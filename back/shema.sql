@@ -18,11 +18,10 @@ CREATE SCHEMA IF NOT EXISTS `final` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb
 USE `final` ;
 
 -- -----------------------------------------------------
--- Table `final`.`users`
+-- Table `final`.`clients`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `final`.`users` (
+CREATE TABLE IF NOT EXISTS `final`.`clients` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `role` ENUM('admin', 'user', 'seller') NULL,
   `name` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
@@ -30,8 +29,25 @@ CREATE TABLE IF NOT EXISTS `final`.`users` (
   `image` VARCHAR(45) NULL,
   `telNumb` INT NULL,
   `cinNum` INT NULL,
-  `userscol` INT NULL,
-  `membership` ENUM('free', 'basic', 'vip') NULL,
+  `longitude` VARCHAR(255) NULL,
+  `lattitude` VARCHAR(255) NULL,
+  `adress` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `final`.`sellers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `final`.`sellers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NULL,
+  `lastName` VARCHAR(45) NULL,
+  `image` VARCHAR(45) NULL,
+  `telNumb` INT NULL,
+  `cinNum` INT NULL,
   `batinda` VARCHAR(255) NULL,
   `longitude` VARCHAR(255) NULL,
   `lattitude` VARCHAR(255) NULL,
@@ -55,8 +71,15 @@ CREATE TABLE IF NOT EXISTS `final`.`items` (
   `description` LONGTEXT NULL,
   `longitude` VARCHAR(255) NULL,
   `lattitude` VARCHAR(255) NULL,
-  `availibility` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
+  `sold` TINYINT NULL,
+  `sellers_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_items_sellers1_idx` (`sellers_id` ASC) VISIBLE,
+  CONSTRAINT `fk_items_sellers1`
+    FOREIGN KEY (`sellers_id`)
+    REFERENCES `final`.`sellers` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -66,16 +89,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `final`.`reclamation` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `message` LONGTEXT NULL,
-  `users_id` INT NOT NULL,
   `items_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_reclamation_users1_idx` (`users_id` ASC) VISIBLE,
   INDEX `fk_reclamation_items1_idx` (`items_id` ASC) VISIBLE,
-  CONSTRAINT `fk_reclamation_users1`
-    FOREIGN KEY (`users_id`)
-    REFERENCES `final`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_reclamation_items1`
     FOREIGN KEY (`items_id`)
     REFERENCES `final`.`items` (`id`)
@@ -91,18 +107,52 @@ CREATE TABLE IF NOT EXISTS `final`.`bid` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `bidAmount` FLOAT NULL,
   `items_id` INT NOT NULL,
-  `users_id` INT NOT NULL,
+  `clients_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_bid_items_idx` (`items_id` ASC) VISIBLE,
-  INDEX `fk_bid_users1_idx` (`users_id` ASC) VISIBLE,
+  INDEX `fk_bid_clients1_idx` (`clients_id` ASC) VISIBLE,
   CONSTRAINT `fk_bid_items`
     FOREIGN KEY (`items_id`)
     REFERENCES `final`.`items` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_bid_users1`
-    FOREIGN KEY (`users_id`)
-    REFERENCES `final`.`users` (`id`)
+  CONSTRAINT `fk_bid_clients1`
+    FOREIGN KEY (`clients_id`)
+    REFERENCES `final`.`clients` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `final`.`admin`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `final`.`admin` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NULL,
+  `lastName` VARCHAR(45) NULL,
+  `image` VARCHAR(45) NULL,
+  `telNumb` INT NULL,
+  `cinNum` INT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `final`.`memberships`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `final`.`memberships` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NULL,
+  `price` INT NULL,
+  `clients_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_memberships_clients1_idx` (`clients_id` ASC) VISIBLE,
+  CONSTRAINT `fk_memberships_clients1`
+    FOREIGN KEY (`clients_id`)
+    REFERENCES `final`.`clients` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
