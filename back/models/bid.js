@@ -19,7 +19,6 @@ autoIncrement:true
     type:DataTypes.INTEGER,
     allowNull:true
   }
-},{timestamps: false,
-    tableName:'bid'});
+},{timestamps: false});
 
 module.exports = Bid;

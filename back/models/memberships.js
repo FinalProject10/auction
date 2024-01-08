@@ -5,7 +5,7 @@ const Memberships = sequelize.define('memberships', {
   id:{
     primaryKey:true,
     autoIncrement:true,
-    typr:DataTypes.INTEGER
+    type:DataTypes.INTEGER
   },
   type:{
     type:DataTypes.STRING,
