@@ -29,5 +29,5 @@ const Items=sequelize.define('item',{
     }
 
 },{timestamps: false,
-    tableName:'membership'})
+    tableName:'items'})
 module.exports=Items
