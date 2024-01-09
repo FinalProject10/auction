@@ -23,7 +23,7 @@ const Seller = sequelize.define('seller', {
     allowNull: true,
   },
   cinNum: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: true,
   },
   longitude: {
