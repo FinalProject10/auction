@@ -1,5 +1,4 @@
-import * as functions from "firebase-functions";
-
+const functions = require("firebase-functions");
 /**
  * Import function triggers from their respective submodules:
  *
@@ -19,28 +18,3 @@ const logger = require("firebase-functions/logger");
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
-
-const axios = require("axios");
-
-exports.createChatEngineUser = functions.auth.user().onCreate((user) => {
-  axios.post(
-    "https://api.chatengine.io/users/",
-    {
-      username: user.email,
-      secret: user.uid,
-      email: user.email,
-      first_name: user.displayName,
-    },
-    { headers: { "Private-Key": "bc788352-e978-4c86-a04a-744d11c6f143" } }
-  );
-});
-
-exports.deleteChatEngineUser = functions.auth.user().onDelete((user) => {
-  axios.delete("https://api.chatengine.io/users/me/", {
-    headers: {
-      "Project-ID": "226182b3-156b-4e03-b5e9-9d46606d9634",
-      "User-Name": user.email,
-      "User-Secret": user.uid,
-    },
-  });
-});
