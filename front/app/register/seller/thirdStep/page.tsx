@@ -26,7 +26,7 @@ const ThirdStep = () => {
 
         </div>
         <div className='absolute right-0 h-full w-1/2 bg-black opacity-70'></div>
-<h1 className=' text-gray-600 text-sm w-fit inline-block ml-[30%] mt-[4%]'></h1><Link href={'/login/client'} className=' text-blue-500 underline text-[15px]'>Sign-in</Link>
+<h1 className=' text-gray-600 text-sm w-fit inline-block ml-[30%] mt-[4%]'></h1><Link href={'/login/seller'} className=' text-blue-500 underline text-[15px]'>Sign-in</Link>
         <div className='flex items-center ml-[10%] mt-[6%]'>
         <div className=''>
         <h1>3/3 Step</h1>
@@ -38,8 +38,11 @@ You'll soon be receiving an email to confirm your registration submission.<br/> 
 
 We will be in touch within 2 working days, <br/>please look out for an email from team@auction4cars-mail.com</p>
     
-       <button className='w-[150px] h-[45px] bg-black mb-5 text-white float-right'
-       >Register</button>
+       <button 
+       
+       className='w-[150px] h-[45px] bg-black mb-5 text-white float-right'
+       onClick={()=>router.push('/login/seller')}
+       >Login</button>
         </div>
         </div>
     </div>
