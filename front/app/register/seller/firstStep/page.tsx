@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import Input from '@mui/joy/Input';
@@ -13,7 +13,7 @@ import { IoPersonCircle } from "react-icons/io5";
 import { HiDocumentText } from "react-icons/hi2";
 import { MdVerifiedUser } from "react-icons/md";
 import { useRouter } from 'next/navigation';
-
+import Alert from '@mui/joy/Alert';
 const FirstStep = () => {
   const router=useRouter()
   const[firstName,setFirstName]=useState(null)
@@ -27,13 +27,13 @@ const FirstStep = () => {
   const[danger,setDanger]=useState(true)
   const[dangerPass,setDangerPass]=useState(true)
   const[dangerConfPass,setDangerConfPass]=useState(true)
-
+ 
 
   const add=()=>{
     axios.post(`http://localhost:5000/seller/register`,{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
-    .then(r=>{setVerified(true)
-    console.log(r.data)}).catch(err=>console.log('e',err))
+    .then(r=>{setVerified(true)}).catch(err=>console.log('e',err))
   }
+  
   return (
     <div>
         <img className='absolute right-0 h-full w-1/2' src="https://static01.nyt.com/images/2023/09/21/multimedia/21sp-cli-stadium-02-mljv/21sp-cli-stadium-02-mljv-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="" />
@@ -155,11 +155,17 @@ const FirstStep = () => {
    onClick={()=>{
 
     add()
-    setTimeout(() => {
-        if(verified) router.push('/register/seller/secondStep')
-    }, 1000);
+   
+        if(verified) {
+         
+          router.push('/register/seller/secondStep')
+      }
+   
 }}
    >
+    {verified&&
+    <Alert color="success"/>
+ }
   <span className="hover-underline-animation"> Next </span>
   <svg
     id="arrow-horizontal"

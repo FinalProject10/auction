@@ -10,7 +10,7 @@ module.exports={
         if((phone).toString().length!==8){
             return res.status(404).json({err:"phone number not valid"})
         }
-        if(password.length!==8||(!password.includes('#') && !password.includes('@') && !password.includes('?'))){
+        if(password.length<8||(!password.includes('#') && !password.includes('@') && !password.includes('?'))){
             return res.status(404).json({err:"password is weak"})
         }
         let a=await Seller.findOne({where:{email}})

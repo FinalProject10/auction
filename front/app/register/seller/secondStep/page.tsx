@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import img1 from '../../../images/img1.png'
@@ -17,6 +17,13 @@ const SecondStep = () => {
   const [cin, setCin] = useState("");
   const [grise,setGrise]=useState(null)
   const[verified,setVerified]=useState(false)
+  useEffect(()=>{
+    const fst=localStorage.getItem('fst')
+
+    if(fst!=='true'){
+      router.push('/register/seller/firstStep')
+    }
+  },[])
   const add=()=>{
     axios.post(`http://localhost:5000/seller/register`,{batinda:grise,cinNumb:cin})
     .then(r=>setVerified(true)).catch(err=>console.log(err))
@@ -60,12 +67,7 @@ const SecondStep = () => {
         console.log(e) 
         setCin(e.target.value)
       }} />
-    
-<CldImage
-  width="600"
-  height="600"
-  src={cin}
-  alt=''/>
+
       </div>
       </div>
       <div className='w-[500px] h-[150px] bg-gray-100 flex justify-center items-center'>
@@ -82,10 +84,13 @@ const SecondStep = () => {
    
    onClick={()=>{
     add()
-   setTimeout(() => {
-        if(verified) router.push('/register/seller/thirdStep')
-       }, 1000)}
-}
+  
+        // if(verified) {
+          router.push('/register/seller/thirdStep')
+      
+      // }
+
+}}
    >
   <span className="hover-underline-animation"> Next </span>
   <svg
