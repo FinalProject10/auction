@@ -9,7 +9,7 @@ module.exports={
         if((phone).toString().length!==8){
             return res.status(404).json({err:"phone number not valid"})
         }
-        let a=await Seller.findOne({where:{email}})
+        let a=await Client.findOne({where:{email}})
         if(a){
             return res.status(404).json({err:"email in use"})
         }
@@ -37,12 +37,16 @@ res.status(400).json(err)
           try{
             const {email,password}=req.body
           let user=await Client.findAll({where:{email}})
+          if(user.length===0){
+            return res.status(404).json('user not found')
+          }
           if(user){
             const hashed=await bcrypt.compare(password,user[0].password)
             if(hashed){
                 const token=jwt.sign({id:user[0].id,role:'client'},secretKey,{expiresIn:'24h'})
                return res.status(200).json(token)
             }
+                return res.status(404).json('password is incorrect')
           }
 
         }catch(err){

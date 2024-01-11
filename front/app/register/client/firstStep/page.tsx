@@ -3,16 +3,12 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import Input from '@mui/joy/Input';
-import Image from 'next/image'
 import Key from '@mui/icons-material/Key';
-import Stack from '@mui/joy/Stack';
-import LinearProgress from '@mui/joy/LinearProgress';
-import Typography from '@mui/joy/Typography';
-import img1 from '../../../images/img1.png'
 import { IoPersonCircle } from "react-icons/io5";
 import { HiDocumentText } from "react-icons/hi2";
 import { MdVerifiedUser } from "react-icons/md";
 import { useRouter } from 'next/navigation';
+import Alert from '@mui/material/Alert';
 
 const FirstStep = () => {
   const router=useRouter()
@@ -27,12 +23,12 @@ const FirstStep = () => {
   const[danger,setDanger]=useState(true)
   const[dangerPass,setDangerPass]=useState(true)
   const[dangerConfPass,setDangerConfPass]=useState(true)
-
+const[err,setErr]=useState('')
 
   const add=()=>{
     axios.post(`http://localhost:5000/seller/register`,{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
     .then(r=>{setVerified(true)
-    console.log(r.data)}).catch(err=>console.log('e',err))
+    console.log(r.data)}).catch(err=>setErr(err.response.data['err']))
   }
   return (
     <div>
@@ -149,6 +145,10 @@ const FirstStep = () => {
      
         </div>
     </div>
+    {err==="email in use"&&
+    <Alert severity="error" className='mt-[5%] w-[250px]'>Email Already Exist!</Alert>
+    }
+
    <button className="cta mt-[5%] ml-[80%]"
    
    onClick={()=>{
