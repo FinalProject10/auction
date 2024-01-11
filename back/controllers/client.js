@@ -6,6 +6,13 @@ module.exports={
     register:async(req,res)=>{
         try{
         const {name,lastName,email,pass,phone,cinNum,batinda}=req.body
+        if((phone).toString().length!==8){
+            return res.status(404).json({err:"phone number not valid"})
+        }
+        let a=await Seller.findOne({where:{email}})
+        if(a){
+            return res.status(404).json({err:"email in use"})
+        }
         const hashed= await bcrypt.hash(pass,10)
         let d=await Client.create({
             name,

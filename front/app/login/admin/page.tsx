@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Link from 'next/link'
-const Admin = () => {
+const AdminLogin = () => {
 
   return (
     <div>
@@ -31,4 +31,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default AdminLogin
