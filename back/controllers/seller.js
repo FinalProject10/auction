@@ -60,5 +60,10 @@ res.status(400).json(err)
     }catch(err){
         res.status(500).json({err:'server err'})
     }
+    },
+    updateProfile: (req,res)=>{
+        Seller.update({name:req.body.name,lastName:req.body.lastName},{where:{id:req.params.id}}).then((data)=>{
+            res.status(200).send(data)
+        }).catch((err)=>{res.status(500).send(err.message)})
     }
 }
