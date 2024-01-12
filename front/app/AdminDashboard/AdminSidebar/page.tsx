@@ -79,7 +79,7 @@ const sideBare = () => {
             </a>
             </div>
             </Link>
-            <Link href="/AdminDashboard/AdminReclamtion">
+            <Link href="/AdminDashboard/AdminReclamation">
             <div  className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ml-1">
             <FaInbox/>
             <a style={{"margin-left":"15px"}}>

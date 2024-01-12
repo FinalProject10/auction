@@ -46,7 +46,7 @@ export default function CardStats({
                     : ""
                 }
               ></i>{" "}
-              {statPercent}%
+              {statPercent}
             </span>
             <span className="whitespace-nowrap">{statDescripiron}</span>
           </p>
