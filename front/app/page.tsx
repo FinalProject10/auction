@@ -1,7 +1,9 @@
 import Image from 'next/image'
-
+import Adddddddddd from './AdminDashboard/page'
 export default function Home() {
   return (
-   <h1>hello</h1>
+  <div>
+<Adddddddddd/>
+  </div>
   )
 }
