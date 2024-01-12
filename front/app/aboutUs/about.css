@@ -821,3 +821,60 @@
     margin-top: 3000px;
 
 }
+.im{    position: relative;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Same Line, Same Size</title>
+  <style>
+    .frame-container {
+      display: flex;
+      justify-content: space-between; /* Adjust as needed */
+    }
+
+    .frame-parent1 {
+      display: flex;
+      align-items: center;
+      margin-right: 20px; /* Adjust as needed */
+    }
+
+    .image-46-ico,
+    .image-51-ico,
+    .image-47-ico {
+      width: 50px; /* Adjust as needed */
+      height: 50px; /* Adjust as needed */
+      border-radius: 50%; /* Makes the images circular */
+      margin-right: 10px; /* Adjust as needed */
+    }
+
+    .frame-parent2 {
+      display: flex;
+      align-items: center;
+    }
+
+    .tom-cruise-paren,
+    .icon-twitter-paren {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tom-cruise,
+    .tom-cruis,
+    .founder-chairma,
+    .scrum-master,
+    .developer {
+      font-size: 14px; /* Adjust as needed */
+      margin: 0; /* Remove default margins */
+    }
+
+    .dropdown-ico {
+      width: 20px; /* Adjust as needed */
+      height: 20px; /* Adjust as needed */
+      margin-right: 5px; /* Adjust as needed */
+    }

@@ -1,16 +1,18 @@
 "use client"
 import { useState } from 'react'
-
+import AboutUs from "./aboutUs/AboutUs.tsx"
 import Image from 'next/image'
 import Register from './register/seller/page'
 import { useRouter } from 'next/navigation'
+import Footer from "./footer/Footer.tsx"
+import Pricing from "./membershipCard/Pricing.tsx"
 export default function Home() {
   const [client,setClient]=useState(false)
   const [seller,setSeller]=useState(false)
   const router=useRouter()
   return (
    <div>
-    {client&&
+    {/* {client&&
     <div
     onMouseEnter={()=>setClient(true)}
     onMouseLeave={()=>setClient(false)}
@@ -39,7 +41,9 @@ export default function Home() {
     <img
     onMouseEnter={()=>setSeller(true)}
     onMouseLeave={()=>setSeller(false)}
-    className='absolute top-0 right-0 w-[50%] h-full' src="https://group.mercedes-benz.com/bilder/unternehmen/chancengleichheit-und-inklusion/diversity-inclusion-03-w1680xh945-cutout.jpg" alt="" />
+    className='absolute top-0 right-0 w-[50%] h-full' src="https://group.mercedes-benz.com/bilder/unternehmen/chancengleichheit-und-inklusion/diversity-inclusion-03-w1680xh945-cutout.jpg" alt="" /> */}
+  <Pricing/>
+  <Footer/>
    </div>
   )
 }
