@@ -1,0 +1,14 @@
+.itemInfo {
+    display: flex;
+    width: ;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Your global CSS file */
+.red-icon {
+    color: red;
+    font-size: 5px;
+}
