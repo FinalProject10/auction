@@ -5,9 +5,23 @@ import CardStats from "../AdminCard/page";
 import { MdVerticalAlignTop } from "react-icons/md";
 import { useEffect } from 'react';
 import Chart from 'chart.js/auto';
-
+import axios from 'axios'
+import { useRouter } from 'next/navigation';
 // import '../AdminHome/AdminDes.css'
 const HomePage = () => {
+    const router=useRouter()
+    useEffect(()=>{
+        const role=localStorage.getItem('role')
+        const token=localStorage.getItem('user')
+        if(role==='admin'){
+            axios.get(`http://localhost:5000/admin/home`,{headers:{Authorization:`Bearer ${token}`}})
+            .then(r=>console.log("r")).catch(err=>router.push('/register/seller'))
+            }
+        else{
+            router.push('/register/seller')
+
+        }
+      },[])
   useEffect(() => {
     const config = {
       type: 'bar',
