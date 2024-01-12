@@ -15,18 +15,11 @@ import { CldImage } from 'next-cloudinary';
 const SecondStep = () => {
   const router=useRouter()
   const [cin, setCin] = useState("");
-  const [grise,setGrise]=useState(null)
-  const[verified,setVerified]=useState(false)
-  useEffect(()=>{
-    const fst=localStorage.getItem('fst')
-
-    if(fst!=='true'){
-      router.push('/register/seller/firstStep')
-    }
-  },[])
+  const [grise,setGrise]=useState("")
   const add=()=>{
     axios.post(`http://localhost:5000/seller/register`,{batinda:grise,cinNumb:cin})
-    .then(r=>setVerified(true)).catch(err=>console.log(err))
+    .then(r=>router.push('/register/seller/thirdStep')
+    ).catch(err=>console.log(err))
   }
 // const cloudinaryInstance = cloudinary.Cloudinary.new({ cloud_name: 'djptnmqtl' });
   // cloudinaryInstance.upload(selectedFile, (error:any, result:any) => {
@@ -83,14 +76,7 @@ const SecondStep = () => {
        <button className="cta mt-[5%] ml-[80%]"
    
    onClick={()=>{
-    add()
-  
-        // if(verified) {
-          router.push('/register/seller/thirdStep')
-      
-      // }
-
-}}
+    add()}}
    >
   <span className="hover-underline-animation"> Next </span>
   <svg

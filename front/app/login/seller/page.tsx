@@ -2,19 +2,25 @@
 import { useEffect, useReducer, useState } from 'react'
 import React from 'react'
 import axios from 'axios'
+import Alert from '@mui/material/Alert';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 const SellerLogin = () => {
     const[email,setEmail]=useState(null)
     const[pass,setPass]=useState(null)
+    const[err,setErr]=useState("")
     const router=useRouter()
 const log=()=>{
     axios.post(`http://localhost:5000/seller/login`,{email,password:pass})
     .then(r=>{
         localStorage.setItem('role','seller')
-        localStorage.setItem('user',r.data)
-                router.push('/home')            
-}).catch(err=>console.log(err))
+        localStorage.setItem('user',r.data)       
+        setTimeout(() => {
+          router.push('/home')
+        }, 1500);            
+}).catch(err=>{
+  setErr(err.response.data)
+  })
 }
   return (
     <div>
@@ -44,6 +50,10 @@ const log=()=>{
             <h1 className='inline-block mr-[40%] font-bold'>remember me</h1>
             <Link href={'/forget'} className=' text-blue-600'>forget password ?</Link>
         </div>
+        {err==="cin or batinda needed"&&<Alert severity="error">Complete Registration!</Alert>}
+        {err==="user not found"&&<Alert severity="error">User Not Found!</Alert>}
+        {err==="password is incorrect"&&<Alert severity="error">Password is incorrect!</Alert>} 
+
         <button 
         onClick={()=>log()}
         className='bg-black w-[20%] h-[45px] text-white rounded mt-[5%] '>Login</button>

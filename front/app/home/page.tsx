@@ -10,11 +10,15 @@ const Home = () => {
         const token=localStorage.getItem('user')
         if(role==='client'){
         axios.get(`http://localhost:5000/client/home`,{headers:{Authorization:`Bearer ${token}`}})
-        .then(r=>console.log(r)).catch(err=>router.push('/register/client'))}
+        .then(r=>console.log('r')).catch(err=>router.push('/register/client'))}
         else if(role==='seller'){
         axios.get(`http://localhost:5000/seller/home`,{headers:{Authorization:`Bearer ${token}`}})
-        .then(r=>console.log(r)).catch(err=>router.push('/register/seller'))
+        .then(r=>console.log("r")).catch(err=>router.push('/register/seller'))
         }
+        else if(role==='admin'){
+          axios.get(`http://localhost:5000/admin/home`,{headers:{Authorization:`Bearer ${token}`}})
+          .then(r=>console.log("r")).catch(err=>router.push('/register/seller'))
+          }
     },[])
   return (
     <div>Home</div>

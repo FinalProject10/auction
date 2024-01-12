@@ -1,12 +1,13 @@
 "use client"
 import React, { useEffect,useState } from 'react'
 import { useRouter } from 'next/navigation'
-
+import Alert from '@mui/material/Alert';
 import axios from 'axios'
 import Link from 'next/link'
 const ClientLogin = () => {
   const[email,setEmail]=useState(null)
   const[pass,setPass]=useState(null)
+  const[err,setErr]=useState('')
   const router=useRouter()
 const log=()=>{
   axios.post(`http://localhost:5000/client/login`,{email,password:pass})
@@ -14,7 +15,7 @@ const log=()=>{
     localStorage.setItem('role','client')
     localStorage.setItem('user',r.data)
               router.push('/home')            
-}).catch(err=>console.log(err))
+}).catch(err=>setErr(err.response.data))
 } 
 
   return (
@@ -45,6 +46,9 @@ const log=()=>{
             <h1 className='inline-block mr-[40%] font-bold'>remember me</h1>
             <Link href={'/forget'} className=' text-blue-600'>forget password ?</Link>
         </div>
+        {err==="user not found"&&<Alert severity="error">User Not Found!</Alert>} 
+        {err==="password is incorrect"&&<Alert severity="error">Password is incorrect!</Alert>} 
+
         <button 
         onClick={()=>log()}
         className='bg-black w-[20%] h-[45px] text-white rounded mt-[5%] '>Login</button>

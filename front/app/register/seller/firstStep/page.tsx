@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import Alert from '@mui/material/Alert';
 import Input from '@mui/joy/Input';
 import Image from 'next/image'
 import Key from '@mui/icons-material/Key';
@@ -13,7 +14,6 @@ import { IoPersonCircle } from "react-icons/io5";
 import { HiDocumentText } from "react-icons/hi2";
 import { MdVerifiedUser } from "react-icons/md";
 import { useRouter } from 'next/navigation';
-import Alert from '@mui/joy/Alert';
 const FirstStep = () => {
   const router=useRouter()
   const[firstName,setFirstName]=useState(null)
@@ -22,16 +22,16 @@ const FirstStep = () => {
   const[email,setEmail]=useState(null)
   const[pass,setPass]=useState('')
   const[confirmPass,setConfirmPass]=useState("")
-  const[verified,setVerified]=useState(false)
   const[show,setShow]=useState(false)
   const[danger,setDanger]=useState(true)
   const[dangerPass,setDangerPass]=useState(true)
   const[dangerConfPass,setDangerConfPass]=useState(true)
- 
+  const[err,setErr]=useState('')
+
 
   const add=()=>{
     axios.post(`http://localhost:5000/seller/register`,{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
-    .then(r=>{setVerified(true)}).catch(err=>console.log('e',err))
+    .then(r=>{router.push('/register/seller/secondStep')}).catch(err=>setErr(err.response.data['err']))
   }
   
   return (
@@ -150,22 +150,21 @@ const FirstStep = () => {
      
         </div>
     </div>
+    {err==="email in use"&&
+    <Alert severity="error" className='mt-[5%] w-[250px]'>Email Already Exist!</Alert>
+    }
    <button className="cta mt-[5%] ml-[80%]"
    
    onClick={()=>{
 
     add()
    
-        if(verified) {
          
-          router.push('/register/seller/secondStep')
-      }
+      
    
 }}
    >
-    {verified&&
-    <Alert color="success"/>
- }
+   
   <span className="hover-underline-animation"> Next </span>
   <svg
     id="arrow-horizontal"

@@ -3,6 +3,7 @@ const express = require('express');
 const db=require('./database/index')
 const sellerRoutes=require('./routes/seller')
 const clientRoutes=require('./routes/client')
+const adminRoutes=require('./routes/admin')
 const cors = require('cors');
 >>>>>>> 8309b2f157bdf4dfcf5d34e69895caa4cbdfab95
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 const PORT = 5000;
 app.use('/seller',sellerRoutes)
 app.use('/client',clientRoutes)
+app.use('/admin',adminRoutes)
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
