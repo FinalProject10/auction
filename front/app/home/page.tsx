@@ -8,6 +8,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Auctions from './auctions'
+import Aboutus from './aboutus'
+import StartNow from './startNow'
+import Offers from './offers'
+import Style from './style'
+import Services from './services'
 const Home = () => {
   const currencies = [
     {
@@ -248,6 +253,11 @@ const Home = () => {
             <button className='absolute text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:w-[136px] hover:h-[47px] hover:transition ease-in-out delay-50 '>Search</button>
         </div> */}
 <Auctions/>
+<Aboutus/>
+<StartNow/>
+<Offers/>
+<Style/>
+<Services/>
     </div>
   )
 }
