@@ -8,10 +8,11 @@ library.add(fas);
 const ItemInfo = () => {
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4">Additional Information</h1>
       <div className=" ">
-        <div className="itemInfo ">
-          <table className="table-auto  w-full">
+        <h1 className="text-2xl font-bold mb-4">Additional Information</h1>
+
+        <div className="itemInfo gap-10">
+          <table className="table-auto  w-full ">
             <tbody className=" ">
               {/* <div className="border-bottom "> */}
               <tr className="border-bottom ">
@@ -41,7 +42,7 @@ const ItemInfo = () => {
                   </p>
                 </td>
                 <td>
-                  <span>Earth Wind</span>
+                  <p>Earth Wind</p>
                 </td>
               </tr>
               <tr className="border-bottom">
@@ -56,37 +57,37 @@ const ItemInfo = () => {
                   </p>
                 </td>
                 <td>
-                  <span>Earth Wind</span>
+                  <p>Earth Wind</p>
                 </td>
               </tr>
               <tr className="border-bottom">
                 <td>
                   {" "}
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-door-closed"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Door Count</p>
-                  </span>
+                  </p>
                 </td>
                 <td>Earth Wind</td>
               </tr>
               <tr className="border-bottom">
                 <td>
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="as fa-recycle"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Emission Class</p>
-                  </span>
+                  </p>
                 </td>
                 <td>Earth Wind</td>
               </tr>
               <tr>
                 <td>
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-parking"
                       className="red-icon w-[20px] float-start mx-1"
@@ -94,7 +95,7 @@ const ItemInfo = () => {
                     <p className="text-lg font-semibold mb-2">
                       Parking Sensors
                     </p>
-                  </span>
+                  </p>
                 </td>
                 <td>Frontal, Rearview Camera, Side Mirrors</td>
               </tr>
@@ -104,56 +105,56 @@ const ItemInfo = () => {
           <table className="table-auto w-full ">
             <tbody>
               <tr className="border-bottom ">
-                <td className="">
-                  <span>
+                <td>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-user-shield"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Airbags</p>
-                  </span>{" "}
+                  </p>{" "}
                 </td>
                 <td>Malcolm</td>
               </tr>
               <tr className="border-bottom ">
                 <td>
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-palette"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Color</p>
-                  </span>
+                  </p>
                 </td>
                 <td>The Eagles</td>
               </tr>
               <tr className="border-bottom">
                 <td>
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-tachometer-alt"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Cubic Capacity</p>
-                  </span>
+                  </p>
                 </td>
                 <td>Earth, Wind</td>
               </tr>
               <tr className="border-bottom">
                 <td>
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-stop-circle"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Gearbox</p>
-                  </span>
+                  </p>
                 </td>
                 <td>Earth, Wind</td>
               </tr>
               <tr className="border-bottom ">
                 <td className="  ">
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-door-closed"
                       className="red-icon w-[20px] float-start mx-1"
@@ -162,19 +163,19 @@ const ItemInfo = () => {
                       {" "}
                       Number Of Seats
                     </p>
-                  </span>
+                  </p>
                 </td>
                 <td className="  ">5</td>
               </tr>
               <tr>
                 <td>
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-car-battery"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Power</p>
-                  </span>
+                  </p>
                 </td>
                 <td>175</td>
               </tr>

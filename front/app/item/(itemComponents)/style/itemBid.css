@@ -1,11 +1,11 @@
 .summary {
-    width: 100% !important;
-    margin-top: 15px;
-    float: left;
-    /* width: 30%; */
-    margin-left: 20px;
-    margin-left: 0 !important;
-    margin-bottom: 2em;
+    margin-top: 50px;
+    margin-right: 50px;
+    /* float: left; */
+    width: 100%;
+    /* margin-left: 20px; */
+    /* margin-left: 0 !important; */
+    /* margin-bottom: 2em; */
 }
 
 .price {
@@ -21,9 +21,7 @@
     color: #242424;
 }
 
-.auction-price {
-    display: flex;
-}
+.auction-price {}
 
 .current {
     font-size: 24px !important;
@@ -75,6 +73,8 @@
 .countdown_row {
     display: flex;
 
+    align-items: center;
+
 }
 
 .amount {
@@ -86,12 +86,14 @@
 
 .bid {
     margin-right: auto;
-    margin-left: 90px;
+    /* margin-left: 90px; */
 }
 
 
 .priceinput {
-    width: 100px;
+    width: 65px;
+    margin-left: 20px;
+    border: 1px solid black;
 }
 
 .bidFlex {
