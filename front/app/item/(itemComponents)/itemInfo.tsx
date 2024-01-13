@@ -16,7 +16,7 @@ const ItemInfo = () => {
             <tbody className=" ">
               {/* <div className="border-bottom "> */}
               <tr className="border-bottom ">
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-truck-pickup"
@@ -24,14 +24,14 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Body</p>
                   </p>
-                </td>
+                </th>
                 <td>Malcolm </td>
               </tr>{" "}
               {/* </div> */}
               {/* <div className="border-bottom "> */}
               {/* </div> */}
               <tr className="border-bottom">
-                <td>
+                <th>
                   {" "}
                   <p>
                     <FontAwesomeIcon
@@ -40,13 +40,13 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Mileage</p>
                   </p>
-                </td>
+                </th>
                 <td>
                   <p>Earth Wind</p>
                 </td>
               </tr>
               <tr className="border-bottom">
-                <td>
+                <th>
                   {" "}
                   <p>
                     <FontAwesomeIcon
@@ -55,13 +55,13 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Mileage</p>
                   </p>
-                </td>
+                </th>
                 <td>
                   <p>Earth Wind</p>
                 </td>
               </tr>
               <tr className="border-bottom">
-                <td>
+                <th>
                   {" "}
                   <p>
                     <FontAwesomeIcon
@@ -70,11 +70,11 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Door Count</p>
                   </p>
-                </td>
+                </th>
                 <td>Earth Wind</td>
               </tr>
               <tr className="border-bottom">
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="as fa-recycle"
@@ -82,11 +82,11 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Emission Class</p>
                   </p>
-                </td>
+                </th>
                 <td>Earth Wind</td>
               </tr>
               <tr>
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-parking"
@@ -96,7 +96,7 @@ const ItemInfo = () => {
                       Parking Sensors
                     </p>
                   </p>
-                </td>
+                </th>
                 <td>Frontal, Rearview Camera, Side Mirrors</td>
               </tr>
             </tbody>
@@ -105,7 +105,7 @@ const ItemInfo = () => {
           <table className="table-auto w-full ">
             <tbody>
               <tr className="border-bottom ">
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-user-shield"
@@ -113,11 +113,11 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Airbags</p>
                   </p>{" "}
-                </td>
+                </th>
                 <td>Malcolm</td>
               </tr>
               <tr className="border-bottom ">
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-palette"
@@ -125,11 +125,11 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Color</p>
                   </p>
-                </td>
+                </th>
                 <td>The Eagles</td>
               </tr>
               <tr className="border-bottom">
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-tachometer-alt"
@@ -137,11 +137,11 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Cubic Capacity</p>
                   </p>
-                </td>
+                </th>
                 <td>Earth, Wind</td>
               </tr>
               <tr className="border-bottom">
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-stop-circle"
@@ -149,11 +149,11 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Gearbox</p>
                   </p>
-                </td>
+                </th>
                 <td>Earth, Wind</td>
               </tr>
               <tr className="border-bottom ">
-                <td className="  ">
+                <th className="  ">
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-door-closed"
@@ -164,11 +164,11 @@ const ItemInfo = () => {
                       Number Of Seats
                     </p>
                   </p>
-                </td>
+                </th>
                 <td className="  ">5</td>
               </tr>
               <tr>
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-car-battery"
@@ -176,13 +176,48 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Power</p>
                   </p>
-                </td>
+                </th>
                 <td>175</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+      <br />
+      <br />
+
+      <br />
+      <table>
+        <thead>
+          <tr>
+            <th>Auction History</th>
+            <td></td>
+            <td> </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Auction started</th>
+            <td>--</td>
+            <td> £</td>
+          </tr>
+          <tr>
+            <th>salmen khelifi </th>
+            <td>November 17, 2023 12:07 pm </td>
+            <td>2.500,00 £</td>
+          </tr>
+          <tr>
+            <th>Sejay Miles </th>
+            <td>December 4, 2023 12:00 am</td>
+            <td> 2.550,00 £</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <br />
+      <hr />
+      <hr />
+      <hr />
       <br />
     </>
   );
