@@ -8,14 +8,15 @@ library.add(fas);
 const ItemInfo = () => {
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4">Additional Information</h1>
       <div className=" ">
-        <div className="itemInfo ">
-          <table className="table-auto  w-full">
+        <h1 className="text-2xl font-bold mb-4">Additional Information</h1>
+
+        <div className="itemInfo gap-10">
+          <table className="table-auto  w-full ">
             <tbody className=" ">
               {/* <div className="border-bottom "> */}
               <tr className="border-bottom ">
-                <td>
+                <th>
                   <p>
                     <FontAwesomeIcon
                       icon="fas fa-truck-pickup"
@@ -23,14 +24,14 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Body</p>
                   </p>
-                </td>
+                </th>
                 <td>Malcolm </td>
               </tr>{" "}
               {/* </div> */}
               {/* <div className="border-bottom "> */}
               {/* </div> */}
               <tr className="border-bottom">
-                <td>
+                <th>
                   {" "}
                   <p>
                     <FontAwesomeIcon
@@ -39,13 +40,13 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Mileage</p>
                   </p>
-                </td>
+                </th>
                 <td>
-                  <span>Earth Wind</span>
+                  <p>Earth Wind</p>
                 </td>
               </tr>
               <tr className="border-bottom">
-                <td>
+                <th>
                   {" "}
                   <p>
                     <FontAwesomeIcon
@@ -54,39 +55,39 @@ const ItemInfo = () => {
                     />
                     <p className="text-lg font-semibold mb-2">Mileage</p>
                   </p>
-                </td>
+                </th>
                 <td>
-                  <span>Earth Wind</span>
+                  <p>Earth Wind</p>
                 </td>
               </tr>
               <tr className="border-bottom">
-                <td>
+                <th>
                   {" "}
-                  <span>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-door-closed"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Door Count</p>
-                  </span>
-                </td>
+                  </p>
+                </th>
                 <td>Earth Wind</td>
               </tr>
               <tr className="border-bottom">
-                <td>
-                  <span>
+                <th>
+                  <p>
                     <FontAwesomeIcon
                       icon="as fa-recycle"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Emission Class</p>
-                  </span>
-                </td>
+                  </p>
+                </th>
                 <td>Earth Wind</td>
               </tr>
               <tr>
-                <td>
-                  <span>
+                <th>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-parking"
                       className="red-icon w-[20px] float-start mx-1"
@@ -94,8 +95,8 @@ const ItemInfo = () => {
                     <p className="text-lg font-semibold mb-2">
                       Parking Sensors
                     </p>
-                  </span>
-                </td>
+                  </p>
+                </th>
                 <td>Frontal, Rearview Camera, Side Mirrors</td>
               </tr>
             </tbody>
@@ -104,56 +105,56 @@ const ItemInfo = () => {
           <table className="table-auto w-full ">
             <tbody>
               <tr className="border-bottom ">
-                <td className="">
-                  <span>
+                <th>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-user-shield"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Airbags</p>
-                  </span>{" "}
-                </td>
+                  </p>{" "}
+                </th>
                 <td>Malcolm</td>
               </tr>
               <tr className="border-bottom ">
-                <td>
-                  <span>
+                <th>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-palette"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Color</p>
-                  </span>
-                </td>
+                  </p>
+                </th>
                 <td>The Eagles</td>
               </tr>
               <tr className="border-bottom">
-                <td>
-                  <span>
+                <th>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-tachometer-alt"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Cubic Capacity</p>
-                  </span>
-                </td>
+                  </p>
+                </th>
                 <td>Earth, Wind</td>
               </tr>
               <tr className="border-bottom">
-                <td>
-                  <span>
+                <th>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-stop-circle"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Gearbox</p>
-                  </span>
-                </td>
+                  </p>
+                </th>
                 <td>Earth, Wind</td>
               </tr>
               <tr className="border-bottom ">
-                <td className="  ">
-                  <span>
+                <th className="  ">
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-door-closed"
                       className="red-icon w-[20px] float-start mx-1"
@@ -162,26 +163,61 @@ const ItemInfo = () => {
                       {" "}
                       Number Of Seats
                     </p>
-                  </span>
-                </td>
+                  </p>
+                </th>
                 <td className="  ">5</td>
               </tr>
               <tr>
-                <td>
-                  <span>
+                <th>
+                  <p>
                     <FontAwesomeIcon
                       icon="fas fa-car-battery"
                       className="red-icon w-[20px] float-start mx-1"
                     />
                     <p className="text-lg font-semibold mb-2">Power</p>
-                  </span>
-                </td>
+                  </p>
+                </th>
                 <td>175</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+      <br />
+      <br />
+
+      <br />
+      <table>
+        <thead>
+          <tr>
+            <th>Auction History</th>
+            <td></td>
+            <td> </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Auction started</th>
+            <td>--</td>
+            <td> £</td>
+          </tr>
+          <tr>
+            <th>salmen khelifi </th>
+            <td>November 17, 2023 12:07 pm </td>
+            <td>2.500,00 £</td>
+          </tr>
+          <tr>
+            <th>Sejay Miles </th>
+            <td>December 4, 2023 12:00 am</td>
+            <td> 2.550,00 £</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <br />
+      <hr />
+      <hr />
+      <hr />
       <br />
     </>
   );

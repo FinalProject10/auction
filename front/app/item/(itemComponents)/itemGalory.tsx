@@ -39,10 +39,16 @@ const Gallery: React.FC<GalleryProps> = () => {
     <section className="gallery-holder hide-in-mobile">
       <section className="gallery">
         <div className="image">
-          <Image src={currentImage} alt="product" width={400} height={400} />
+          <Image
+            className="image "
+            src={currentImage}
+            alt="product"
+            width={900}
+            height={500}
+          />
         </div>
 
-        <div className="thumbnails">
+        <div className="thumbnails ">
           {THUMBS.map((th, index) => (
             <div
               className="img-holder"

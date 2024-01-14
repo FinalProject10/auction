@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./style/itemBid.css";
 
 const ItemBid = () => {
-  const [quant, setQuant] = useState(0);
+  const [quant, setQuant] = useState(5000);
 
   const addQuant = () => {
     setQuant(quant + 5);
@@ -97,11 +97,12 @@ const ItemBid = () => {
                   </svg>
                 </button>
                 <input
-                  type="number"
+                  type="text"
                   value={quant}
                   onChange={handleInputChange}
                   className="priceinput"
-                />
+                />{" "}
+                DT
                 {/* <p>{quant}</p> */}
                 <button
                   className="plus"
@@ -125,10 +126,10 @@ const ItemBid = () => {
               </div>
             </div>
           </form>
-          <div className="bid">
+          <div className="bid ml-24">
             <button
               type="submit"
-              className="bg-red-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg "
+              className="bg-red-500 text-white text-sm leading-6 font-bold py-2 px-4 rounded-lg hover:bg-red-700"
             >
               Bid
             </button>
