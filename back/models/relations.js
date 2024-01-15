@@ -5,4 +5,5 @@ const Items=require('./items')
 const Memberships=require('./memberships')
 const Seller=require('./sellers')
 const Reclamation=require('./reclamation')
+
 module.exports={Bid,Client,Admin,Items,Memberships,Seller,Reclamation}
