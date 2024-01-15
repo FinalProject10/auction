@@ -1,0 +1,120 @@
+.page_cart {
+    color: grey;
+  }
+  .content_cart {
+    margin: 60px;
+    flex-direction: column;
+    display: flex; 
+    padding: 30px;
+    gap: 10px;
+  }
+  .title_cart {
+    text-decoration: solid;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+    width: 30%;
+    height: 50%;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 12%;
+  }
+  .step_cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  
+  }
+  .first_step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff2800;
+    color: white;
+    border-radius: 5px;
+   padding: 5px;
+    width: 2%;
+    height: 25%;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+    order: -1;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+  .cart_space {
+    width: 25%;
+    height: 2px;
+    background-color: #ff2800;
+    border: 1px solid #ff2800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .other_step {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: grey;
+      border: 1px solid  grey;
+      border-radius: 5px;
+      padding: 5px;
+      width: 2%;
+      height: 25%;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  }
+  .other_space {
+      width: 25%;
+    height: 2px;
+    background-color: gray;
+    border: 2px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .text_step_cart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap:20%
+  }
+  .text_step {
+      color: grey;
+      font-size: 13px;
+    font-weight: 500;
+    text-decoration: solid;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+  
+  }
+  .acount_stat {
+    flex-direction: row;
+  }
+  .line-container {
+    width: 95%;
+    height: 2px;
+    background-color: #ff2800;
+    border: 1px solid #ff2800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .text_cart {
+    color: grey;
+  }
+  .button_cart {
+    background-color: #ff2800;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+    border-radius: 5px;
+    width: 12%;
+    height: 20%;
+    padding: 10px;
+  }
+  .button_cart:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+  
