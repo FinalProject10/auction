@@ -26,7 +26,7 @@ const log=()=>{
         <div className='flex items-center ml-[10%] mt-[6%]'>
         <div className='mt-[10%]'>
         <h1 className='text-[45px] mb-10'>Sign in</h1>
-        <h1 className=' font-[300] text-gray-500 absolute top-[25%] ml-[24%] '>Not a member ?<Link href={'/register/seller/firstStep'} className='underline text-blue-400'>Sign-up now</Link></h1>
+        <h1 className=' font-[300] text-gray-500 absolute top-[25%] ml-[24%] '>Not a member ?<Link href={'/register/client/firstStep'} className='underline text-blue-400'>Sign-up now</Link></h1>
        <h1 className='mb-5'>Email Address</h1>
         <input 
         onChange={(e:any)=>setEmail(e.target.value)}
