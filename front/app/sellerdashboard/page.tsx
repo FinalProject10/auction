@@ -1,37 +1,32 @@
-import {Chart,registerables} from "chart.js"
+"use client"
+import React from "react"
+
+import AlertDialogSlide from "./popup/popup"
 import Cards from "./cards/cards"
 import SideBar from "./sidebarr/sidebar"
 import "../sellerdashboard/sellerdashboard.css"
+const salesData = [2112, 2343, 2545, 3423, 2365, 1985, 987];
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 export default function  SellerDashboard (){
-  Chart.register(...registerables);
-  const canvas: HTMLCanvasElement = document.querySelector('canvas')!;
-  const chart = new Chart(canvas,{
-    type:'line',
-    data: {
-      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      datasets: [{
-        label: 'Traffic',
-        data: [2112, 2343, 2545, 3423, 2365, 1985, 987],
-      }],
-    },
-  })
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    console.log("add product click works!")
+    setOpen(true);
+    console.log("open is set to true")
+  };
     return(
       <div className="dashboard ">
  
   
     
       
-      <SideBar />
+      <SideBar open={open} setOpen={setOpen} handleClickOpen={handleClickOpen}  />
       
     <Cards />
-    <div  className="chart mx-auto w-11/12 overflow-hidden md:w-3/5 bg-gray-200 border border-gray-500 p-4">
-  <canvas id="canvas"
-    data-te-chart="line"
-    data-te-dataset-label="Traffic"
-    data-te-labels="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"
-    data-te-dataset-data="[2112, 2343, 2545, 3423, 2365, 1985, 987]"
-  ></canvas>
-</div>
+    {
+      open&& <AlertDialogSlide handleClickOpen={handleClickOpen} open = {open} setOpen={setOpen} />
+    }
+    
 </div>
     )
 }

@@ -19,6 +19,8 @@
     "@mui/material": "^5.15.2",
     "@mui/styled-engine-sc": "^6.0.0-alpha.10",
     "@mui/x-charts": "^6.18.4",
+    "@types/chart.js": "^2.9.41",
+    "@types/react-chartjs-2": "^2.5.7",
     "axios": "^1.6.3",
     "chart.js": "^4.4.1",
     "cloudinary-core": "^2.13.0",

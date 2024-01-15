@@ -1,6 +1,13 @@
-
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import './sidebar.css'
-export default function SideBar(){
+interface SideBarProps {
+  handleClickOpen:( )=>void;
+  open:boolean;
+  setOpen:React.Dispatch<React.SetStateAction<boolean>>
+}
+export default function SideBar(props:SideBarProps){
+  const handleClickOpen=props.handleClickOpen
+  const open = props.open
     return (
         <>
        
@@ -11,6 +18,10 @@ export default function SideBar(){
         <div className="full-name">
             zakaria askri
         </div>
+        <button onClick={()=>{handleClickOpen()}} className="add-product">
+        <AddCircleOutlineIcon/>
+        <p>add Product</p>
+        </button>
       </div>
     </div>
     <div className="m-4">
