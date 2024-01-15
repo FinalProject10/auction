@@ -1,7 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBare from '../AdminSidebar/page'
 import '../AdminClientNotBid/bt.css'
+import axios from 'axios'
+
+
+interface productPro{
+  images:string
+  name : string 
+  price :number 
+  timeStart :TimeRanges 
+  timeEnd :TimeRanges 
+  reviews:number
+  views :number 
+  watching :number
+  description: string 
+  longitude :string
+  lattitude: string
+  sold :number 
+  sellers_id: number
+}
 const listPro = () => {
+    const [data,setData]= useState <productPro[]>([])
+ useEffect(() => {
+  axios
+    .get('http://127.0.0.1:5000/dash/getPro')
+    .then((res) => {
+      const Data: productPro[] = res.data;
+      setData(Data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
+
   return (
     <div className="flex-row lg:flex"> 
     <SideBare/>
@@ -56,37 +87,39 @@ const listPro = () => {
                  </th>
               </tr>
             </thead>
-            <tbody>
+            {data.map((el)=>
+            (
+              <tbody>
               <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                 test 
+                 {el.images} 
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  test
+                  {el.name}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  0.000
+                  {el.price}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  test
+                  {el.timeStart}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  test
+                {el.timeEnd}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">               
-                0
+                {el.reviews}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">               
-                0
+                {el.views}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">               
-                0
+                {el.watching}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">               
-                test
+                {el.description}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">               
-                0
+                {el.sold}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <button className="btn">
@@ -108,6 +141,8 @@ const listPro = () => {
                 </td> */}
               </tr>
             </tbody>
+            ))}
+           
           </table>
         </div>
       </div>
