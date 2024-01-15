@@ -1,5 +1,6 @@
 import React from 'react'
 import SideBare from '../AdminSidebar/page'
+import '../AdminClientNotBid/bt.css'
 const listClientBid = () => {
   return (
     <div  className="flex-row lg:flex">

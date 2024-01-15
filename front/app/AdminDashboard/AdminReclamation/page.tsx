@@ -1,6 +1,24 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import SideBare from '../AdminSidebar/page'
+import axios from 'axios'
+interface reclam{
+  message:string
+}
 const Inbox = () => {
+  const [reclamtion,setReclamatio]= useState <reclam[]>([])
+
+  useEffect(() => {
+    axios
+      .get('http://127.0.0.1:5000/dash/getReclam')
+      .then((res) => {
+        const Data: reclam[] = res.data;
+        setReclamatio(Data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div  className="flex-row lg:flex">
     <SideBare/>
@@ -17,7 +35,7 @@ const Inbox = () => {
       <ul className="mt-6 overflow-y-scroll" >
         <li className="py-5 border-b px-3 transition hover:bg-indigo-100">
           <a href="#" className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Akhil Gautam</h3>
+            <h3 className="text-lg font-semibold"></h3>
             <p className="text-md text-gray-400">23m ago</p>
           </a>
           <div className="text-md italic text-gray-400">You have been invited!</div>

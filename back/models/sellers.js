@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
 
-const Seller = sequelize.define('seller', {
+const Seller = sequelize.define('sellers', {
   name: {
     type:DataTypes.STRING,
     allowNull: true},
@@ -30,7 +30,7 @@ const Seller = sequelize.define('seller', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  latitude: {
+  lattitude: {
     type: DataTypes.STRING,
     allowNull: true,
   },
@@ -44,6 +44,6 @@ const Seller = sequelize.define('seller', {
   },
   
 },{timestamps: false,
-    tableName:'seller'});
+    tableName:'sellers'});
 
 module.exports = Seller;

@@ -2,6 +2,13 @@ import React from 'react'
 import SideBare from '../AdminSidebar/page'
 import "../AdminClientNotBid/bt.css"
 const ListClientCan_t_Bid = () => {
+
+
+
+
+
+
+  
   return (
     <div  className="flex-row lg:flex">
     <SideBare/>
@@ -37,6 +44,9 @@ const ListClientCan_t_Bid = () => {
                   cin number
                 </th>
                 <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                amount paid
+                </th>
+                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                  
                 </th>
                 <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
@@ -62,6 +72,10 @@ const ListClientCan_t_Bid = () => {
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
                   11454789
+                </td>
+                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
+                  50000 dt
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>

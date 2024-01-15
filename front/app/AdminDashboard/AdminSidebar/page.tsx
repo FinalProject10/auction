@@ -14,12 +14,9 @@ const sideBare = () => {
     <div className="flex-row lg:flex">
 
       <div className="space-y-3">
-        <div className="flex items-center justify-between">
-   
         
-        </div>
-<div className="flex h-screen bg-gray-100">
-<div className="hidden md:flex flex-col w-64 bg-gray-800">
+<div className="flex h-screen bg-gray-100 ">
+<div className="hidden md:flex flex-col w-64 bg-gray-800 ">
     <div className="flex items-center justify-center h-16 bg-gray-900" style={{"height": "217px"}}>
         <span className="text-white font-bold uppercase">
         <img className='flex rounded-4 rounded-full   ' src="https://shorturl.at/cgFI5" alt="" 
@@ -63,19 +60,19 @@ const sideBare = () => {
             </a>
             </div> 
             </Link>
-            <Link href="/AdminDashboard/AdminSellerBasic">
+            {/* <Link href="/AdminDashboard/AdminSellerBasic">
             <div className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ml-1">
             <RiVerifiedBadgeFill />
           <a style={{"margin-left":"15px"}}> 
-                Basic Seller
+                Basic client
             </a>
             </div> 
-            </Link>
+            </Link> */}
             <Link href="/AdminDashboard/AdminSelerVip">
             <div  className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ml-1">
             <FaCrown/>
             <a style={{"margin-left":"15px"}}>
-               VIP Seller
+               VIP client
             </a>
             </div>
             </Link>

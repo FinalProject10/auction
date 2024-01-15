@@ -20,6 +20,6 @@ clients_id:{
     allowNull:true
 }
 },{timestamps: false,
-tableName:'membership'});
+tableName:'memberships'});
 
 module.exports = Memberships;
