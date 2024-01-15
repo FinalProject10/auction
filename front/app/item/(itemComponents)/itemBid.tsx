@@ -74,7 +74,7 @@ const ItemBid = () => {
           Auction ends: December 12, 2024 12:00 am <br />
           Timezone: UTC 0
         </p>
-        <div className="bidFlex">
+        <div className="bidFlex mb-4">
           <form
             className="countdown_row  h-10 px-6 font-semibold"
             onSubmit={handleSubmit}
@@ -136,7 +136,7 @@ const ItemBid = () => {
           </div>
         </div>
       </div>
-      <div className="product_meta">
+      <div className="product_meta mb-4 ml-3">
         <p className="sku_wrapper">
           SKU: <span className="sku">ab-08</span>
         </p>
