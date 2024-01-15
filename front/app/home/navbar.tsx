@@ -14,8 +14,6 @@ const Navbar = () => {
   return (
     <div>
         <div className=' w-full h-[54px] bg-[#262626] flex justify-center items-center gap-[80%]'>
-            <img className='w-[150px]' src="https://public-assets.envato-static.com/assets/logos/envato_market-dde916a48af7413e54aa058fe7ae6856752fca799da4bec355f00aea904bfa19.svg" alt="" />
-            <button className='text-white bg-[#6f9a37] text-[16px] float-right  w-[100px] h-[30px] rounded'>Buy Now</button>
         </div>
         <div className='flex items-center gap-[30px] text-[#333333] font-[600] mb-[25px]'>
             <img className='w-[120px] ml-[50px] mt-[15px] ' src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg" alt="" />

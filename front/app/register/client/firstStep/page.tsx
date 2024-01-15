@@ -26,8 +26,8 @@ const FirstStep = () => {
 const[err,setErr]=useState('')
 
   const add=()=>{
-    axios.post(`http://localhost:5000/seller/register`,{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
-    .then(r=>{setVerified(true)
+    axios.post(`http://localhost:5000/client/register`,{name:firstName,lastName:lastName,pass:pass,email:email,phone:phone})
+    .then(r=>{router.push('/login/client')
     console.log(r.data)}).catch(err=>setErr(err.response.data['err']))
   }
   return (
@@ -154,9 +154,7 @@ const[err,setErr]=useState('')
    onClick={()=>{
 
     add()
-    setTimeout(() => {
-        if(verified) router.push('/register/seller/secondStep')
-    }, 1000);
+    
 }}
    >
   <span className="hover-underline-animation"> Next </span>
