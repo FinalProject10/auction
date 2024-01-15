@@ -7,8 +7,8 @@ const ItemSidebar = () => {
   return (
     <>
       <div>
-        <div className="max-w-sm border border-black-200 rounded-lg p-4 drop-shadow-lg bg-white rounded-b-lg">
-          <span className="flex m-5 ">
+        <div className=" my-6  max-w-sm border border-black-200 rounded-lg p-4 drop-shadow-lg bg-white rounded-b-lg">
+          <span className="flex m-2 ">
             <Image
               className="rounded-lg pr-4"
               src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-13-768x486.jpg"
@@ -18,14 +18,14 @@ const ItemSidebar = () => {
             />
             <h2>Leasing Automobile</h2>
           </span>
-          <p>
+          <p className="my-2">
             <FontAwesomeIcon
               icon="fas fa-map-marker-alt"
               className="black-icon w-[10px] inline-block mx-2 "
             />{" "}
             Hamburg, Germany
           </p>
-          <p>
+          <p className="my-2">
             <FontAwesomeIcon
               icon="fas fa-user-alt"
               className="black-icon w-[10px] inline-block mx-2 "
@@ -81,7 +81,7 @@ const ItemSidebar = () => {
             width={300}
             height={100}
           />
-          <div className="border border-black-200 rounded-sm p-4 drop-shadow-lg bg-white rounded-b-lg">
+          <div className="text-sm/[30px] border border-black-200 rounded-sm p-4 drop-shadow-lg bg-white rounded-b-lg">
             <p>Audi A6 </p>
             <p> 2015 · 97 900 km · 2</p>
             <p>494 cm3 · Hybrid</p>
@@ -99,7 +99,7 @@ const ItemSidebar = () => {
             width={300}
             height={100}
           />
-          <div className="border border-black-200 rounded-sm p-4 drop-shadow-lg bg-white rounded-b-lg">
+          <div className="text-sm/[30px] border border-black-200 rounded-sm p-4 drop-shadow-lg bg-white rounded-b-lg">
             <p>Audi A6 </p>
             <p> 2015 · 97 900 km · 2</p>
             <p>494 cm3 · Hybrid</p>

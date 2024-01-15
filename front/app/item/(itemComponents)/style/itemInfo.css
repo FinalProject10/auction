@@ -24,6 +24,7 @@ th {
     padding: 10px;
     /* border: 1px solid rgb(202, 202, 202); */
     /* Optional for visualizing cell borders */
+    width: 330px;
 }
 
 table {
@@ -36,6 +37,10 @@ td {
     text-align: left;
     padding: 8px;
     border-bottom: 1px solid #ddd;
+}
+
+td {
+    text-align: end;
 }
 
 th {
