@@ -6,9 +6,12 @@ import Gallery from "./(itemComponents)/itemGalory.tsx";
 import ItemDescrption from "./(itemComponents)/itemDescrption.tsx";
 import ItemSidebar from "./(itemComponents)/itemSidebar.tsx";
 import "./(itemComponents)/style/page.css";
+import Navbar from "../home/navbar.tsx";
+import Footer from "../footer/Footer.tsx";
 const Item = () => {
   return (
     <>
+    <Navbar/>
       <ItemHeader />
       <div className="mx-[5%]">
         <div className="galoryBid">
@@ -27,6 +30,7 @@ const Item = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import img3 from '../images/img3.png'
 const Offers = () => {
   return (
-    <div className='w-full h-[890px] bg-[#f2f2f2] mt-[15%] mb-[5%]'>
+    <div className='w-full h-[930px] bg-[#f2f2f2] mt-[15%] mb-[5%]'>
         <div className='flex justify-evenly w-full p-[50px]'>
             <div>
                 <h1 className='text-[45px] font-[800]'>40K</h1>
