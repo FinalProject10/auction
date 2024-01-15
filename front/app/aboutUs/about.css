@@ -878,3 +878,12 @@
       height: 20px; /* Adjust as needed */
       margin-right: 5px; /* Adjust as needed */
     }
+    .picc{
+        position: relative;
+        left: -94.6px;
+        box-sizing: border-box;
+        width: 939px;
+        max-width: 939px;
+        padding-left: 94.6px;
+        padding-right: 94.4px;
+      }

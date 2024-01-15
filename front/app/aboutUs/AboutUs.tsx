@@ -8,6 +8,8 @@ const AboutUs: FC = () => {
 
   return (
     <div className="abou">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5T2YK7OWnl33LN_Ezuk3gCsm2icLRvB24Fg&usqp=CAU" ></img>
+
   <div><img src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/Autobid-about.jpg?id=7148" width={30000} alt="" className='cov' /></div>
       <div className="our-story-paren">
         <div className="our-stor">Our Mission in Company</div>
@@ -32,13 +34,13 @@ Our platform is a dynamic fusion of curated collections, spirited bidding, and u
       </div>
       <div className="full-service">
         <div className="services-paren">
-          <img className="services-ico" alt="" src="/services@2x.png" />
+          <img className="services-ico" alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC12Zd5z5Ioi805yjisbWOqy1E4JqjQ_aMFg&usqp=CAU" />
           <div className="free-and-fast-delivery-paren">
             <div className="free-and-fas">GET YOUR CAR</div>
            </div>
         </div>
         <div className="services-grou">
-          <img className="services-ico" alt="" src="/services@2x.png" />
+          <img className="services-ico" alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRLyx0I6WruhCadbIEFTFO-IgKbQ-GBlWGxA&usqp=CAU" />
           <div className="customer-service-paren">
             <div className="free-and-fas">24/7 CUSTOMER SERVICE</div>
             <div className="friendly-247-custome">
@@ -47,7 +49,7 @@ Our platform is a dynamic fusion of curated collections, spirited bidding, and u
           </div>
         </div>
         <div className="services-containe">
-          <img className="services-ico" alt="" src="/services@2x.png" />
+          <img className="services-ico" alt="" src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.pickles.com.au%2Fgetmedia%2F1412ed1a-90c4-4667-a51d-fcafa737e751%2Fnational_prestige_luxury_classic_auction_pickles_2311.jpg.aspx%3Fwidth%3D674&tbnid=mg3tZDfO9Ta0kM&vet=12ahUKEwiOn4Cv9t6DAxXM7AIHHbBWDpEQMyhIegUIARD0AQ..i&imgrefurl=https%3A%2F%2Fwww.pickles.com.au%2F&docid=VlgesmbcsnidTM&w=674&h=506&q=car%20auction%20photo%20client%20deals&ved=2ahUKEwiOn4Cv9t6DAxXM7AIHHbBWDpEQMyhIegUIARD0AQ" />
           <div className="free-and-fast-delivery-paren">
             <div className="free-and-fas">MONEY BACK GUARANTEE</div>
             <div className="friendly-247-custome">
@@ -56,9 +58,9 @@ Our platform is a dynamic fusion of curated collections, spirited bidding, and u
           </div>
         </div>
         <div className="services-paren">
-          <img className="services-ico" alt="" src="/services@2x.png" />
+          <img className="services-ico" alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe2LUbokwTuTysfhyaxBRQa-Mzmr3sPNkXXA&usqp=CAU" />
           <div className="free-and-fast-delivery-paren">
-            <div className="free-and-fas">MONEY BACK GUARANTEE</div>
+            <div className="free-and-fas">pick the right choice </div>
             <div className="friendly-247-custome">
               We reurn money within 30 days
             </div>
@@ -107,131 +109,28 @@ Our platform is a dynamic fusion of curated collections, spirited bidding, and u
           </div>
         </div>
       </div>
-      <div className="frame-containe">
-        <div className="frame-parent1">
-          <div className="image-46-wrappe">
-            <img className="image-46-ico" alt="" src="/download.jfif" />
-          </div>
-          <div className="frame-parent2">
-            <div className="tom-cruise-paren">
-              <div className="tom-cruise">SALAH HLEL</div>
-              <div className="founder-chairma">DEVELOPER</div>
-            </div>
-            <div className="icon-twitter-paren">
-              <img className="dropdown-ico" alt="" src="/icontwitter@2x.png" />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconinstagram@2x.png"
-              />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconlinkedin@2x.png"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="frame-parent1">
-          <div className="image-46-wrappe">
-            <img className="image-51-ico" alt="" src="" />
-          </div>
-          <div className="frame-parent2">
-            <div className="tom-cruise-paren">
-              <div className="tom-cruis">SALMEN KHLIFI</div>
-              <div className="founder-chairma">DEVELOPER</div>
-            </div>
-            <div className="icon-twitter-paren">
-              <img className="dropdown-ico" alt="" src="/icontwitter@2x.png" />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconinstagram@2x.png"
-              />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconlinkedin@2x.png"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="frame-parent1">
-          <div className="image-46-wrappe">
-            <img className="image-51-ico" alt="" src="" />
-          </div>
-          <div className="frame-parent2">
-            <div className="tom-cruise-paren">
-              <div className="tom-cruis">SALIM BEN SLIM</div>
-              <div className="founder-chairma">Scrum master</div>
-            </div>
-            <div className="icon-twitter-paren">
-              <img className="dropdown-ico" alt="" src="/icontwitter@2x.png" />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconinstagram@2x.png"
-              />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconlinkedin@2x.png"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="frame-parent1">
-          <div className="image-46-wrappe">
-            <img className="image-47-ico" alt="" src="" />
-          </div>
-          <div className="frame-parent2">
-            <div className="tom-cruise-paren">
-              <div className="tom-cruis">ADIB JAZIRI</div>
-              <div className="founder-chairma">DEVELOPER</div>
-            </div>
-            <div className="icon-twitter-paren">
-              <img className="dropdown-ico" alt="" src="/icontwitter@2x.png" />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconinstagram@2x.png"
-              />
-                <div className="frame-parent1">
-          <div className="image-46-wrappe">
-            <img className="image-51-ico" alt="" src="" />
-          </div>
-          <div className="frame-parent2">
-            <div className="tom-cruise-paren">
-              <div className="tom-cruis">SALMEN KHLIFI</div>
-              <div className="founder-chairma">DEVELOPER</div>
-            </div>
-            <div className="icon-twitter-paren">
-              <img className="dropdown-ico" alt="" src="/icontwitter@2x.png" />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconinstagram@2x.png"
-              />
-              <img
-                className="dropdown-ico"
-                alt=""
-                src="/iconlinkedin@2x.png"
-              />
-            </div>
-          </div>
-            </div>      
-          </div>
-          </div>
+      <div className="frame-containe flex space-x-6">
+  {[
+    { name: 'SALAH HLEL', role: 'DEVELOPER', image: '' },
+    { name: 'SALMEN KHLIFI', role: 'DEVELOPER', image: '/image-path-for-salmi.jfif' },
+    { name: 'SALIM BEN SLIM', role: 'Scrum master', image: '/image-path-for-salim.jfif' },
+    { name: 'ADIB JAZIRI', role: 'DEVELOPER', image: '/image-path-for-adib.jfif' },
+    { name: 'ZAKARIA ASKRI', role: 'DEVELOPER', image: '/image-path-for-adib.jfif' },
+  ].map((person, index) => (
+    <div key={index} className="flex flex-col items-center">
+      <div className="image-46-wrappe">
+        <img className={`image-${index + 46}-ico`} alt="" src={person.image} />
+      </div>
+      <div className="frame-parent2">
+        <div className="tom-cruise-paren">
+          <div className="tom-cruise">{person.name}</div>
+          <div className="founder-chairma">{person.role}</div>
         </div>
       </div>
-      <div/>
-      <div className="ellipse-paren">
-        <div className="frame-chil" />
-        <div className="frame-chil" />
-        <img className="frame-inne" alt="" src="/group-1000005940@2x.png" />
-        <div className="frame-chil" />
-        <div className="frame-chil" />
-      </div>
+    </div>
+  ))}
+</div>
+  <div/>
     </div>
   );
 };
