@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['carauctionnetwork.com'],
-      },
-}
+  reactStrictMode: false,
+  images: {
+    domains: ["autobid.modeltheme.com"],
+  },
+};
 
-
-module.exports = nextConfig
+module.exports = nextConfig;
