@@ -19,9 +19,11 @@ export default function Actions(props:ActionsProps){
         setAction(act)
         if(act==="Delete"){
             setIsDelete(true)
+            setIsEdit(false)
         }
         else if(act==="Edit"){
             setIsEdit(true)
+            setIsDelete(false)
         }
     }
    return(
@@ -40,21 +42,20 @@ export default function Actions(props:ActionsProps){
                 </svg>
             </button>
             {!hidden&& <div id="dropdownAction" className="z-10  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
-                    <li>
-                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
+                <ul className="py-1 cursor-pointer text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
+                    <li onClick={()=>{handleClick("Edit")}}>
+                        <p className="block cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Update</p>
                     </li>
-                    <li>
-                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
+                    
+                    <li onClick={()=>{handleClick("Delete")}}>
+                        <p className="block cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</p>
                     </li>
-                    <li>
-                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activate account</a>
-                    </li>
+                   
+                   
                 </ul>
-                <div className="py-1">
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete User</a>
+                
                 </div>
-            </div>
+           
         }
 
         </div>

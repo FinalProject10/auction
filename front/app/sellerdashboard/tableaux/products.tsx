@@ -1,13 +1,15 @@
 "use client"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import Actions from "./actions"
 export default function AddedProducts(){
     const [action,setAction]=useState("")
     const [isDelete,setIsDelete]=useState<boolean>(false)
     const [isEdit,setIsEdit]=useState<boolean>(false)
-    
+    useEffect(()=>{
+        ()=>{console.log("component rerenderd due to operation change.")}
+    },[isDelete,isEdit])
    return( <>
    <div className=" relative overflow-x-auto shadow-md sm:rounded-lg">
     <Actions setIsDelete={setIsDelete} setIsEdit={setIsEdit} action ={action} setAction ={setAction} />
