@@ -44,7 +44,7 @@ const Products = () => {
 
 
         </div>
-    <div className='w-[1090px] h-[1500px] bg-gray-200'>
+    <div className='w-[1090px] h-[1500px] '>
     <div className='flex justify-between'>
     <div className='flex gap-[20px]' >
     <div className='flex cursor-pointer'>
@@ -70,7 +70,7 @@ const Products = () => {
 
 
     </div>
-    {flex?<div className='flex justify-between mt-[3%] flex-wrap'>
+    {flex?<div className='flex justify-between mt-[3%] flex-wrap '>
     <div className=' w-[33%] h-[10%] bg-white rounded-3xl border-[2px]  shadow-2xl'>
             <div style={{background:'url("https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg")',backgroundSize:'cover'}}  className='w-[315px] h-[190px]  rounded-t-3xl overflow-hidden'>
             <div className="flex justify-evenly mt-[50%]">
@@ -94,7 +94,7 @@ const Products = () => {
     
  
     </div>:<div className="grid">
-    <div className="w-full h-[198px]  rounded-[10px] bg-white flex">
+    <div className="w-full h-[198px]  rounded-[10px] bg-white flex shadow-2xl">
         <div 
         className="w-[313px] h-full rounded-l-[10px] inline-block"
         style={{background:'url("https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg")',backgroundSize:'cover'}}>
