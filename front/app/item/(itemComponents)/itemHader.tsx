@@ -3,7 +3,7 @@ const ItemHeader = () => {
   return (
     <div className="autobid-breadcrumbs">
       <div className="container">
-        <div className="row">
+        <div className="">
           <div className="col-md-6">
             <h1>Mercedes-Benz GLC</h1>
             <div className="description">

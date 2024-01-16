@@ -5,8 +5,8 @@
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  /* max-width: 1200px;
+  margin: 0 auto; */
 }
 
 .row {
@@ -62,13 +62,14 @@ ul li {
 .row {
   justify-content: center;
   align-items: center;
- 
+
 }
 
 .ft {
-  text-align: center; 
+  text-align: center;
 }
+
 .pic {
-text-align: center;
-display: flex;  
+  text-align: center;
+  display: flex;
 }
