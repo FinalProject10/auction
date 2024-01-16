@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from 'react'
 import SideBare from '../AdminSidebar/page'
 import '../AdminClientNotBid/bt.css'
@@ -87,9 +88,10 @@ const listPro = () => {
                  </th>
               </tr>
             </thead>
-            {data.map((el)=>
-            (
+            
               <tbody>
+              {data.map((el)=>
+            (
               <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                  {el.images} 
@@ -140,8 +142,9 @@ const listPro = () => {
 
                 </td> */}
               </tr>
+               ))}
             </tbody>
-            ))}
+           
            
           </table>
         </div>

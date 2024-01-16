@@ -1,5 +1,5 @@
 "use client"
-import Image from 'next/image'
+
 import { useState } from 'react'
 import AboutUs from "./aboutUs/AboutUs.tsx"
 import Image from 'next/image'

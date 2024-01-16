@@ -1,10 +1,11 @@
-const express = require('express');
-const db=require('./database/index')
-const sellerRoutes=require('./routes/seller')
-const clientRoutes=require('./routes/client')
-const adminRoutes=require('./routes/admin')
-const dashboard=require('./routes/AdminDashboardRouter')
-const cors = require('cors');
+const express = require("express");
+const db = require("./database/index");
+const {Bid,Client,Admin,Items,Memberships,Seller,Reclamation}=require('./models/relations')
+const sellerRoutes = require("./routes/seller");
+const clientRoutes = require("./routes/client");
+const adminRoutes = require("./routes/admin");
+const dashboard = require('./routes/AdminDashboardRouter');
+const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
