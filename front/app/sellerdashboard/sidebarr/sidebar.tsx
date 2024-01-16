@@ -3,9 +3,11 @@ import './sidebar.css'
 interface SideBarProps {
   handleClickOpen:( )=>void;
   open:boolean;
-  setOpen:React.Dispatch<React.SetStateAction<boolean>>
+  setOpen:React.Dispatch<React.SetStateAction<boolean>>;
+  setAddedProducts:React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function SideBar(props:SideBarProps){
+  const setAddedProducts=props.setAddedProducts
   const handleClickOpen=props.handleClickOpen
   const open = props.open
     return (
@@ -52,7 +54,7 @@ export default function SideBar(props:SideBarProps){
         </li>
         <li>
           
-            <button className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize" type="button">
+            <button onClick={()=>{setAddedProducts(true)}} className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize" type="button">
              
               <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Added Products</p>
             </button>
