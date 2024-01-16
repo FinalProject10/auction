@@ -27,9 +27,11 @@ export default function  SellerDashboard (){
     {
       open&& <AlertDialogSlide handleClickOpen={handleClickOpen} open = {open} setOpen={setOpen} />
     }
+    <div className="  absolute bottom-[10%] left-[25%] h-auto">
 {
   addedProducts&&<AddedProducts/>
 }
+</div>
     
 </div>
     )
