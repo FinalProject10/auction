@@ -7,7 +7,6 @@ const Navbar = () => {
    
     const[home,setHome]=useState(false)
     const[platform,setPlatform]=useState(false)
-    const[news,setNews]=useState(false)
     const[shop,setShop]=useState(false)
     const[pages,setPages]=useState(false)
     const[cart,setCart]=useState(false)
@@ -18,20 +17,18 @@ const Navbar = () => {
         <div className='flex items-center gap-[30px] text-[#333333] font-[600] mb-[25px]'>
             <img className='w-[120px] ml-[50px] mt-[15px] ' src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg" alt="" />
         <Link href={'/'} className='mt-[1%] ml-[10%] hover:text-[#ff2800] transition ease-in-out delay-50 ' 
-        onMouseEnter={()=>{setHome(true);setPlatform(false);setNews(false);setShop(false);setPages(false)}}
+        onMouseEnter={()=>{setHome(true);setPlatform(false);setShop(false);setPages(false)}}
         >Home</Link>
         
         <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
-        onMouseEnter={()=>{setPlatform(true);setHome(false);setNews(false);setShop(false);setPages(false)}}
+        onMouseEnter={()=>{setPlatform(true);setHome(false);setShop(false);setPages(false)}}
         >Platform</Link>
+       
         <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
-        onMouseEnter={()=>{setNews(true);setHome(false);setPlatform(false);setShop(false);setPages(false)}}
-        >News</Link>
-        <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
-        onMouseEnter={()=>{setShop(true);setHome(false);setPlatform(false);setNews(false);setPages(false)}}
+        onMouseEnter={()=>{setShop(true);setHome(false);setPlatform(false);setPages(false)}}
         >Shop</Link>
         <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
-        onMouseEnter={()=>{setPages(true);setHome(false);setPlatform(false);setNews(false);setShop(false)}}
+        onMouseEnter={()=>{setPages(true);setHome(false);setPlatform(false);setShop(false)}}
         >Pages</Link>
         <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'>Get In Touch</Link>
         <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'>Favorites</Link>
@@ -50,7 +47,7 @@ const Navbar = () => {
         </div>}
         {platform&&<div
         onMouseLeave={()=>setPlatform(false)}
-        className=' bg-white w-[900px] h-[350px] rounded-[20px] absolute top-[15%] left-[419px] grid grid-cols-2 mt-[10px]'>
+        className=' bg-white w-[900px] h-[367px] rounded-[20px] absolute top-[15%] left-[419px] grid grid-cols-2 mt-[10px]'>
             <div className='grid grid-cols-2 mt-[2%] ml-[2%] p-5'>
                 <div className='mb-10'>
                 <h1 className='font-[700] text-[30px] mb-[15px]'>Search Cars</h1>
@@ -108,13 +105,8 @@ const Navbar = () => {
   borderTopRightRadius:'20px'}}></div>
 
         </div>}
-        {news&&<div className='text-[#333333] bg-white w-[150px] h-[90px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[35%] '
-        onMouseLeave={()=>setNews(false)}
-        >
-            <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Blog List</h1>
-            <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Single Blog</h1>
-        </div>}
-        {shop&&<div className='text-[#333333] bg-white w-[150px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[40%] '
+       
+        {shop&&<div className='text-[#333333] bg-white w-[150px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[35%] '
         onMouseLeave={()=>setShop(false)}
         >
             <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Shop Page</h1>
@@ -122,7 +114,7 @@ const Navbar = () => {
             <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Cart</h1>
             <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>My Account</h1>
         </div>}
-        {pages&&<div className='text-[#333333] bg-white w-[150px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[45%] '
+        {pages&&<div className='text-[#333333] bg-white w-[170px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[40%] '
         onMouseLeave={()=>setPages(false)}
         >
             <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>How It Works</h1>

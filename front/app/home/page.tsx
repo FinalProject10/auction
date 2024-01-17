@@ -13,6 +13,7 @@ import StartNow from './startNow'
 import Offers from './offers'
 import Style from './style'
 import Services from './services'
+import Footer from '../footer/Footer'
 const Home = () => {
   const currencies = [
     {
@@ -258,6 +259,7 @@ const Home = () => {
 <Offers/>
 <Style/>
 <Services/>
+<Footer/>
     </div>
   )
 }
