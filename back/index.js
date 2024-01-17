@@ -1,9 +1,18 @@
 const express = require("express");
 const db = require("./database/index");
-const {Bid,Client,Admin,Items,Memberships,Seller,Reclamation}=require('./models/relations')
+const {
+  Bid,
+  Client,
+  Admin,
+  Items,
+  Memberships,
+  Seller,
+  Reclamation,
+} = require("./models/relations");
 const sellerRoutes = require("./routes/seller");
 const clientRoutes = require("./routes/client");
 const adminRoutes = require("./routes/admin");
+const itemsRoute = require("./routes/itemsRoute");
 const cors = require("cors");
 const app = express();
 app.use(cors());
@@ -14,6 +23,7 @@ const PORT = 5000;
 app.use("/seller", sellerRoutes);
 app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
+app.use("/api/items", itemsRoute);
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });

@@ -14,11 +14,11 @@
 }
 
 .name {
-    margin-bottom: 0px;
-    margin-top: 80px;
+    /* margin-bottom: 0px; */
+    margin-top: -36px;
     /* position: absolute; */
     /* z-index: 99; */
-    margin-left: 25px;
+    margin-left: 10px;
 
     color: white;
 }
@@ -26,7 +26,7 @@
 .bidIcon {
 
     margin-bottom: 0px;
-    margin-top: 70px;
+    margin-top: 60px;
     /* position: absolute; */
     /* z-index: 99; */
     margin-left: 115px;
@@ -43,3 +43,6 @@
     font-size: 20px;
     margin-bottom: 10px;
 } */
+.borderRadiu {
+    border-radius: 10px 10px 0 0;
+}
