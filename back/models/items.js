@@ -21,7 +21,7 @@ const Items = sequelize.define('item', {
     allowNull: true
   },
   timeStart: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING(45),
     allowNull: false
   },
   timeEnd: {
@@ -93,7 +93,7 @@ const Items = sequelize.define('item', {
     allowNull: true
   },
   doorCount: {
-    type: DataTypes.STRING(45),
+    type: DataTypes.INTEGER,
     allowNull: true
   },
   gearBox: {
