@@ -56,10 +56,6 @@ const Items = sequelize.define('item', {
     type: DataTypes.BOOLEAN,
     allowNull: true
   },
-  sellers_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
   body: {
     type: DataTypes.STRING(45),
     allowNull: true

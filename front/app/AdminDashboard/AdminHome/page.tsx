@@ -32,32 +32,32 @@ interface sellerProps{
     adress : string,
 }
 interface MemberPr{
-    type :string
+    type :string,
 price:number
 }
-interface biditem{
-    images:string
-    name : string 
-    price :number 
-    timeStart :TimeRanges 
-    timeEnd :TimeRanges 
-    reviews:number
-    views :number 
-    watching :number
-    description: string 
-    longitude :string
-    lattitude: string
-    sold :number 
-    sellers_id: number
-}
+// interface biditem{
+//     images:string
+//     name : string 
+//     price :number 
+//     timeStart :TimeRanges 
+//     timeEnd :TimeRanges 
+//     reviews:number
+//     views :number 
+//     watching :number
+//     description: string 
+//     longitude :string
+//     lattitude: string
+//     sold :number 
+//     sellers_id: number
+// }
 const HomePage = () => {
     const [Data, setData] = useState<clientProps[]>([]);
     const [Data1, setData1] = useState<sellerProps[]>([]);
     const [data2,setData2]= useState <MemberPr[]>([])
-    const [data3,setData3] =useState <biditem[]>([])
+    const [data3,setData3] =useState <[]>([])
     const [total ,setTotal]=useState<number>(0)
     const [total1,setTotal1] =useState <number>(0)
-    const [merge , setMerge]=useState <object>({})
+   const [cordoner , setCordoner]=useState ([])
 
     useEffect(() => {
         axios
@@ -65,6 +65,19 @@ const HomePage = () => {
           .then((res) => {
             const Data: clientProps[] = res.data;
             setData(Data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, []);
+      useEffect(() => {
+        axios
+          .get('http://127.0.0.1:5000/dash/SelItem')
+          .then((res) => {
+            const Data:[] = res.data;
+            console.log(Data);
+            
+            setCordoner(Data);
           })
           .catch((err) => {
             console.log(err);
@@ -85,30 +98,34 @@ const HomePage = () => {
         axios
           .get('http://127.0.0.1:5000/dash/getMember')
           .then((res) => {
-            const Data: MemberPr[] = res.data;
-            setData2(Data);
+            const fetchedData: MemberPr[] = res.data;
+            setData2(fetchedData);
+    
+            // Assuming data2 has a 'price' property
+            const totalPrice = fetchedData.reduce((acc, item) => acc + item.price, 0);
+            setTotal((prevTotal) => prevTotal + totalPrice);
           })
           .catch((err) => {
             console.log(err);
           });
       }, []);
+      
       useEffect(() => {
         axios
           .get('http://127.0.0.1:5000/dash/getPro')
           .then((res) => {
-            const Data: biditem[] = res.data;
-            setData3(Data);
+            const fetchedData: [] = res.data; // Assuming biditem is a type for your data
+            setData3(fetchedData);
+            
+            const totalSold = fetchedData.reduce((acc, item) => acc + item , 0);
+            
+            setTotal1((prevTotal) => prevTotal + totalSold);
           })
           .catch((err) => {
             console.log(err);
           });
       }, []);
-      data2.forEach((el) => {
-        setTotal(el.price + total);
-    });
-    data3.forEach((el) => {
-        setTotal1(el.sold + total1);
-    });
+      
  
     // const router=useRouter()
     // useEffect(()=>{
@@ -312,7 +329,7 @@ const HomePage = () => {
             <div>
 <div className="relative">
 <div className=" flex  rounded-md w-[800px] h-[50%] overflow-x-scroll ">
-    {data3.map((el)=>(
+    {cordoner.map((el)=>(
 <div style={{"padding-right": "10%"}}>
 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
     <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
@@ -355,7 +372,7 @@ const HomePage = () => {
 </div>
     ))}
  
-    <div style={{"padding-right": "10%"}}>
+    {/* <div style={{"padding-right": "10%"}}>
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
             <tr>
@@ -634,7 +651,7 @@ const HomePage = () => {
             </tr>
         </tbody>
     </table>
-    </div>
+    </div> */}
 </div>
 
 </div>
