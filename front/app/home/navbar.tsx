@@ -11,12 +11,16 @@ const Navbar = () => {
     const[pages,setPages]=useState(false)
     const[cart,setCart]=useState(false)
   return (
-    <div>
-        <div className=' w-full h-[54px] bg-[#262626] flex justify-center items-center gap-[80%]'>
+    <div
+    onMouseLeave={()=>{setHome(false);setPlatform(false);setShop(false);setPages(false);setCart(false)}}
+
+    >
+        <div 
+        className=' w-full h-[54px] bg-[#262626] flex justify-center items-center gap-[80%]'>
         </div>
         <div className='flex items-center gap-[30px] text-[#333333] font-[600] mb-[25px]'>
             <img className='w-[120px] ml-[50px] mt-[15px] ' src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg" alt="" />
-        <Link href={'/'} className='mt-[1%] ml-[10%] hover:text-[#ff2800] transition ease-in-out delay-50 ' 
+        <Link href={'/home'} className='mt-[1%] ml-[10%] hover:text-[#ff2800] transition ease-in-out delay-50 ' 
         onMouseEnter={()=>{setHome(true);setPlatform(false);setShop(false);setPages(false)}}
         >Home</Link>
         

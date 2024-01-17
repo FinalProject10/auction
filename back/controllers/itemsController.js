@@ -77,5 +77,23 @@ const getItems = async (req, res) => {
       .json({ message: "Internal server error", error: error.message });
   }
 };
+const addItem=async(req,res)=>{
+  try{
+    const d=await Items.create(req.body)  
+   res.status(200).json('created') 
+ 
+  }catch(err){
+    res.status(500).json('server err')
+  }  
+    }
+const getAllItems=async(req,res)=>{
+  try{
 
-module.exports = { getItems };
+    const d=await Items.findAll()
+    res.status(200).json(d)
+  }catch(err){
+    res.status(500).json('server err')
+  }
+}
+
+module.exports = { getItems,addItem,getAllItems };

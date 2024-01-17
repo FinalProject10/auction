@@ -8,16 +8,16 @@ const Page = () => {
     <div >
         <Navbar/>
         <div className='bg-[#F2F2F2] h-[170px] w-full'>
-           <div className='pl-[4%] pt-[3%]'>
+           <div className='pl-[6%] pt-[3%]'>
            <Link href={'/home'}> <h1 className='text-[#999999] inline-block mb-[2%]'>Home / </h1></Link><span className='text-[#999999]'>shop</span>
             <h1 className='text-[35px] font-[700]'>Auctions</h1>
             </div>
 
         </div>
         <Products/>
-        
-    
         <Footer/>
+    
+       
     </div>
   )
 }
