@@ -11,9 +11,9 @@ const Products = () => {
     const[flex,setFlex]=useState(true)
   return (
     <div className='w-[90%] m-[5%] h-[800px] flex gap-[5%]'>
-        <div className='w-[329px] h-[1691px] shadow-2xl rounded-[20px] p-[3%] inline-block'>
+        <div className='w-[30%] h-[1691px] shadow-2xl rounded-[20px] p-[3%] inline-block'>
         <h1 className=' font-[700] text-[30px] mb-[3%]'>Filters:</h1>
-        <h1 >Car Models</h1>
+        <h1 className="font-[700] text-[20px] mb-[3%]">Car Models</h1>
         <div className='flex justify-between mb-[1%]'>
             <h1>Audi </h1>
             <h1>(5)</h1>
@@ -38,6 +38,97 @@ const Products = () => {
             <h1>Lamborghini </h1>
             <h1>(1)</h1>
             </div>
+            <hr className=' border-dotted'/>
+            <div className='flex justify-between'>
+            <h1>Mazda</h1>
+            <h1>(0)</h1>
+            </div>
+            <hr className=' border-dotted'/>
+            <div className='flex justify-between'>
+            <h1>Mercedes-Benz </h1>
+            <h1>(4)</h1>
+            </div>
+            <hr className=' border-dotted'/>
+            <div className='flex justify-between'>
+            <h1>Mitsubishi </h1>
+            <h1>(1)</h1>
+            </div>
+            <hr className=' border-dotted'/>
+            <div className='flex justify-between'>
+            <h1>Seat </h1>
+            <h1>(1)</h1>
+            </div>
+            <hr className=' border-dotted'/>
+            <div className='flex justify-between'>
+            <h1>Tesla </h1>
+            <h1>(2)</h1>
+            </div>
+            <hr className=' border-dotted'/>
+            <div className='flex justify-between'>
+            <h1>Toyota </h1>
+            <h1>(0)</h1>
+            </div>
+            <hr className=' border-dotted'/>
+            <div className='flex justify-between'>
+            <h1>Volkswagen </h1>
+            <h1>(2)</h1>
+            </div>
+            <hr/>
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Body</h1>
+            <h1>+</h1>
+            </div>
+            <hr />     
+<div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Airbags</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Climatisation</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Color</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Cubic Capacity</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Door Count</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Emission Class</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Fuel</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Gearbox</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Power+</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
+            <div className='flex justify-between font-[500] text-[20px]'>
+            <h1>Product Mileage</h1>
+            <h1>+</h1>
+            </div>
+            <hr />
 
 
 
@@ -53,7 +144,7 @@ const Products = () => {
     <TbLayoutGrid size={20} color='white' onClick={()=>{setFlex(true)}}/>
         </div>
         <div className='w-[40px] h-[31px] bg-white flex justify-center items-center rounded-r-[3px] hover:bg-[#ff2800] hover:text-white transition-all'>
-    <FaRegListAlt size={20} className='text-[#ff2800] ' onClick={()=>{setFlex(false)}}/>
+    <FaRegListAlt size={20} className='text-[#ff2800] hover:text-white' onClick={()=>{setFlex(false)}}/>
     </div>
     </div> 
     <h1>       Showing</h1>
@@ -72,7 +163,7 @@ const Products = () => {
     </div>
     {flex?<div className='flex justify-between mt-[3%] flex-wrap '>
     <div className=' w-[33%] h-[10%] bg-white rounded-3xl border-[2px]  shadow-2xl'>
-            <div style={{background:'url("https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg")',backgroundSize:'cover'}}  className='w-[315px] h-[190px]  rounded-t-3xl overflow-hidden'>
+            <div style={{background:'url("https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg")',backgroundSize:'cover'}}  className='w-full h-[190px]  rounded-t-3xl overflow-hidden'>
             <div className="flex justify-evenly mt-[50%]">
             <div>
                 <h1 className="text-white font-[700]">44 Days</h1>
@@ -107,9 +198,12 @@ const Products = () => {
 
         <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
         <h1 className='font-[300] text-[13px]'>Auction Ended</h1>
-
+        <div className="flex justify-center items-center  w-[30px] h-[30px] rounded-[5px] hover:bg-[#ff2800] hover:text-white ml-[170%]  transition-all">
+            <FaHammer   size={25} className='text-black cursor-pointer'/>
+            </div>
         </div>
     </div>
+    
         </div>}
     
         </div>

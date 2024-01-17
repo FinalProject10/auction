@@ -123,7 +123,7 @@ const Navbar = () => {
             <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>404 Not Found</h1>
         </div>}
         {cart&&
-        <div className='text-[#333333] bg-white w-[350px] h-[144px] pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[75%] rounded-[20px]'
+        <div className='text-[#333333] bg-white w-[350px] h-[144px] pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[70%] rounded-[20px]'
         onMouseLeave={()=>setCart(false)}
         >
             <h1 className= ' text-[#333333] font-[600] text-[30px] '>Cart</h1>
