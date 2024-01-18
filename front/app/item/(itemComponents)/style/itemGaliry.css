@@ -64,10 +64,12 @@ button {
 } */
 
 ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    /* list-style: none; */
+    /* padding: 0; */
+    /* margin: 0; */
 }
+
+
 
 .App {
     text-align: center;
@@ -110,7 +112,7 @@ header nav .left ul {
     gap: 30px;
 }
 
-header nav .left ul button {
+header nav .left button {
     padding: 0;
     color: var(--d-grayish-blue);
     font-size: var(--p-fs);

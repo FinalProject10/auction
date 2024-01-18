@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Style = () => {
@@ -32,32 +33,32 @@ const Style = () => {
         </div>
         <div className='w-[320px] h-[200px] shadow-xl rounded-[10px] bg-white flex justify-center items-center'>
             <div>
-            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ5.png" alt="" />
             <h1 className='font-[800] text-[25px] text-center'>Compact</h1>
             </div>
         </div>
         <div className='w-[320px] h-[200px] shadow-xl rounded-[10px] bg-white flex justify-center items-center'>
             <div>
-            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ6.png" alt="" />
             <h1 className='font-[800] text-[25px] text-center'>Pick Up</h1>
             </div>
         </div>
         <div className='w-[320px] h-[200px] shadow-xl rounded-[10px] bg-white flex justify-center items-center '>
             <div>
-            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ7.png" alt="" />
             <h1 className='font-[800] text-[25px] text-center'>Cross Over</h1>
             </div>
         </div>
         <div className='w-[320px] h-[200px] shadow-xl rounded-[10px] bg-white flex justify-center items-center'>
             <div>
-            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ8.png" alt="" />
             <h1 className='font-[800] text-[25px] text-center'>Electric</h1>
             </div>
         </div>
 
     </div>
-    <button className='text-white font-[400] bg-[#ff2800] rounded w-[150px]  h-[43px] ml-[45%] mt-[3%] hover:text-black hover:bg-white hover:border-[2px] hover:border-black  hover:transition ease-in-out delay-50 '>Check Our Shop</button>
-
+    <Link href={'/shop'}><button className='text-white font-[400] bg-[#ff2800] rounded w-[150px]  h-[43px] ml-[45%] mt-[3%] hover:text-black hover:bg-white hover:border-[2px] hover:border-black  hover:transition ease-in-out delay-50 '>Check Our Shop</button>
+    </Link>
     </div>
   )
 }

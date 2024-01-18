@@ -3,7 +3,7 @@ import Image from 'next/image'
 import img1 from '../images/img2.png'
 const Aboutus = () => {
   return (
-    <div className='w-full h-[700px] bg-[#f2f2f2] mt-[50%] grid grid-cols-2 mb-[20%]'>
+    <div className='w-full h-[730px] bg-[#f2f2f2] mt-[10%] grid grid-cols-2 mb-[20%]'>
         <div className=''>
         <Image className='h-[600px] w-[700px] mt-[10%]' src={img1} alt="" />
         </div>
