@@ -43,7 +43,7 @@ const ItemInfo = ({ items }) => {
         <div key={item.id}>
           <br />
           <br />
-          <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+          <Accordion open={open === 0} icon={<Icon id={1} open={open} />}>
             <AccordionHeader onClick={() => handleOpen(1)}>
               Additional Information{" "}
             </AccordionHeader>

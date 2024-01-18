@@ -17,6 +17,19 @@ const Items = sequelize.define(
       type: DataTypes.STRING(255),
       allowNull: true,
     },
+    fuel: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+
+    short_description: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    category: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     price: {
       type: DataTypes.INTEGER,
       allowNull: true,
