@@ -297,7 +297,7 @@ const Home = () => {
 // <Services/>
 // <Footer/>
 //     </div>
-//   )
-// }
+  )
+}
 
-// export default Home
+export default Home
