@@ -2,7 +2,7 @@
 import React, { FC, useState } from 'react';
 import { FcInfo } from 'react-icons/fc';
 import { motion } from 'framer-motion';
-import { fadeIn } from './fadeIn.tsx';
+import { fadeIn } from './fadeIn';
 
 interface Package {
   name: string;

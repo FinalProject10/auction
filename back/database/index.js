@@ -1,12 +1,14 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("final", "root", "Salmen12@", {
-  host: "localhost",
-  dialect: "mysql",
-});
-sequelize
-  .authenticate()
-  .then((r) => console.log("connected"))
-  .catch((err) => console.log(err));
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize(
+  "final",
+  "root",
+  "root",
+  {
+    host: "localhost",
+    dialect: "mysql",
+  }
+);
+sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.log(err))
 
 //  Sync the models with the database
 // execute one time and then comment this code (after Database and tables created!)

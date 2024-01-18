@@ -44,6 +44,6 @@ const Seller = sequelize.define('seller', {
   },
   
 },{timestamps: false,
-    tableName:'seller'});
+    tableName:'sellers'});
 
 module.exports = Seller;

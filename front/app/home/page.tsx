@@ -108,195 +108,195 @@ const Home = () => {
     >
      
      
-        <TextField
-          id="filled-select-currency"
-          select
-          label="Car Marker"
-          defaultValue="Car Marker"
-          helperText="Please select a category"
-          variant="filled"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+//         <TextField
+//           id="filled-select-currency"
+//           select
+//           label="Car Marker"
+//           defaultValue="Car Marker"
+//           helperText="Please select a category"
+//           variant="filled"
+//         >
+//           {currencies.map((option) => (
+//             <MenuItem key={option.value} value={option.value}>
+//               {option.label}
+//             </MenuItem>
+//           ))}
+//         </TextField>
         
       
       
-    </Box>
-            </div>
-            <div className='ml-[10px] mt-[10px]'>
-            <h1>Car Model</h1>
-            <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
+//     </Box>
+//             </div>
+//             <div className='ml-[10px] mt-[10px]'>
+//             <h1>Car Model</h1>
+//             <Box
+//       component="form"
+//       sx={{
+//         '& .MuiTextField-root': { m: 1, width: '25ch' },
+//       }}
+//       noValidate
+//       autoComplete="off"
+//     >
      
      
-        <TextField
-          id="filled-select-currency"
-          select
-          label="Car Model"
-          defaultValue="Car Model"
-          helperText="Please select a category"
-          variant="filled"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+//         <TextField
+//           id="filled-select-currency"
+//           select
+//           label="Car Model"
+//           defaultValue="Car Model"
+//           helperText="Please select a category"
+//           variant="filled"
+//         >
+//           {currencies.map((option) => (
+//             <MenuItem key={option.value} value={option.value}>
+//               {option.label}
+//             </MenuItem>
+//           ))}
+//         </TextField>
         
       
       
-    </Box>
-            </div>
-            <div className='ml-[10px] mt-[10px] '>
-            <h1>Mileage from, to (km)</h1>
-           <div className='flex'>
-            <Box
+//     </Box>
+//             </div>
+//             <div className='ml-[10px] mt-[10px] '>
+//             <h1>Mileage from, to (km)</h1>
+//            <div className='flex'>
+//             <Box
             
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '100px' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
+//       component="form"
+//       sx={{
+//         '& .MuiTextField-root': { m: 1, width: '100px' },
+//       }}
+//       noValidate
+//       autoComplete="off"
+//     >
      
      
-        <TextField
-        className='w-[10%]'
-          id="filled-select-currency"
-          select
-          label="Car Marker"
-          defaultValue="Car Marker"
-          helperText="Please select a category"
-          variant="filled"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+//         <TextField
+//         className='w-[10%]'
+//           id="filled-select-currency"
+//           select
+//           label="Car Marker"
+//           defaultValue="Car Marker"
+//           helperText="Please select a category"
+//           variant="filled"
+//         >
+//           {currencies.map((option) => (
+//             <MenuItem key={option.value} value={option.value}>
+//               {option.label}
+//             </MenuItem>
+//           ))}
+//         </TextField>
         
       
       
-    </Box>
-    <Box
+//     </Box>
+//     <Box
             
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '100px' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
+//       component="form"
+//       sx={{
+//         '& .MuiTextField-root': { m: 1, width: '100px' },
+//       }}
+//       noValidate
+//       autoComplete="off"
+//     >
      
      
-        <TextField
-        className='w-[10%]'
-          id="filled-select-currency"
-          select
-          label="Car Marker"
-          defaultValue="Car Marker"
-          helperText="Please select a category"
-          variant="filled"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+//         <TextField
+//         className='w-[10%]'
+//           id="filled-select-currency"
+//           select
+//           label="Car Marker"
+//           defaultValue="Car Marker"
+//           helperText="Please select a category"
+//           variant="filled"
+//         >
+//           {currencies.map((option) => (
+//             <MenuItem key={option.value} value={option.value}>
+//               {option.label}
+//             </MenuItem>
+//           ))}
+//         </TextField>
         
       
       
-    </Box></div>
-            </div>
-            <div className='ml-[10px] mt-[10px] '>
-            <h1>Power from, to (HP)</h1>
-           <div className='flex'>
-            <Box
+//     </Box></div>
+//             </div>
+//             <div className='ml-[10px] mt-[10px] '>
+//             <h1>Power from, to (HP)</h1>
+//            <div className='flex'>
+//             <Box
             
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '100px' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
+//       component="form"
+//       sx={{
+//         '& .MuiTextField-root': { m: 1, width: '100px' },
+//       }}
+//       noValidate
+//       autoComplete="off"
+//     >
      
      
-        <TextField
-        className='w-[10%]'
-          id="filled-select-currency"
-          select
-          label="Car Marker"
-          defaultValue="Car Marker"
-          helperText="Please select a category"
-          variant="filled"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+//         <TextField
+//         className='w-[10%]'
+//           id="filled-select-currency"
+//           select
+//           label="Car Marker"
+//           defaultValue="Car Marker"
+//           helperText="Please select a category"
+//           variant="filled"
+//         >
+//           {currencies.map((option) => (
+//             <MenuItem key={option.value} value={option.value}>
+//               {option.label}
+//             </MenuItem>
+//           ))}
+//         </TextField>
         
       
       
-    </Box>
-    <Box
+//     </Box>
+//     <Box
             
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '100px' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
+//       component="form"
+//       sx={{
+//         '& .MuiTextField-root': { m: 1, width: '100px' },
+//       }}
+//       noValidate
+//       autoComplete="off"
+//     >
      
      
-        <TextField
-        className='w-[10%]'
-          id="filled-select-currency"
-          select
-          label="Car Marker"
-          defaultValue="Car Marker"
-          helperText="Please select a category"
-          variant="filled"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+//         <TextField
+//         className='w-[10%]'
+//           id="filled-select-currency"
+//           select
+//           label="Car Marker"
+//           defaultValue="Car Marker"
+//           helperText="Please select a category"
+//           variant="filled"
+//         >
+//           {currencies.map((option) => (
+//             <MenuItem key={option.value} value={option.value}>
+//               {option.label}
+//             </MenuItem>
+//           ))}
+//         </TextField>
         
       
       
-    </Box>
-    </div>
-            </div>
-            <button className='absolute text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:w-[136px] hover:h-[47px] hover:transition ease-in-out delay-50 '>Search</button>
-        </div> */}
-<Auctions/>
-<Aboutus/>
-<StartNow/>
-<Offers/>
-<Style/>
-<Services/>
-<Footer/>
-    </div>
+//     </Box>
+//     </div>
+//             </div>
+//             <button className='absolute text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:w-[136px] hover:h-[47px] hover:transition ease-in-out delay-50 '>Search</button>
+//         </div> */}
+// <Auctions/>
+// <Aboutus/>
+// <StartNow/>
+// <Offers/>
+// <Style/>
+// <Services/>
+// <Footer/>
+//     </div>
   )
 }
 
