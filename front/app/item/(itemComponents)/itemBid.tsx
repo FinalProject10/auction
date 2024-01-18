@@ -75,8 +75,8 @@ const ItemBid = ({ items }) => {
               </div>
             </div>
             <p className="auction-end">
-              Auction ends: December 12, 2024 12:00 am <br />
-              Timezone: UTC 0
+              Auction ends:{item.timeEnd} <br />
+              Timezone: UTC +2
             </p>
             <div className="bidFlex mb-4">
               <form

@@ -1,14 +1,14 @@
-import React from 'react'
-import First from './firstStep/page'
+// import React from 'react'
+// import First from './firstStep/page'
 
-const ClientRegister = () => {
+// const ClientRegister = () => {
 
-  return (
-    <div>
-<First/>
+//   return (
+//     <div>
+// <First/>
         
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default ClientRegister
+// export default ClientRegister

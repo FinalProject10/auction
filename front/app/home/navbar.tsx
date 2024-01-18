@@ -28,7 +28,7 @@ const Navbar = () => {
         onMouseEnter={()=>{setPlatform(true);setHome(false);setShop(false);setPages(false)}}
         >Platform</Link>
        
-        <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
+        <Link href={'/shop'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
         onMouseEnter={()=>{setShop(true);setHome(false);setPlatform(false);setPages(false)}}
         >Shop</Link>
         <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
@@ -42,13 +42,7 @@ const Navbar = () => {
         <button className='text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:w-[136px] hover:h-[47px] hover:transition ease-in-out delay-50 '>Sell Now</button>
         </div>
         
-        {home&&<div className='text-[#333333] bg-white w-[175px] h-[115px] leading-[28px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[22%] '
-        onMouseLeave={()=>setHome(false)}
-        >
-            <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Main</h1>
-            <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Clean Title Cars</h1>
-            <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Parts Marketplace</h1>
-        </div>}
+       
         {platform&&<div
         onMouseLeave={()=>setPlatform(false)}
         className=' bg-white w-[900px] h-[367px] rounded-[20px] absolute top-[15%] left-[419px] grid grid-cols-2 mt-[10px]'>
