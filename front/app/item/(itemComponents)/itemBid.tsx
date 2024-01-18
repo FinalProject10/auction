@@ -5,7 +5,8 @@ import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 
 const ItemBid = ({ items }) => {
-  const [quant, setQuant] = useState(5000);
+  const [quant, setQuant] = useState(items[0].price);
+  console.log(items[0].price, "items[0].price");
 
   const addQuant = () => {
     setQuant(quant + 5);
@@ -33,7 +34,9 @@ const ItemBid = ({ items }) => {
           <p className="price">
             <span className="auction-price">
               <span className="current">Starting bid:</span>
-              <span className="current currentc">{item.price}£</span>
+              <span className="current currentc ">
+                <span className="text-red-500"> {item.price}£</span>
+              </span>
             </span>
           </p>
           <div className="auction">
@@ -97,7 +100,7 @@ const ItemBid = ({ items }) => {
                     </button>
                     <input
                       type="text"
-                      value={item.price}
+                      value={quant}
                       onChange={handleInputChange}
                       className="priceinput"
                     />{" "}
@@ -126,11 +129,7 @@ const ItemBid = ({ items }) => {
             </div>
           </div>
           <div className="product_meta mb-4 ml-3">
-            <p className="sku_wrapper">
-              SKU: <span className="sku">ab-08</span>
-            </p>
-            <p className="">Category: Cars</p>
-            <p className="">Tags: cars driving road</p>
+            <p className="">Category:{item.category}</p>
           </div>
         </div>
       ))}

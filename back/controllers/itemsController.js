@@ -6,8 +6,7 @@ const getItems = async (req, res) => {
   const itemId = req.params.itemId;
 
   try {
-    const items = await Items.findAll(
-      {
+    const items = await Items.findAll({
       where: { id: itemId },
       include: [
         {
@@ -26,8 +25,7 @@ const getItems = async (req, res) => {
         },
         { model: Bids, as: "bids" },
       ],
-    }
-    );
+    });
 
     console.log(items);
     res.status(200).json(items);
@@ -56,7 +54,7 @@ const addItem = async (req, res) => {
 // };
 const getAllItems = async (req, res) => {
   const itemsPerPage = 8;
-  const page = req.query.page || 1; // Get the page from query parameters or default to page 1
+  const page = parseInt(req.query.page, 10) || 1;
 
   try {
     const offset = (page - 1) * itemsPerPage;
