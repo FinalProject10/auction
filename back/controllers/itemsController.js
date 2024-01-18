@@ -1,46 +1,5 @@
-// const Items = require("../models/items");
-// const Seller = require("../models/sellers");
-// const Client = require("../models/clients");
-// const Bids = require("../models/bid");
-
-// const getItems = async (req, res) => {
-//   try {
-//     const items = await Items.findAll({
-//       include: [
-//         {
-//           model: Seller,
-//           as: "seller",
-//           attributes: [
-//             "id",
-//             "name",
-
-//             "lastName",
-//             "image",
-//             "telNumb",
-
-//             "longitude",
-//             "latitude",
-//             "address",
-//           ],
-//         },
-//         { model: Bids, as: "bids" },
-//       ],
-//     });
-
-//     console.log(items);
-//     res.status(200).json(items);
-//   } catch (error) {
-//     console.error(error); // Log the actual error for debugging
-//     res
-//       .status(500)
-//       .json({ message: "Internal server error", error: error.message });
-//   }
-// };
-
-// module.exports = { getItems };
 const Items = require("../models/items");
 const Seller = require("../models/sellers");
-const Client = require("../models/clients");
 const Bids = require("../models/bid");
 
 const getItems = async (req, res) => {
@@ -85,12 +44,29 @@ const addItem = async (req, res) => {
     res.status(500).json("server err");
   }
 };
+// const getAllItems = async (req, res) => {
+//   try {
+//     const d = await Items.findAll();
+//     res.status(200).json(d);
+//   } catch (err) {
+//     res.status(500).json("server err");
+//   }
+// };
 const getAllItems = async (req, res) => {
+  const itemsPerPage = 8;
+  const page = req.query.page || 1; // Get the page from query parameters or default to page 1
+
   try {
-    const d = await Items.findAll();
-    res.status(200).json(d);
+    const offset = (page - 1) * itemsPerPage;
+    const items = await Items.findAll({
+      limit: itemsPerPage,
+      offset: offset,
+    });
+
+    res.status(200).json(items);
   } catch (err) {
-    res.status(500).json("server err");
+    console.error(err);
+    res.status(500).json("Internal server error");
   }
 };
 module.exports = { getItems, addItem, getAllItems };

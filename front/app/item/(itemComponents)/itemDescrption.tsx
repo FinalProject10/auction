@@ -5,7 +5,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-import DOMPurify from "dompurify";
+import parse from "html-react-parser";
 
 function Icon({ id, open }) {
   return (
@@ -28,7 +28,7 @@ function Icon({ id, open }) {
   );
 }
 
-const ItemDescrption = ({ items }) => {
+const ItemDescription = ({ items }) => {
   const [open, setOpen] = React.useState(0);
 
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
@@ -37,16 +37,15 @@ const ItemDescrption = ({ items }) => {
     <>
       {items.map((item) => (
         <div key={item.id}>
-          <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
-            <AccordionHeader onClick={() => handleOpen(1)}>
-              Description{" "}
+          <Accordion
+            open={open === item.id}
+            icon={<Icon id={item.id} open={open} />}
+          >
+            <AccordionHeader onClick={() => handleOpen(item.id)}>
+              Description
             </AccordionHeader>
-            <AccordionBody>
-              <AccordionBody
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(item.description),
-                }}
-              />
+            <AccordionBody className="list-disc">
+              {parse(item.description)}
             </AccordionBody>
           </Accordion>
         </div>
@@ -55,4 +54,4 @@ const ItemDescrption = ({ items }) => {
   );
 };
 
-export default ItemDescrption;
+export default ItemDescription;
