@@ -2,24 +2,6 @@ import "./style/itemHader.css";
 const ItemHeader = ({ items }) => {
   console.log(items, "items");
 
-  interface Item {
-    id: number;
-    name: string;
-    price: number;
-    seller: {
-      id: number;
-      name: string;
-      lastName: string;
-    };
-    bids: {
-      id: number;
-      bidAmount: number;
-    }[];
-  }
-
-  interface ItemsListProps {
-    items: Item[];
-  }
   return (
     <div className="autobid-breadcrumbs">
       {items.map((item) => (

@@ -23,7 +23,7 @@ const PORT = 5000;
 app.use("/seller", sellerRoutes);
 app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
-app.use("/api/items", itemsRoute);
+app.use("/items", itemsRoute);
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
