@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Services = () => {
@@ -7,7 +8,7 @@ const Services = () => {
     <div className='mt-[50%]'>
         <h1 className='text-[#ff2800] font-[700] tracking-wider'>Find out Now</h1>
         <h1 className='text-[30px] font-[700] mb-[20%]'>User Testimonials: What Our Customers Are Saying</h1>
-        <button className='text-black font-[800] border-[2px] border-black  mt-[1%] bg-white rounded w-[132px] h-[43px] hover:text-white hover:bg-[#ff2800] hover:border-none hover:transition ease-in-out delay-50 '>Our Services</button>
+        <Link href={'/membershipCard'}><button className='text-black font-[800] border-[2px] border-black  mt-[1%] bg-white rounded w-[132px] h-[43px] hover:text-white hover:bg-[#ff2800] hover:border-none hover:transition ease-in-out delay-50 ' >Our Services</button></Link>
 
     </div>
     <div >
@@ -18,7 +19,7 @@ const Services = () => {
    </div>
    <div className='bg-[#f7f7f7] w-full h-[100px] flex justify-center items-center'>
     <h1 className='text-[20px] font-[600] mr-[5%]'>Are You Certified Seller?</h1>
-    <button className='text-white font-[800]  bg-[#ff2800] rounded w-[190px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black  hover:transition ease-in-out delay-50 '>Register As Vendor</button>
+    <Link href={'register/seller/firstStep'}><button className='text-white font-[800]  bg-[#ff2800] rounded w-[190px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black  hover:transition ease-in-out delay-50 '>Register As Vendor</button></Link>
 
    </div>
 

@@ -32,25 +32,25 @@ const Style = () => {
         </div>
         <div className='w-[320px] h-[200px] shadow-xl rounded-[10px] bg-white flex justify-center items-center'>
             <div>
-            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ5.png" alt="" />
             <h1 className='font-[800] text-[25px] text-center'>Compact</h1>
             </div>
         </div>
         <div className='w-[320px] h-[200px] shadow-xl rounded-[10px] bg-white flex justify-center items-center'>
             <div>
-            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ6.png" alt="" />
             <h1 className='font-[800] text-[25px] text-center'>Pick Up</h1>
             </div>
         </div>
         <div className='w-[320px] h-[200px] shadow-xl rounded-[10px] bg-white flex justify-center items-center '>
             <div>
-            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ7.png" alt="" />
             <h1 className='font-[800] text-[25px] text-center'>Cross Over</h1>
             </div>
         </div>
         <div className='w-[320px] h-[200px] shadow-xl rounded-[10px] bg-white flex justify-center items-center'>
             <div>
-            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+            <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ8.png" alt="" />
             <h1 className='font-[800] text-[25px] text-center'>Electric</h1>
             </div>
         </div>

@@ -17,11 +17,34 @@ const Products = () => {
     const[flex,setFlex]=useState(true)
     const [open, setOpen] =useState(-1);
     const[data,setData]=useState([])
+    const[click,setClick]=useState(false)
+    const[allData,setAllData]=useState([])
+    const[allData1,setAllData1]=useState([])
+    const[audi,setAudi]=useState(0)
     useEffect(()=>{
-        axios.get('http://localhost:5000/items/getAll').then(r=>setData(r.data))
+        axios.get('http://localhost:5000/items/fetch-items').then(r=>{setData(r.data);setAllData(r.data);setAllData1(r.data)})
+        .catch(err=>console.log(err))
     },[])
     console.log(data)
-
+    const filter=(value:any)=>{
+     if(!value){
+      
+      return 
+     }
+      
+      const filtered=allData.filter(el=>{
+        return el.name.includes(value)
+      })
+      
+      setData(filtered)
+    }
+const filter2=(property:any,value:any)=>{
+    const filtered=allData1.filter(el=>{
+      if(!isNaN(property)) return el[property].includes(value)
+      return el[property]===value 
+    })
+    setData(filtered)
+}
     const handleOpen = (value:any) => setOpen(open === value ? 0 : value);
   return (
     <>
@@ -29,62 +52,122 @@ const Products = () => {
         <div className='w-[30%] h-auto shadow-2xl rounded-[20px] p-[3%] inline-block'>
         <h1 className=' font-[700] text-[30px] mb-[3%]'>Filters:</h1>
         <h1 className="font-[700] text-[20px] mb-[5%]">Car Models</h1>
-        <div className='flex justify-between mt-[10%] mb-[5%] cursor-pointer'>
+        <div 
+        onClick={()=>{
+
+          filter('Audi')
+          }
+        }
+        className='flex justify-between mt-[10%] mb-[5%] cursor-pointer'>
             <h1 >Audi </h1>
             <h1>(5)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('BMW')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>BMW </h1>
             <h1>(6)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Dacia')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Dacia </h1>
             <h1>(3)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Ford')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Ford </h1>
             <h1>(3)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Lamborghini')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Lamborghini </h1>
             <h1>(1)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+              filter('Mazda')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Mazda</h1>
             <h1>(0)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Mercedes-Benz')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Mercedes-Benz </h1>
             <h1>(4)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Mitsubishi')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Mitsubishi </h1>
             <h1>(1)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Seat')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Seat </h1>
             <h1>(1)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Tesla')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Tesla </h1>
             <h1>(2)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Toyota')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Toyota </h1>
             <h1>(0)</h1>
             </div>
             <hr className=' border-dotted mb-[2%]'/>
-            <div className='flex justify-between mb-[5%] cursor-pointer'>
+            <div 
+            onClick={()=>{
+
+              filter('Volkswagen')
+              }}
+            className='flex justify-between mb-[5%] cursor-pointer'>
             <h1>Volkswagen </h1>
             <h1>(2)</h1>
             </div>
@@ -97,16 +180,24 @@ const Products = () => {
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("airbags","Curtain")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Curtains</h1>
           </div>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("airbags","Frontal")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Frontal</h1>
           </div>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("airbags","Knee")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Knee</h1>
           </div>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("airbags","Side-Impact")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Side-Impact</h1>
           </div>
           
@@ -124,16 +215,24 @@ const Products = () => {
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("climatisation","Automatic Climate Control")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Automatic Climate Control</h1>
           </div>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+           onClick={()=>filter2("climatisation","Dual-Zone Climate Control")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Dual-Zone Climate Control</h1>
           </div>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("climatisation","Manual Climate Control")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Manual Climate Control</h1>
           </div>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("climatisation","Multi-Zone Climate Control")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Multi-Zone Climate Control</h1>
           </div>
           
@@ -151,18 +250,30 @@ const Products = () => {
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("body","Convertible")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Convertible</h1>
           </div>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("body","Coupe")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Coupe</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("body","Crossover")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Crossover</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("body","Hatchback")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Hatchback</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("body","Sedan")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Sedan</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("body","SUV")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>SUV</h1>
           </div>  
           
@@ -183,23 +294,41 @@ const Products = () => {
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+      onClick={()=>filter2("color","Yellow")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Yellow</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div
+          onClick={()=>filter2("color","White")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>White</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("color","Tan")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Tan</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div
+          onClick={()=>filter2("color","Silver")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Silver</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div
+          onClick={()=>filter2("color","Red")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Red</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div
+          onClick={()=>filter2("color","Green")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Green</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("color","Gray")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Gray</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("color","Blue")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Blue</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("color","Black")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Black</h1>
           </div> 
                 </AccordionBody>
@@ -213,24 +342,42 @@ const Products = () => {
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("cubicCapacity","1.0L")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>1.0L</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("cubicCapacity","1.5L")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>1.5L</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("cubicCapacity","2.0L")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>2.0L</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("cubicCapacity","2.5L")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>2.5L</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("cubicCapacity","3.0L")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>3.0L</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("cubicCapacity","3.5L")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>3.5L</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("cubicCapacity","4.0L")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>4.0L</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("cubicCapacity","4.5L")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>4.5L</h1>
           </div> 
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("cubicCapacity","Electric")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Electric</h1>
           </div> 
     
@@ -246,19 +393,27 @@ const Products = () => {
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("doorCount","2")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>2-Door</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("doorCount","3")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>3-Door</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("doorCount","4")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>4-Door</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("doorCount","5")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>5-Door</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("doorCount","6")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>6-Door</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
-            <h1>Convertible</h1>
-          </div>
+          </div> 
 
         </AccordionBody>
       </Accordion>
@@ -271,7 +426,9 @@ const Products = () => {
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("cubicCapacity","4.5L")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Electric</h1>
           </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Euro3</h1>
@@ -294,11 +451,13 @@ const Products = () => {
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
-            <h1>
-Diesel
-</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("fuel","Diesel")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+            <h1>Diesel</h1>
+          </div><div 
+          onClick={()=>filter2("fuel","Gasoline")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Gasoline</h1>
           </div>
         </AccordionBody>
@@ -312,10 +471,14 @@ Diesel
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("gearBox","Automatic")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Automatic</h1>
           </div>
-          <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          <div 
+          onClick={()=>filter2("gearBox","Manual")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>Manual</h1>
           </div>
 
@@ -331,21 +494,37 @@ Diesel
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("power",10000)}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>10000</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("power",12500)}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>12500</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("power",15000)}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>15000</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("power",17500)}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>17500</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("power",75000)}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>75000</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("power",100000)}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>100000</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("power",225000)}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>225000</h1>
-          </div> <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div> <div 
+          onClick={()=>filter2("power",250000)}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>250000</h1>
           </div>
             </AccordionBody>
@@ -359,21 +538,37 @@ Diesel
         <h1 className="mt-[4%] text-[25px]">+</h1>
         </div>
         <AccordionBody>
-        <div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+        <div 
+        onClick={()=>filter2("mileage","75")}
+        className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>75</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("mileage","100")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>100</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("mileage","125")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>125</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("mileage","150")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>150</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("mileage","175")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>175</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("mileage","200")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>200</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("mileage","225")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>225</h1>
-          </div><div className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
+          </div><div 
+          onClick={()=>filter2("mileage","250")}
+          className="flex w-[280px] h-[56px] justify-center items-center border-[1px] border-gray-200 rounded-[15px] cursor-pointer hover:border-[#ff2800] hover:text-[#ff2800] mb-[3%]">
             <h1>250</h1>
           </div>
 
@@ -406,9 +601,8 @@ Diesel
     <FaRegListAlt size={20} className='text-[#ff2800] hover:text-white' onClick={()=>{setFlex(false)}}/>
     </div>
     </div> 
-    <h1>       Showing</h1>
     </div>
-    <div className="mr-[20px]">
+    {/* <div className="mr-[20px]">
     <Select  placeholder={'qs'} label='Default Sorting'>
         <Option>Sort by popularity</Option>
         <Option>Sort by average rating</Option>
@@ -418,9 +612,9 @@ Diesel
         <Option>Sort by current bid: High to low</Option>
         <Option>Sort auction by ending soonest</Option>
         <Option>Sort auction by recently started</Option>
-<Option>Sort auction by most activeA</Option>
+        <Option>Sort auction by most activeA</Option>
       </Select>
-    </div>
+    </div> */}
 
 
     </div>
