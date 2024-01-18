@@ -14,13 +14,14 @@ import axios from "axios";
 import { Player } from "@lottiefiles/react-lottie-player";
 
 const Item = ({ params }) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Item | []>([]);
   const [loading, setLoading] = useState(true);
-  const carDescriptionHTML = useEffect(() => {
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          ` http://localhost:5000/api/items/fetch-items/${params.id}`
+          ` http://localhost:5000/items/fetch-items/${params.id}`
         );
         setItems(response.data);
       } catch (error) {
@@ -83,13 +84,3 @@ const Item = ({ params }) => {
   );
 };
 export default Item;
-
-const CarDescription = () => {
-  const carDescriptionHTML = `
-    <!-- The provided HTML content goes here -->
-    <p>Introducing the 2021 Velocity Vortex GT, a masterpiece in automotive engineering, featuring a stunning white exterior and a sleek black interior.</p>
-    <!-- ... (rest of the HTML content) ... -->
-  `;
-
-  return <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />;
-};
