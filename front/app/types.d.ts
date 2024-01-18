@@ -16,3 +16,12 @@ interface Item {
   interface ItemsListProps {
     items: Item[];
   }
+
+
+  interface GalleryProps {
+    items: {
+      id: number;
+      images: string[];
+      // ... other item properties
+    }[];
+  }

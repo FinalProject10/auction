@@ -34,14 +34,14 @@ const[err,setErr]=useState('')
     <div>
         <img className='absolute right-0 h-full w-1/2' src="https://static01.nyt.com/images/2023/09/21/multimedia/21sp-cli-stadium-02-mljv/21sp-cli-stadium-02-mljv-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="" />
         
-       <div className='flex mt-28 ml-40 absolute'>
+       {/* <div className='flex mt-28 ml-40 absolute'>
         <IoPersonCircle size={45} color="#0000007a"/>
         <hr className='w-40 text-gray-400 h-1 bg-gray-200 mt-5'/>
         <HiDocumentText size={45} color="black"/>
         <hr className='w-40 text-gray-400 h-1 bg-gray-200 mt-5'/>
         <MdVerifiedUser size={45} color="black"/>
 
-        </div>
+        </div> */}
         <div className='absolute right-0 h-full w-1/2 bg-black opacity-70'></div>
 <h1 className=' text-gray-600 text-sm w-fit inline-block ml-[30%] mt-[4%]  '>Already a member</h1><Link href={'/login/client'} className=' text-blue-500 underline text-[15px]'>Sign-in</Link>
         <div className='flex items-center ml-[10%] mt-[6%]'>

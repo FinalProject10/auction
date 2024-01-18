@@ -12,7 +12,7 @@ const StartNow = () => {
         <h2 className='font-[700] text-[#0a0a0a] text-[20px] mb-[5%]'>Registration and Account</h2>
         <h1 className='font-[100] text-[15px]'>Search inventory of more than salvage used vehicles. Aliquam sagittis pellentesque turpis egestas tincidunt. Integer mollis leo lectus. .</h1>
         </div>
-        <img className='w-[285px] top-[370%] left-[20%] absolute' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-dots1.png" alt="" />
+        <img className='w-[285px] top-[420%] left-[20%] absolute' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-dots1.png" alt="" />
     </div>
     <div className='pl-[20%]'>
        <div>
@@ -26,7 +26,7 @@ const StartNow = () => {
         <img className='text-center ml-[20%] mb-[3%]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_how2.png" alt="" />
         <h2 className='font-[700] text-[#0a0a0a] text-[20px] mb-[5%]'>Place Bids and Monitor</h2>
         <h1 className='font-[100] text-[15px]'>Search inventory of more than salvage used vehicles. Aliquam sagittis pellentesque turpis egestas tincidunt. Integer mollis leo lectus. .</h1>
-        <img className='absolute w-[285px] left-[55%] top-[395%]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-dots2-1.png" alt="" />
+        <img className='absolute w-[285px] left-[55%] top-[448%]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-dots2-1.png" alt="" />
         </div>
     </div>
 </div>

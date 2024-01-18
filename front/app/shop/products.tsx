@@ -21,7 +21,8 @@ const Products = () => {
         axios.get('http://localhost:5000/items/getAll').then(r=>setData(r.data))
     },[])
     console.log(data)
-  const handleOpen = (value:any) => setOpen(open === value ? 0 : value);
+
+    const handleOpen = (value:any) => setOpen(open === value ? 0 : value);
   return (
     <>
     <div className='w-[90%] ml-[5%] mt-[5%]  h-auto flex gap-[5%] mb-auto'>
@@ -393,7 +394,7 @@ Diesel
 
 
         </div>
-    <div className='w-[1090px] h-[1500px] '>
+    <div className='w-[1190px] h-[1500px] '>
     <div className='flex justify-between'>
     <div className='flex gap-[20px]' >
     <div className='flex cursor-pointer'>
@@ -407,7 +408,7 @@ Diesel
     </div> 
     <h1>       Showing</h1>
     </div>
-    <div className="mr-[75px]">
+    <div className="mr-[20px]">
     <Select  placeholder={'qs'} label='Default Sorting'>
         <Option>Sort by popularity</Option>
         <Option>Sort by average rating</Option>
@@ -424,14 +425,14 @@ Diesel
 
     </div>
     {flex?
-    <div className='flex justify-start gap-[10px] mt-[3%] flex-wrap  '>
+    <div className='flex justify-start gap-[17px] mt-[3%] flex-wrap w-full '>
     {data.map((el,i)=>(
     
-    <div className=' w-[30%] bg-white rounded-3xl  shadow-2xl'>
+    <div className=' w-[32%] bg-white rounded-3xl  shadow-2xl'>
             <div style={{background:`url(${el.images[0]})`,backgroundSize:'cover'}}  className='w-full h-[190px]  rounded-t-3xl overflow-hidden'>
-            <div className="flex justify-between mt-[60%]">
+            <div className="flex justify-between mt-[56%]">
             <div>
-                <h1 className="text-white font-[700]">44 Days</h1>
+                <h1 className="text-white font-[700]">{Math.floor((new Date(el.timeEnd) - new Date(el.timeStart))/3600000)}H</h1>
             </div>
             <div className="flex justify-center items-center  w-[30px] h-[30px] rounded-[5px] hover:bg-[#ff2800]  transition-all">
             <FaHammer   size={25} className='text-white cursor-pointer'/>
@@ -449,14 +450,14 @@ Diesel
     </div>
     
  
-    ))}</div>:<div className="grid">
+    ))}</div>:<div className="grid w-full">
     {data.map((el,i)=>(
     <div className="w-full h-[198px]  rounded-[10px] bg-white flex shadow-2xl">
         <div 
         className="w-[313px] h-full rounded-l-[10px] inline-block"
         style={{background:`url(${el.images[0]})`,backgroundSize:'cover'}}>
             <div className="flex justify-center items-center rounded-[10px] w-[100px] h-[40px]  ml-[5%]  backdrop-blur-[50px]	text-white">
-                <h1 >44 days</h1>
+                <h1 >{Math.floor((new Date(el.timeEnd) - new Date(el.timeStart))/3600000)}H</h1>
                 </div>
         </div>
         <div className="mt-[5%] ml-[5%]">

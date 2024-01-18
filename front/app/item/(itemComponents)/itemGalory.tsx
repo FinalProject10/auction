@@ -2,45 +2,28 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import "./style/itemGaliry.css";
-// import { TImage } from "react-icons/t";
 
-// Assuming images are located in the 'public/images' directory
-const IMAGES = [
-  "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-22.jpg",
-  "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-22-v3.jpg",
-  "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-22-v1.jpg",
-  "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-22-v2.jpg",
-];
-const THUMBS = [
-  "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-22.jpg",
-  "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-22-v3.jpg",
-  "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-22-v1.jpg",
-  "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-22-v2.jpg",
-];
+const Gallery: React.FC<GalleryProps> = ({ items }) => {
+  const [currentImage, setCurrentImage] = useState(items[0]?.images[0] || "");
 
-interface GalleryProps {}
-
-const Gallery: React.FC<GalleryProps> = () => {
-  const [currentImage, setCurrentImage] = useState(IMAGES[0]);
-
-  const handleClick = (index: number) => {
-    setCurrentImage(IMAGES[index]);
+  const handleClick = (image: string) => {
+    setCurrentImage(image);
   };
 
-  const removeActivatedClass = (parent: HTMLElement) => {
-    parent.childNodes.forEach((node) => {
-      if (node.childNodes[0].classList.contains("activated")) {
-        node.childNodes[0].classList.remove("activated");
-      }
-    });
-  };
+  // const removeActivatedClass = (parent: HTMLElement) => {
+  //   parent.childNodes.forEach((node) => {
+  //     if (node.childNodes[0].classList.contains("activated")) {
+  //       node.childNodes[0].classList.remove("activated");
+  //     }
+  //   });
+  // };
 
   return (
     <section className="gallery-holder hide-in-mobile">
       <section className="gallery">
         <div className="image">
           <Image
-            className="image "
+            className="image"
             src={currentImage}
             alt="product"
             width={900}
@@ -48,28 +31,26 @@ const Gallery: React.FC<GalleryProps> = () => {
           />
         </div>
 
-        <div className="thumbnails ">
-          {THUMBS.map((th, index) => (
-            <div
-              className="img-holder"
-              key={index}
-              onClick={(e) => {
-                handleClick(index);
-                removeActivatedClass(e.currentTarget.parentNode);
-                e.currentTarget.childNodes[0].classList.toggle("activated");
-              }}
-            >
-              <div className={`outlay ${index === 0 && "activated"}`}>
-                {/* <TImage size={48} /> */}
+        <div className="thumbnails">
+          {items.map((item) =>
+            item.images.map((image, index) => (
+              <div
+                className="img-holder"
+                key={index}
+                onClick={() => handleClick(image)}
+              >
+                <div
+                  className={`outlay ${currentImage === image && "activated"}`}
+                ></div>
+                <Image
+                  src={image}
+                  alt={`product-${index + 1}`}
+                  width={100}
+                  height={100}
+                />
               </div>
-              <Image
-                src={th}
-                alt={`product-${index + 1}`}
-                width={100}
-                height={100}
-              />
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </section>
     </section>
