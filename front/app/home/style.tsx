@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Style = () => {
@@ -56,8 +57,8 @@ const Style = () => {
         </div>
 
     </div>
-    <button className='text-white font-[400] bg-[#ff2800] rounded w-[150px]  h-[43px] ml-[45%] mt-[3%] hover:text-black hover:bg-white hover:border-[2px] hover:border-black  hover:transition ease-in-out delay-50 '>Check Our Shop</button>
-
+    <Link href={'/shop'}><button className='text-white font-[400] bg-[#ff2800] rounded w-[150px]  h-[43px] ml-[45%] mt-[3%] hover:text-black hover:bg-white hover:border-[2px] hover:border-black  hover:transition ease-in-out delay-50 '>Check Our Shop</button>
+    </Link>
     </div>
   )
 }

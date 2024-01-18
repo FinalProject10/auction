@@ -13,7 +13,6 @@ const Auctions = () => {
         const filtered=allData.filter(el=>{
             return Math.floor((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)<=48
         })
-        console.log(filtered)
         setData(filtered)
 
     }

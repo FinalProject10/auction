@@ -30,7 +30,6 @@ const ItemSidebar = ({ items }) => {
     // Fetch items when the component mounts and when the page changes
     fetchItems();
   }, [page]);
-
   const handleLoadMore = () => {
     // Increment the page when the "Load More" button is clicked
     setPage((prevPage) => prevPage + 1);

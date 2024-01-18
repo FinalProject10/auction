@@ -289,14 +289,14 @@ const Home = () => {
 //             </div>
 //             <button className='absolute text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:w-[136px] hover:h-[47px] hover:transition ease-in-out delay-50 '>Search</button>
 //         </div> */}
-// <Auctions/>
-// <Aboutus/>
-// <StartNow/>
-// <Offers/>
-// <Style/>
-// <Services/>
-// <Footer/>
-//     </div>
+ <Auctions/>
+ <Aboutus/>
+ <StartNow/>
+ <Offers/>
+ <Style/>
+ <Services/>
+ <Footer/>
+     </div>
   )
 }
 

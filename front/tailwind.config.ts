@@ -21,6 +21,7 @@ const baseConfig: Config = withMT({
   },
   plugins: [],
 });
+export default baseConfig
 
 // export default baseConfig 
 //  module.exports = withMT({

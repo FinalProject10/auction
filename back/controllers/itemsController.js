@@ -6,7 +6,8 @@ const getItems = async (req, res) => {
   const itemId = req.params.itemId;
 
   try {
-    const items = await Items.findAll({
+    const items = await Items.findAll(
+      {
       where: { id: itemId },
       include: [
         {
@@ -25,7 +26,8 @@ const getItems = async (req, res) => {
         },
         { model: Bids, as: "bids" },
       ],
-    });
+    }
+    );
 
     console.log(items);
     res.status(200).json(items);

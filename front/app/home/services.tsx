@@ -3,6 +3,7 @@ import React from 'react'
 
 const Services = () => {
   return (
+    <>
     <div className='mt-[40px] bg-auto' style={{background:'url(https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_about.jpg?id=6765)',backgroundSize:'cover',height:'600px'}}>
    <div className=' w-[90%] ml-[5%] mb-[10%] grid grid-cols-[30%_70%]'  >
     <div className='mt-[50%]'>
@@ -17,13 +18,16 @@ const Services = () => {
         </div>
     </div>
    </div>
-   <div className='bg-[#f7f7f7] w-full h-[100px] flex justify-center items-center'>
-    <h1 className='text-[20px] font-[600] mr-[5%]'>Are You Certified Seller?</h1>
-    <Link href={'register/seller/firstStep'}><button className='text-white font-[800]  bg-[#ff2800] rounded w-[190px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black  hover:transition ease-in-out delay-50 '>Register As Vendor</button></Link>
-
-   </div>
+   
 
     </div>
+
+<div className='bg-[#f7f7f7] w-full h-[100px]   flex justify-center items-center'>
+<h1 className='text-[20px] font-[600] mr-[5%]'>Are You Certified Seller?</h1>
+<Link href={'register/seller/firstStep'}><button className='text-white font-[800]  bg-[#ff2800] rounded w-[190px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black  hover:transition ease-in-out delay-50 '>Register As Vendor</button></Link>
+
+</div>
+</>
   )
 }
 

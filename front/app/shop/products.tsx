@@ -8,11 +8,13 @@ import { Select, Option } from "@material-tailwind/react";
 import { dividerClasses } from "@mui/material";
 import Image from "next/image";
 import axios from 'axios'
+import Link from "next/link";
 import {
     Accordion,
     AccordionHeader,
     AccordionBody,
   } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 const Products = () => {
     const[flex,setFlex]=useState(true)
     const [open, setOpen] =useState(-1);
@@ -21,6 +23,7 @@ const Products = () => {
     const[allData,setAllData]=useState([])
     const[allData1,setAllData1]=useState([])
     const[audi,setAudi]=useState(0)
+    const router=useRouter()
     useEffect(()=>{
         axios.get('http://localhost:5000/items/fetch-items').then(r=>{setData(r.data);setAllData(r.data);setAllData1(r.data)})
         .catch(err=>console.log(err))
@@ -622,14 +625,16 @@ const filter2=(property:any,value:any)=>{
     <div className='flex justify-start gap-[17px] mt-[3%] flex-wrap w-full '>
     {data.map((el,i)=>(
     
-    <div className=' w-[32%] bg-white rounded-3xl  shadow-2xl'>
+    <div className=' w-[32%] bg-white rounded-3xl mb-[17px]  shadow-2xl'>
             <div style={{background:`url(${el.images[0]})`,backgroundSize:'cover'}}  className='w-full h-[190px]  rounded-t-3xl overflow-hidden'>
             <div className="flex justify-between mt-[56%]">
             <div>
                 <h1 className="text-white font-[700]">{Math.floor((new Date(el.timeEnd) - new Date(el.timeStart))/3600000)}H</h1>
             </div>
             <div className="flex justify-center items-center  w-[30px] h-[30px] rounded-[5px] hover:bg-[#ff2800]  transition-all">
-            <FaHammer   size={25} className='text-white cursor-pointer'/>
+            <Link href={`/item/${el.id}`}> <FaHammer   size={25} className='text-white cursor-pointer'
+            
+            /></Link>
             </div>
 
             </div>
