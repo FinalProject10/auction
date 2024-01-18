@@ -11,9 +11,11 @@ const {
 } = require("./models/relations");
 const sellerRoutes = require("./routes/seller");
 const clientRoutes = require("./routes/client");
+const itemsRoute =require("./routes/itemsRoute")
 const adminRoutes = require("./routes/admin");
 const dashboard = require('./routes/AdminDashboardRouter');
 const cors = require("cors");
+const ProductsRouter = require("./routes/products");
 const app = express();
 app.use(cors());
 app.use(express.json());

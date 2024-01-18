@@ -62,15 +62,15 @@ module.exports.getProduct = async (req, res) => {
           required: true
         }
       ],
-      raw: true // Ensure the result is in raw format to simplify processing
+      raw: true 
     });
 
-    // Extract only the bidAmount from the result
+    
     const bidAmounts = result.map(item => item.bidAmount);
 
     res.status(200).json(bidAmounts);
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error); 
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 };
@@ -87,80 +87,6 @@ module.exports.getMembership = async (req, res) => {
     res.status(500).json(err);
   }
 }
-
-
-// module.exports.getRec = async (req, res) => { 
-//     try {
-//       const rec = await Reclamation.findAll();
-  
-//       res.json(rec);
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).json(err);
-//     }
-//   };
-  module.exports.addpro = async (req, res) => {
-    const { images,
-      name, 
-      price, 
-      timeStart , 
-      timeEnd , 
-      reviews ,
-      views ,
-      watching,
-      description,
-      longitude ,
-      latitude ,
-      sold ,
-      body ,
-      climatisation ,
-      cubicCapacity ,
-      emissionClass ,
-      mileage ,
-      parkingSensors ,
-      airbags ,
-      color ,
-      doorCount ,
-      gearBox ,
-      numberOfSeats ,
-      power , sellerId} = req.body;
-    try {
-        const newItem = await Item.create({
- images,
-name, 
-price, 
-timeStart , 
-timeEnd , 
-reviews ,
-views ,
-watching,
-description,
-longitude ,
-latitude ,
-sold ,
-body ,
-climatisation ,
-cubicCapacity ,
-emissionClass ,
-mileage ,
-parkingSensors ,
-airbags ,
-color ,
-doorCount ,
-gearBox ,
-numberOfSeats ,
-power ,
-sellerId:sellerId
-            
-        });
-
-        res.json({ Item: newItem });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json(err);
-    }
-};
-
 module.exports.getCord = (req, res) => { 
   Seller.findAll({
     attributes: ['name','image'],
@@ -244,7 +170,7 @@ module.exports.canBid = async (req, res) => {
 module.exports.remove = async (req, res) => {
   try {
     const result = await Client.destroy({
-      where: { id: req.params.id } // Use req.params.id to get the user ID
+      where: { id: req.params.id } 
     });
 
     if (result) {
@@ -253,14 +179,14 @@ module.exports.remove = async (req, res) => {
       res.status(404).send('User not found');
     }
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error); 
     res.status(500).send(error.message);
   }
 };
 module.exports.removePro = async (req, res) => {
   try {
     const result = await Item.destroy({
-      where: { id: req.params.id } // Use req.params.id to get the user ID
+      where: { id: req.params.id } 
     });
 
     if (result) {
@@ -269,7 +195,7 @@ module.exports.removePro = async (req, res) => {
       res.status(404).send('product not found');
     }
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error); 
     res.status(500).send(error.message);
   }
 };

@@ -359,7 +359,7 @@ const HomePage = () => {
           <React.Fragment key={i}>
             <tr className="bg-white dark:bg-gray-800">
               <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <img src={item.images}
+                <img src={item.images[0]}
                   style={{ "width": "100%" }} alt={item.name} />
               </th>
             </tr>

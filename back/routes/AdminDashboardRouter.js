@@ -3,7 +3,7 @@ const dashctr=require('../controllers/adminDashboard')
 
 
 dashboardRouter.post('/addAdmin',dashctr.addAdmin)
-dashboardRouter.post('/addPro',dashctr.addpro)
+// dashboardRouter.post('/addPro',dashctr.addpro)
 dashboardRouter.post('/rec',dashctr.addRec)
 dashboardRouter.get('/het',dashctr.getAlClient)
 dashboardRouter.get('/getsel',dashctr.getAllSeller)

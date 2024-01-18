@@ -11,11 +11,12 @@ import Link from 'next/link';
 
 const sideBare = () => {
    return (
+  
     <div className="flex-row lg:flex">
 
-      <div className="space-y-3">
+      <div className="space-y-3 ">
         
-<div className="flex h-screen bg-gray-100 ">
+<div className="flex h-screen bg-gray-100">
 <div className="hidden md:flex flex-col w-64 bg-gray-800 ">
     <div className="flex items-center justify-center h-16 bg-gray-900" style={{"height": "217px"}}>
         <span className="text-white font-bold uppercase">
