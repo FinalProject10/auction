@@ -1,0 +1,31 @@
+.autobid-breadcrumbs {
+    background: #F2F2F2;
+}
+
+
+.container {
+    margin: 20px;
+    padding: 20px 15px;
+}
+
+
+.description {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.description p {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+
+    padding-top: 5px;
+    margin-bottom: 0;
+}
+
+.col-md-6 h1 {
+    font-size: 26px !important;
+    line-height: 30px !important;
+    font-weight: 800;
+}
