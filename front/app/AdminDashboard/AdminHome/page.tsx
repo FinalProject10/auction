@@ -57,7 +57,7 @@ const HomePage = () => {
     const [data3,setData3] =useState <[]>([])
     const [total ,setTotal]=useState<number>(0)
     const [total1,setTotal1] =useState <number>(0)
-   const [cordoner , setCordoner]=useState ([])
+   const [cordoner , setCordoner]=useState<[]> ([])
 
     useEffect(() => {
         axios
@@ -76,7 +76,6 @@ const HomePage = () => {
           .then((res) => {
             const Data:[] = res.data;
             console.log(Data);
-            
             setCordoner(Data);
           })
           .catch((err) => {
@@ -125,7 +124,7 @@ const HomePage = () => {
             console.log(err);
           });
       }, []);
-      
+     
  
     // const router=useRouter()
     // useEffect(()=>{
@@ -329,48 +328,53 @@ const HomePage = () => {
             <div>
 <div className="relative">
 <div className=" flex  rounded-md w-[800px] h-[50%] overflow-x-scroll ">
-    {cordoner.map((el)=>(
-<div style={{"padding-right": "10%"}}>
-<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-    <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
+{cordoner.map((el, index) => (
+  <div key={index} style={{ "paddingRight": "10%" }}>
+    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
         <tr>
-            <th scope="col" className="px-6 py-3">
-                <div className="flex items-center ">
-                    <MdVerticalAlignTop />
-                    <a style={{ "margin-left": "15px", 'fontSize': '20px' }}>
-                        {el.price}
-                    </a>
-                </div>
-            </th>
+          <th scope="col" className="px-6 py-3">
+            <div className="flex items-center">
+              <MdVerticalAlignTop />
+              <a style={{ "marginLeft": "15px", 'fontSize': '20px' }}>
+                {el.seller.items[0].price}
+              </a>
+            </div>
+          </th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr className="bg-white dark:bg-gray-800">
-            <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <div className="flex items-center">
-                    <img src={el.images}
-                        className="w-10 h-auto rounded-full"
-                        style={{ "marginLeft": "0%" }} />
-                    <span className="ml-2"></span>
-                </div>
-            </th>
+          <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <div className="flex items-center">
+              <img src={el.seller.image}
+                className="w-10 h-auto rounded-full"
+                style={{ "marginLeft": "0%" }} alt={`${el.seller.name}'s profile`} />
+              <span className="ml-2">{el.seller.name}</span>
+            </div>
+          </th>
         </tr>
 
-        <tr className="bg-white dark:bg-gray-800">
-            <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <img src={el.images}
-                    style={{ "width": "100%" }} />
-            </th>
-        </tr>
-        <tr className="bg-white dark:bg-gray-800">
-            <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <span className='ml-[8%]'>{el.name}</span>
-            </th>
-        </tr>
-    </tbody>
-</table>
-</div>
-    ))}
+        {el.seller.items.map((item, i) => (
+          <React.Fragment key={i}>
+            <tr className="bg-white dark:bg-gray-800">
+              <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <img src={item.images}
+                  style={{ "width": "100%" }} alt={item.name} />
+              </th>
+            </tr>
+            <tr className="bg-white dark:bg-gray-800">
+              <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <span className='ml-[8%]'>{item.name}</span>
+              </th>
+            </tr>
+          </React.Fragment>
+        ))}
+      </tbody>
+    </table>
+  </div>
+))}
+
  
     {/* <div style={{"padding-right": "10%"}}>
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
