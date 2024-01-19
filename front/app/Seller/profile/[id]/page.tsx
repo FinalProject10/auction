@@ -1,20 +1,40 @@
 "use client";
-import React, { useState } from 'react';
+
+import React, { useState } from 'react'
+import { useEffect } from 'react'
 import { IoMdPhonePortrait } from "react-icons/io";
 import { MdLocationOn } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdStarRate } from "react-icons/md";
-import Footer from "../footer/Footer.tsx"
-import Navbar from "../home/navbar.tsx"
+import Footer from "../../../footer/Footer.tsx"
+import Navbar from "../../../home/navbar.tsx"
 import { GiThorHammer } from "react-icons/gi";
-const Page = () => {
+import axios from "axios";
+
+const Page = ({ params }) => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
+  const [items, setItems] = useState<Item | []>([]);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/Seller/profile/${params.id}`
+      );
+      setItems(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+console.log(params,"params")
 
+    fetchData();
+  }, []);
+  console.log(items,"items")
   const handleContactVendor = () => {
     setShowContactForm(true);
   };
@@ -36,32 +56,7 @@ const Page = () => {
     setMessage('');
     setShowContactForm(false);
   };
-  const handleSearch = () => {
-    const filteredCars = cars.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    
-    setCars(filteredCars);
-  };
-  const handleSort = () => {
-    let sortedCars = [...cars];
-
-    switch (sortOption) {
-      case 'price':
-        sortedCars.sort((a, b) => a.price - b.price);
-        break;
-      case 'name':
-        sortedCars.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'category':
-        sortedCars.sort((a, b) => a.category.localeCompare(b.category));
-        break;
-      default:
-        break;
-    }
-
-    setCars(sortedCars);
-  };
+  
   const divStyle = {
   position :"center",  
   top:"80%",
@@ -84,7 +79,6 @@ const Page = () => {
           <div className='mt-[20%]'>
             <h1 className='text-[10px] font-[300] mb-[20%]'>Store Product Category</h1>
             <h1 className='text-[#ff2800] font-[300] '>Cars</h1>
-            <p><h1>Contact Vendor</h1></p>
             {showContactForm ? (
               <div className='mt-4'>
                 <input
@@ -133,12 +127,12 @@ const Page = () => {
                 className="rounded-full mx-auto mt-6 w-[100px] h-[100px]"
               />
               <div>
-                <p>JOHNNY DEEP</p>
+                <p>{items.name}</p>
               </div>
-              <div className="flex items-center justify-center mt-4"><MdLocationOn color="#ff2800" /> <p>EL KEF</p></div>
-              <div className="flex items-center justify-center mt-4"><IoMdPhonePortrait color="#ff2800" /> <p>27348509</p></div>
-              <div className="flex items-center justify-center mt-4"><MdEmail color="#ff2800" /><p>johnny@gmail.com</p></div>
-              <div className="flex items-center justify-center mt-4"><MdStarRate color="#ff2800" /> <p>5 on 5</p></div>
+              <div className="flex items-center justify-center mt-4"><MdLocationOn color="#ff2800" /> <p>seller.adress</p></div>
+              <div className="flex items-center justify-center mt-4"><IoMdPhonePortrait color="#ff2800" /> <p>seller.</p></div>
+              <div className="flex items-center justify-center mt-4"><MdEmail color="#ff2800" /><p>seller.email</p></div>
+              <div className="flex items-center justify-center mt-4"><MdStarRate color="#ff2800" /> <p>seller.rating</p></div>
             </div>
           </div>
         </div>
@@ -158,14 +152,13 @@ const Page = () => {
       className='w-[100px] p-1 mb-1 rounded border border-black-200 mr-2'
     />
     <button
-      onClick={handleSearch}
       className='bg-blue-500 text-white px-2 py-1 rounded'
       style={{ backgroundColor: '#ff2800', cursor: 'pointer' }}
     >
       Search
     </button>
   </div>
-  <div className='flex items-center'>
+  {/* <div className='flex items-center'>
           <span className='text-sm text-gray-500 mr-2'>
             Sort by:
             <select
@@ -181,101 +174,18 @@ const Page = () => {
           </span>
         </div>
       </div>
-      <div className='flex flex-wrap justify-evenly gap-8'>
-  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
-    <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ2.png" alt="" />
-      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
-        <GiThorHammer />
+      <div>
+        {items.map((item) => (
+          <div key={item.id}>
+            <h2>{item.name}</h2>
+            <p>{item.description}</p>
+            <button onClick={() => router.push(`/item/${item.id}`)}>View Details</button>
+          </div>
+        ))}
       </div>
-    </div> 
-    <div className='text-center'>
-      <h1 className='font-[800] text-[25px] mb-2'>SUV</h1>
-      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
-      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>2500$</h2>
-    </div>
+     </div> */}
+ </div> 
   </div>
-  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
-    <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ1.png" alt="" />
-      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
-        <GiThorHammer />
-      </div>
-    </div> 
-    <div className='text-center'>
-      <h1 className='font-[800] text-[25px] mb-2'>Sedan</h1>
-      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
-      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>1500$</h2>
-    </div>
-  </div>
-  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
-    <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ3.png" alt="" />
-      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
-        <GiThorHammer />
-      </div>
-    </div> 
-    <div className='text-center'>
-      <h1 className='font-[800] text-[25px] mb-2'>Sports</h1>
-      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
-      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>2800$</h2>
-    </div>
-  </div>
-  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
-    <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
-      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
-        <GiThorHammer />
-      </div>
-    </div> 
-    <div className='text-center'>
-      <h1 className='font-[800] text-[25px] mb-2'>Convertible</h1>
-      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
-      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>2300$</h2>
-    </div>
-  </div>
-  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
-    <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ7.png" alt="" />
-      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
-        <GiThorHammer />
-      </div>
-    </div> 
-    <div className='text-center'>
-      <h1 className='font-[800] text-[25px] mb-2'>FAMILIAR</h1>
-      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
-      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>1700$</h2>
-    </div>
-  </div>
-  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
-    <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ5.png" alt="" />
-      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
-        <GiThorHammer />
-      </div>
-    </div> 
-    <div className='text-center'>
-      <h1 className='font-[800] text-[25px] mb-2'>CLASSIC</h1>
-      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
-      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>1300$</h2>
-    </div>
-  </div>
-  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
-    <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ6.png" alt="" />
-      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
-        <GiThorHammer />
-      </div>
-    </div> 
-    <div className='text-center'>
-      <h1 className='font-[800] text-[25px] mb-2'>4*4</h1>
-      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
-      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>3200$</h2>
-    </div>
-  </div>
-  
-    </div>
-</div>
       <Footer/>
     </div>
   );

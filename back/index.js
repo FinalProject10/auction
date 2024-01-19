@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("./database/index");
+const cors = require("cors");
 const {
   Bid,
   Client,
@@ -9,19 +10,18 @@ const {
   Seller,
   Reclamation,
 } = require("./models/relations");
-const sellerRoutes = require("./routes/seller");
+const sellersRoutes = require("./routes/seller");
 const clientRoutes = require("./routes/client");
 const adminRoutes = require("./routes/admin");
 const ProductsRouter=require("./routes/products")
 const itemsRoute = require("./routes/itemsRoute");
-const cors = require("cors");
 const app = express();
-app.use(cors());
+app.use('/Seller', sellersRoutes);
+app.use(cors({origin:true,credentials:true}))
 app.use(express.json());
 app.use(express.static(__dirname + "/../react-client/dist"));
 app.use(express.urlencoded({ extended: true }));
 const PORT = 5000;
-app.use("/seller", sellerRoutes);
 app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use('/products',ProductsRouter)
@@ -29,6 +29,11 @@ app.use("/items", itemsRoute);
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
+
+
+
+
+
 
 // functions
 // createChatEngineUser();

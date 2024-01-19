@@ -1,17 +1,19 @@
 "use client"
 import React from 'react'
 import "./cart.css"
+import Navbar from "../home/navbar.tsx"
 // import  NavBar  from '../navbar/NavBar'
 
 const Cart = () => {
   return (
 
     <div className='body_cart'>
-    
+    <Navbar/>
       <div className='content_cart'>
+        <div className='cartt'>
 <h4 className='page_cart'>Home / Cart</h4>
 <h3 className='title_cart'>Cart</h3>
-
+</div>
 
     <div className='step_cart'>
       <div className='first_step'>1</div>
