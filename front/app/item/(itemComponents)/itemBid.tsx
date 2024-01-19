@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import "./style/itemBid.css";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
+import AuctionTimer from "./auctionTimer";
 
 const ItemBid = ({ items }) => {
-  const [quant, setQuant] = useState(items[0].price);
-  console.log(items[0].price, "items[0].price");
+  const [quant, setQuant] = useState(items[0]?.price);
 
   const addQuant = () => {
     setQuant(quant + 5);
@@ -39,48 +39,16 @@ const ItemBid = ({ items }) => {
               </span>
             </span>
           </p>
+          <div className="auction-time">
+            Time left:{" "}
+            <AuctionTimer startTime={item.timeStart} endTime={item.timeEnd} />
+          </div>
           <div className="auction">
-            <div className="auction-time  ">
-              Time left:
-              <div className="main-auction auction-time-countdown hasCountdown">
-                <span className="countdown_row curren">
-                  <span className="countdown_section">
-                    <span className="countdown_amount">11</span>
-                    <br />
-                    Months
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">0</span>
-                    <br />
-                    Weeks
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">0</span>
-                    <br />
-                    Days
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">6</span>
-                    <br />
-                    Hours
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">33</span>
-                    <br />
-                    Minutes
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">29</span>
-                    <br />
-                    Seconds
-                  </span>
-                </span>
-              </div>
-            </div>
             <p className="auction-end">
               Auction ends:{item.timeEnd} <br />
               Timezone: UTC +2
             </p>
+
             <div className="bidFlex mb-4">
               <form
                 className="countdown_row  h-10 px-6 font-semibold"
@@ -128,6 +96,7 @@ const ItemBid = ({ items }) => {
               </div>
             </div>
           </div>
+
           <div className="product_meta mb-4 ml-3">
             <p className="">Category:{item.category}</p>
           </div>

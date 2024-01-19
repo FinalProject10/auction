@@ -4,20 +4,18 @@ import "../(itemComponents)/style/page.css";
 import React, { useEffect, useState } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import dynamic from "next/dynamic";
-const Gallery = dynamic(() => import("../(itemComponents)/itemGalory.tsx"));
-const ItemHeader = dynamic(() => import("../(itemComponents)/itemHader.tsx"));
-const ItemBid = dynamic(() => import("../(itemComponents)/itemBid.tsx"));
-const ItemInfo = dynamic(() => import("../(itemComponents)/itemInfo.tsx"));
+const Gallery = dynamic(() => import("../(itemComponents)/itemGalory"));
+const ItemHeader = dynamic(() => import("../(itemComponents)/itemHader"));
+const ItemBid = dynamic(() => import("../(itemComponents)/itemBid"));
+const ItemInfo = dynamic(() => import("../(itemComponents)/itemInfo"));
 const ItemDescrption = dynamic(
-  () => import("../(itemComponents)/itemDescrption.tsx")
+  () => import("../(itemComponents)/itemDescrption")
 );
-const ItemSidebar = dynamic(
-  () => import("../(itemComponents)/itemSidebar.tsx")
-);
-const Navbar = dynamic(() => import("../../home/navbar.tsx"));
+const ItemSidebar = dynamic(() => import("../(itemComponents)/itemSidebar"));
+const Navbar = dynamic(() => import("../../home/navbar"));
 // const Footer = dynamic(() => import("../../footer/Footer.tsx"));
 import axios from "axios";
-import Footer from "../../footer/Footer.tsx";
+import Footer from "../../footer/Footer";
 const Item = ({ params }) => {
   const [items, setItems] = useState<Item | []>([]);
   const [loading, setLoading] = useState(true);
