@@ -11,6 +11,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import AuctionHistory from "./AuctionHistory";
 function Icon({ id, open }) {
   return (
     <svg
@@ -247,32 +248,12 @@ const ItemInfo = ({ items }) => {
               Auction History{" "}
             </AccordionHeader>
             <AccordionBody>
-              <table>
-                <thead>
-                  <tr>
-                    {/* <th>Auction History</th> */}
-                    <td></td>
-                    <td> </td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th>Auction started</th>
-                    <td>--</td>
-                    <td> £</td>
-                  </tr>
-                  <tr>
-                    <th>salmen khelifi </th>
-                    <td>November 17, 2023 12:07 pm </td>
-                    <td>2.500,00 £</td>
-                  </tr>
-                  <tr>
-                    <th>Sejay Miles </th>
-                    <td>December 4, 2023 12:00 am</td>
-                    <td> 2.550,00 £</td>
-                  </tr>
-                </tbody>
-              </table>
+              <AuctionHistory
+                items={item.bids}
+                timeStart={item.timeStart}
+                price={item.price}
+                timeEnd={item.timeEnd}
+              />
             </AccordionBody>
           </Accordion>
           <hr />
