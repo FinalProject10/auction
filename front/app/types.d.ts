@@ -11,6 +11,7 @@ interface Item {
       id: number;
       bidAmount: number;
     }[];
+    images: string[];
   }
 
   interface ItemsListProps {
@@ -22,6 +23,6 @@ interface Item {
     items: {
       id: number;
       images: string[];
-      // ... other item properties
     }[];
+    
   }

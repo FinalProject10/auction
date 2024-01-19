@@ -100,15 +100,12 @@
     background-color: #f0f8ff;
 }
 
-.priceinput {
-    width: 185px;
 
-}
 
 .priceinput {
     margin-left: 20px;
     /* border: 1px solid black; */
-    width: 185px;
+    width: 165px;
     padding: 12px;
     border: 2px solid #EF4444;
     border-radius: 15px;

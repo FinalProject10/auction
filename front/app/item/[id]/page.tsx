@@ -1,6 +1,5 @@
 "use client";
 import "../(itemComponents)/style/page.css";
-
 import React, { useEffect, useState } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import dynamic from "next/dynamic";
@@ -13,9 +12,8 @@ const ItemDescrption = dynamic(
 );
 const ItemSidebar = dynamic(() => import("../(itemComponents)/itemSidebar"));
 const Navbar = dynamic(() => import("../../home/navbar"));
-// const Footer = dynamic(() => import("../../footer/Footer.tsx"));
-import axios from "axios";
 import Footer from "../../footer/Footer";
+import axios from "axios";
 const Item = ({ params }) => {
   const [items, setItems] = useState<Item | []>([]);
   const [loading, setLoading] = useState(true);

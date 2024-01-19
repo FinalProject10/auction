@@ -4,9 +4,11 @@ import "./style/itemBid.css";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import AuctionTimer from "./auctionTimer";
-
+import socket from "./bid/socket";
 const ItemBid = ({ items }) => {
-  const [quant, setQuant] = useState(items[0]?.price);
+  const [quant, setQuant] = useState(
+    items[0]?.bids[items[0]?.bids.length - 1]?.bidAmount
+  );
 
   const addQuant = () => {
     setQuant(quant + 5);
@@ -21,10 +23,17 @@ const ItemBid = ({ items }) => {
   const handleInputChange = (e) => {
     setQuant(Number(e.target.value));
   };
-
   const handleSubmit = (e) => {
+    const currentItemId = items[0].id;
+    const clientId = 1;
     e.preventDefault();
-    console.log(`Bid for ${quant} units`);
+    console.log(`Bid for ${quant} units in room ${currentItemId}`);
+
+    socket.emit("send_bid", {
+      bidAmount: quant,
+      itemId: currentItemId,
+      ClientId: clientId,
+    });
   };
 
   return (
@@ -85,15 +94,15 @@ const ItemBid = ({ items }) => {
                     </button>
                   </div>
                 </div>
+                <div className="bid ml-24">
+                  <button
+                    type="submit"
+                    className="bg-red-500 text-white text-sm leading-6 font-bold py-2 px-4 rounded-lg hover:bg-red-700"
+                  >
+                    Bid
+                  </button>
+                </div>
               </form>
-              <div className="bid ml-24">
-                <button
-                  type="submit"
-                  className="bg-red-500 text-white text-sm leading-6 font-bold py-2 px-4 rounded-lg hover:bg-red-700"
-                >
-                  Bid
-                </button>
-              </div>
             </div>
           </div>
 

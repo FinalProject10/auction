@@ -7,10 +7,6 @@ const AuctionTimer = ({ startTime, endTime }) => {
     const now = new Date().getTime();
     const startTimestamp = new Date(endTime).getTime();
     const endTimestamp = new Date(startTime).getTime();
-    console.log(
-      startTimestamp,
-      (endTimestamp - now) / (1000 * 60 * 60 * 24 * 30.44)
-    );
 
     let difference = def();
     function def() {
