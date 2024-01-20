@@ -21,7 +21,7 @@ Items.belongsTo(Seller);
 Memberships.hasMany(Client, { foreignKey: "membershipId" });
 Client.belongsTo(Memberships);
 
-Items.belongsTo(Client, { foreignKey: "clientId", as: "client" });
+// Items.belongsTo(Client, { foreignKey: "clientId", as: "client" });
 
 module.exports = {
   Bid,
