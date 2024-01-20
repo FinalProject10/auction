@@ -7,7 +7,7 @@ import "./footer.css";
 
 const Footer: FC = () => {
   return (
-    <footer className="footer-section mt-[6%]">
+    <footer className="footer-section ">
       <div className="container">
         <div className="row">
           <div className="col-md-3">

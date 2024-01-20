@@ -9,10 +9,9 @@ import { FaLocationDot } from "react-icons/fa6";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import Link from "next/link";
 import axios from "axios";
-
 const ItemSidebar = ({ items }) => {
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     // Function to fetch items from the server
@@ -53,17 +52,17 @@ const ItemSidebar = ({ items }) => {
                   width={70}
                   height={70}
                 />
-                <h2 className="font-bold pl-3">{item.seller.name}</h2>
+                <h2 className="font-bold pl-3">{item.seller?.name}</h2>
               </span>
               <p>
                 <FaLocationDot className="black-icon w-[15px] inline-block mx-2 " />
-                {item.seller.address}
+                {item.seller?.address}
               </p>
               <p className="mb-3">
                 <RiAccountPinCircleFill className="black-icon w-[15px] inline-block mx-2" />
                 <Link
                   href="/seller/profile/"
-                  as={`/seller/profile/${item.seller.id}`}
+                  as={`/seller/profile/${item.seller?.id}`}
                 >
                   Check more offers from this vendor.
                 </Link>
@@ -97,10 +96,9 @@ const ItemSidebar = ({ items }) => {
             <div className="flex flex-wrap mt-3" key={el.id}>
               <div className="sadContainer rounded-b-lg">
                 <div
-                  className="w-[178px] h-[100px] rounded-t-lg"
+                  className="w-178 h-100 rounded-t-lg"
                   style={{
-                    background:
-                      'url("https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg")',
+                    backgroundImage: `url(${el.images[0]})`,
                     backgroundSize: "cover",
                   }}
                 >
@@ -120,10 +118,13 @@ const ItemSidebar = ({ items }) => {
                 <h1 className="name font-bold object-center mb-3 ">26 daays</h1>
 
                 <div className="font-semibold	 text-sm/[30px] border border-black-200 rounded-sm p-4 drop-shadow-lg bg-white rounded-b-lg">
-                  <p>Audi A6 </p>
+                  <p>{el.name}</p>
                   <p> 2015 · 97 900 km · 2</p>
                   <p>494 cm3 · Hybrid</p>
-                  <p>Current Bid: € 2.550,00</p>
+                  <p className="text-black">
+                    Current Bid: €{" "}
+                    <span className="text-red-500">{el.price}</span>
+                  </p>
                 </div>
               </div>
             </div>

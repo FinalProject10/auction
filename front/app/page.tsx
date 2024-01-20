@@ -1,12 +1,8 @@
 "use client"
 import { useState } from 'react'
-import AboutUs from "./aboutUs/AboutUs.tsx"
-import Image from 'next/image'
-import Register from './register/seller/page'
+
 import { useRouter } from 'next/navigation'
-import Footer from "./footer/Footer.tsx"
-import Pricing from "./membershipCard/Pricing.tsx"
-import Cart from "./CART/Page.tsx"
+
 export default function Home() {
   const [client,setClient]=useState(false)
   const [seller,setSeller]=useState(false)

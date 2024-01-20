@@ -21,12 +21,13 @@ const baseConfig: Config = withMT({
   },
   plugins: [],
 });
+export default baseConfig
 
-export default baseConfig 
-// module.exports = withMT({
-//   content: ["./pages/**/*.{js,ts,jsx,tsx}"],
-//   theme: {
-//     extend: {},
-//   },
-//   plugins: [],
-// });
+// export default baseConfig 
+//  module.exports = withMT({
+//    content: ["./pages/**/*.{js,ts,jsx,tsx}"],
+//    theme: {
+//      extend: {},
+//    },
+//    plugins: [],
+//  });

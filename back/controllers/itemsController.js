@@ -53,8 +53,8 @@ const addItem = async (req, res) => {
 //   }
 // };
 const getAllItems = async (req, res) => {
-  const itemsPerPage = 8;
-  const page = req.query.page || 1; // Get the page from query parameters or default to page 1
+  const itemsPerPage = 8
+  const page = parseInt(req.query.page, 10) || 1
 
   try {
     const offset = (page - 1) * itemsPerPage;
@@ -63,10 +63,10 @@ const getAllItems = async (req, res) => {
       offset: offset,
     });
 
-    res.status(200).json(items);
+    res.status(200).json(items)
   } catch (err) {
-    console.error(err);
-    res.status(500).json("Internal server error");
+    console.error(err)
+    res.status(500).json("Internal server error")
   }
 };
 module.exports = { getItems, addItem, getAllItems };

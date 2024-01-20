@@ -3,18 +3,17 @@ import React, { useState } from "react";
 import "./style/itemBid.css";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
-
+import AuctionTimer from "./auctionTimer";
+import socket from "./bid/socket";
 const ItemBid = ({ items }) => {
-  const [quant, setQuant] = useState(5000);
+  const [quant, setQuant] = useState(
+    items[0]?.bids[items[0]?.bids.length - 1]?.bidAmount
+  );
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const addQuant = () => {
-    setQuant(quant + 5);
-  };
-
-  const removeQuant = () => {
-    if (quant > 0) {
-      setQuant(quant - 1);
-    }
+  const adjustQuant = (amount) => {
+    setQuant((prevQuant) => prevQuant + amount);
   };
 
   const handleInputChange = (e) => {
@@ -23,9 +22,28 @@ const ItemBid = ({ items }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Bid for ${quant} units`);
-  };
 
+    const currentItemId = items[0].id;
+    const clientId = 1;
+
+    const lastBidAmount =
+      items[0]?.bids[items[0]?.bids.length - 1]?.bidAmount || 0;
+
+    if (quant > lastBidAmount && items[0]?.price < quant) {
+      console.log(`Bid for ${quant} units in room ${currentItemId}`);
+      socket.emit("send_bid", {
+        bidAmount: quant,
+        itemId: currentItemId,
+        ClientId: clientId,
+      });
+
+      setErrorMessage("");
+      setSuccessMessage("Bid submitted successfully!");
+    } else {
+      setErrorMessage("Bid amount must be greater than the last bid.");
+      setSuccessMessage("");
+    }
+  };
   return (
     <div className="summary">
       {items.map((item) => (
@@ -33,51 +51,21 @@ const ItemBid = ({ items }) => {
           <p className="price">
             <span className="auction-price">
               <span className="current">Starting bid:</span>
-              <span className="current currentc">{item.price}£</span>
+              <span className="current currentc ">
+                <span className="text-red-500"> {item.price}£</span>
+              </span>
             </span>
           </p>
+          <div className="auction-time">
+            Time left:{" "}
+            <AuctionTimer startTime={item.timeStart} endTime={item.timeEnd} />
+          </div>
           <div className="auction">
-            <div className="auction-time  ">
-              Time left:
-              <div className="main-auction auction-time-countdown hasCountdown">
-                <span className="countdown_row curren">
-                  <span className="countdown_section">
-                    <span className="countdown_amount">11</span>
-                    <br />
-                    Months
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">0</span>
-                    <br />
-                    Weeks
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">0</span>
-                    <br />
-                    Days
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">6</span>
-                    <br />
-                    Hours
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">33</span>
-                    <br />
-                    Minutes
-                  </span>
-                  <span className="countdown_section">
-                    <span className="countdown_amount">29</span>
-                    <br />
-                    Seconds
-                  </span>
-                </span>
-              </div>
-            </div>
             <p className="auction-end">
               Auction ends:{item.timeEnd} <br />
               Timezone: UTC +2
             </p>
+
             <div className="bidFlex mb-4">
               <form
                 className="countdown_row  h-10 px-6 font-semibold"
@@ -86,8 +74,9 @@ const ItemBid = ({ items }) => {
                 <div className="quantity buttons_added  ">
                   <div className="amount w-12">
                     <button
+                      type="button"
                       className="minus"
-                      onClick={removeQuant}
+                      onClick={() => adjustQuant(-5)}
                       disabled={quant === 0}
                     >
                       <FaMinus
@@ -97,14 +86,15 @@ const ItemBid = ({ items }) => {
                     </button>
                     <input
                       type="text"
-                      value={item.price}
+                      value={quant}
                       onChange={handleInputChange}
                       className="priceinput"
                     />{" "}
                     {/* <p>{quant}</p> */}
                     <button
+                      type="button"
                       className="plus"
-                      onClick={addQuant}
+                      onClick={() => adjustQuant(5)}
                       /* disabled={resetQuant === 100} */
                     >
                       <FaPlus
@@ -114,23 +104,28 @@ const ItemBid = ({ items }) => {
                     </button>
                   </div>
                 </div>
+                <div className="bid ml-24">
+                  <button
+                    type="submit"
+                    className="bg-red-500 text-white text-sm leading-6 font-bold py-2 px-4 rounded-lg hover:bg-red-700"
+                  >
+                    Bid
+                  </button>
+                </div>
               </form>
-              <div className="bid ml-24">
-                <button
-                  type="submit"
-                  className="bg-red-500 text-white text-sm leading-6 font-bold py-2 px-4 rounded-lg hover:bg-red-700"
-                >
-                  Bid
-                </button>
-              </div>
+              {successMessage && (
+                <div className="text-green-500 mt-2 ml-24">
+                  {successMessage}
+                </div>
+              )}
+              {errorMessage && (
+                <div className="text-red-500 mt-2 ml-24">{errorMessage}</div>
+              )}
             </div>
           </div>
+
           <div className="product_meta mb-4 ml-3">
-            <p className="sku_wrapper">
-              SKU: <span className="sku">ab-08</span>
-            </p>
-            <p className="">Category: Cars</p>
-            <p className="">Tags: cars driving road</p>
+            <p className="">Category:{item.category}</p>
           </div>
         </div>
       ))}
