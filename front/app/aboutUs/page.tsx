@@ -2,6 +2,7 @@
 import React, { FC, useCallback } from 'react';
 import "./about.css"
 import Navbar from "../home/navbar"
+import Footer from "../footer/Footer.tsx"
 const AboutUs: FC = () => {
   const onHeaderContainer1Click = useCallback(() => {
   }, []);
@@ -13,8 +14,8 @@ const AboutUs: FC = () => {
     textAlign: 'center',
     padding: '230px'}
   return (
-    <div>
-     
+    
+   <div>
     <div className="abou"> 
     <Navbar/>
     <div style={divStyle}>
@@ -95,7 +96,12 @@ Our platform is a dynamic fusion of curated collections, spirited bidding, and u
   ].map((person, index) => (
     <div key={index} className="flex flex-col items-center">
       <div className="image-46-wrappe">
-        <img className={`image-${index}-ico`} alt="" src={person.image} />
+      <img
+  className={`image-${index}-ico group hover:scale-110`}
+  alt=""
+  src={person.image}
+/>
+
       </div>
       <div className="frame-parent2">
         <div className="tom-cruise-paren">
@@ -103,15 +109,22 @@ Our platform is a dynamic fusion of curated collections, spirited bidding, and u
           <div className="founder-chairma">{person.role}</div>
         </div>
       </div>
+     
     </div>
+    
   ))}
+
+    
 </div>
+
   <div/>
-
     </div>
+    <div className='footer'><Footer/ ></div>
     </div>
+   
     </div>
-
+ 
+  
   );
 };
 

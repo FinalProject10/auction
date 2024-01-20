@@ -1,10 +1,13 @@
 
 .launced-in-201 {
-    position: relative;
-    line-height: 26px;
-    display: inline-block;
-    width: 525px;
-}
+    line-height: 36px;
+    display: flex;
+    width: 625px;
+    text-align: right;
+    margin-left: -50px; 
+    font-family: 'Rubik', sans-serif;
+  }
+  
 .exclusive-has-mor {
     position: relative;
     line-height: 26px;
@@ -26,7 +29,7 @@
 .our-story-paren {
     position: absolute;
     top: 820px;
-    left: 135px;
+    left: -500px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -50,8 +53,8 @@
     left: 600px;
     border-radius: 4px 0px 0px 4px;
     background-color: #eb7ea8;
-    width: 705px;
-    height: 609px;
+    width: 685px;
+    height: 509px;
     overflow: hidden;
 }
 .services-ico {
@@ -391,3 +394,50 @@
   .footer{
     margin-top: 1800px;
   }
+.our-store{
+    margin-left: -100px;
+    height: 60px;
+    margin-top: -30px;
+    font-size: 40px;
+    margin-left: 30px;
+    font-family: 'Rubik', sans-serif;
+}
+.gray-box {
+    background-color: #F2F3F5;
+   width: 1550px;
+   height: 680px;
+    border-radius: 10px; 
+    overflow: hidden; 
+    margin-top: 190px;
+    margin-left: -120px;
+  }
+  .p{
+    color: #ff4e2f;
+    font-size: 20px;
+    margin-top: -20px;
+    margin-left: 30px;
+    font-family: 'Roboto', sans-serif;
+font-family: 'Rubik', sans-serif;
+  }
+  .p1 {color: #ff4e2f;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+.our-stor{
+    margin-left: -100px;
+    height: 60px;
+    margin-top: -30px;
+    font-size: 40px;
+    margin-left: 30px;
+}
+.side-image {
+    position: absolute;
+    top: -50px;
+    left: 600px;
+    border-radius: 4px 0px 0px 4px;
+    background-color: #eb7ea8;
+    width: 685px;
+    height: 509px;
+    overflow: hidden;
+}

@@ -8,7 +8,6 @@ import { MdEmail } from "react-icons/md";
 import { MdStarRate } from "react-icons/md";
 import Footer from "../../../footer/Footer.tsx"
 import Navbar from "../../../home/navbar.tsx"
-import { GiThorHammer } from "react-icons/gi";
 import axios from "axios";
 
 const Page = ({ params }) => {
@@ -19,21 +18,8 @@ const Page = ({ params }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
   const [items, setItems] = useState<Item | []>([]);
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/Seller/profile/${params.id}`
-      );
-      setItems(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-  useEffect(() => {
-console.log(params,"params")
-
-    fetchData();
-  }, []);
+ 
+ 
   console.log(items,"items")
   const handleContactVendor = () => {
     setShowContactForm(true);
@@ -129,10 +115,10 @@ console.log(params,"params")
               <div>
                 <p>{items.name}</p>
               </div>
-              <div className="flex items-center justify-center mt-4"><MdLocationOn color="#ff2800" /> <p>seller.adress</p></div>
-              <div className="flex items-center justify-center mt-4"><IoMdPhonePortrait color="#ff2800" /> <p>seller.</p></div>
-              <div className="flex items-center justify-center mt-4"><MdEmail color="#ff2800" /><p>seller.email</p></div>
-              <div className="flex items-center justify-center mt-4"><MdStarRate color="#ff2800" /> <p>seller.rating</p></div>
+              <div className="flex items-center justify-center mt-4"><MdLocationOn color="#ff2800" /> <p></p></div>
+              <div className="flex items-center justify-center mt-4"><IoMdPhonePortrait color="#ff2800" /> <p></p></div>
+              <div className="flex items-center justify-center mt-4"><MdEmail color="#ff2800" /><p></p></div>
+              <div className="flex items-center justify-center mt-4"><MdStarRate color="#ff2800" /> <p>seller.</p></div>
             </div>
           </div>
         </div>
@@ -158,32 +144,7 @@ console.log(params,"params")
       Search
     </button>
   </div>
-  {/* <div className='flex items-center'>
-          <span className='text-sm text-gray-500 mr-2'>
-            Sort by:
-            <select
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-              className='ml-2 border rounded p-1'
-            >
-              <option value=''>None</option>
-              <option value='price'>Price</option>
-              <option value='name'>Name</option>
-              <option value='category'>Category</option>
-            </select>
-          </span>
-        </div>
-      </div>
-      <div>
-        {items.map((item) => (
-          <div key={item.id}>
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <button onClick={() => router.push(`/item/${item.id}`)}>View Details</button>
-          </div>
-        ))}
-      </div>
-     </div> */}
+ 
  </div> 
   </div>
       <Footer/>

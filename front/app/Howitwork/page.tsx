@@ -1,33 +1,82 @@
 "use client"
-import React, { FC, useCallback } from 'react'
-
-const page = () => {  const onHeaderContainer1Click = useCallback(() => {
-}, []);
-
+import React, { FC, useCallback } from 'react';
+import "./HowItWork.css";
+import Navbar from "../home/navbar"
+import Footer from "../footer/Footer.tsx"
+const Howitwork: FC = () => {
+  const onHeaderContainer1Click = useCallback(() => {
+  }, []);
+  const divStyle = {
+    backgroundImage: 'url(https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-hiw-banner-v2.jpg?id=7264)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    color: '#fff',
+    textAlign: 'center',
+    padding: '230px'}
   return (
-  <div className="abou">
-<div style="position: relative;">
-  <img src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/Autobid-about.jpg?id=7148" width="3000" alt="" className="cov" />
-  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 20px; font-weight: bold;">
-    WHO WE ARE
-  </div>
-</div>
-
-      <div className="our-story-paren">
-        <div className="our-stor">Our Mission in Company</div>
-        <div className="launced-in-2015-exclusive-is-paren">
-          <div className="launced-in-201">{`Welcome to AutoBid, where passion meets possibility in every bid. Explore a world of curated auctions, where treasures await discovery and bidding is an art form. Unleash the thrill of winning as you navigate through our diverse marketplace of unique items. Join us on the journey where auctions become more than transactions – they become stories. `}</div>
-          <div className="exclusive-has-mor">
-          Uncover rare finds, embrace the excitement of competitive bidding, and redefine your shopping experience. We curate a marketplace where enthusiasts, collectors, and seekers of extraordinary come together. Explore, engage, and embark on a journey of exclusive auctions that redefine the way you acquire and appreciate the extraordinary.
-
-    <p><img src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/Autobid-24.png" width={80} height={80} alt="24"  />Years on the Market</p>
-<p>
-Our platform is a dynamic fusion of curated collections, spirited bidding, and unbeatable excitement.</p>
-    </div>
-    </div>
-        </div>
+    
+   <div>
+    <div className="abou"> 
+    <Navbar/>
+    <div style={divStyle}>
+   
+<h1 className="lemon-regular ">How It Works</h1>
+<h2 className='fugaz-one-regular '>DISCOVER, BID, AND WIN – YOUR GATEWAY TO EXCEPTIONAL AUCTION EXPERIENCES!</h2>
+       
       </div>
-  )
-}
+      <div className="our-story-paren">
+      <p className='p1'>How It Works</p>
+        <div className="our-stor">Registration And Account</div>
+        
+        <div className="launced-in-2015-exclusive-is-paren">
+          <div className="launced-in-201">{`Discover a seamless Registration and Account experience at Autobid, where we seamlessly blend innovative technology with a hassle-free process, ensuring you embark on your car-buying journey with confidence.
 
-export default page
+Effortless Registration: Simply fill in your details, and you’re ready to dive into our world of vehicles.
+Real-Time Updates: Is. Receive updates on your bids, auction status, and exclusive offers.
+Personalized Account: Save your favorite vehicles, track your bidding history, and set custom alerts for upcoming auctions.
+Secure Profile Management: Your personal information and transactions are safeguarded, allowing you to bid confidently in a secure environment. `}</div>
+        
+      </div>
+      <div className="side-imag">
+        <img
+          className="portrait-two-african-females-h-ico"
+
+          src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-how-it-works-2.jpg" alt='about'
+        />
+      </div>
+      <div className="gray-box">
+      <div className="our-story-paren">
+        <p className='p'>How It Works</p>
+        <div className="our-store">Browse And Select A Vehicle</div>
+        <div className="launced-in-2015-exclusive-is-paren">
+          <div className="launced-in-201">{`At AutoBid, we understand that finding the perfect vehicle is a pivotal part of your car-buying journey. Our Browse and Select a Vehicle section is designed to provide you with a seamless and enjoyable exploration of our diverse range of cars. Here’s what sets this section apart:
+
+Intuitive Interface: Our user-friendly interface allows you to effortlessly browse through a wide variety of vehicles.
+Comprehensive Information: Each vehicle listing is accompanied by detailed information, including specifications, features, and high-quality images.
+Advanced Filters: Narrow down your options quickly with our advanced filtering system. Whether you’re looking for a specific make, model year, or price range..
+Compare and Contrast: Easily compare multiple vehicles side by side to make the decision-making process even smoother. . `}</div>
+        
+      </div>
+      <div className="side-image">
+        <img
+          className="portrait-two-african-females-h-ico"
+
+          src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-how-it-works-3.jpg" alt='about'
+        />
+      </div>
+      </div>
+      </div>
+      
+      
+      
+     
+    
+    </div>
+</div>
+<div/>
+<div className='footer'><Footer/ ></div>
+</div>
+  );
+};
+
+export default Howitwork;
