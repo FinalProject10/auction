@@ -1,4 +1,6 @@
 "use client";
+
+const Loading = dynamic(() => import("./loading"));
 import "../(itemComponents)/style/page.css";
 import React, { useEffect, useState } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
@@ -11,11 +13,10 @@ const ItemDescrption = dynamic(
   () => import("../(itemComponents)/itemDescrption")
 );
 const ItemSidebar = dynamic(() => import("../(itemComponents)/itemSidebar"));
-const Navbar = dynamic(() => import("../../home/navbar"));
-import Footer from "../../footer/Footer";
+
 import axios from "axios";
 const Item = ({ params }) => {
-  const [items, setItems] = useState<Item | []>([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const Item = ({ params }) => {
         const response = await axios.get(
           ` http://localhost:5000/items/fetch-items/${params.id}`
         );
-        setItems(response.data);
+        setItems(response.data as Item[]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -40,19 +41,21 @@ const Item = ({ params }) => {
 
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
-      <Navbar />
+      {/* <Loading loading={loading} /> */}
+
       {loading ? (
         <>
-          {" "}
-          <Player
+          {/* <Player
             autoplay
             speed={1.5}
             loop
             src="https://lottie.host/9bdf25ba-5ca3-44fb-a1b9-18cf62a6ec79/YuknZDDgpg.json"
             style={{ height: "300px", width: "300px" }}
-          ></Player>
+          ></Player> */}
+          <Loading loading={loading} />
         </>
       ) : (
         <>
@@ -79,8 +82,6 @@ const Item = ({ params }) => {
           </div>
         </>
       )}
-
-      <Footer />
     </>
   );
 };

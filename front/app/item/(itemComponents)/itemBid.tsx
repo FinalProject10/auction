@@ -9,33 +9,41 @@ const ItemBid = ({ items }) => {
   const [quant, setQuant] = useState(
     items[0]?.bids[items[0]?.bids.length - 1]?.bidAmount
   );
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const addQuant = () => {
-    setQuant(quant + 5);
-  };
-
-  const removeQuant = () => {
-    if (quant > 0) {
-      setQuant(quant - 1);
-    }
+  const adjustQuant = (amount) => {
+    setQuant((prevQuant) => prevQuant + amount);
   };
 
   const handleInputChange = (e) => {
     setQuant(Number(e.target.value));
   };
+
   const handleSubmit = (e) => {
+    e.preventDefault();
+
     const currentItemId = items[0].id;
     const clientId = 1;
-    e.preventDefault();
-    console.log(`Bid for ${quant} units in room ${currentItemId}`);
 
-    socket.emit("send_bid", {
-      bidAmount: quant,
-      itemId: currentItemId,
-      ClientId: clientId,
-    });
+    const lastBidAmount =
+      items[0]?.bids[items[0]?.bids.length - 1]?.bidAmount || 0;
+
+    if (quant > lastBidAmount && items[0]?.price < quant) {
+      console.log(`Bid for ${quant} units in room ${currentItemId}`);
+      socket.emit("send_bid", {
+        bidAmount: quant,
+        itemId: currentItemId,
+        ClientId: clientId,
+      });
+
+      setErrorMessage("");
+      setSuccessMessage("Bid submitted successfully!");
+    } else {
+      setErrorMessage("Bid amount must be greater than the last bid.");
+      setSuccessMessage("");
+    }
   };
-
   return (
     <div className="summary">
       {items.map((item) => (
@@ -66,8 +74,9 @@ const ItemBid = ({ items }) => {
                 <div className="quantity buttons_added  ">
                   <div className="amount w-12">
                     <button
+                      type="button"
                       className="minus"
-                      onClick={removeQuant}
+                      onClick={() => adjustQuant(-5)}
                       disabled={quant === 0}
                     >
                       <FaMinus
@@ -83,8 +92,9 @@ const ItemBid = ({ items }) => {
                     />{" "}
                     {/* <p>{quant}</p> */}
                     <button
+                      type="button"
                       className="plus"
-                      onClick={addQuant}
+                      onClick={() => adjustQuant(5)}
                       /* disabled={resetQuant === 100} */
                     >
                       <FaPlus
@@ -103,6 +113,14 @@ const ItemBid = ({ items }) => {
                   </button>
                 </div>
               </form>
+              {successMessage && (
+                <div className="text-green-500 mt-2 ml-24">
+                  {successMessage}
+                </div>
+              )}
+              {errorMessage && (
+                <div className="text-red-500 mt-2 ml-24">{errorMessage}</div>
+              )}
             </div>
           </div>
 

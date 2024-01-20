@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.18.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
@@ -27,6 +28,7 @@
     "@mui/x-charts": "^6.18.4",
     "@types/chart.js": "^2.9.41",
     "@types/react-chartjs-2": "^2.5.7",
+    "antd": "^5.13.2",
     "axios": "^1.6.3",
     "chart.js": "^4.4.1",
     "cloudinary-core": "^2.13.0",

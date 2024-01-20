@@ -20,9 +20,18 @@ interface Item {
 
 
   interface GalleryProps {
+    items: Item | { id: number; images: string[]; }[];
+
     items: {
       id: number;
       images: string[];
     }[];
     
   }
+
+  interface CustomSpinProps {
+    loading: boolean;
+    color?: string;
+
+  }
+

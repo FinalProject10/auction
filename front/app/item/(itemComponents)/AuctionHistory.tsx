@@ -5,7 +5,6 @@ import axios from "axios";
 
 function AuctionHistory({ items, timeStart, timeEnd, price }) {
   const [data, setData] = useState([]);
-  console.log(data, "data");
 
   const fetchData = async () => {
     try {
@@ -56,7 +55,7 @@ function AuctionHistory({ items, timeStart, timeEnd, price }) {
             </tr>
           ))}
           <tr>
-            <th>Auction started</th>
+            <th>Auction End</th>
             <td>{formatDateTime(timeEnd)}</td>
             <td>
               {new Date(timeEnd) > new Date()
