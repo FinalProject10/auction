@@ -27,6 +27,7 @@ const Products = () => {
     const[bg,setBg]=useState(false)
     const[index,setIndex]=useState(1)
     const [page, setPage] = useState(1);
+    const[size,setSize]=useState(0)
     const router=useRouter()
     // useEffect(()=>{
     //     axios.get('http://localhost:5000/items/fetch-items').then(r=>{setData(r.data);setAllData(r.data);setAllData1(r.data)})
@@ -34,13 +35,72 @@ const Products = () => {
     // },[])
     useEffect(() => {
       // Function to fetch items from the server
+    
+      
       const fetchItems = async () => {
         try {
           const response = await axios.get(
             `http://localhost:5000/items/fetch-items/?page=${page}`
           );
-          setData((prevItems) => [...response.data]);
-          setAllData(response.data);setAllData1(response.data)
+          console.log(response.data)
+          if(localStorage.getItem('category')){
+              const category=localStorage.getItem('category')
+              let dat=response.data.filter((el:any)=>{
+                return el.category===category
+              })
+              setData(dat)
+              localStorage.removeItem('category')
+              return              
+          }
+          else if(localStorage.getItem('Climatisation')){
+            const climatisation=localStorage.getItem('Climatisation')
+            let dat=response.data.filter((el:any)=>{
+              return el.climatisation===climatisation
+            })
+            setData(dat)
+            localStorage.removeItem('Climatisation')
+                          
+        }
+        if(localStorage.getItem('Color')){
+          const Color=localStorage.getItem('Color')
+          let dat=response.data.filter((el:any)=>{
+            return el.color===Color
+          })
+          setData(dat)
+          localStorage.removeItem('Color')
+                        
+      }
+      else if(localStorage.getItem('Capacity')){
+        const Capacity=localStorage.getItem('Capacity')
+        let dat=response.data.filter((el:any)=>{
+          return el.capacity===Capacity
+        })
+        setData(dat)
+        localStorage.removeItem('Capacity')
+                      
+    }
+    else if(localStorage.getItem('Gearbox')){
+      const Gearbox=localStorage.getItem('Gearbox')
+      let dat=response.data.filter((el:any)=>{
+        return el.gearbox===Gearbox
+      })
+      setData(dat)
+      localStorage.removeItem('Gearbox')
+                    
+  }
+          
+          else if(localStorage.getItem('body')){
+            const body=localStorage.getItem('body')
+            const dit=response.data.filter((el:any)=>{
+              return el.body===body
+            })
+            setData(dit)
+            localStorage.removeItem('body')
+          }
+          else{
+            
+          setData(response.data);
+          setAllData(response.data);setAllData1(response.data)}
         } catch (error) {
           console.error("Error fetching items:", error);
         }
@@ -48,15 +108,17 @@ const Products = () => {
   
       // Fetch items when the component mounts and when the page changes
       fetchItems();
-    }, [page]);
+    }, [page,click]);
   
     const handleLoadMore = (value:any) => {
+      router.push('#flex')
       // Increment the page when the "Load More" button is clicked
       setPage(value);
       
     };
     console.log(data)
     const filter=(value:any)=>{
+      router.push('#flex')
      if(!value){
       
       return 
@@ -69,6 +131,7 @@ const Products = () => {
       setData(filtered)
     }
 const filter2=(property:any,value:any)=>{
+  router.push('#flex')
     const filtered=allData1.filter(el=>{
       if(!isNaN(property)) return el[property].includes(value)
       return el[property]===value 
@@ -620,16 +683,17 @@ const filter2=(property:any,value:any)=>{
 
 
         </div>
-    <div className='w-[1190px] h-auto '>
+    <div className='w-[1190px] h-auto ' id='flex'>
     <div className='flex justify-between'>
     <div className='flex gap-[20px]' >
     <div className='flex cursor-pointer'>
 
     <div className=' w-[40px] h-[31px] bg-[#ff2800] flex justify-center items-center rounded-l-[3px] '>
-    <TbLayoutGrid size={20} color='white' onClick={()=>{setFlex(true)}}/>
+    <TbLayoutGrid size={20} color='white' onClick={()=>{{setFlex(true);setClick(!click)
+    }}}/>
         </div>
         <div className='w-[40px] h-[31px] bg-white flex justify-center items-center rounded-r-[3px] hover:bg-[#ff2800] hover:text-white transition-all'>
-    <FaRegListAlt size={20} className='text-[#ff2800] hover:text-white' onClick={()=>{setFlex(false)}}/>
+    <FaRegListAlt size={20} className='text-[#ff2800] hover:text-white' onClick={()=>{setFlex(false);}}/>
     </div>
     </div> 
     </div>
@@ -647,11 +711,11 @@ const filter2=(property:any,value:any)=>{
       </Select>
     </div> */}
 
-
+{data.length===0&&<div>No Product Found</div>}
     </div>
     {flex?
-    <div className='flex justify-start gap-[17px] mt-[3%] flex-wrap w-full '>
-    {data.length===0&&<div>No Product Found</div>}
+    <div className='flex justify-start gap-[17px] mt-[3%] flex-wrap w-full ' >
+    
    
     {data.map((el,i)=>(
     
@@ -703,13 +767,13 @@ const filter2=(property:any,value:any)=>{
     </div>))}
     
         </div>}
-        <div className="flex gap-[2%] mb-[30px]">
-        <div 
+      <div className="flex gap-[2%] mb-[30px]">
+        {index>1&&<div 
     onClick={()=>{
       setIndex(index-1)
        handleLoadMore(index-1)
     }}
-    className=" w-[50px] h-[50px] rotate-180  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>
+    className=" w-[50px] h-[50px] rotate-180  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>}
     
     <div 
     onClick={()=>{
@@ -741,11 +805,11 @@ const filter2=(property:any,value:any)=>{
       }}
     style={{color:index===4?'white':'black',backgroundColor:index===4?'#ff2800':'white'}}
     className=" w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer">4</div>
-    <div 
+    {index<4&&<div 
     onClick={()=>{setIndex(index+1),
       handleLoadMore(index+1)
     }}
-    className=" w-[50px] h-[50px]  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>
+    className=" w-[50px] h-[50px]  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>}
 
     
     </div>

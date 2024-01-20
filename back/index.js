@@ -26,6 +26,11 @@ app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use('/products',ProductsRouter)
 app.use("/items", itemsRoute);
+app.get('/getallusers',async(req,res)=>{
+let d=await Client.findAll()
+let s=await Seller.findAll()
+res.status(200).json({total:d.length+s.length})
+})
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
