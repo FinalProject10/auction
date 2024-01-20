@@ -14,6 +14,8 @@ const clientRoutes = require("./routes/client");
 const itemsRoute =require("./routes/itemsRoute")
 const adminRoutes = require("./routes/admin");
 const dashboard = require('./routes/AdminDashboardRouter');
+const ProductsRouter = require("./routes/products");
+const itemsRoute = require("./routes/itemsRoute");
 const cors = require("cors");
 const ProductsRouter = require("./routes/products");
 const app = express();
@@ -27,12 +29,12 @@ app.use('/dash',dashboard)
 app.use("/seller", sellerRoutes);
 app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
-app.use('/products',ProductsRouter)
+app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
-
+///////////////////////////////
 // functions
 // createChatEngineUser();
 // GetorCreateUser();
