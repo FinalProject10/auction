@@ -1,67 +1,46 @@
-.dashboard-sidebar{
-    background: #FFFFFF;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
-    flex: 1 auto;
-}
-.navigation .menu {
-    width:17%;
-    background: #242424;
-    list-style: none;
-    margin: 0 0 20px 0;
-    padding: 0;
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-    background-color: #FF2800
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-    list-style: none;
-}
-.navigation .menu li{
-    margin: 0;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.36) ;
-    line-height: 25px;
-}
-.navigation .menu .active{
-    position:relative;
-    background: #FFF
-}
-.navigation .menu .active:after{
-    left: 93%;
-    top: 1.3rem;
-    border: transparent solid;
-    content: ' ';
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: transparent #fff transparent transparent;
-    border-left-color: #fff;
-    border-width: 16px 16px 16px 0;
-    margin-top: -16px;
 
+.dokan-dash-sidebar {
+    width: 250px;
+    height: 100vh;    
+    background: #FF0000; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+    margin-left: 0; 
+    margin-top: 0; 
 }
-.navigation .menu .active a{
-    color: #FF2800;
-    font-size: 14px;
-    line-height: 17px;
-    display: block;
-    text-decoration:none;
+
+.dokan-dashboard-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height:100%;
+}
+
+.dokan-dashboard-menu li {
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.36);
+}
+
+.dokan-dashboard-menu li.active {
+    background: #FFF;
+}
+
+.dokan-dashboard-menu li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 15px 0 15px 32px;
     font-weight: bold;
     text-transform: uppercase;
-    background-color: transparent;
+    width: 100%;
 }
-.navigation .menu .active a:focus ,a:hover{
-    outline: none;
+
+.dokan-dashboard-menu li.active a {
+    color: #FF2800;
 }
-.navigation .menu .active:after{
+
+.dokan-dashboard-menu li.active:after {
     left: 93%;
     top: 1.3rem;
     border: transparent solid;
@@ -75,13 +54,112 @@ li {
     border-width: 16px 16px 16px 0;
     margin-top: -16px;
 }
-.dashboard-wrap{
-    display: flex;
-    width:100%;
-    overflow: visible 
 
+a:hover {
+    color: #FF2800;
+    background: #FFF;
+    outline: none;
 }
-.dashboard-wrap .dashboard-sidebar{
-    width: 17%;
-    flex: 1 auto;
+.dokan-dashboard-menu li a {
+    color: white;
+}
+
+.dokan-dashboard-menu li a:hover {
+    color: red; 
+    background: #FFF;
+    outline: none;
+}
+.dokan-dashboard-menu li.icons-container {
+    display: flex;
+}
+
+.dokan-dashboard-menu .icon-item {
+    flex: 1;
+    border-right: 1px solid rgba(255, 255, 255, 0.36);
+}
+
+.dokan-dashboard-menu .icon-item:last-child {
+    border-right: none; /* Remove border on the last item */
+}
+
+.dokan-dashboard-menu .icon-item a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    height: 60px; /* Adjust as needed */
+}
+
+.dokan-dashboard-menu .icon-item a:hover {
+    color: red; /* Change to red on hover */
+    background: #FFF;
+    outline: none;
+}
+.dokan-dashboard-menu .icon-item a:hover {
+    color: red; /* Change to red on hover */
+    background: #FFF;
+    outline: none;
+    position: relative;
+}
+
+.dokan-dashboard-menu .icon-item a:hover::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #000 transparent;
+}
+
+.dokan-dashboard-menu .icon-item a:hover::after {
+    content: 'Store';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #000, #333); /* Adjust gradient colors */
+    color: #FFF; /* White text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px; /* Adjust font size */
+    transition: opacity 0.5s;
+    opacity: 0; /* Initially hidden */
+}
+.dokan-dashboard-menu .icon-item a[href^="#file-upload"]:hover::after {
+    content: 'Edit My Account';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #000, #333);
+    color: #FFF;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.dokan-dashboard-menu .icon-item a[href^="#power-settings"]:hover::after {
+    content: 'Log Out';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #000, #333);
+    color: #FFF;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.dokan-dashboard-menu #icon-item1 a:hover::before,
+.dokan-dashboard-menu #icon-item1 a:hover::after {
+    transition: opacity 0.5s;
+    opacity: 1; /* Fade in on hover */
 }

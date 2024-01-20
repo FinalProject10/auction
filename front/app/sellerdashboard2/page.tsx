@@ -1,8 +1,8 @@
-import SideBar from './sidebar/page'
+import AddProduct from './addproduct/page'
 export default function Dashboard(){
     return (
         <div>
-            <SideBar/>
+            <AddProduct/>
         </div>
     )
 }

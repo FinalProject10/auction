@@ -1,0 +1,73 @@
+.container{
+    display:grid;
+    grid-template-columns: 250px auto;
+    gap: 0;
+    width: 1000px;
+    height:710px;
+    margin: 0 auto; 
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); 
+}
+.form-container{
+    display:flex;
+    flex-direction: column;
+    width:auto; 
+padding: 15px;
+  
+}
+.form-container ,.header-container, .names-email .passwords-btn{
+    margin-bottom:30px;
+}
+.names-email{
+    display: flex;
+    flex-direction: column;
+}
+.first-last-names, .email{
+    margin-bottom:30px;
+}
+.first-last-names {
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+
+}
+.first-name ,.last-name,.email{
+    display:flex;
+    flex-direction: column;
+}
+span{
+    color:red;
+    margin-bottom:12px;
+}
+.form-container .header-container{
+    font-weight: 800;
+    font-size: 26px;
+}
+.input-style {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .input-style::placeholder {
+    color: #888;
+  }
+  .passwords-btn{
+    display: flex;
+    flex-direction: column;
+  }
+  .passwords-btn .header{
+    font-size:26px;
+    font-weight:500;
+    margin-left:28px;
+  }
+  .passwords-btn,.current,.new,.confirm{
+    margin-bottom:30px;
+  }
+  .current,.new,.confirm{
+    display: flex;
+    flex-direction: column;
+  }
+  .passwords-btn div label {
+    margin-bottom:12px;
+  }

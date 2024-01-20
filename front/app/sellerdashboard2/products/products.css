@@ -1,0 +1,153 @@
+.container{
+    width:50%;
+    margin-left:30%;
+}
+.container .header{
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    /* width:50%; */
+    margin-left:30%;
+    box-shadow: 3px 3px 3px 3px #EDEDED;
+    line-height: 20px;
+    margin-bottom: 15px;
+    
+}
+.stats{
+    display: flex;
+    flex-direction: row;
+    color:grey;
+    min-height:16px;
+    margin-left:5px;
+    width:100%;
+}
+.stats .all{
+    border-right: solid 1px rgb(171, 171, 171);
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin-left:5px;
+    padding-left:5px ;
+}
+.add-product-button {
+    background-color: #FF2800;
+    color: white;
+    padding: 8px ;
+    font-size: 16px;
+    font-weight: 500;
+   width: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  
+  .add-product-button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+  }
+  .filter-reset-search{
+   width:auto;
+    margin-top:70px;
+    
+    display: flex;
+    align-items:center;
+    justify-content:space-evenly;
+  }
+  .filter-reset-search .filter-reset{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .filter-reset-search .filter-reset >*{
+    margin-left:7px;
+  }
+  .filter-reset-search .filter-reset button{
+    /* display: inline-block; */
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: #FF2800 ;
+    color: #fff ;
+    font-size: 16px ;
+    line-height: 1 ;
+    padding: 12px 30px ;
+    font-weight: 800 ;
+    text-transform: capitalize;
+    border: 2px solid ;
+    border-radius: 5px ;
+  }
+  .nice-input {
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    outline: none; /* Remove the default focus outline */
+    transition: border-color 0.3s ease-in-out; /* Add a smooth transition for the border color */
+
+    /* Optional: Add some box-shadow for a subtle effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* Optional: Adjust font and other styles */
+    font-size: 16px;
+}
+
+/* Add a hover effect for better interactivity */
+.nice-input:hover {
+    border-color: #007bff; /* Change border color on hover */
+}
+
+/* Add a focus effect */
+.nice-input:focus {
+    border-color: #007bff; /* Change border color on focus */
+}
+.search{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+.search button{
+    margin-left:10px;
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: #FF2800 ;
+    color: #fff ;
+    font-size: 16px ;
+    line-height: 1 ;
+    padding: 12px 30px ;
+    font-weight: 800 ;
+    text-transform: capitalize;
+    border: 2px solid ;
+    border-radius: 5px ;
+}
+.apply{
+    
+    width:50%;
+}
+.apply button{
+    margin-left:10px;
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: #FF2800 ;
+    color: #fff ;
+    font-size: 16px ;
+    line-height: 1 ;
+    padding: 12px 30px ;
+    font-weight: 800 ;
+    text-transform: capitalize;
+    border: 2px solid ;
+    border-radius: 5px ;
+}

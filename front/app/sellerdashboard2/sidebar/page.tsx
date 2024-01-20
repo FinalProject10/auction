@@ -1,51 +1,66 @@
-import "./page.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './page.css'
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import SettingsIcon from '@mui/icons-material/Settings';
-export default function SideBar(){
-    return(
-       <div>
-        <div className="dashboard-wrap">
-            <div className="dashboard-sidebar">
-                <div className="navigation">
-                    <ul className="menu">
-                        <li className="active dashboard">
-                            <a href="#">Dashboard</a>
-                        <FontAwesomeIcon
-                          icon="fas fa-tachometer-alt"
-                          className="red-icon h-6 w-6 float-start mx-1"
-                        />
-                        </li>
-                        
-                        <li className="">
-                            <a href="#">Products</a>
-                           < BusinessCenterIcon/>
-                        </li>
-                        <li className="">
-                            <a href="#">Orders</a>
-                            <ShoppingCartIcon/>
-                        </li>
-                        <li className="">
-                            <a href="#">Withdraw</a>
-                            <FileUploadIcon/>
-                        </li>
-                        <li className="">
-                            <a href="#">Withdraw</a>
-                            <FileUploadIcon/>
-                        </li>
-                        <li className="">
-                            <a href="#">Withdraw</a>
-                            <SettingsIcon/>
-                        </li>
-                       
-
-                    </ul>
-                </div>
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+export default function SideBar() {
+    return (
+        <div>
+            <div className="dokan-dash-sidebar">
+                <ul className="dokan-dashboard-menu">
+                    <li className="active dashboard">
+                        <a href="https://autobid.modeltheme.com/dashboard/">
+                            <i className="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li className="products">
+                        <a href="https://autobid.modeltheme.com/dashboard/products/">
+                            <BusinessCenterIcon />
+                            Products
+                        </a>
+                    </li>
+                    <li className="orders">
+                        <a href="https://autobid.modeltheme.com/dashboard/orders/">
+                            <ShoppingCartIcon />
+                            Orders
+                        </a>
+                    </li>
+                    <li className="withdraw">
+                        <a href="https://autobid.modeltheme.com/dashboard/withdraw/">
+                            <FileUploadIcon />
+                            Withdraw
+                        </a>
+                    </li>
+                    <li className="settings has-submenu">
+                        <a href="https://autobid.modeltheme.com/dashboard/settings/store/">
+                            <SettingsIcon />
+                            Settings <ChevronRightIcon className="menu-dropdown" />
+                        </a>
+                    </li>
+                    <li className="icons-container">
+                        <div className="icon-item" id='icon-item1'>
+                            <a href="#">
+                                <BusinessCenterIcon />
+                            </a>
+                        </div>
+                        <div className="icon-item" >
+                            <a href="#power-settings">
+                                <FileUploadIcon />
+                            </a>
+                        </div>
+                        <div className="icon-item" >
+                            <a href="#file-upload">
+                                <PowerSettingsNewIcon />
+                            </a>
+                        </div>
+                    </li>
+         
+                </ul>
             </div>
-            <div className="dashboard-content"></div>
         </div>
-       </div>
-    )
+    );
 }
