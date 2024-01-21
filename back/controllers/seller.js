@@ -3,9 +3,24 @@ const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 const secretKey="salim123"
 module.exports={
+    registerSec:async(req,res)=>{
+        try{
+        const id=req.params.id
+        const {batinda,cinNum}=req.body
+        
+            let r=await Seller.update({
+                batinda,
+                cinNum
+            },{where:{id}})
+           return res.status(201).json(r)
+        
+        }catch(err){
+            res.status(500).json('serv err')
+        }
+    },
     register:async(req,res)=>{
         try{
-        const {name,lastName,email,password,phone,cinNum,batinda}=req.body
+        const {name,lastName,email,password,phone}=req.body
         if((phone).toString().length!==8){
             return res.status(404).json({err:"phone number not valid"})
         }
@@ -25,13 +40,13 @@ module.exports={
             email,
             password:hashed,
             telNumb:phone,
-            cinNum,
-            batinda
+            
         })
-        res.status(201).json({
+        res.status(200).json({
         name:d.name,
         lastName:d.lastName,
-        email:d.email
+        email:d.email,
+        id:d.id
       })
     }
 catch(err){

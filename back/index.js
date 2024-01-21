@@ -14,8 +14,11 @@ const clientRoutes = require("./routes/client");
 const adminRoutes = require("./routes/admin");
 const ProductsRouter = require("./routes/products");
 const itemsRoute = require("./routes/itemsRoute");
+const cloudRoute=require('./routes/cloudinary')
 const cors = require("cors");
+
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/../react-client/dist"));
@@ -26,6 +29,12 @@ app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
+app.use('/cloudinary',cloudRoute)
+app.get('/getallusers',async(req,res)=>{
+let d=await Client.findAll()
+let s=await Seller.findAll()
+res.status(200).json({total:d.length+s.length})
+})
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });

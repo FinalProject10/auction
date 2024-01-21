@@ -15,67 +15,207 @@ import {
   AccordionBody,
 } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
+import { Vollkorn_SC } from "next/font/google";
 const Products = () => {
-  const [flex, setFlex] = useState(true);
-  const [open, setOpen] = useState(-1);
-  const [data, setData] = useState([]);
-  const [click, setClick] = useState(false);
-  const [allData, setAllData] = useState([]);
-  const [allData1, setAllData1] = useState([]);
-  const [audi, setAudi] = useState(0);
-  const [color, setColor] = useState(false);
-  const [bg, setBg] = useState(false);
-  const [index, setIndex] = useState(1);
-  const [page, setPage] = useState(1);
-  const router = useRouter();
-  // useEffect(()=>{
-  //     axios.get('http://localhost:5000/items/fetch-items').then(r=>{setData(r.data);setAllData(r.data);setAllData1(r.data)})
-  //     .catch(err=>console.log(err))
-  // },[])
-  useEffect(() => {
-    // Function to fetch items from the server
-    const fetchItems = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/items/fetch-items/?page=${page}`
-        );
-        setData((prevItems) => [...response.data]);
-        setAllData(response.data);
-        setAllData1(response.data);
-      } catch (error) {
-        console.error("Error fetching items:", error);
+    const[flex,setFlex]=useState(true)
+    const [open, setOpen] =useState(-1);
+    const[data,setData]=useState([])
+    const[click,setClick]=useState(false)
+    const[allData,setAllData]=useState([])
+    const[allData1,setAllData1]=useState([])
+    var[bmw,setBmw]=useState(0)
+    var[dacia,setdacia]=useState(0)
+    var[lamborghini,setlamborghini]=useState(0)
+    var[mazda,setmazda]=useState(0)
+    var[mercedes,setmercedes]=useState(0)
+    var[Mitsubishi,setMitsubishi]=useState(0)
+    var[seat,setseat]=useState(0)
+    var[tesla,settesla]=useState(0)
+    var[toyota,settoyota]=useState(0)
+    var[Volkswagen,setvolkswagen]=useState(0)
+    var[audi,setAudi]=useState(0)
+    var[ford,setFord]=useState(0)
+  
+    const[color,setColor]=useState(false)
+    const[bg,setBg]=useState(false)
+    const[index,setIndex]=useState(1)
+    const [page, setPage] = useState(1);
+    const[size,setSize]=useState(0)
+    const router=useRouter()
+    useEffect(()=>{ axios.get('http://localhost:5000/items/get').then(r=>{
+          setAllData(r.data);setAllData1(r.data)
+        setr(r.data)})
+        .catch(err=>console.log(err))},[])
+   
+    
+   
+    const setr=(arr:any)=>{      
+      
+
+      for(var i=0;i<arr.length;i++){
+        console.log(arr[i].name)
+        if(arr[i].name.includes("Audi")){
+          audi++
+        }
+        if(arr[i].name.includes("Ford")){
+          ford++
+        }
+        if(arr[i].name.includes("Mercedes")){
+          mercedes++
+        }
+        if(arr[i].name.includes("BMW")){
+          console.log('hhh')
+          bmw++
+        }
+        if(arr[i].name.includes("Dacia")){
+          dacia++
+        }
+        if(arr[i].name.includes("Lamborghini")){
+          lamborghini++
+        }
+        if(arr[i].name.includes("Mazda")){
+          mazda++
+        }
+        if(arr[i].name.includes("Mitsubishi")){
+          Mitsubishi++
+        }
+        if(arr[i].name.includes("Seat")){
+          seat++
+        }
+        if(arr[i].name.includes("Toyota")){
+          toyota++
+        }
+        if(arr[i].name.includes("Tesla")){
+          tesla++
+        }
+        if(arr[i].name.includes("Volkswagen")){
+          Volkswagen++
+        }
+
+        setAudi(audi)
+        setFord(ford)
+        setBmw(bmw)
+        setMitsubishi(Mitsubishi)
+        setdacia(dacia)
+        settesla(tesla)
+        settoyota(toyota)
+        setmazda(mazda)
+      setvolkswagen(Volkswagen)
+        setseat(seat)
+        setlamborghini(lamborghini)
+        setmercedes(mercedes)
+        
       }
-    };
-
-    // Fetch items when the component mounts and when the page changes
-    fetchItems();
-  }, [page]);
-
-  const handleLoadMore = (value: any) => {
-    // Increment the page when the "Load More" button is clicked
-    setPage(value);
-  };
-  console.log(data);
-  const filter = (value: any) => {
-    if (!value) {
-      return;
+      
+      
+      console.log(bmw)
     }
-
-    const filtered = allData.filter((el) => {
-      return el.name.includes(value);
-    });
-
-    setData(filtered);
-  };
-  const filter2 = (property: any, value: any) => {
-    const filtered = allData1.filter((el) => {
-      if (!isNaN(property)) return el[property].includes(value);
-      return el[property] === value;
-    });
-    console.log(filtered);
-    setData(filtered);
-  };
-  const handleOpen = (value: any) => setOpen(open === value ? 0 : value);
+    useEffect(() => {
+      // Function to fetch items from the server
+    
+      
+      const fetchItems = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:5000/items/fetch-items/?page=${page}`
+          );
+          
+          
+          if(localStorage.getItem('category')){
+              const category=localStorage.getItem('category')
+              let dat=response.data.filter((el:any)=>{
+                return el.category===category
+              })
+              setData(dat)
+              localStorage.removeItem('category')
+              return              
+          }
+          else if(localStorage.getItem('Climatisation')){
+            const climatisation=localStorage.getItem('Climatisation')
+            let dat=response.data.filter((el:any)=>{
+              return el.climatisation===climatisation
+            })
+            setData(dat)
+            localStorage.removeItem('Climatisation')
+                          
+        }
+        if(localStorage.getItem('Color')){
+          const Color=localStorage.getItem('Color')
+          let dat=response.data.filter((el:any)=>{
+            return el.color===Color
+          })
+          setData(dat)
+          localStorage.removeItem('Color')
+                        
+      }
+      else if(localStorage.getItem('Capacity')){
+        const Capacity=localStorage.getItem('Capacity')
+        let dat=response.data.filter((el:any)=>{
+          return el.capacity===Capacity
+        })
+        setData(dat)
+        localStorage.removeItem('Capacity')
+                      
+    }
+    else if(localStorage.getItem('Gearbox')){
+      const Gearbox=localStorage.getItem('Gearbox')
+      let dat=response.data.filter((el:any)=>{
+        return el.gearbox===Gearbox
+      })
+      setData(dat)
+      localStorage.removeItem('Gearbox')
+                    
+  }
+          
+          else if(localStorage.getItem('body')){
+            const body=localStorage.getItem('body')
+            const dit=response.data.filter((el:any)=>{
+              return el.body===body
+            })
+            setData(dit)
+            localStorage.removeItem('body')
+          }
+          else{
+            console.log('hae')
+          setData(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching items:", error);
+        }
+      };
+  
+      // Fetch items when the component mounts and when the page changes
+      fetchItems();
+    }, [page,click]);
+    const handleLoadMore = (value:any) => {
+      router.push('#flex')
+      // Increment the page when the "Load More" button is clicked
+      setPage(value);
+      
+    };
+    const filter=(value:any)=>{
+      router.push('#flex')
+     if(!value){
+      
+      return 
+     }
+      
+      const filtered=allData.filter(el=>{
+        return el.name.includes(value)
+      })
+      
+      setData(filtered)
+    }
+const filter2=(property:any,value:any)=>{
+  router.push('#flex')
+    const filtered=allData1.filter(el=>{
+      if(!isNaN(property)) return el[property].includes(value)
+      return el[property]===value 
+    })
+    console.log(filtered)
+    setData(filtered)
+}
+    const handleOpen = (value:any) => setOpen(open === value ? 0 : value);
   return (
     <>
       <div className="w-[90%] ml-[5%] mt-[5%]  h-auto flex gap-[5%] mb-auto">
@@ -89,7 +229,7 @@ const Products = () => {
             className="flex justify-between mt-[10%] mb-[5%] cursor-pointer"
           >
             <h1>Audi </h1>
-            <h1>(5)</h1>
+            <h1>({audi})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -99,7 +239,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>BMW </h1>
-            <h1>(6)</h1>
+            <h1>({bmw})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -109,7 +249,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Dacia </h1>
-            <h1>(3)</h1>
+            <h1>({dacia})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -119,7 +259,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Ford </h1>
-            <h1>(3)</h1>
+            <h1>({ford})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -129,7 +269,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Lamborghini </h1>
-            <h1>(1)</h1>
+            <h1>({lamborghini})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -139,7 +279,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Mazda</h1>
-            <h1>(0)</h1>
+            <h1>({mazda})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -149,7 +289,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Mercedes-Benz </h1>
-            <h1>(4)</h1>
+            <h1>({mercedes})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -159,7 +299,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Mitsubishi </h1>
-            <h1>(1)</h1>
+            <h1>({Mitsubishi})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -169,7 +309,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Seat </h1>
-            <h1>(1)</h1>
+            <h1>({seat})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -179,7 +319,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Tesla </h1>
-            <h1>(2)</h1>
+            <h1>({tesla})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -189,7 +329,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Toyota </h1>
-            <h1>(0)</h1>
+            <h1>({toyota})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -199,7 +339,7 @@ const Products = () => {
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Volkswagen </h1>
-            <h1>(2)</h1>
+            <h1>({Volkswagen})</h1>
           </div>
           <hr className="mb-[3%]" />
           <div>
@@ -719,31 +859,20 @@ const Products = () => {
             }
           />
         </div>
-        <div className="w-[1190px] h-auto ">
-          <div className="flex justify-between">
-            <div className="flex gap-[20px]">
-              <div className="flex cursor-pointer">
-                <div className=" w-[40px] h-[31px] bg-[#ff2800] flex justify-center items-center rounded-l-[3px] ">
-                  <TbLayoutGrid
-                    size={20}
-                    color="white"
-                    onClick={() => {
-                      setFlex(true);
-                    }}
-                  />
-                </div>
-                <div className="w-[40px] h-[31px] bg-white flex justify-center items-center rounded-r-[3px] hover:bg-[#ff2800] hover:text-white transition-all">
-                  <FaRegListAlt
-                    size={20}
-                    className="text-[#ff2800] hover:text-white"
-                    onClick={() => {
-                      setFlex(false);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-            {/* <div className="mr-[20px]">
+    <div className='w-[1190px] h-auto '>
+    <div className='flex justify-between'>
+    <div className='flex gap-[20px]' >
+    <div className='flex cursor-pointer'>
+
+    <div className=' w-[40px] h-[31px] bg-[#ff2800] flex justify-center items-center rounded-l-[3px] '>
+    <TbLayoutGrid size={20} color='white' onClick={()=>{setFlex(true)}}/>
+        </div>
+        <div className='w-[40px] h-[31px] bg-white flex justify-center items-center rounded-r-[3px] hover:bg-[#ff2800] hover:text-white transition-all'>
+    <FaRegListAlt size={20} className='text-[#ff2800] hover:text-white' onClick={()=>{setFlex(false)}}/>
+    </div>
+    </div> 
+    </div>
+    {/* <div className="mr-[20px]">
     <Select  placeholder={'qs'} label='Default Sorting'>
         <Option>Sort by popularity</Option>
         <Option>Sort by average rating</Option>
@@ -756,137 +885,85 @@ const Products = () => {
         <Option>Sort auction by most activeA</Option>
       </Select>
     </div> */}
-          </div>
-          {flex ? (
-            <div className="flex justify-start gap-[17px] mt-[3%] flex-wrap w-full ">
-              {data.length === 0 && <div>No Product Found</div>}
 
-              {data.map((el, i) => (
-                <div className=" w-[32%] bg-white rounded-3xl mb-[17px]  shadow-2xl">
-                  <div
-                    style={{
-                      background: `url(${el.images[0]})`,
-                      backgroundSize: "cover",
-                    }}
-                    className="w-full h-[190px]  rounded-t-3xl overflow-hidden"
-                  >
-                    <div className="flex justify-between mt-[56%]">
-                      <div>
-                        <h1 className="text-white font-[700]">
-                          {Math.floor(
-                            (new Date(el.timeEnd) - new Date(el.timeStart)) /
-                              3600000
-                          )}
-                          H
-                        </h1>
-                      </div>
-                      <div className="flex justify-center items-center  w-[30px] h-[30px] rounded-[5px] hover:bg-[#ff2800]  transition-all">
-                        <Link href={`/item/${el.id}`}>
-                          {" "}
-                          <FaHammer
-                            size={25}
-                            className="text-white cursor-pointer"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-[15px] text-[#333333]">
-                    <h1 className="cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]">
-                      {el.name}
-                    </h1>
-                    <h1 className="mb-[10px] font-[500]">
-                      2018 · 121 787 km · 2 995 cm3 · Diesel
-                    </h1>
+{data.length===0&&<div>No Product Found</div>}
+    </div>
+    {flex?
+    <div className='flex justify-start gap-[17px] mt-[3%] flex-wrap w-full ' >
+    
+   
+    {data.map((el,i)=>(
+    
+    <div className=' w-[32%] bg-white rounded-3xl mb-[17px]  shadow-2xl'>
+            <div style={{background:`url(${el.images[0]})`,backgroundSize:'cover'}}  className='w-full h-[190px]  rounded-t-3xl overflow-hidden'>
+            <div className="flex justify-between mt-[56%]">
+            <div>
+                <h1 className="text-white font-[700]">{Math.floor((new Date(el.timeEnd) - new Date(el.timeStart))/3600000)}H</h1>
+            </div>
+            <div className="flex justify-center items-center  w-[30px] h-[30px] rounded-[5px] hover:bg-[#ff2800]  transition-all">
+            <Link href={`/item/${el.id}`}> <FaHammer   size={25} className='text-white cursor-pointer'
+            
+            /></Link>
+            </div>
 
-                    <h1 className="font-[300] text-[13px]">Auction Ended</h1>
-                  </div>
+            </div>
+            </div>
+            <div className='p-[15px] text-[#333333]'>
+            <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'>{el.name}</h1>
+            <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
+            
+
+            <h1 className='font-[300] text-[13px]'>Auction Ended</h1>
+            </div>
+
+    </div>
+    
+ 
+    ))}</div>:<div className=" w-full h-auto mt-[2%] flex flex-wrap">
+    {data.map((el,i)=>(
+    <div className="w-full h-[198px]   rounded-[10px] bg-white flex shadow-2xl mb-[5%]">
+        <div 
+        className="w-[313px] h-full rounded-l-[10px] inline-block "
+        style={{background:`url(${el.images[0]})`,backgroundSize:'cover'}}>
+            <div className="flex justify-center items-center rounded-[10px] w-[100px] h-[40px]  ml-[5%]  backdrop-blur-[50px]	text-white">
+                <h1 >{Math.floor((new Date(el.timeEnd) - new Date(el.timeStart))/3600000)}H</h1>
                 </div>
-              ))}
+        </div>
+        <div className="mt-[5%] ml-[5%]">
+        <Link href={`/item/${el.id}`}> <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'>{el.name}</h1>
+        </Link>
+        <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
+        <h1 className='font-[300] text-[13px]'>Auction Ended</h1>
+        <div className="flex justify-center items-center  w-[30px] h-[30px] rounded-[5px] hover:bg-[#ff2800] hover:text-white ml-[170%]  transition-all">
+        <Link href={`/item/${el.id}`}> <FaHammer   size={25} className='text-black cursor-pointer hover:text-white'/>
+          </Link>
             </div>
-          ) : (
-            <div className=" w-full h-auto mt-[2%] flex flex-wrap">
-              {data.map((el, i) => (
-                <div className="w-full h-[198px]   rounded-[10px] bg-white flex shadow-2xl mb-[5%]">
-                  <div
-                    className="w-[313px] h-full rounded-l-[10px] inline-block "
-                    style={{
-                      background: `url(${el.images[0]})`,
-                      backgroundSize: "cover",
-                    }}
-                  >
-                    <div className="flex justify-center items-center rounded-[10px] w-[100px] h-[40px]  ml-[5%]  backdrop-blur-[50px]	text-white">
-                      <h1>
-                        {Math.floor(
-                          (new Date(el.timeEnd) - new Date(el.timeStart)) /
-                            3600000
-                        )}
-                        H
-                      </h1>
-                    </div>
-                  </div>
-                  <div className="mt-[5%] ml-[5%]">
-                    <Link href={`/item/${el.id}`}>
-                      {" "}
-                      <h1 className="cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]">
-                        {el.name}
-                      </h1>
-                    </Link>
-                    <h1 className="mb-[10px] font-[500]">
-                      2018 · 121 787 km · 2 995 cm3 · Diesel
-                    </h1>
-                    <h1 className="font-[300] text-[13px]">Auction Ended</h1>
-                    <div className="flex justify-center items-center  w-[30px] h-[30px] rounded-[5px] hover:bg-[#ff2800] hover:text-white ml-[170%]  transition-all">
-                      <Link href={`/item/${el.id}`}>
-                        {" "}
-                        <FaHammer
-                          size={25}
-                          className="text-black cursor-pointer hover:text-white"
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-          <div className="flex gap-[2%] mb-[30px]">
-            <div
-              onClick={() => {
-                setIndex(index - 1);
-                handleLoadMore(index - 1);
-              }}
-              className=" w-[50px] h-[50px] rotate-180  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all"
-            >
-              →
-            </div>
-
-            <div
-              onClick={() => {
-                setIndex(1);
-                handleLoadMore(index);
-              }}
-              style={{
-                color: index === 1 ? "white" : "black",
-                backgroundColor: index === 1 ? "#ff2800" : "white",
-              }}
-              className=" shadow-2xl w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer"
-            >
-              1
-            </div>
-            <div
-              onClick={() => {
-                setIndex(2);
-                handleLoadMore(index);
-              }}
-              style={{
-                color: index === 2 ? "white" : "black",
-                backgroundColor: index === 2 ? "#ff2800" : "white",
-              }}
-              className=" w-[50px] h-[50px]  hover:text-white hover:bg-[#ff2800] rounded flex justify-center items-center cursor-pointer"
-            >
-              2
-            </div>
+        </div>
+    </div>))}
+    
+        </div>}
+        <div className="flex gap-[2%] mb-[30px]">
+        {index>1&&<div 
+    onClick={()=>{
+      setIndex(index-1)
+       handleLoadMore(index-1)
+    }}
+    className=" w-[50px] h-[50px] rotate-180  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>
+  }
+    <div 
+    onClick={()=>{
+      setIndex(1)
+      handleLoadMore(index)
+      }}
+    style={{color:index===1?'white':'black',backgroundColor:index===1?'#ff2800':'white'}}
+    className=" shadow-2xl w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer">1</div>
+    <div 
+    onClick={()=>{
+      setIndex(2)
+      handleLoadMore(index)
+      }}
+    style={{color:index===2?'white':'black',backgroundColor:index===2?'#ff2800':'white'}}
+    className=" w-[50px] h-[50px]  hover:text-white hover:bg-[#ff2800] rounded flex justify-center items-center cursor-pointer">2</div>
 
             <div
               onClick={() => {
@@ -902,28 +979,21 @@ const Products = () => {
               3
             </div>
 
-            <div
-              onClick={() => {
-                setIndex(4);
-                handleLoadMore(index);
-              }}
-              style={{
-                color: index === 4 ? "white" : "black",
-                backgroundColor: index === 4 ? "#ff2800" : "white",
-              }}
-              className=" w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer"
-            >
-              4
-            </div>
-            <div
-              onClick={() => {
-                setIndex(index + 1), handleLoadMore(index + 1);
-              }}
-              className=" w-[50px] h-[50px]  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all"
-            >
-              →
-            </div>
-          </div>
+    <div 
+    onClick={()=>{
+      setIndex(4)
+      handleLoadMore(index)
+      }}
+    style={{color:index===4?'white':'black',backgroundColor:index===4?'#ff2800':'white'}}
+    className=" w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer">4</div>
+    {index<4&&<div 
+    onClick={()=>{setIndex(index+1),
+      handleLoadMore(index+1)
+    }}
+    className=" w-[50px] h-[50px]  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>
+  }
+    
+    </div>
         </div>
       </div>
     </>
