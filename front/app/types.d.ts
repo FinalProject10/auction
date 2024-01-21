@@ -11,6 +11,7 @@ interface Item {
       id: number;
       bidAmount: number;
     }[];
+    images: string[];
   }
 
   interface ItemsListProps {
@@ -19,9 +20,18 @@ interface Item {
 
 
   interface GalleryProps {
+    items: Item | { id: number; images: string[]; }[];
+
     items: {
       id: number;
       images: string[];
-      // ... other item properties
     }[];
+    
   }
+
+  interface CustomSpinProps {
+    loading: boolean;
+    color?: string;
+
+  }
+

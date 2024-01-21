@@ -10,14 +10,6 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
     setCurrentImage(image);
   };
 
-  // const removeActivatedClass = (parent: HTMLElement) => {
-  //   parent.childNodes.forEach((node) => {
-  //     if (node.childNodes[0].classList.contains("activated")) {
-  //       node.childNodes[0].classList.remove("activated");
-  //     }
-  //   });
-  // };
-
   return (
     <section className="gallery-holder hide-in-mobile">
       <section className="gallery">

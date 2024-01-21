@@ -12,7 +12,7 @@ const {
 const sellerRoutes = require("./routes/seller");
 const clientRoutes = require("./routes/client");
 const adminRoutes = require("./routes/admin");
-const ProductsRouter=require("./routes/products")
+const ProductsRouter = require("./routes/products");
 const itemsRoute = require("./routes/itemsRoute");
 const cors = require("cors");
 const app = express();
@@ -24,7 +24,7 @@ const PORT = 5000;
 app.use("/seller", sellerRoutes);
 app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
-app.use('/products',ProductsRouter)
+app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
 app.get('/getallusers',async(req,res)=>{
 let d=await Client.findAll()
@@ -34,7 +34,7 @@ res.status(200).json({total:d.length+s.length})
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
-
+///////////////////////////////
 // functions
 // createChatEngineUser();
 // GetorCreateUser();
