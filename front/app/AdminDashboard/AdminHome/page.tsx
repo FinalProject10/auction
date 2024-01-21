@@ -328,6 +328,38 @@ const HomePage = () => {
             <div>
 <div className="relative">
 <div className=" flex  rounded-md w-[800px] h-[50%] overflow-x-scroll ">
+
+{/* {cordoner.map((el, index) => (
+  <div key={index} style={{ "paddingRight": "10%" }}>
+<div className="container">
+
+	<table className="text-left">
+		<thead className="bg-white flex text-black w-full">
+			<tr className="flex w-full ">
+				<th className="p-4 w-1/4">
+        <MdVerticalAlignTop />
+              <a style={{ "marginLeft": "15px", 'fontSize': '20px' }}>
+                {el.seller.items[0].price} 
+              </a><br/> 
+              <img src={el.seller.image}
+                className="w-10 h-auto rounded-full"
+                style={{ "marginLeft": "0%" }} alt={`${el.seller.name}'s profile`} />
+              </th>
+			</tr>
+		</thead>
+		<tbody className="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" style={{"height": "50vh;"}}>
+			<tr className="flex w-full mb-4">
+		tr
+			</tr>
+      <tr className="flex w-full mb-4">
+		tr
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>
+))} */}
+
 {cordoner.map((el, index) => (
   <div key={index} style={{ "paddingRight": "10%" }}>
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
