@@ -11,33 +11,43 @@ import { useRouter } from 'next/navigation';
 import cloudinary from 'cloudinary-core';
 import { useState } from 'react'
 import { CldImage } from 'next-cloudinary';
-
+import { Form } from 'antd'
+// import './env.local'
 const SecondStep = () => {
   const router=useRouter()
   const [cin, setCin] = useState("");
   const [grise,setGrise]=useState("")
-  const add=()=>{
-    axios.post(`http://localhost:5000/seller/register`,{batinda:grise,cinNumb:cin})
-    .then(r=>router.push('/register/seller/thirdStep')
-    ).catch(err=>console.log(err))
-  }
-// const cloudinaryInstance = cloudinary.Cloudinary.new({ cloud_name: 'djptnmqtl' });
-  // cloudinaryInstance.upload(selectedFile, (error:any, result:any) => {
-  //   if (error) {
-  //     console.error(error);
-  //     alert('Error uploading image. Please try again.');
-  //   } else {
-  //     console.log(result);
-  //           const imageUrl = result.secure_url;
-  //     alert('Image uploaded successfully!\n' + imageUrl);
-  //   }
-  // });
+  // const add=()=>{
+  //   axios.post(`http://localhost:5000/seller/registerSec`,{batinda:grise,cinNum:cin})
+  //   .then(r=>router.push('/register/seller/thirdStep')
+  //   ).catch(err=>console.log(err))
+  // }
+ 
+const addCin=()=>{
+  const id=localStorage.getItem('id')
+  const form = new FormData()
+  form.append('img',cin)
+  form.append('img',grise)
+  form.append('id',id)
+  axios.post(`http://localhost:5000/cloudinary/get`,form).then(r=>{
+   console.log(r.data)
+    axios.post(`http://localhost:5000/seller/registerSec/${id}`,{batinda:r.data[1].url,cinNum:r.data[0].url})
+    .then(r=>router.push('/register/seller/thirdStep')).catch(err=>console.log(err))
+  })
+  .catch(err=>console.log(err))
+  
+ 
+}
+const addBatinda=()=>{
+
+}
 
   return (
     <div>
+
         <img className='absolute right-0 h-full w-1/2' src="https://static01.nyt.com/images/2023/09/21/multimedia/21sp-cli-stadium-02-mljv/21sp-cli-stadium-02-mljv-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="" />
-        <Image  src={img1} className='absolute right-[17.25rem] rounded-xl top-[6rem] z-30'
-        alt=''/>
+        {/* <Image  src={img1} className='absolute right-[17.25rem] rounded-xl top-[6rem] z-30'
+        alt=''/> */}
         <div className='flex mt-20 ml-40 absolute'>
         <IoPersonCircle size={45} color="#00cf54"/>
         <hr className='w-40 text-gray-400 h-1 bg-black mt-5'/>
@@ -53,13 +63,16 @@ const SecondStep = () => {
         <h1 className='text-[45px] mb-10'>Sign-up</h1>
         <div className='w-[500px] h-[150px] mb-10 bg-gray-100 flex justify-center items-center'>
         <div>
-        <h1 className='font-bold text-[20px]'>Cin Image</h1>
+        
        <input 
        type="file"
+
        onChange={(e:any)=>{
-        console.log(e) 
-        setCin(e.target.value)
-      }} />
+        setCin(e.target.files[0])
+       console.log("1",e.target.files)
+        console.log("2",e.target.value)
+       
+      }}  /><h1 className='font-bold text-[20px]'>Cin Image</h1>
 
       </div>
       </div>
@@ -68,15 +81,17 @@ const SecondStep = () => {
       <h1 className='font-bold text-[20px]'>Car Paper (carte grise)</h1>
       <input type="file" 
        onChange={(e:any)=>{
-        console.log(e) 
-         setGrise(e.target.value)
+       
+         setGrise(e.target.files[0])
       }} />
       </div>
        </div>
+      
        <button className="cta mt-[5%] ml-[80%]"
    
    onClick={()=>{
-    add()}}
+    addCin()
+  }}
    >
   <span className="hover-underline-animation"> Next </span>
   <svg

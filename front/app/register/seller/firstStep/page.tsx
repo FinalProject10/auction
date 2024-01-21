@@ -31,7 +31,10 @@ const FirstStep = () => {
 
   const add=()=>{
     axios.post(`http://localhost:5000/seller/register`,{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
-    .then(r=>{router.push('/register/seller/secondStep')}).catch(err=>setErr(err.response.data['err']))
+    .then(r=>{
+      console.log(r.data)
+      localStorage.setItem('id',r.data.id)
+      router.push('/register/seller/secondStep')}).catch(err=>{if(err.response) setErr(err.response.data['err'])})
   }
   
   return (
