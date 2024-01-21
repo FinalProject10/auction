@@ -13,7 +13,6 @@ const ItemDescrption = dynamic(
   () => import("../(itemComponents)/itemDescrption")
 );
 const ItemSidebar = dynamic(() => import("../(itemComponents)/itemSidebar"));
-
 import axios from "axios";
 const Item = ({ params }) => {
   const [items, setItems] = useState<Item[]>([]);
