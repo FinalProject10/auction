@@ -48,7 +48,7 @@ function AuctionHistory({ items, timeStart, timeEnd, price }) {
           {data.map((item, index) => (
             <tr key={index}>
               <th>
-                {item?.name}" "{item?.lastName}
+                {item?.name} {item?.lastName}
               </th>
               <td>{formatDateTime(items[index]?.updatedAt)}</td>
               <td>{items[index]?.bidAmount}$</td>

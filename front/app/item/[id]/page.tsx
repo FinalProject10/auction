@@ -12,7 +12,6 @@ const ItemDescrption = dynamic(
   () => import("../(itemComponents)/itemDescrption")
 );
 const ItemSidebar = dynamic(() => import("../(itemComponents)/itemSidebar"));
-
 import axios from "axios";
 const Item = ({ params }) => {
   console.log(params)
@@ -45,7 +44,6 @@ const Item = ({ params }) => {
   return (
     <>
       {/* <Loading loading={loading} /> */}
-
       {loading ? (
         <>
           {/* <Player
