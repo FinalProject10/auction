@@ -36,11 +36,10 @@ const Navbar = () => {
         <h1 className='mt-[1%] cursor-pointer hover:text-[#ff2800] transition ease-in-out delay-50'
         onMouseEnter={()=>{setPages(true);setHome(false);setPlatform(false);setShop(false)}}
         >Pages</h1>
-        <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'>Get In Touch</Link>
-        <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'>Favorites</Link>
-        <FaBasketShopping size={25} className='hover:text-[#ff2800] ml-[10%] mt-[1%] cursor-pointer'
+        <Link href={'/contactus'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'>Get In Touch</Link>
+       <Link className='hover:text-[#ff2800] ml-[20%] mt-[1%] cursor-pointer' href={'/cart'}> <FaBasketShopping size={25} 
         onMouseEnter={()=>setCart(true)}/>
-
+</Link>
         <button className='text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:transition ease-in-out delay-50 '>Sell Now</button>
         </div>
         
@@ -128,12 +127,14 @@ const Navbar = () => {
            <Link href={'/cart'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Cart</h1></Link>
            <Link href={'/'}></Link> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>My Account</h1>
         </div>}
-        {pages&&<div className='text-[#333333] bg-white w-[170px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[40%] '
+        {pages&&<div className='text-[#333333] bg-white w-[170px] h-[165px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[40%] '
         onMouseLeave={()=>setPages(false)}
         >
-            <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>How It Works</h1>
+           <Link href={'/Howitwork'}> <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>How It Works</h1></Link>
            <Link href={'/membershipCard'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Pricing Services</h1></Link>
           <Link href={'/aboutUs'}>  <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>About us</h1></Link>
+          <Link href={'/faq'}>  <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>faq</h1></Link>
+
             <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>404 Not Found</h1>
         </div>}
         {cart&&

@@ -18,6 +18,7 @@ const Page = () => {
   const [items, setItems] = useState([]); // Make sure items is initialized correctly
   const[data,setData]=useState([])
   useEffect(() => {
+  
    axios.get(`http://localhost:5000/seller/profile/1`).then(r=>setData(r.data)).catch(err=>console.log(err))
   }, []);
   
@@ -79,7 +80,7 @@ const Page = () => {
         break;
     }
 
-    setitems(sorteditems);
+    setItems(sorteditems);
   };
   const divStyle = {
   position :"center",  
