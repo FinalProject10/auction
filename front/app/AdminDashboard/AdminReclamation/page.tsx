@@ -39,7 +39,7 @@ const Inbox = () => {
   return (
     <div  className="flex-row lg:flex">
     <SideBare/>
-    <div className="container mx-auto mt-4 lg:mt-12">
+    <div className="container mx-auto mt-4 lg:mt-12 overflow-y-auto">
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 ">
    
 <main className="flex w-[100%] h-[10%] ml-[5%] mt-[-2%] ">
