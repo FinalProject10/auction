@@ -1,21 +1,42 @@
+
 .container{
-    width:50%;
-    margin-left:30%;
-}
-.container .header{
-    display:flex;
+    width:auto;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-around;
+    margin-left:20%;
+}
+.side{
+  height:100%;
+  width: 50%;
+
+}
+.main{
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  flex: 1;
+}
+.main .header{
+    /* display:flex;
+    align-items: center;
+    justify-content: space-between; */
     /* width:50%; */
-    margin-left:30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* margin-left:30%; */
     box-shadow: 3px 3px 3px 3px #EDEDED;
     line-height: 20px;
     margin-bottom: 15px;
-    
+    width: 100%;
 }
+
 .stats{
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: space-start;
     color:grey;
     min-height:16px;
     margin-left:5px;
@@ -30,30 +51,33 @@
     padding-left:5px ;
 }
 .add-product-button {
-    background-color: #FF2800;
-    color: white;
-    padding: 8px ;
-    font-size: 16px;
-    font-weight: 500;
-   width: auto;
-    border-radius: 5px;
-    cursor: pointer;
+  min-width: 10%;
+  margin-top:20px;
+  background-color: #FF2800;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
     margin-bottom: 15px;
+    margin-right: 15%;
   }
   
   .add-product-button:hover {
+
     background-color: white;
     color: black;
     border: 2px solid black;
     transition: background-color 0.5s, color 0.5s, border 0.5s;
   }
   .filter-reset-search{
-   width:auto;
-    margin-top:70px;
+  margin-top: 20px;
     
     display: flex;
     align-items:center;
-    justify-content:space-evenly;
+    justify-content:space-between;
   }
   .filter-reset-search .filter-reset{
     display: flex;
@@ -80,6 +104,12 @@
     text-transform: capitalize;
     border: 2px solid ;
     border-radius: 5px ;
+  }
+  .apply{
+    width:100%;
+    margin-top:30px;
+    margin-bottom: 30px;
+    margin-left: 0;
   }
   .nice-input {
     padding: 10px;

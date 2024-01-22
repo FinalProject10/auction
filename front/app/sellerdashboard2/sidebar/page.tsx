@@ -21,7 +21,7 @@ export default function SideBar(props:SideProps) {
             <div className="dokan-dash-sidebar" style={{height:`${h} px`}}>
                 <ul className="dokan-dashboard-menu">
                     <li className="active dashboard">
-                        <Link href="/sellerdashboard2">
+                        <Link href="sellerdashboard2">
                             <i className="fas fa-tachometer-alt"></i> Dashboard
                         </Link>
                     </li>
@@ -32,19 +32,19 @@ export default function SideBar(props:SideProps) {
                         </Link>
                     </li>
                     <li className="orders">
-                        <Link href="/orders">
+                        <Link href="orders">
                             <ShoppingCartIcon />
                             Orders
                         </Link>
                     </li>
                     <li className="withdraw">
-                        <Link href="/sellerdashboard2/withdraw">
+                        <Link href="sellerdashboard2/withdraw">
                             <FileUploadIcon />
                             Withdraw
                         </Link>
                     </li>
                     <li className="settings has-submenu">
-                        <Link href="#">
+                        <Link href="/sellerdashboard2/edit/account">
                             <SettingsIcon />
                             Settings <ChevronRightIcon className="menu-dropdown" />
                         </Link>
@@ -61,7 +61,7 @@ export default function SideBar(props:SideProps) {
                             </a>
                         </div>
                         <div className="icon-item" >
-                            <Link href="/sellerdashboard2/edit-account">
+                            <Link href="#">
                                 <PowerSettingsNewIcon />
                             </Link>
                         </div>

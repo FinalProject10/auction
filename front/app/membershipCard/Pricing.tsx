@@ -2,6 +2,8 @@
 import React, { FC, useState } from 'react';
 import { FcInfo } from 'react-icons/fc';
 import { motion } from 'framer-motion';
+import Navbar from '../home/navbar.tsx'
+import Footer from '../footer/Footer.tsx'
 import { fadeIn } from './fadeIn';
 
 interface Package {
@@ -65,8 +67,10 @@ const Pricing: FC = () => {
 
 
   return (
-    <div className="py-10 md:px-14 p-4 max-w-screen-2xl mx-auto" id="pricing">
+    <div id="pricing">
+      <div className='nav'>   <Navbar/> </div>
       <div className="text-center">
+      
         <div className="bg-gray-100 p-8 rounded-lg shadow-lg mb-8">
           <h2 className="md:text-5xl text-2xl font-extrabold text-gray-900 mb-2">Pricing Services</h2>
           <p className="text-tertiary md:w-1/3 mx-auto">

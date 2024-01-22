@@ -1,10 +1,11 @@
 "use client"
+import './page.css'
+
 import React,{useState} from "react"
 import Navbar from "../../home/navbar";
 import Header from "../header/page";
 import Footer from "../../footer/Footer";
 import SideBar from "../sidebar/page";
-import './page.css'
 import { Edit, FormatBold, FormatItalic, FormatUnderlined,
      FormatAlignLeft, FormatAlignCenter, FormatAlignRight
      , FormatAlignJustify } from '@mui/icons-material';
@@ -18,6 +19,9 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
         const showOptions=()=>{
             setShow(!show)
         }
+        const saveProduct=()=>{
+          alert ('product saved successfully!')
+        }
         const generateRandomOptions = () => {
             const options = [];
             for (let i = 1; i <= 20; i++) {
@@ -29,6 +33,7 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
         <div className="comp">
             <Navbar/>
     <Header/>
+
     <div className="container">
    <div className="sidebar">
             <SideBar h= {1756} />
@@ -207,7 +212,7 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
               </div>
   </div>}
    
-  <div className="save-product">
+  <div className="save-product" onClick={()=>{saveProduct()}}>
     <button>Save Product</button>
   </div>
   </div>

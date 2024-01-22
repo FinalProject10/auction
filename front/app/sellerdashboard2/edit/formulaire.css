@@ -2,8 +2,8 @@
 display: flex;
 align-items: center;
 justify-content: space-between;
- width: 940px;
- height:817
+ width: auto;
+ height:auto
 }
 
 .sidebar {
@@ -17,7 +17,7 @@ justify-content: space-between;
 
 .form-container {
   
-  margin: 20px; /* Adjusted margin for the form container */
+  margin: 20px; 
   margin-left:15%;
   
   width:755px;
@@ -26,8 +26,8 @@ justify-content: space-between;
   box-sizing: border-box;
 }
 .header-container{
-  letter-spacing: 1;
-  font-size: 26px;
+  letter-spacing: 2;
+  font-size: 30px;
   font-weight: 1000;
 }
 

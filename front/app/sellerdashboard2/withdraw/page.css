@@ -6,6 +6,12 @@
     margin-top:20px;
     margin-bottom: 20px;
 }
+.withdraw-button:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
 .dokan-panel-default {
     border-color: #ddd;
     margin-bottom: 20px;
