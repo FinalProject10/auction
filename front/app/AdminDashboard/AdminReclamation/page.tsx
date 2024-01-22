@@ -8,6 +8,7 @@ import axios from 'axios'
 const Inbox = () => {
   const [reclamtion,setReclamatio]= useState <[]>([])
   const [mess,setMess] =useState(null)
+  const [refresh , setRefrech]= useState (true)
 
   useEffect(() => {
     axios
@@ -20,17 +21,25 @@ const Inbox = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-  const Msg=(email:string,image:string ,name:string,lastName:string,message:string)=>{
-    setMess({email,image,name,lastName,message})
+  }, [refresh]);
+  const remove =async (id:number) => {
+    try {
+      await axios.delete(`http://localhost:5000/dash/removeRec/${id}`)
+      setRefrech(!refresh)
+    } catch  (err) {
+      console.log(err);
+    } 
+  }
+  const Msg=(id:number ,email:string,image:string ,name:string,lastName:string,message:string)=>{
+    setMess({id,email,image,name,lastName,message})
   }
   return (
     <div  className="flex-row lg:flex">
     <SideBare/>
     <div className="container mx-auto mt-4 lg:mt-12">
-    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 ">
    
-<main className="flex w-[100%] h-[10%] shadow-lg rounded-3xl ml-[5%] mt-[-2%] ">
+<main className="flex w-[100%] h-[10%] ml-[5%] mt-[-2%] ">
   
     <section className="flex flex-col pt-3 w-4/12 bg-gray-50 h-full ">
       <label className="px-3">
@@ -38,7 +47,7 @@ const Inbox = () => {
           placeholder="Search..." />
       </label>
       {reclamtion.map((el=>(
-        <ul className="mt-6 overflow-y-scroll" onClick={()=>{Msg(el.Client.image,
+        <ul className="mt-6 overflow-y-scroll" onClick={()=>{Msg(el.Client.id,el.Client.image,
           el.Client.email,el.Client.name,el.Client.lastName,el.message)}}>
         <li className="py-5 border-b px-3 transition hover:bg-indigo-100">
           <a href="#" className="flex justify-between items-center">
@@ -61,15 +70,6 @@ const Inbox = () => {
           </div>
         </div>
         <div>
-          <ul className="flex text-gray-400 space-x-4">
-            <li className="w-6 h-6">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-            </li>
-            
-          </ul>
         </div>
       </div>
       <section>

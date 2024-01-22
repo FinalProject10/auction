@@ -7,6 +7,7 @@ import { GiMoneyStack } from "react-icons/gi";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { FaInbox } from "react-icons/fa6";
 import { FaHome } from "react-icons/fa";
+import { FaStore } from "react-icons/fa";
 import Link from 'next/link';
 
 const sideBare = () => {
@@ -61,14 +62,14 @@ const sideBare = () => {
             </a>
             </div> 
             </Link>
-            {/* <Link href="/AdminDashboard/AdminSellerBasic">
+            <Link href="/AdminDashboard/listOfSeller">
             <div className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ml-1">
-            <RiVerifiedBadgeFill />
+            <FaStore />
           <a style={{"margin-left":"15px"}}> 
-                Basic client
+                list of seller
             </a>
             </div> 
-            </Link> */}
+            </Link>
             <Link href="/AdminDashboard/AdminSelerVip">
             <div  className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ml-1">
             <FaCrown/>

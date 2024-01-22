@@ -15,7 +15,11 @@ dashboardRouter.get('/getAll',dashctr.getAllPro)
 dashboardRouter.get('/cantBid',dashctr.cantBid)
 dashboardRouter.get('/canBid',dashctr.canBid)
 dashboardRouter.delete('/remove/:id',dashctr.remove)
+dashboardRouter.delete('/removeSel/:id',dashctr.removeSel)
+dashboardRouter.delete('/removeProduct/:id',dashctr.removePro)
+dashboardRouter.delete('/removeRec/:id',dashctr.removerec)
 dashboardRouter.get('/vip',dashctr.vip)
+dashboardRouter.get('/getAllProduc',dashctr.getAllProduct)
 
 
 

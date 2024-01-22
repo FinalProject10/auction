@@ -5,6 +5,8 @@ const Item =require ('../models/items')
 const Membership=require('../models/memberships')
 const Reclamation = require('../models/reclamation')
 const bid =require ('../models/bid')
+const { where } = require('sequelize')
+const Items = require('../models/items')
 module.exports.addAdmin = async (req, res) => {
     const { name, password, email, lastName, image, telNumb, cinNum } = req.body;
 
@@ -89,12 +91,13 @@ module.exports.getMembership = async (req, res) => {
 }
 module.exports.getCord = (req, res) => { 
   Seller.findAll({
-    attributes: ['name','image'],
+    attributes: ['name','lastName','image'],
     include: [
       {
         model: Item,
         attributes: ['name', 'images','price']
       },
+    
     ],
   })
     .then((sellersWithItems) => {
@@ -250,5 +253,48 @@ module.exports.getRec = async (req, res) => {
   } catch (error) {
     console.error(error); 
     res.status(500).json({ error: 'Internal Server Error',details: error.message });
+  }
+};
+module.exports.getAllProduct= async(req,res)=>{
+  try {
+    const pr = await Item.findAll()
+
+
+    res.json(pr)
+  }catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+}
+module.exports.removerec = async (req, res) => {
+  try {
+    const re = await Reclamation.destroy({
+      where: { id: req.params.id } 
+    });
+
+    if (re) {
+      res.status(200).send('reclamation deleted');
+    } else {
+      res.status(404).send('reclamation not found');
+    }
+  } catch (error) {
+    console.error(error); 
+    res.status(500).send(error.message);
+  }
+};
+module.exports.removeSel = async (req, res) => {
+  try {
+    const sel = await Seller.destroy({
+      where: { id: req.params.id } 
+    });
+
+    if (sel) {
+      res.status(200).send('seller deleted');
+    } else {
+      res.status(404).send('seller not found');
+    }
+  } catch (error) {
+    console.error(error); 
+    res.status(500).send(error.message);
   }
 };

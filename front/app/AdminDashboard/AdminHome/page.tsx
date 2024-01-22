@@ -323,67 +323,35 @@ const HomePage = () => {
         </div>
       </div>
       
-      <div className="bg-white rounded-2xl float-left w-3/5 h-44 p-4 ml-1 mt-[] flex justify-between">
+      <div className="bg-white rounded-2xl float-left w-3/5 h-44 p-4 ml-1  flex justify-between" style={{    "width": "9%"}}>
   <div className='flex justify-between mt-[9%]'>
             <div>
 <div className="relative">
 <div className=" flex  rounded-md w-[800px] h-[50%] overflow-x-scroll ">
-
-{/* {cordoner.map((el, index) => (
-  <div key={index} style={{ "paddingRight": "10%" }}>
-<div className="container">
-
-	<table className="text-left">
-		<thead className="bg-white flex text-black w-full">
-			<tr className="flex w-full ">
-				<th className="p-4 w-1/4">
-        <MdVerticalAlignTop />
-              <a style={{ "marginLeft": "15px", 'fontSize': '20px' }}>
-                {el.seller.items[0].price} 
-              </a><br/> 
-              <img src={el.seller.image}
-                className="w-10 h-auto rounded-full"
-                style={{ "marginLeft": "0%" }} alt={`${el.seller.name}'s profile`} />
-              </th>
-			</tr>
-		</thead>
-		<tbody className="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" style={{"height": "50vh;"}}>
-			<tr className="flex w-full mb-4">
-		tr
-			</tr>
-      <tr className="flex w-full mb-4">
-		tr
-			</tr>
-		</tbody>
-	</table>
-</div>
-</div>
-))} */}
-
 {cordoner.map((el, index) => (
-  <div key={index} style={{ "paddingRight": "10%" }}>
+  <div key={index} style={{ "paddingRight": "0%" }}>
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
         <tr>
           <th scope="col" className="px-6 py-3">
             <div className="flex items-center">
-              <MdVerticalAlignTop />
               <a style={{ "marginLeft": "15px", 'fontSize': '20px' }}>
-                {el.seller.items[0].price}
+              
+             <center> <img src={el.seller.image}
+                className="w-10 h-auto rounded-full"
+                style={{ "marginLeft": "0%" }} alt={`${el.seller.name}'s profile`} />
+              <span className="ml-2">{el.seller.name}</span></center>
+             
+            
               </a>
             </div>
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" style={{"height": "20vh"}}>
         <tr className="bg-white dark:bg-gray-800">
           <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            <div className="flex items-center">
-              <img src={el.seller.image}
-                className="w-10 h-auto rounded-full"
-                style={{ "marginLeft": "0%" }} alt={`${el.seller.name}'s profile`} />
-              <span className="ml-2">{el.seller.name}</span>
-            </div>
+          
           </th>
         </tr>
 
@@ -392,12 +360,13 @@ const HomePage = () => {
             <tr className="bg-white dark:bg-gray-800">
               <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 <img src={item.images[0]}
-                  style={{ "width": "100%" }} alt={item.name} />
+                  style={{ "width": "100%" }} alt="" />
               </th>
             </tr>
             <tr className="bg-white dark:bg-gray-800">
               <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <span className='ml-[8%]'>{item.name}</span>
+                <span className='ml-[8%]'>{item.name}</span><br/>
+                <span className='ml-[8%]'>{item.price}</span>
               </th>
             </tr>
           </React.Fragment>
@@ -408,286 +377,7 @@ const HomePage = () => {
 ))}
 
  
-    {/* <div style={{"padding-right": "10%"}}>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-            <tr>
-                <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center ">
-                        <MdVerticalAlignTop />
-                        <a style={{ "margin-left": "15px", 'fontSize': '20px' }}>
-                            12.452
-                        </a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div className="flex items-center">
-                        <img src="https://avatars.githubusercontent.com/u/141127569?v=4"
-                            className="w-10 h-auto rounded-full"
-                            style={{ "marginLeft": "0%" }} />
-                        <span className="ml-2">salmen khlifi</span>
-                    </div>
-                </th>
-            </tr>
-
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="https://www.bmw-tunisia.com/content/dam/bmw/common/all-models/x-series/x6/2023/navigation/bmw-x-series-x6-m60i-modelfinder.png.asset.1675183272938.png"
-                        style={{ "width": "100%" }} />
-                </th>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <span className='ml-[8%]'>BMW X</span>
-                </th>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div style={{"padding-right": "10%"}}>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-            <tr>
-                <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center ">
-                        <MdVerticalAlignTop />
-                        <a style={{ "margin-left": "15px", 'fontSize': '20px' }}>
-                            12.452
-                        </a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div className="flex items-center">
-                        <img src="https://avatars.githubusercontent.com/u/141127569?v=4"
-                            className="w-10 h-auto rounded-full"
-                            style={{ "marginLeft": "0%" }} />
-                        <span className="ml-2">salmen khlifi</span>
-                    </div>
-                </th>
-            </tr>
-
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="https://www.bmw-tunisia.com/content/dam/bmw/common/all-models/x-series/x6/2023/navigation/bmw-x-series-x6-m60i-modelfinder.png.asset.1675183272938.png"
-                        style={{ "width": "100%" }} />
-                </th>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <span className='ml-[8%]'>BMW X</span>
-                </th>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div style={{"padding-right": "10%"}}>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-            <tr>
-                <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center ">
-                        <MdVerticalAlignTop />
-                        <a style={{ "margin-left": "15px", 'fontSize': '20px' }}>
-                            12.452
-                        </a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div className="flex items-center">
-                        <img src="https://avatars.githubusercontent.com/u/141127569?v=4"
-                            className="w-10 h-auto rounded-full"
-                            style={{ "marginLeft": "0%" }} />
-                        <span className="ml-2">salmen khlifi</span>
-                    </div>
-                </th>
-            </tr>
-
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="https://www.bmw-tunisia.com/content/dam/bmw/common/all-models/x-series/x6/2023/navigation/bmw-x-series-x6-m60i-modelfinder.png.asset.1675183272938.png"
-                        style={{ "width": "100%" }} />
-                </th>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <span className='ml-[8%]'>BMW X</span>
-                </th>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div style={{"padding-right": "10%"}}>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-            <tr>
-                <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center ">
-                        <MdVerticalAlignTop />
-                        <a style={{ "margin-left": "15px", 'fontSize': '20px' }}>
-                            12.452
-                        </a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div className="flex items-center">
-                        <img src="https://avatars.githubusercontent.com/u/141127569?v=4"
-                            className="w-10 h-auto rounded-full"
-                            style={{ "marginLeft": "0%" }} />
-                        <span className="ml-2">salmen khlifi</span>
-                    </div>
-                </th>
-            </tr>
-
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="https://www.bmw-tunisia.com/content/dam/bmw/common/all-models/x-series/x6/2023/navigation/bmw-x-series-x6-m60i-modelfinder.png.asset.1675183272938.png"
-                        style={{ "width": "100%" }} />
-                </th>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <span className='ml-[8%]'>BMW X</span>
-                </th>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div style={{"padding-right": "10%"}}>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-            <tr>
-                <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center ">
-                        <MdVerticalAlignTop />
-                        <a style={{ "margin-left": "15px", 'fontSize': '20px' }}>
-                            12.452
-                        </a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div className="flex items-center">
-                        <img src="https://avatars.githubusercontent.com/u/141127569?v=4"
-                            className="w-10 h-auto rounded-full"
-                            style={{ "marginLeft": "0%" }} />
-                        <span className="ml-2">salmen khlifi</span>
-                    </div>
-                </th>
-            </tr>
-
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="https://www.bmw-tunisia.com/content/dam/bmw/common/all-models/x-series/x6/2023/navigation/bmw-x-series-x6-m60i-modelfinder.png.asset.1675183272938.png"
-                        style={{ "width": "100%" }} />
-                </th>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <span className='ml-[8%]'>BMW X</span>
-                </th>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div style={{"padding-right": "10%"}}>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-            <tr>
-                <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center ">
-                        <MdVerticalAlignTop />
-                        <a style={{ "margin-left": "15px", 'fontSize': '20px' }}>
-                            12.452
-                        </a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div className="flex items-center">
-                        <img src="https://avatars.githubusercontent.com/u/141127569?v=4"
-                            className="w-10 h-auto rounded-full"
-                            style={{ "marginLeft": "0%" }} />
-                        <span className="ml-2">salmen khlifi</span>
-                    </div>
-                </th>
-            </tr>
-
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="https://www.bmw-tunisia.com/content/dam/bmw/common/all-models/x-series/x6/2023/navigation/bmw-x-series-x6-m60i-modelfinder.png.asset.1675183272938.png"
-                        style={{ "width": "100%" }} />
-                </th>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <span className='ml-[8%]'>BMW X</span>
-                </th>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <div style={{"padding-right": "10%"}}>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-            <tr>
-                <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center ">
-                        <MdVerticalAlignTop />
-                        <a style={{ "margin-left": "15px", 'fontSize': '20px' }}>
-                            12.452
-                        </a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div className="flex items-center">
-                        <img src="https://avatars.githubusercontent.com/u/141127569?v=4"
-                            className="w-10 h-auto rounded-full"
-                            style={{ "marginLeft": "0%" }} />
-                        <span className="ml-2">salmen khlifi</span>
-                    </div>
-                </th>
-            </tr>
-
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="https://www.bmw-tunisia.com/content/dam/bmw/common/all-models/x-series/x6/2023/navigation/bmw-x-series-x6-m60i-modelfinder.png.asset.1675183272938.png"
-                        style={{ "width": "100%" }} />
-                </th>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="px-6  font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <span className='ml-[8%]'>BMW X</span>
-                </th>
-            </tr>
-        </tbody>
-    </table>
-    </div> */}
+   
 </div>
 
 </div>
