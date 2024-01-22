@@ -1,51 +1,74 @@
-import "./page.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './page.css'
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import SettingsIcon from '@mui/icons-material/Settings';
-export default function SideBar(){
-    return(
-       <div>
-        <div className="dashboard-wrap">
-            <div className="dashboard-sidebar">
-                <div className="navigation">
-                    <ul className="menu">
-                        <li className="active dashboard">
-                            <a href="#">Dashboard</a>
-                        <FontAwesomeIcon
-                          icon="fas fa-tachometer-alt"
-                          className="red-icon h-6 w-6 float-start mx-1"
-                        />
-                        </li>
-                        
-                        <li className="">
-                            <a href="#">Products</a>
-                           < BusinessCenterIcon/>
-                        </li>
-                        <li className="">
-                            <a href="#">Orders</a>
-                            <ShoppingCartIcon/>
-                        </li>
-                        <li className="">
-                            <a href="#">Withdraw</a>
-                            <FileUploadIcon/>
-                        </li>
-                        <li className="">
-                            <a href="#">Withdraw</a>
-                            <FileUploadIcon/>
-                        </li>
-                        <li className="">
-                            <a href="#">Withdraw</a>
-                            <SettingsIcon/>
-                        </li>
-                       
-
-                    </ul>
-                </div>
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import Link from 'next/link';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+interface SideProps {
+    h:number
+}
+export default function SideBar(props:SideProps) {
+    
+   const h = props.h
+   
+    return (
+        
+        <div >
+            <div className="dokan-dash-sidebar" style={{height:`${h} px`}}>
+                <ul className="dokan-dashboard-menu">
+                    <li className="active dashboard">
+                        <Link href="sellerdashboard2">
+                            <i className="fas fa-tachometer-alt"></i> Dashboard
+                        </Link>
+                    </li>
+                    <li className="products">
+                        <Link href="/sellerdashboard2/products">
+                            <BusinessCenterIcon />
+                            Products
+                        </Link>
+                    </li>
+                    <li className="orders">
+                        <Link href="orders">
+                            <ShoppingCartIcon />
+                            Orders
+                        </Link>
+                    </li>
+                    <li className="withdraw">
+                        <Link href="sellerdashboard2/withdraw">
+                            <FileUploadIcon />
+                            Withdraw
+                        </Link>
+                    </li>
+                    <li className="settings has-submenu">
+                        <Link href="/sellerdashboard2/edit/account">
+                            <SettingsIcon />
+                            Settings <ChevronRightIcon className="menu-dropdown" />
+                        </Link>
+                    </li>
+                    <li className="icons-container">
+                        <div className="icon-item" id='icon-item1'>
+                            <Link href="#">
+                                <BusinessCenterIcon />
+                            </Link>
+                        </div>
+                        <div className="icon-item" >
+                            <a href="#power-settings">
+                                <FileUploadIcon />
+                            </a>
+                        </div>
+                        <div className="icon-item" >
+                            <Link href="#">
+                                <PowerSettingsNewIcon />
+                            </Link>
+                        </div>
+                    </li>
+         
+                </ul>
             </div>
-            <div className="dashboard-content"></div>
         </div>
-       </div>
-    )
+    );
 }
