@@ -1,17 +1,20 @@
 import React from 'react';
+
 import './ourproduct.css';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import Link from 'next/link';
 
-const Products: React.FC = () => {
-  return (
+const OurProducts: React.FC = () => {
+  return (<div className="container">
+   
     <div className="my-orders-list">
       <div className="list-header">
         <div className="txt">
       < BusinessCenterIcon/>
-        <h2>Products</h2> 
+        <h2 style={{color:'white'}} >Products</h2> 
         </div>
         <div className="add-product-btn">
-            <p>+ add new product</p>
+            <Link  href='/sellerdashboard2/addproduct'>+ add new product</Link>
         </div>
       
       </div>
@@ -33,6 +36,7 @@ const Products: React.FC = () => {
       </div>
       
     </div>
+    </div>
   );
 };
-export default Products
+export default OurProducts

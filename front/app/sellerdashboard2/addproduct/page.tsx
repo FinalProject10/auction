@@ -1,5 +1,9 @@
 "use client"
 import React,{useState} from "react"
+import Navbar from "../../home/navbar";
+import Header from "../header/page";
+import Footer from "../../footer/Footer";
+import SideBar from "../sidebar/page";
 import './page.css'
 import { Edit, FormatBold, FormatItalic, FormatUnderlined,
      FormatAlignLeft, FormatAlignCenter, FormatAlignRight
@@ -22,7 +26,15 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
             return options;
           };
     return (
-        <div className="container">
+        <div className="comp">
+            <Navbar/>
+    <Header/>
+    <div className="container">
+   <div className="sidebar">
+            <SideBar h= {1756} />
+            </div>
+            
+        <div className="form">
             <div className="header">Add New Product</div>
             <div className="add-product">
                 <div className="title-tag">
@@ -189,14 +201,20 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
     <label >Purchase Note</label>
     <textarea id="textarea1" placeholder="Customer will get this info in their order email"></textarea>
   </div>
+  <div className="enable-reviews">
+                <input type="checkbox" className="enable" />
+                <label >enable reviews</label>
+              </div>
   </div>}
    
   <div className="save-product">
     <button>Save Product</button>
   </div>
+  </div>
             </div>
+            <Footer/>
 
-           
+            </div>
  
     )
 }

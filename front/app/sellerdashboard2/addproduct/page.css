@@ -1,7 +1,32 @@
+
+.comp .sidebar{
+    overflow: visible;
+height: 100%;
+margin-bottom:1200px;
+}
+.form{
+  flex: 1;
+  margin-left: 30px;
+}
 .container {
-    width: calc(100% - 250px);
+
         margin: 0 auto;
     padding: 20px;
+    height: auto;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+    width:auto;
+    height:auto;
+    margin: 0 auto; 
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); 
+  overflow: visible;
+   height: auto;
+    
+  }
+  .container:focus{
+    color: #ffffff;
+    background-color: #FF2800;
   }
   
   .header {
@@ -38,6 +63,10 @@
     max-width: 100%;
     color: #333;
   }
+  label::selection{
+    color: #ffffff;
+    background-color: #FF2800;
+  }
   
   input {
     width: 100%;
@@ -58,6 +87,7 @@
   .category-container {
     display: flex;
     align-items: center;
+    max-width: 50%;
   }
   
   .category-edit {
@@ -89,20 +119,22 @@
     margin-right: 3px;
   }
   
-  .checkbox-with-text input {
-    margin-right: 3px;
-  }
+  
   
   .auction {
     margin-top: 5px;
   }
   
   .image-container {
-    width: 30%;
+    width: 38%;
+    min-height: 300px;
     background-color: #fff;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 4px dashed #dddddd;
+    margin-bottom: 20px;
+    margin-left:20px;
+    overflow: hidden;
+    position: relative;
   }
   .dokan-input-group {
     display: flex;
@@ -316,3 +348,21 @@
     border: 2px solid ;
     border-radius: 5px 
   }
+  .enable-reviews {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 12px;
+  }
+  
+  .enable-reviews:not(:last-child) {
+    margin-right: 10px;
+    width: 10px;
+    height: 10px; 
+  }
+  
+  .enable-reviews input {
+    margin-right: 3px;
+  }
+  
+  

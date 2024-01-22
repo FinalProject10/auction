@@ -7,7 +7,7 @@ import "./page.css";
 const Orders = () => {
   return (
     <div className="container">
-        <SideBar/>
+        
     <div className="your-component-container">
       <div className="status-list">
         <div className="list-item">All (0)</div>

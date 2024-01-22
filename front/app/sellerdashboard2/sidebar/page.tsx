@@ -5,47 +5,55 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import Link from 'next/link';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-export default function SideBar() {
+interface SideProps {
+    h:number
+}
+export default function SideBar(props:SideProps) {
+    
+   const h = props.h
+   
     return (
-        <div>
-            <div className="dokan-dash-sidebar">
+        
+        <div >
+            <div className="dokan-dash-sidebar" style={{height:`${h} px`}}>
                 <ul className="dokan-dashboard-menu">
                     <li className="active dashboard">
-                        <a href="https://autobid.modeltheme.com/dashboard/">
+                        <Link href="/sellerdashboard2">
                             <i className="fas fa-tachometer-alt"></i> Dashboard
-                        </a>
+                        </Link>
                     </li>
                     <li className="products">
-                        <a href="https://autobid.modeltheme.com/dashboard/products/">
+                        <Link href="/sellerdashboard2/products">
                             <BusinessCenterIcon />
                             Products
-                        </a>
+                        </Link>
                     </li>
                     <li className="orders">
-                        <a href="https://autobid.modeltheme.com/dashboard/orders/">
+                        <Link href="/orders">
                             <ShoppingCartIcon />
                             Orders
-                        </a>
+                        </Link>
                     </li>
                     <li className="withdraw">
-                        <a href="https://autobid.modeltheme.com/dashboard/withdraw/">
+                        <Link href="/sellerdashboard2/withdraw">
                             <FileUploadIcon />
                             Withdraw
-                        </a>
+                        </Link>
                     </li>
                     <li className="settings has-submenu">
-                        <a href="https://autobid.modeltheme.com/dashboard/settings/store/">
+                        <Link href="#">
                             <SettingsIcon />
                             Settings <ChevronRightIcon className="menu-dropdown" />
-                        </a>
+                        </Link>
                     </li>
                     <li className="icons-container">
                         <div className="icon-item" id='icon-item1'>
-                            <a href="#">
+                            <Link href="#">
                                 <BusinessCenterIcon />
-                            </a>
+                            </Link>
                         </div>
                         <div className="icon-item" >
                             <a href="#power-settings">
@@ -53,9 +61,9 @@ export default function SideBar() {
                             </a>
                         </div>
                         <div className="icon-item" >
-                            <a href="#file-upload">
+                            <Link href="/sellerdashboard2/edit-account">
                                 <PowerSettingsNewIcon />
-                            </a>
+                            </Link>
                         </div>
                     </li>
          
