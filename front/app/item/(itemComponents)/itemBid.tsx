@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import AuctionTimer from "./auctionTimer";
 import socket from "./bid/socket";
+
 const ItemBid = ({ items }) => {
   const [quant, setQuant] = useState(
     items[0]?.bids[items[0]?.bids.length - 1]?.bidAmount
@@ -13,7 +14,26 @@ const ItemBid = ({ items }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [click, setClick] = useState(false);
+  const [hasUserBidded, setHasUserBidded] = useState(false); // Add this line
+  const [newBidMessageVisible, setNewBidMessageVisible] = useState(false);
+  console.log(hasUserBidded, "rrrrrrrrrrrrrrrrrr");
 
+  useEffect(() => {
+    const handleNewBidFromOthers = (data) => {
+      console.log("Received new bid from others", data);
+      setHasUserBidded(false);
+      setNewBidMessageVisible(true);
+
+      // Update the quantity with the new bid amount
+      setQuant(data.bidAmount);
+    };
+
+    socket.on("new_bid_from_others", handleNewBidFromOthers);
+
+    return () => {
+      socket.off("new_bid_from_others", handleNewBidFromOthers);
+    };
+  }, []);
   useEffect(() => {
     if (isPopupVisible) {
       const hideTimeout = setTimeout(() => {
@@ -25,6 +45,7 @@ const ItemBid = ({ items }) => {
       return () => clearTimeout(hideTimeout);
     }
   }, [isPopupVisible]);
+
   const adjustQuant = (amount) => {
     setQuant((prevQuant) => prevQuant + amount);
   };
@@ -208,6 +229,37 @@ const ItemBid = ({ items }) => {
                         <p className="text-sm">
                           Your message could not be sent. Please try again
                           later.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div>
+                {newBidMessageVisible && (
+                  <div
+                    className={`bg-blue-500 border-t-4 border-blue-700 rounded-b text-white px-4 py-3 shadow-md ${
+                      newBidMessageVisible
+                        ? "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                        : "hidden"
+                    }`}
+                    role="alert"
+                  >
+                    <div className="flex">
+                      <div className="py-1">
+                        <svg
+                          className="fill-current h-6 w-6 mr-4 cursor-pointer"
+                          onClick={() => setNewBidMessageVisible(false)}
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M6.7 6.7a1 1 0 011.4 0L10 8.6l1.9-1.9a1 1 0 111.4 1.4L11.4 10l1.9 1.9a1 1 0 01-1.4 1.4L10 11.4l-1.9 1.9a1 1 0 01-1.4-1.4L8.6 10 6.7 8.1a1 1 0 010-1.4z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-bold">New Bid!</p>
+                        <p className="text-sm">
+                          Someone placed a new bid on this item.
                         </p>
                       </div>
                     </div>
