@@ -1,6 +1,7 @@
 const Admin=require('../models/admin')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
+
 const secretKey="salim123"
 
 module.exports={

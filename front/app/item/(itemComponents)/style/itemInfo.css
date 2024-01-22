@@ -1,0 +1,52 @@
+.itemInfo {
+    display: flex;
+    /* width: 1000px; */
+    /* background-color: aliceblue; */
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Your global CSS file */
+.red-icon {
+    color: red;
+    font-size: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    /* Optional for removing spacing between cells */
+}
+
+td,
+th {
+    padding: 10px;
+    /* border: 1px solid rgb(202, 202, 202); */
+    /* Optional for visualizing cell borders */
+    width: 330px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    text-align: end;
+}
+
+th {
+    /* background-color: #f2f2f2; */
+}
+
+tr:nth-child(even) {
+    /* background-color: #f2f2f2; */
+}

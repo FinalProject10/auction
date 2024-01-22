@@ -1,9 +1,9 @@
 "use client"
+
 import { useState } from 'react'
 
-import Image from 'next/image'
-import Register from './register/seller/page'
 import { useRouter } from 'next/navigation'
+
 export default function Home() {
   const [client,setClient]=useState(false)
   const [seller,setSeller]=useState(false)
@@ -40,6 +40,7 @@ export default function Home() {
     onMouseEnter={()=>setSeller(true)}
     onMouseLeave={()=>setSeller(false)}
     className='absolute top-0 right-0 w-[50%] h-full' src="https://group.mercedes-benz.com/bilder/unternehmen/chancengleichheit-und-inklusion/diversity-inclusion-03-w1680xh945-cutout.jpg" alt="" />
+
    </div>
   )
 }

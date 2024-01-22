@@ -1,24 +1,24 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../database/index');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database/index");
 
-const Bid = sequelize.define('bid', {
+const Bid = sequelize.define("bid", {
   id: {
-    type:DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-autoIncrement:true
-},
- bidAmount: {
+    autoIncrement: true,
+  },
+  bidAmount: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  items_id:{
-    type:DataTypes.INTEGER,
-    allowNull:true
+  ClientId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
   },
-  clients_id:{
-    type:DataTypes.INTEGER,
-    allowNull:true
-  }
-},{timestamps: false});
+  itemId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+});
 
 module.exports = Bid;

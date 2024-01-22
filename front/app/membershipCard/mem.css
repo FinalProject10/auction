@@ -1,0 +1,71 @@
+/* Add this CSS in your stylesheets or directly in your component */
+
+#pricing {
+  font-family: 'Roboto', sans-serif; /* Use a professional font */
+  background-color: #f8f8f8; /* Subtle background color */
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Style the pricing section header */
+.bg-gray-100 {
+  background-color: #ffffff; /* White background */
+}
+
+/* Style the toggle switch */
+.inline-flex {
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+#toggle {
+  display: none; /* Hide the default checkbox */
+}
+
+/* Style the monthly and yearly labels */
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.w-14 {
+  width: 3.5rem;
+}
+
+/* Style the pricing packages grid */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* Style the individual pricing package cards */
+.border {
+  border: 1px solid #e5e5e5;
+  background-color: #ffffff;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect for pricing package cards */
+.border:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the notification icons */
+.text-xl {
+  font-size: 1.25rem;
+  color: #ff9800; /* Orange color */
+}
+
+/* Style the "Get Started" button */
+/* Style the Premium package for better visibility */
+.bg-black.text-white {
+  background-color: #333; 
+  color: #ffffff; 
+}
+.FcInfo {
+  color: #ff2800; /* Orange color */
+}
+.text-xl.notification-icon {
+  color: #ff2800 !important; /* Use !important to ensure the style is applied */
+}
