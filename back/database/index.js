@@ -1,11 +1,13 @@
 const { Sequelize, DataTypes } = require('sequelize');
-
-
-
-const sequelize = new Sequelize('final', 'root', '10519970', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
+const sequelize = new Sequelize(
+  "final",
+  "root",
+  "root",
+  {
+    host: "localhost",
+    dialect: "mysql",
+  }
+);
 sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.log(err))
 
 //  Sync the models with the database
