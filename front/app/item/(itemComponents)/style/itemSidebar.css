@@ -1,0 +1,48 @@
+/* body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+} */
+
+.sadContainer {
+    /* border: 1px solid #ccc; */
+    /* padding: 30px; */
+    /* background-color: #f2f2f2; */
+    max-width: 180px;
+    /* margin: 0 auto; */
+    margin: 10px
+}
+
+.name {
+    /* margin-bottom: 0px; */
+    margin-top: -36px;
+    /* position: absolute; */
+    /* z-index: 99; */
+    margin-left: 10px;
+
+    color: white;
+}
+
+.bidIcon {
+
+    margin-bottom: 0px;
+    margin-top: 60px;
+    /* position: absolute; */
+    /* z-index: 99; */
+    margin-left: 115px;
+
+    color: white;
+}
+
+/* h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+} */
+
+/* p {
+    font-size: 20px;
+    margin-bottom: 10px;
+} */
+.borderRadiu {
+    border-radius: 10px 10px 0 0;
+}
