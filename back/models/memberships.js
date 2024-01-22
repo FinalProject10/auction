@@ -17,6 +17,6 @@ const Memberships = sequelize.define('memberships', {
 }
 
 },{timestamps: false,
-tableName:'membership'});
+tableName:'memberships'});
 
 module.exports = Memberships;
