@@ -2,7 +2,8 @@
 import React from 'react'
 import "./cart.css"
 import Navbar from "../home/navbar"
-// import  NavBar  from '../navbar/NavBar'
+import { IoIosCard } from "react-icons/io";
+
 
 const Cart = () => {
   return (
@@ -29,7 +30,8 @@ const Cart = () => {
 </div>
 
     <div className="line-container"></div>
-<div className='acount_stat'>
+    <div className='boxWithShadow'>
+<IoIosCard className='icon' /> 
   <h5 className='text_cart'>Your cart is currently empty.</h5>
 </div>
 <button className='button_cart'>Return To Shop</button>
