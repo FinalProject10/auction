@@ -1,0 +1,131 @@
+.comp{
+    width: 1437px;
+height: 1533px;
+}
+.head{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    margin-top:222px;
+    margin-left:135px;
+    margin-right:135px;
+    width:auto;
+}
+.sidebar{
+    margin-left:135px;
+    margin-top:323px;
+}
+.sidebar-blocks{
+    display: inline-flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 8px;
+}
+.sidebar-blocks p{
+    color: var(--Text2, #000);
+
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px;
+}
+
+.container{
+ margin-top:323px;
+ margin-right:133px;
+ margin-left:434px;
+ margin-bottom:580px;
+width: 870px;
+height: auto;
+flex-shrink: 0;
+border-radius: 4px;
+background: var(--Primary, #FFF);
+
+box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.05);
+}
+.inputs-section{
+    margin-top:84px;
+    margin-left:80px;
+}
+.red-h1{
+    margin-top:40px;
+    margin-left:80px;
+    color: var(--Secondary-2, #DB4444);
+
+font-family: Poppins;
+
+font-style: normal;
+
+line-height: 28px; 
+}
+.password-change{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+.block{
+    display: inline-flex;
+align-items: flex-start;
+gap: 50px;
+}
+.label-input{
+  
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 8px;
+
+}
+.label-input label{
+    color: var(--Text2, #000);
+width:auto;
+
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; 
+}
+.label-input input{
+    margin-top: 6px;
+    width: 330px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 4px;
+background: var(--Secondary, #F5F5F5);
+}
+#pass-input{
+    width: 710px;
+height: 50px;
+}
+.buttons{
+    margin-top: 8px;
+    display: inline-flex;
+align-items: center;
+gap: 32px;
+margin-left:487px;
+margin-bottom:40px;
+margin-right:80px;
+}
+.buttons .save-changes{
+    color: var(--Text, #FAFAFA);
+    background-color: #DB4444;
+    padding:12px;
+    text-align:center;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; 
+    border-radius:8px;
+}
+.buttons .cancel{
+    color: var(--Text2, #000);
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; 
+}

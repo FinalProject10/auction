@@ -14,12 +14,9 @@ const Memberships = sequelize.define('memberships', {
   price:{
     type:DataTypes.INTEGER,
     allowNull:true    
-},
-clients_id:{
-    type:DataTypes.INTEGER,
-    allowNull:true
 }
+
 },{timestamps: false,
-tableName:'membership'});
+tableName:'memberships'});
 
 module.exports = Memberships;

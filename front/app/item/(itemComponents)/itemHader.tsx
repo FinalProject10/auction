@@ -1,17 +1,31 @@
 import "./style/itemHader.css";
-const ItemHeader = () => {
+import Link from "next/link";
+
+const ItemHeader = ({ items }) => {
   return (
     <div className="autobid-breadcrumbs">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <h1>Mercedes-Benz GLC</h1>
-            <div className="description">
-              <p>2019 · 94 000 km · 2 967 cm3 · Diesel</p>
+      {items.map((item) => (
+        <div className="container" key={item.id}>
+          <div className="">
+            <Link href={"/home"}>
+              {" "}
+              <h1 className="text-[#999999] inline-block mb-[2%]">Home / </h1>
+            </Link>
+            <Link href={"/shop"}>
+              <span className="text-[#999999]">Shop /</span>
+            </Link>
+
+            <span className="text-[#999999]">Product</span>
+
+            <div className="col-md-6">
+              <h1>{item.name}</h1>
+              <div className="description">
+                <p>{item.short_description}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

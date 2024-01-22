@@ -7,7 +7,7 @@ import "./footer.css";
 
 const Footer: FC = () => {
   return (
-    <footer className="footer-section">
+    <footer className="footer-section ">
       <div className="container">
         <div className="row">
           <div className="col-md-3">
@@ -65,8 +65,8 @@ const Footer: FC = () => {
           <div className="ft">
             <h5>@Copyright by ModelTheme. All Rights Reserved.</h5>
             <div className="pic">
-<Image src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-google.svg" width={200} height={200}/>
-<Image src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-appstore.svg"width={200}height={200}/>
+<Image alt="" src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-google.svg" width={200} height={200}/>
+<Image alt="" src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-appstore.svg"width={200}height={200}/>
 </div>
         </div>
         </div>

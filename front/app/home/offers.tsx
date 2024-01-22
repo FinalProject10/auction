@@ -1,25 +1,32 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import img3 from '../images/img3.png'
+import axios from 'axios'
 const Offers = () => {
+    const[users,setUsers]=useState(0)
+    useEffect(()=>{
+            axios.get('http://localhost:5000/getallusers').then(r=>setUsers(r.data.total))
+            .catch(err=>console.log(err))
+    },[])
   return (
-    <div className='w-full h-[890px] bg-[#f2f2f2] mt-[15%] mb-[5%]'>
+    <div className='w-full h-[930px] bg-[#f2f2f2] mt-[15%] mb-[5%]'>
         <div className='flex justify-evenly w-full p-[50px]'>
             <div>
-                <h1 className='text-[45px] font-[800]'>40K</h1>
+                <h1 className='text-[45px] font-[800]'>{users}</h1>
                 <h1 className='text-[#ff2800] '> Registered members</h1>
             </div>
             <div>
-                <h1 className='text-[45px] font-[800]'>40K</h1>
-                <h1  className='text-[#ff2800] '> Registered members</h1>
+                <h1 className='text-[45px] font-[800]'>5M</h1>
+                <h1  className='text-[#ff2800] '> Inventory Sold</h1>
             </div>
             <div>
-                <h1 className='text-[45px] font-[800]'>40K</h1>
-                <h1 className='text-[#ff2800] '> Registered members</h1>
+                <h1 className='text-[45px] font-[800]'>100%</h1>
+                <h1 className='text-[#ff2800] '> Selling Price Received</h1>
             </div>
             <div>
-                <h1 className='text-[45px] font-[800]'>40K</h1>
-                <h1 className='text-[#ff2800] '> Registered members</h1>
+                <h1 className='text-[45px] font-[800]'>4+</h1>
+                <h1 className='text-[#ff2800] '> Satisfied Customers</h1>
             </div>
         </div>
         <hr className=' h-[10px] border-black border-dotted'/>
