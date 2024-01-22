@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
 
-const Client = sequelize.define('Client', {
+const Client = sequelize.define('Clients', {
   name: {
     type:DataTypes.STRING,
     allowNull: true},
@@ -30,15 +30,15 @@ const Client = sequelize.define('Client', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  latitude: {
+  lattitude: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  address: {
+  adress: {
     type: DataTypes.STRING,
     allowNull: true,
   },
 },{timestamps: false,
-    tableName:'client'});
+    tableName:'clients'});
 
 module.exports = Client;

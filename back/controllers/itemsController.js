@@ -44,14 +44,14 @@ const addItem = async (req, res) => {
     res.status(500).json("server err");
   }
 };
-// const getAllItems = async (req, res) => {
-//   try {
-//     const d = await Items.findAll();
-//     res.status(200).json(d);
-//   } catch (err) {
-//     res.status(500).json("server err");
-//   }
-// };
+const getAll = async (req, res) => {
+  try {
+    const d = await Items.findAll();
+    res.status(200).json(d);
+  } catch (err) {
+    res.status(500).json("server err");
+  }
+};
 const getAllItems = async (req, res) => {
   const itemsPerPage = 8
   const page = parseInt(req.query.page, 10) || 1
@@ -69,4 +69,4 @@ const getAllItems = async (req, res) => {
     res.status(500).json("Internal server error")
   }
 };
-module.exports = { getItems, addItem, getAllItems };
+module.exports = { getItems, addItem, getAllItems,getAll };
