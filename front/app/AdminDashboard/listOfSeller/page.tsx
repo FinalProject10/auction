@@ -1,8 +1,9 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import SideBare from '../AdminSidebar/page'
 import '../AdminClientNotBid/bt.css'
 import axios from 'axios'
+import dynamic from "next/dynamic";
+const SideBare = dynamic(() => import("../AdminSidebar/page"));
 const listOfSeller = () => {
   const [data,setData]= useState<[]>([])
   const[refrech,setRefrech]=useState(false)

@@ -1,6 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import SideBare from '../AdminSidebar/page'
+
+import dynamic from "next/dynamic";
+const SideBare = dynamic(() => import("../AdminSidebar/page"));
 import axios from 'axios'
 // interface reclam{
 //   message:string
@@ -30,9 +32,10 @@ const Inbox = () => {
       console.log(err);
     } 
   }
-  const Msg=(id:number ,email:string,image:string ,name:string,lastName:string,message:string)=>{
-    setMess({id,email,image,name,lastName,message})
-  }
+  const Msg = (id: number, email: string, image: string, name: string, lastName: string, message: string) => {
+    setMess({ id, email, image, name, lastName, message });
+  };
+  
   return (
     <div  className="flex-row lg:flex">
     <SideBare/>
@@ -47,11 +50,10 @@ const Inbox = () => {
           placeholder="Search..." />
       </label>
       {reclamtion.map((el=>(
-        <ul className="mt-6 overflow-y-scroll" onClick={()=>{Msg(el.Client.id,el.Client.image,
-          el.Client.email,el.Client.name,el.Client.lastName,el.message)}}>
+        <ul className="mt-6 overflow-y-scroll" onClick={()=>{Msg(el.Client.id,el.Client.email,el.Client.image,el.Client.name,el.Client.lastName,el.message)}}>
         <li className="py-5 border-b px-3 transition hover:bg-indigo-100">
           <a href="#" className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold" >{el.Client.name}</h3>
+            <h3 className="text-lg font-semibold" >{el.Client?.name}</h3>
             <p className="text-md text-gray-400">{new Date(el.createdAt).getHours()}:{new Date(el.createdAt).getMinutes()}mn</p>
           </a>
         </li>
@@ -62,7 +64,8 @@ const Inbox = () => {
       <div className="flex justify-between items-center h-48 border-b-2 mb-8">
         <div className="flex space-x-4 items-center">
           <div className="h-12 w-12 rounded-full overflow-hidden">
-            <img src={mess?.image} loading="lazy" className="h-full w-full object-cover" />
+            <img src="https://shorturl.at/eosQ1"
+   className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col">
             <h3 className="font-semibold text-lg">{mess?.name} {mess?.lastName}</h3>

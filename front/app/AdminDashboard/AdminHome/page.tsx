@@ -1,6 +1,8 @@
 "use client"
 import React ,{useState,useEffect}from 'react'
-import SideBare from '../AdminSidebar/page'
+
+import dynamic from "next/dynamic";
+const SideBare = dynamic(() => import("../AdminSidebar/page"));
 import CardStats from "../AdminCard/page";
 import { MdVerticalAlignTop } from "react-icons/md";
 import Chart from 'chart.js/auto';
@@ -239,7 +241,7 @@ const HomePage = () => {
     <div  className="flex-row lg:flex">
  <SideBare/> 
  <div className="container mx-auto mt-4 lg:mt-12">
- <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
+ {/* <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
         <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
           <a
             className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
@@ -264,12 +266,12 @@ const HomePage = () => {
           
           </ul>
         </div>
-      </nav>
+      </nav> */}
       <div className="relative bg-blueGray-800 md:pt-32 pb-32 pt-12 mt-[-50px]" style={{"background-color": "#1e293b"}}>
         <div className="px-4 md:px-10 mx-auto w-full">
           <div>
             {/* Card stats */}
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap mt-[-7%]">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="total revenue"
@@ -323,12 +325,42 @@ const HomePage = () => {
         </div>
       </div>
       
-      <div className="bg-white rounded-2xl float-left w-3/5 h-44 p-4 ml-1  flex justify-between" style={{    "width": "9%"}}>
+      <div className="bg-white rounded-2xl float-left w-3/5 h-44 p-4 ml-1  " >
   <div className='flex justify-between mt-[9%]'>
-            <div>
+            
+ </div>
+<div>
+  
+
+<div className="relative overflow-x-auto ml-[50px] mt-[-23%] w-[1150px]">
+
+  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded" >
+        <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
+          <div className="flex flex-wrap items-center">
+            <div className="relative w-full max-w-full flex-grow flex-1">
+              <h6 className="uppercase text-blueGray-400 mb-1 text-xs font-semibold">
+                Performance
+              </h6>
+              <h2 className="text-blueGray-700 text-xl font-semibold">
+                Total orders
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div className="p-4 flex-auto">
+          {/* Chart */}
+          <div className="relative h-350-px">
+            <canvas id="bar-chart"></canvas>
+          </div>
+        </div>
+      </div>
+   
+</div>
+<div>
 <div className="relative">
-<div className=" flex  rounded-md w-[800px] h-[50%] overflow-x-scroll ">
+<div className=" flex  rounded-md w-[1220px] h-[50%] overflow-x-scroll ml-[15px]">
 {cordoner.map((el, index) => (
+   el.seller.items.length > 0 && (
   <div key={index} style={{ "paddingRight": "0%" }}>
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
@@ -374,7 +406,7 @@ const HomePage = () => {
       </tbody>
     </table>
   </div>
-))}
+)))}
 
  
    
@@ -382,35 +414,6 @@ const HomePage = () => {
 
 </div>
  </div>
- </div>
-<div>
-  
-
-<div className="relative overflow-x-auto ml-[50px]">
-
-  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded" >
-        <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full max-w-full flex-grow flex-1">
-              <h6 className="uppercase text-blueGray-400 mb-1 text-xs font-semibold">
-                Performance
-              </h6>
-              <h2 className="text-blueGray-700 text-xl font-semibold">
-                Total orders
-              </h2>
-            </div>
-          </div>
-        </div>
-        <div className="p-4 flex-auto">
-          {/* Chart */}
-          <div className="relative h-350-px">
-            <canvas id="bar-chart"></canvas>
-          </div>
-        </div>
-      </div>
-   
-</div>
-
   </div>
 </div>
        
