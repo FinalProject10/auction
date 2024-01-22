@@ -15,6 +15,7 @@ import {
   AccordionBody,
 } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
+import { Vollkorn_SC } from "next/font/google";
 const Products = () => {
     const[flex,setFlex]=useState(true)
     const [open, setOpen] =useState(-1);
@@ -22,17 +23,93 @@ const Products = () => {
     const[click,setClick]=useState(false)
     const[allData,setAllData]=useState([])
     const[allData1,setAllData1]=useState([])
-    const[audi,setAudi]=useState(0)
+    var[bmw,setBmw]=useState(0)
+    var[dacia,setdacia]=useState(0)
+    var[lamborghini,setlamborghini]=useState(0)
+    var[mazda,setmazda]=useState(0)
+    var[mercedes,setmercedes]=useState(0)
+    var[Mitsubishi,setMitsubishi]=useState(0)
+    var[seat,setseat]=useState(0)
+    var[tesla,settesla]=useState(0)
+    var[toyota,settoyota]=useState(0)
+    var[Volkswagen,setvolkswagen]=useState(0)
+    var[audi,setAudi]=useState(0)
+    var[ford,setFord]=useState(0)
+  
     const[color,setColor]=useState(false)
     const[bg,setBg]=useState(false)
     const[index,setIndex]=useState(1)
     const [page, setPage] = useState(1);
     const[size,setSize]=useState(0)
     const router=useRouter()
-    // useEffect(()=>{
-    //     axios.get('http://localhost:5000/items/fetch-items').then(r=>{setData(r.data);setAllData(r.data);setAllData1(r.data)})
-    //     .catch(err=>console.log(err))
-    // },[])
+    useEffect(()=>{ axios.get('http://localhost:5000/items/get').then(r=>{
+          setAllData(r.data);setAllData1(r.data)
+        setr(r.data)})
+        .catch(err=>console.log(err))},[])
+   
+    
+   
+    const setr=(arr:any)=>{      
+      
+
+      for(var i=0;i<arr.length;i++){
+        console.log(arr[i].name)
+        if(arr[i].name.includes("Audi")){
+          audi++
+        }
+        if(arr[i].name.includes("Ford")){
+          ford++
+        }
+        if(arr[i].name.includes("Mercedes")){
+          mercedes++
+        }
+        if(arr[i].name.includes("BMW")){
+          console.log('hhh')
+          bmw++
+        }
+        if(arr[i].name.includes("Dacia")){
+          dacia++
+        }
+        if(arr[i].name.includes("Lamborghini")){
+          lamborghini++
+        }
+        if(arr[i].name.includes("Mazda")){
+          mazda++
+        }
+        if(arr[i].name.includes("Mitsubishi")){
+          Mitsubishi++
+        }
+        if(arr[i].name.includes("Seat")){
+          seat++
+        }
+        if(arr[i].name.includes("Toyota")){
+          toyota++
+        }
+        if(arr[i].name.includes("Tesla")){
+          tesla++
+        }
+        if(arr[i].name.includes("Volkswagen")){
+          Volkswagen++
+        }
+
+        setAudi(audi)
+        setFord(ford)
+        setBmw(bmw)
+        setMitsubishi(Mitsubishi)
+        setdacia(dacia)
+        settesla(tesla)
+        settoyota(toyota)
+        setmazda(mazda)
+      setvolkswagen(Volkswagen)
+        setseat(seat)
+        setlamborghini(lamborghini)
+        setmercedes(mercedes)
+        
+      }
+      
+      
+      console.log(bmw)
+    }
     useEffect(() => {
       // Function to fetch items from the server
     
@@ -42,7 +119,8 @@ const Products = () => {
           const response = await axios.get(
             `http://localhost:5000/items/fetch-items/?page=${page}`
           );
-          console.log(response.data)
+          
+          
           if(localStorage.getItem('category')){
               const category=localStorage.getItem('category')
               let dat=response.data.filter((el:any)=>{
@@ -98,9 +176,9 @@ const Products = () => {
             localStorage.removeItem('body')
           }
           else{
-            
+            console.log('hae')
           setData(response.data);
-          setAllData(response.data);setAllData1(response.data)}
+          }
         } catch (error) {
           console.error("Error fetching items:", error);
         }
@@ -109,14 +187,12 @@ const Products = () => {
       // Fetch items when the component mounts and when the page changes
       fetchItems();
     }, [page,click]);
-  
     const handleLoadMore = (value:any) => {
       router.push('#flex')
       // Increment the page when the "Load More" button is clicked
       setPage(value);
       
     };
-    console.log(data)
     const filter=(value:any)=>{
       router.push('#flex')
      if(!value){
@@ -153,7 +229,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mt-[10%] mb-[5%] cursor-pointer"
           >
             <h1>Audi </h1>
-            <h1>(5)</h1>
+            <h1>({audi})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -163,7 +239,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>BMW </h1>
-            <h1>(6)</h1>
+            <h1>({bmw})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -173,7 +249,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Dacia </h1>
-            <h1>(3)</h1>
+            <h1>({dacia})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -183,7 +259,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Ford </h1>
-            <h1>(3)</h1>
+            <h1>({ford})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -193,7 +269,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Lamborghini </h1>
-            <h1>(1)</h1>
+            <h1>({lamborghini})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -203,7 +279,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Mazda</h1>
-            <h1>(0)</h1>
+            <h1>({mazda})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -213,7 +289,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Mercedes-Benz </h1>
-            <h1>(4)</h1>
+            <h1>({mercedes})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -223,7 +299,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Mitsubishi </h1>
-            <h1>(1)</h1>
+            <h1>({Mitsubishi})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -233,7 +309,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Seat </h1>
-            <h1>(1)</h1>
+            <h1>({seat})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -243,7 +319,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Tesla </h1>
-            <h1>(2)</h1>
+            <h1>({tesla})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -253,7 +329,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Toyota </h1>
-            <h1>(0)</h1>
+            <h1>({toyota})</h1>
           </div>
           <hr className=" border-dotted mb-[2%]" />
           <div
@@ -263,7 +339,7 @@ const filter2=(property:any,value:any)=>{
             className="flex justify-between mb-[5%] cursor-pointer"
           >
             <h1>Volkswagen </h1>
-            <h1>(2)</h1>
+            <h1>({Volkswagen})</h1>
           </div>
           <hr className="mb-[3%]" />
           <div>
@@ -867,13 +943,13 @@ const filter2=(property:any,value:any)=>{
     
         </div>}
         <div className="flex gap-[2%] mb-[30px]">
-        <div 
+        {index>1&&<div 
     onClick={()=>{
       setIndex(index-1)
        handleLoadMore(index-1)
     }}
     className=" w-[50px] h-[50px] rotate-180  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>
-    
+  }
     <div 
     onClick={()=>{
       setIndex(1)
@@ -910,12 +986,12 @@ const filter2=(property:any,value:any)=>{
       }}
     style={{color:index===4?'white':'black',backgroundColor:index===4?'#ff2800':'white'}}
     className=" w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer">4</div>
-    <div 
+    {index<4&&<div 
     onClick={()=>{setIndex(index+1),
       handleLoadMore(index+1)
     }}
     className=" w-[50px] h-[50px]  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>
-
+  }
     
     </div>
         </div>
