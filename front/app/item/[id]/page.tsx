@@ -1,5 +1,4 @@
 "use client";
-
 const Loading = dynamic(() => import("./loading"));
 import "../(itemComponents)/style/page.css";
 import React, { useEffect, useState } from "react";
@@ -16,6 +15,7 @@ const ItemSidebar = dynamic(() => import("../(itemComponents)/itemSidebar"));
 
 import axios from "axios";
 const Item = ({ params }) => {
+  console.log(params)
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
 
