@@ -12,6 +12,7 @@ const ItemBid = ({ items }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [click, setClick] = useState(false);
 
   useEffect(() => {
     if (isPopupVisible) {
@@ -33,6 +34,8 @@ const ItemBid = ({ items }) => {
   };
 
   const handleSubmit = (e) => {
+    setClick(!click);
+
     e.preventDefault();
 
     const currentItemId = items[0].id;
@@ -116,6 +119,11 @@ const ItemBid = ({ items }) => {
                       />
                     </button>
                     <input
+                      placeholder={
+                        items[0]?.bids.length > 0
+                          ? items[0]?.bids[items[0]?.bids.length - 1]?.bidAmount
+                          : items[0]?.price
+                      }
                       type="text"
                       value={quant}
                       onChange={handleInputChange}
