@@ -1,14 +1,12 @@
-// import React from 'react'
-// import First from './firstStep/page'
+import React from "react";
+import First from "./firstStep/page";
 
-// const ClientRegister = () => {
+const ClientRegister = () => {
+  return (
+    <div>
+      <First />
+    </div>
+  );
+};
 
-//   return (
-//     <div>
-// <First/>
-        
-//     </div>
-//   )
-// }
-
-// export default ClientRegister
+export default ClientRegister;
