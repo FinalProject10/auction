@@ -1,5 +1,5 @@
 import Navbar from "../home/navbar"
-import Header from "./header/page"
+// import Header from "./header/page"
 import Footer from "../footer/Footer"
 import CanvasComponent from "./homedashboard/courbe/courbe"
 import  MyOrdersList from "./homedashboard/orders/orders"
@@ -12,7 +12,7 @@ export default function Dashboard(){
     return (
         <div className='dash-container'>
             <Navbar/>
-           < Header/>
+           {/* < Header/> */}
             <div className="body-container">
             <div className="sidebar">
                 <SideBar h={1000}/>
