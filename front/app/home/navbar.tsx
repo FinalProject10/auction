@@ -21,7 +21,7 @@ const Navbar = () => {
         className=' w-full h-[54px] bg-[#262626] flex justify-center items-center gap-[80%]'>
         </div>
         <div className='flex items-center gap-[30px] text-[#333333] font-[600] mb-[25px]'>
-            <img className='w-[120px] ml-[50px] mt-[15px] ' src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg" alt="" />
+            <img className='w-[120px] ml-[75px]  mt-[15px] ' src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg" alt="" />
         <Link href={'/home'} className='mt-[1%] ml-[10%] hover:text-[#ff2800] transition ease-in-out delay-50 ' 
         onMouseEnter={()=>{setHome(true);setPlatform(false);setShop(false);setPages(false)}}
         >Home</Link>
@@ -124,8 +124,8 @@ const Navbar = () => {
         onMouseLeave={()=>setShop(false)}
         >
            <Link href={'/shop'}> <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Shop Page</h1></Link>
-            <Link href={'/checkout'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Checkout</h1></Link>
-           <Link href={'/CART'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Cart</h1></Link>
+            <Link href={'/cart'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Checkout</h1></Link>
+           <Link href={'/cart'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Cart</h1></Link>
            <Link href={'/'}></Link> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>My Account</h1>
         </div>}
         {pages&&<div className='text-[#333333] bg-white w-[170px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[40%] '
