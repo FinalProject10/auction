@@ -17,6 +17,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 import { useScroll } from "framer-motion";
 const Home = () => {
+  const router=useRouter()
   const currencies = [
     {
       value: "USD",
