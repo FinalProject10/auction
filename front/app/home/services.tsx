@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const Services = () => {
   return (
@@ -13,9 +15,26 @@ const Services = () => {
 
     </div>
     <div >
-        <div className='w-[95%] ml-[8%] h-[90%]  mt-[15%] bg-white shadow-xl rounded-[20px] '>
+    <div 
+       
+        className='bg-white absolute  mt-[20%] flex justify-center items-center w-[50px] h-[50px] rounded-[5px]'>
+<KeyboardArrowLeftIcon fontSize={'large'} className='text-black'/>
+        </div>
+
+        <div className='w-[95%] ml-[6%] h-[90%] flex justify-center items-center  mt-[15%] bg-white shadow-xl rounded-[20px] '>
+<div>
+  <img src="" alt="" />
+  <h1 className='text-center mt-[3%] mb-[3%]'>salim ben slim</h1>
+  <p className='p-[30px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam dolorem, voluptates alias ducimus nostrum perferendis, dicta eveniet esse recusandae inventore debitis voluptate deserunt quam voluptatem libero expedita! Laudantium, porro voluptatibus?</p>
+</div>
 
         </div>
+        <div 
+       
+        className='bg-white absolute right-0 -mt-[16%] flex justify-center items-center w-[50px] h-[50px] rounded-[5px]'>
+        <KeyboardArrowRightIcon fontSize={'large'} className='text-black absolute'/>
+        </div>
+
     </div>
    </div>
    

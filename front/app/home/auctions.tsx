@@ -1,6 +1,7 @@
 'use client'
 import React,{useEffect, useState} from 'react'
 import axios from 'axios'
+import Link from 'next/link'
 const Auctions = () => {
     const[color,setColor]=useState([false,false])
     const[data,setData]=useState([])
@@ -32,7 +33,9 @@ const Auctions = () => {
         <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
             <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src={el.images[0]} alt="" />
             <div className='p-[15px] text-[#333333]'>
-            <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'>{el.name}</h1>
+            <Link href={`/item/${el.id}`}> <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'
+        
+            >{el.name}</h1></Link>
             <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
             <h1 className='font-[300] text-[13px]'>{Math.floor((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)}h</h1>
             </div>
