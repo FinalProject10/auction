@@ -13,7 +13,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
-  background: #647df9;
+  background: #f96464;
 }
 
 .wrapper {
@@ -49,10 +49,10 @@ body {
   height: 100%;
   width: 100%;
   border-radius: 50%;
-  border: 3px solid #fff;
+  border: 3px;
   line-height: 117px;
   text-align: center;
-  color: #fff;
+  color: #ffffff27;
   background-color: rgb(167, 167, 22);
   position: relative;
 }
@@ -149,7 +149,7 @@ body {
 .table .btn button {
   width: 80%;
   height: 50px;
-  color: #fff;
+  color:black;
   font-size: 20px;
   font-weight: 500;
   border: none;
@@ -163,9 +163,7 @@ body {
   border-radius: 5px;
 }
 
-.basic .features li::selection {
-  background: #ffd861;
-}
+
 
 .basic ::selection,
 .basic .price-area,
@@ -231,7 +229,7 @@ body {
   content: "";
   z-index: -1;
   display: block;
-  border: 7px solid #4606ac;
+  border: 7px solid #4606ac07;
   border-top-color: transparent;
   border-left-color: transparent;
 }
@@ -252,11 +250,15 @@ body {
   right: 0;
   transform: rotate(-45deg);
   width: 200px;
-  background: #a26bfa;
+  background: #fafafa;
   padding: 10px 0;
   color: #fff;
   text-align: center;
   font-size: 17px;
   text-transform: uppercase;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+}
+.nav{
+  margin-top: 100px;
+  width:300px;
 }

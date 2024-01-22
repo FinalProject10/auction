@@ -13,7 +13,7 @@ const {
   Seller,
   Reclamation,
 } = require("./models/relations");
-const sellerRoutes = require("./routes/seller");
+const sellersRoutes = require("./routes/seller");
 const clientRoutes = require("./routes/client");
 const adminRoutes = require("./routes/admin");
 const dashboard = require('./routes/AdminDashboardRouter');
@@ -21,9 +21,9 @@ const itemsRoute = require("./routes/itemsRoute");
 const cloudRoute=require('./routes/cloudinary')
 const cors = require("cors");
 const ProductsRouter = require("./routes/products");
+const sellerRouter = require("./routes/seller");
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/../react-client/dist"));
@@ -85,7 +85,7 @@ cancel_url: `http://localhost:3000/cancel`,   // Update with your frontend cance
 
 
 app.use('/dash',dashboard)
-app.use("/seller", sellerRoutes);
+app.use("/seller", sellerRouter);
 app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
@@ -99,7 +99,7 @@ res.status(200).json({total:d.length+s.length})
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
-///////////////////////////////
+
 // functions
 // createChatEngineUser();
 // GetorCreateUser();
