@@ -1,0 +1,129 @@
+.vc_row[data-vc-full-width] {
+    position: relative;
+    left: -86.2px;
+    box-sizing: border-box;
+    width: 922px;
+    max-width: 922px;
+    padding-left: 86.2px;
+    padding-right: 85.8px;
+    transition: opacity 0.5s ease;
+    overflow: hidden;
+  }
+  
+  .vc_custom_1601885870901 {
+    margin-bottom: 0px ;
+    background-image: url(https://angro.modeltheme.com/wp-content/uploads/2020/10/Iffiliate-Contact_bg.jpg?id=7264) !important;
+  }
+  
+  .vc_row {
+    background-size: cover;
+  }
+  
+  .bg-contact {
+    opacity: 0.7;
+  }
+  
+  .vc_row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  .bg-contact .vc_empty_space {
+    height: 400px 
+}
+.wpb_column {
+    height: auto;
+}
+.vc_column_container {
+    padding-left: 0;
+    padding-right: 0;
+}
+.vc_row-has-fill>.vc_column_container>.vc_column-inner {
+    padding-top: 35px;
+}
+.the-form {
+    display: flex; 
+    flex-direction: row;
+
+  }
+  
+  .formulaire {
+    height: 633.34px;
+    margin: 0; /* Remove any default margin */
+    flex: 1; 
+  }
+  
+  .input-groups {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .first,
+  .second,
+  .third {
+    margin-bottom: 20px;
+  }
+  
+  .name,
+  .email,
+  .phone,
+  .subject {
+    width: 100%;
+  }
+  
+  .name,
+  .email,
+  .phone,
+  .subject {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .professional-input,
+  .full-width-input {
+    width: 100%;
+    padding: 4px 15px;
+    box-sizing: border-box;
+    border: 1px solid #EDEDED;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #555555;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+    min-height: 47px !important;
+  }
+  
+  .professional-input:focus,
+  .full-width-input:focus {
+    outline: 1px solid #FF2800;
+  }
+  
+  .contact-infos {
+    background-color: #222 !important;
+    height: 633.34px;
+    padding: 20px;
+    width: 50%; /* Adjust the width based on your preference */
+    margin: 0; /* Remove any default margin */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .section {
+    color: #fff;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .section h3 {
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }

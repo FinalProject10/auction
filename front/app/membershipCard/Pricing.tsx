@@ -109,7 +109,7 @@ const Pricing: FC = () => {
             className={`border py-10 md:px-6 px-4 rounded-lg shadow-md ${pkg.name === 'Premium' ? 'bg-black text-white' : ''
               }`}
           >
-            <h3 className="text-3xl font-bold text-center text-[#010851]">{pkg.name}</h3>
+            <h3 className="text-3xl font-bold text-center text-[#]">{pkg.name}</h3>
             <p className="text-tertiary text-center my-6">{pkg.description}</p>
             {pkg.features && (
               <ul className="mt-4 space-y-2 px-4">
@@ -135,12 +135,12 @@ const Pricing: FC = () => {
         ))}
 
       </motion.div>
-      <div className="bg-orange-500 p-200 mt-6000   right-0 left-0 w-full">
+      <div className="p-200 mt-6000 right-0 left-0 w-full flex justify-center">
         <img src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-newsletter_pic.png" width={600} alt="car" />
       </div>
 
 
-
+<Footer/>
     </div>
   );
 };

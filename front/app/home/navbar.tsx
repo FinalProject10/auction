@@ -2,11 +2,13 @@
 import React,{useState} from 'react'
 import Link from 'next/link'
 import { FaBasketShopping } from "react-icons/fa6";
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
    
     const[home,setHome]=useState(false)
     const[platform,setPlatform]=useState(false)
+    const router = useRouter()
     const[shop,setShop]=useState(false)
     const[pages,setPages]=useState(false)
     const[cart,setCart]=useState(false)
@@ -19,27 +21,27 @@ const Navbar = () => {
         className=' w-full h-[54px] bg-[#262626] flex justify-center items-center gap-[80%]'>
         </div>
         <div className='flex items-center gap-[30px] text-[#333333] font-[600] mb-[25px]'>
-            <img className='w-[120px] ml-[50px] mt-[15px] ' src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg" alt="" />
+            <img className='w-[120px] ml-[75px]  mt-[15px] ' src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg" alt="" />
         <Link href={'/home'} className='mt-[1%] ml-[10%] hover:text-[#ff2800] transition ease-in-out delay-50 ' 
         onMouseEnter={()=>{setHome(true);setPlatform(false);setShop(false);setPages(false)}}
         >Home</Link>
         
-        <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
+        <h1  className='mt-[1%] cursor-pointer hover:text-[#ff2800] transition ease-in-out delay-50'
         onMouseEnter={()=>{setPlatform(true);setHome(false);setShop(false);setPages(false)}}
-        >Platform</Link>
+        >Platform</h1>
        
         <Link href={'/shop'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
         onMouseEnter={()=>{setShop(true);setHome(false);setPlatform(false);setPages(false)}}
         >Shop</Link>
-        <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
+        <h1 className='mt-[1%] cursor-pointer hover:text-[#ff2800] transition ease-in-out delay-50'
         onMouseEnter={()=>{setPages(true);setHome(false);setPlatform(false);setShop(false)}}
-        >Pages</Link>
+        >Pages</h1>
         <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'>Get In Touch</Link>
         <Link href={'/'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'>Favorites</Link>
         <FaBasketShopping size={25} className='hover:text-[#ff2800] ml-[10%] mt-[1%] cursor-pointer'
         onMouseEnter={()=>setCart(true)}/>
 
-        <button className='text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:w-[136px] hover:h-[47px] hover:transition ease-in-out delay-50 '>Sell Now</button>
+        <button className='text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:transition ease-in-out delay-50 '>Sell Now</button>
         </div>
         
        
@@ -51,25 +53,39 @@ const Navbar = () => {
                 <h1 className='font-[700] text-[30px] mb-[15px]'>Search Cars</h1>
                 <div className='flex gap-[10px] mb-[15px]'>
                 <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-1.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Body</h1>
+                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '
+                onClick={()=>{localStorage.setItem('body','Convertible')
+                router.push('/shop')}}>Body</h1>
                 </div>
                 <div className='flex gap-[10px] mb-[15px]'>
                 <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-2.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Color</h1>
+                <h1 
+                onClick={()=>{localStorage.setItem('Color','Black')
+                router.push('/shop')}}
+                className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Color</h1>
                 </div>
                 <div className='flex gap-[10px] mb-[15px]'>
                 <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-4.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Capacity</h1>
+                <h1 
+                onClick={()=>{localStorage.setItem('Capacity','1.0L')
+                router.push('/shop')}}
+                className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Capacity</h1>
                 </div>
                 <div className='flex gap-[10px] mb-[15px]'>
                 <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-3.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Gearbox</h1>
+                <h1 
+                onClick={()=>{localStorage.setItem('Gearbox','automatic')
+                router.push('/shop')}}
+                className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Gearbox</h1>
                 </div>
                 <div className='flex gap-[10px] mb-[15px]'>
                 <img className='w-[20px] h-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-5.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Climatisation</h1><br/>
+                <h1 
+                onClick={()=>{localStorage.setItem('Climatisation','Automatic Climate Control')
+                router.push('/shop')}}
+                className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Climatisation</h1><br/>
                 </div>
-                <button className='font-[700] text-[15px] text-[#ff2800]'>Explore All Categories</button>
+                <Link href={'/shop'}><button className='font-[700] text-[15px] text-[#ff2800]'>Explore All Categories</button></Link>
 
                 </div>
                 <div>
@@ -107,17 +123,17 @@ const Navbar = () => {
         {shop&&<div className='text-[#333333] bg-white w-[150px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[35%] '
         onMouseLeave={()=>setShop(false)}
         >
-            <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Shop Page</h1>
-            <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Checkout</h1>
-            <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Cart</h1>
-            <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>My Account</h1>
+           <Link href={'/shop'}> <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Shop Page</h1></Link>
+            <Link href={'/cart'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Checkout</h1></Link>
+           <Link href={'/cart'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Cart</h1></Link>
+           <Link href={'/'}></Link> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>My Account</h1>
         </div>}
         {pages&&<div className='text-[#333333] bg-white w-[170px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[40%] '
         onMouseLeave={()=>setPages(false)}
         >
             <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>How It Works</h1>
-            <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Pricing Services</h1>
-            <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>About us</h1>
+           <Link href={'/membershipCard'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Pricing Services</h1></Link>
+          <Link href={'/aboutUs'}>  <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>About us</h1></Link>
             <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>404 Not Found</h1>
         </div>}
         {cart&&

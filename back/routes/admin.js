@@ -8,6 +8,4 @@ adminRouter.get('/home',mid.verifyTokenClient,adminContr.getHome)
 
 
 
-
-
 module.exports=adminRouter

@@ -1,0 +1,140 @@
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul, li, button {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Hind', sans-serif;
+    background-color: #fff;
+    color: #4d5974;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 4rem;
+    width: 80%; 
+}
+
+.content_cart {
+    /* Add styles for the cart section if necessary */
+}
+
+.page_cart {
+    color: #ff2800; 
+}
+
+.title_cart {
+    margin-top: 10px; /* Adjust spacing */
+    color: black; /* Black color for the title */
+}
+
+h2 {
+    margin-top: 20px; /* Adjust spacing */
+    color: #5d5553; /* Updated color for FAQ title */
+}
+
+.accordion-item {
+    border-bottom: 1px solid #e5e5e5; /* Light gray border */
+}
+
+
+button {
+    position: relative;
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 1em 0;
+    color: #ff2800; /* Updated text color */
+    font-size: 1.15rem;
+    font-weight: 400;
+    border: none;
+    background-color: #fff; /* Set background color to white */
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle box shadow for depth */
+}
+
+button:hover,
+button:focus {
+    color: #ff884d; /* Lighter updated color on hover/focus */
+    background-color: #f5f5f5; /* Light gray background on hover/focus */
+}
+
+
+.accordion-title {
+    padding: 1em 1.5em 1em 0;
+}
+
+.icon {
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    right: 0;
+    font-size: 22px;
+}
+
+button[aria-expanded='true'] .icon::before {
+    content: '-';
+}
+
+button[aria-expanded='false'] .icon::before {
+    content: '+';
+}
+
+.accordion-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 200ms linear, max-height 200ms linear;
+}
+
+button[aria-expanded='true'] + .accordion-content {
+    opacity: 1;
+    max-height: 9em;
+}
+
+.cartt {
+    margin-left: -210px;
+    margin-top: -90px;
+    background-color: #EFEFEF;
+    width: 1480px;
+    height: 160px;
+}
+
+.page_cart {
+    color: #d3d3d3;
+    margin-top: 20px;
+}
+
+.title_cart {
+    text-decoration: solid;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+    width: 40%;
+    height: 50%;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 900px;
+    margin-left: 80px;
+    color: black;
+}
+
+.accordion-title {
+    font-size: x-large;
+    color:black;
+    font-weight: 650;
+
+}
+
+.accordion-content {
+    font-size: medium;
+    color: black;
+}
+
+.footer {
+    margin-top: 100px;
+}
+.f{
+    color:#4d5974
+}
