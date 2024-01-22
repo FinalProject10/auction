@@ -4,7 +4,6 @@ const stripe =require('stripe')("sk_test_51Oa23kFgyHOf8MRLBiQ7NHVMbtwjQadZr4dQEe
 
 const express = require("express");
 const db = require("./database/index");
-const cors = require("cors");
 const {
   Bid,
   Client,
@@ -22,9 +21,9 @@ const itemsRoute = require("./routes/itemsRoute");
 const cloudRoute=require('./routes/cloudinary')
 const cors = require("cors");
 const ProductsRouter = require("./routes/products");
+const sellerRouter = require("./routes/seller");
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/../react-client/dist"));
@@ -86,7 +85,7 @@ cancel_url: `http://localhost:3000/cancel`,   // Update with your frontend cance
 
 
 app.use('/dash',dashboard)
-app.use("/seller", sellerRoutes);
+app.use("/seller", sellerRouter);
 app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);

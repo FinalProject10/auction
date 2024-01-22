@@ -392,7 +392,7 @@
         font-style: normal;
       }
   .footer{
-    margin-top: 1800px;
+    margin-top: 200px;
   }
 .our-store{
     margin-left: -100px;
@@ -440,4 +440,14 @@ font-family: 'Rubik', sans-serif;
     width: 685px;
     height: 509px;
     overflow: hidden;
+}
+.img10{
+    margin-top: 1500px;
+}
+.para{
+    margin-left: 800px;
+    margin-top: -280px;
+    font-size: larger;
+    width: 500px;
+
 }

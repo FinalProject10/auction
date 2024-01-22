@@ -47,7 +47,7 @@
 .side-imag {
     position: absolute;
     top: 30px;
-    left: 600px;
+    left: 700px;
     border-radius: 4px 0px 0px 4px;
     background-color: #eb7ea8;
     width: 705px;
@@ -101,7 +101,7 @@
 }
 .full-service {
     position: absolute;
-    top: 5164px;
+    top: 154px;
     left: 248px;
     display: flex;
     flex-direction: row;
@@ -388,6 +388,207 @@
         font-size: 80px;
         font-style: normal;
       }
-  .footer{
-    margin-top: 1800px;
+  
+    
+  .par{
+    -ms-text-size-adjust: initial;
+    margin-top: -65px;
+    margin-left: 90px;
   }
+  .parr{
+    font-size: medium;
+  }
+
+  .team-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #eeeeee5d;
+    padding: 100px;
+    margin-left: -60px;
+    margin-top: 800px;
+    size: medium;
+  }
+  
+  .team-member {
+    flex: 0 1 200px; 
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 03px;
+    margin-left: 300px;
+    margin: 10px;
+    padding: 10px;
+    transition: transform 0.3s;
+    background-color: #c0c0c0; 
+  }
+  
+  .team-member:hover {
+    transform: scale(1.1);
+  }
+  
+  .team-member img {
+    width: 150px; 
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .mt-addons-member-section {
+    margin-top: 10px;
+  }
+  
+  .social-icons a {
+    margin: 0 5px;
+    color: #333;
+  }
+  
+  .team-member:hover .social-icons a {
+    color: orange;
+  }
+  
+  .mt-addons-member-position,
+  .mt-addons-member-url {
+    margin-top: 10px;
+    font-weight: bold;
+  
+  }
+ 
+  .team-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  /* Team member card */
+  .team-member {
+    margin-top: -100px;
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+    transition: transform 0.3s;
+    width: 150px; 
+    text-align: center;
+    left:-500px
+  }
+  
+  .team-member:hover {
+    transform: scale(1.1);
+  }
+  
+  .team-member img {
+    width: 150px; /* Adjust the image size */
+    height: 150px; /* Adjust the image size */
+    border-radius: 50%; /* Make the image circular */
+    margin-bottom: 10px;
+  }
+  
+  .mt-addons-member-section {
+    margin-top: 10px;
+  }
+  
+  .mt-addons-member-name,
+  .mt-addons-member-position,
+  .mt-addons-member-url {
+    margin: 5px 0;
+  }
+  
+  /* Social icons */
+  .social-icons a {
+    margin: 0 5px;
+    color: #333;
+  }
+  
+  .team-member:hover .social-icons a {
+    color: orange;
+    margin-left: 0;
+  }
+
+
+
+ 
+  .vc_custom_heading{
+    font-size: 35px;
+    color: #222222;
+    line-height: 02px;
+    text-align: center;
+    margin-left: 450px;
+  }
+  
+  .team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+  }
+  
+  .team-members {
+    margin-top: 100px; 
+  }
+  
+  .team-member {
+    display: inline-block; 
+    margin: 0 40px; 
+  }
+  
+  .mt-addons-member-image img {
+    width: 200px; 
+    height: 200px; 
+    border-radius: 30%;
+    object-fit: cover;
+  }
+  .center-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top:-300px; 
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.center-heading {
+    margin: 0 auto;
+}
+
+.image-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; 
+    margin-top: -300px;
+}
+
+.image-gallery img {
+    width: 200px;
+    height: auto;
+    border: 2px solid #ddd; 
+    border-radius: 8px; 
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-gallery img:hover {
+  transform: scale(1.2); /* Adjust the scale factor for the hover effect */
+  filter: brightness(1); /* 1 is the default, making it clear */
+}
+.container{
+  margin-top: -300px;
+}
+.info{margin-top: 20px;}
+.imginf{  border-radius: 8px;
+  max-width: 100%;
+   height: auto;
+  margin-left: 270px;
+margin-top: 40px;
+transition: transform 0.3s ease-in-out;
+}
+.lp{
+  margin-top: -20px;
+}

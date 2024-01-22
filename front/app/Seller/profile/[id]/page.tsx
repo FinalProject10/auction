@@ -1,26 +1,27 @@
 "use client";
-
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState ,useEffect} from 'react';
 import { IoMdPhonePortrait } from "react-icons/io";
 import { MdLocationOn } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdStarRate } from "react-icons/md";
-import Footer from "../../../footer/Footer.tsx"
+import Footer from "../../../footer/Footer.tsx";
 import Navbar from "../../../home/navbar.tsx"
-import axios from "axios";
-
-const Page = ({ params }) => {
+import { GiThorHammer } from "react-icons/gi";
+import axios from 'axios'
+const Page = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
-  const [items, setItems] = useState<Item | []>([]);
- 
- 
-  console.log(items,"items")
+  const [items, setItems] = useState([]); // Make sure items is initialized correctly
+  const[data,setData]=useState([])
+  useEffect(() => {
+   axios.get(`http://localhost:5000/seller/profile/1`).then(r=>setData(r.data)).catch(err=>console.log(err))
+  }, []);
+  
+
   const handleContactVendor = () => {
     setShowContactForm(true);
   };
@@ -30,11 +31,17 @@ const Page = ({ params }) => {
       return;
     }
   
+    // Email validation using a regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+  
     console.log('Name:', name);
     console.log('Email:', email);
     console.log('Message:', message);
   
-    
     alert('Email sent successfully!');
   
     setName('');
@@ -43,6 +50,37 @@ const Page = ({ params }) => {
     setShowContactForm(false);
   };
   
+
+  const handleSearch = () => {
+    const filteredItems = items.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setDisplayedItems(filteredItems);
+  };
+  
+
+// Use displayeditems to render your list in the UI
+
+  const handleSort = () => {
+    let sorteditems = [...items];
+
+    switch (sortOption) {
+      case 'price':
+        sorteditems.sort((a, b) => a.price - b.price);
+        break;
+      case 'name':
+        sorteditems.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'category':
+        sorteditems.sort((a, b) => a.category.localeCompare(b.category));
+        break;
+      default:
+        break;
+    }
+
+    setitems(sorteditems);
+  };
   const divStyle = {
   position :"center",  
   top:"80%",
@@ -64,7 +102,8 @@ const Page = ({ params }) => {
         <div className='w-[70%] ml-[5%] mb-[30%] grid grid-cols-[30%_60%]'>
           <div className='mt-[20%]'>
             <h1 className='text-[10px] font-[300] mb-[20%]'>Store Product Category</h1>
-            <h1 className='text-[#ff2800] font-[300] '>Cars</h1>
+            <h1 className='text-[#ff2800] font-[300] '>CARS</h1>
+
             {showContactForm ? (
               <div className='mt-4'>
                 <input
@@ -104,6 +143,7 @@ const Page = ({ params }) => {
                 Contact Vendor
               </button>
             )}
+            <div><img src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-sidebar_pic-922x1024.jpg" alt="" /></div>
           </div>
           <div>
             <div className='w-[150%] ml-[8%] h-[90%] mt-[15%] bg-white shadow-xl rounded-[20px] text-center relative'>
@@ -113,12 +153,12 @@ const Page = ({ params }) => {
                 className="rounded-full mx-auto mt-6 w-[100px] h-[100px]"
               />
               <div>
-                <p>{items.name}</p>
+                <p>JOHNNY DEEP</p>
               </div>
-              <div className="flex items-center justify-center mt-4"><MdLocationOn color="#ff2800" /> <p></p></div>
-              <div className="flex items-center justify-center mt-4"><IoMdPhonePortrait color="#ff2800" /> <p></p></div>
-              <div className="flex items-center justify-center mt-4"><MdEmail color="#ff2800" /><p></p></div>
-              <div className="flex items-center justify-center mt-4"><MdStarRate color="#ff2800" /> <p>seller.</p></div>
+              <div className="flex items-center justify-center mt-4"><MdLocationOn color="#ff2800" /> <p>EL KEF</p></div>
+              <div className="flex items-center justify-center mt-4"><IoMdPhonePortrait color="#ff2800" /> <p>27348509</p></div>
+              <div className="flex items-center justify-center mt-4"><MdEmail color="#ff2800" /><p>johnny@gmail.com</p></div>
+              <div className="flex items-center justify-center mt-4"><MdStarRate color="#ff2800" /> <p>5 on 5</p></div>
             </div>
           </div>
         </div>
@@ -138,15 +178,125 @@ const Page = ({ params }) => {
       className='w-[100px] p-1 mb-1 rounded border border-black-200 mr-2'
     />
     <button
+      onClick={handleSearch}
       className='bg-blue-500 text-white px-2 py-1 rounded'
       style={{ backgroundColor: '#ff2800', cursor: 'pointer' }}
     >
       Search
     </button>
   </div>
- 
- </div> 
+  <div className='flex items-center'>
+          <span className='text-sm text-gray-500 mr-2'>
+            Sort by:
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className='ml-2 border rounded p-1'
+            >
+              <option value=''>None</option>
+              <option value='price'>Price</option>
+              <option value='name'>Name</option>
+              <option value='category'>Category</option>
+            </select>
+          </span>
+        </div>
+      </div>
+      <div className='flex flex-wrap justify-evenly gap-8'>
+  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
+    <div style={{ position: 'relative' }}>
+      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ2.png" alt="" />
+      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
+        <GiThorHammer />
+      </div>
+    </div> 
+    <div className='text-center'>
+      <h1 className='font-[800] text-[25px] mb-2'>SUV</h1>
+      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
+      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>2500$</h2>
+    </div>
   </div>
+  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
+    <div style={{ position: 'relative' }}>
+      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ1.png" alt="" />
+      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
+        <GiThorHammer />
+      </div>
+    </div> 
+    <div className='text-center'>
+      <h1 className='font-[800] text-[25px] mb-2'>Sedan</h1>
+      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
+      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>1500$</h2>
+    </div>
+  </div>
+  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
+    <div style={{ position: 'relative' }}>
+      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ3.png" alt="" />
+      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
+        <GiThorHammer />
+      </div>
+    </div> 
+    <div className='text-center'>
+      <h1 className='font-[800] text-[25px] mb-2'>Sports</h1>
+      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
+      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>2800$</h2>
+    </div>
+  </div>
+  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
+    <div style={{ position: 'relative' }}>
+      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
+        <GiThorHammer />
+      </div>
+    </div> 
+    <div className='text-center'>
+      <h1 className='font-[800] text-[25px] mb-2'>Convertible</h1>
+      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
+      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>2300$</h2>
+    </div>
+  </div>
+  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
+    <div style={{ position: 'relative' }}>
+      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ7.png" alt="" />
+      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
+        <GiThorHammer />
+      </div>
+    </div> 
+    <div className='text-center'>
+      <h1 className='font-[800] text-[25px] mb-2'>FAMILIAR</h1>
+      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
+      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>1700$</h2>
+    </div>
+  </div>
+  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
+    <div style={{ position: 'relative' }}>
+      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ5.png" alt="" />
+      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
+        <GiThorHammer />
+      </div>
+    </div> 
+    <div className='text-center'>
+      <h1 className='font-[800] text-[25px] mb-2'>CLASSIC</h1>
+      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
+      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>1300$</h2>
+    </div>
+  </div>
+  <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
+    <div style={{ position: 'relative' }}>
+      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ6.png" alt="" />
+      <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
+        <GiThorHammer />
+      </div>
+    </div> 
+    <div className='text-center'>
+      <h1 className='font-[800] text-[25px] mb-2'>4*4</h1>
+      <h4 className='mb-2'>2015 · 97 900 km · 2 494 cm3 · Hybrid</h4>
+      <h6 className='mt-0'>Starting Bid:</h6><h2 style={{ color: '#ff2800' }}>3200$</h2>
+    </div>
+  </div>
+  
+    </div>
+</div>
+
       <Footer/>
     </div>
   );

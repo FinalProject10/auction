@@ -74,6 +74,10 @@ Compare and Contrast: Easily compare multiple vehicles side by side to make the 
     </div>
 </div>
 <div/>
+<div className='img10'><img src="https://cdni.autocarindia.com/utils/imageresizer.ashx?n=https://cms.haymarketindia.net/model/uploads/modelimages/Lamborghini-Revuelto-190920231426.jpg&w=872&h=578&q=75&c=1" width={600} alt="" />
+<p className='para'>
+A trusted website is characterized by its reliability, credibility, and security. It consistently provides accurate information, maintains a transparent and ethical approach, and ensures the privacy and safety of its users. Verified by reputable sources, a trusted website fosters user confidence through a track record of dependability and a commitment to delivering a secure and valuable online experience.</p>
+</div>
 <div className='footer'><Footer/ ></div>
 </div>
   );

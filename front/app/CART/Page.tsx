@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import "./cart.css"
-import Navbar from "../home/navbar.tsx"
+import Navbar from "../home/navbar"
 // import  NavBar  from '../navbar/NavBar'
 
 const Cart = () => {
