@@ -39,16 +39,16 @@ const Inbox = () => {
   return (
     <div  className="flex-row lg:flex">
     <SideBare/>
-    <div className="container mx-auto mt-4 lg:mt-12 overflow-y-auto">
+    <div className="container  overflow-y-auto">
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 ">
    
-<main className="flex w-[100%] h-[10%] ml-[5%] mt-[-2%] ">
+<main className="flex w-[100%] h-[10%] ml-[5%] mt-[10%] ">
   
-    <section className="flex flex-col pt-3 w-4/12 bg-gray-50 h-full ">
-      <label className="px-3">
+    <section className="flex flex-col  w-4/12 ">
+      {/* <label className="px-3">
         <input className="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full"
           placeholder="Search..." />
-      </label>
+      </label> */}
       {reclamtion.map((el=>(
         <ul className="mt-6 overflow-y-scroll" onClick={()=>{Msg(el.Client.id,el.Client.email,el.Client.image,el.Client.name,el.Client.lastName,el.message)}}>
         <li className="py-5 border-b px-3 transition hover:bg-indigo-100">

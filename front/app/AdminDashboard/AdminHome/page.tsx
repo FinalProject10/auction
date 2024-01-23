@@ -60,6 +60,10 @@ const HomePage = () => {
     const [total ,setTotal]=useState<number>(0)
     const [total1,setTotal1] =useState <number>(0)
    const [cordoner , setCordoner]=useState<[]> ([])
+   const [graph , setGraph]=useState([])
+   const [graph2,setGraph2]=useState ([])
+   const [reclamtion,setReclamation]= useState <[]>([])
+
 
     useEffect(() => {
         axios
@@ -102,7 +106,7 @@ const HomePage = () => {
             const fetchedData: MemberPr[] = res.data;
             setData2(fetchedData);
     
-            // Assuming data2 has a 'price' property
+            
             const totalPrice = fetchedData.reduce((acc, item) => acc + item.price, 0);
             setTotal((prevTotal) => prevTotal + totalPrice);
           })
@@ -115,7 +119,7 @@ const HomePage = () => {
         axios
           .get('http://127.0.0.1:5000/dash/getPro')
           .then((res) => {
-            const fetchedData: [] = res.data; // Assuming biditem is a type for your data
+            const fetchedData: [] = res.data; 
             setData3(fetchedData);
             
             const totalSold = fetchedData.reduce((acc, item) => acc + item , 0);
@@ -126,7 +130,8 @@ const HomePage = () => {
             console.log(err);
           });
       }, []);
-     
+   
+
  
     // const router=useRouter()
     // useEffect(()=>{
@@ -153,13 +158,18 @@ const HomePage = () => {
           'May',
           'June',
           'July',
+          "August" ,
+          "September" ,
+          "October" ,
+          "November", 
+          "December",
         ],
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: '#ed64a6',
             borderColor: '#ed64a6',
-            data: [30, 78, 56, 34, 100, 45, 13],
+            data: [30, 78, 56, 34, 100, 45, 13,45,45,45,46,12],
             fill: false,
             barThickness: 8,
           },
@@ -168,7 +178,7 @@ const HomePage = () => {
             fill: false,
             backgroundColor: '#4c51bf',
             borderColor: '#4c51bf',
-            data: [27, 68, 86, 74, 10, 4, 87],
+            data: [27, 68, 86, 74, 10, 4, 87,10,12,22,45,96],
             barThickness: 8,
           },
         ],
@@ -232,17 +242,31 @@ const HomePage = () => {
     }
   }, []);
  
-
+  useEffect(() => {
+    axios
+      .get('http://127.0.0.1:5000/dash/getReclam')
+      .then((res) => {
+        const Data: [] = res.data;
+        setReclamation(Data);
+       const reclamation1= Data.filter((item)=>{item.createdAt.getFullYear()===new Date().getFullYear()}).sort()
+       const reclamtion2 = Data.filter((item2)=>{item2.createdAt.getFullYear()===new Date().getFullYear()-1}).sort()
+       setGraph(reclamation1)
+       setGraph2(reclamtion2)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
 
   
 
   return (
-    <div  className="flex-row lg:flex">
+    <div  className="flex-row lg:flex ">
  <SideBare/> 
- <div className="container mx-auto mt-4 lg:mt-12 overflow-y-auto ">
+ <div className="  overflow-y-auto">
  
-      <div className="relative bg-blueGray-800 md:pt-32 pb-32 pt-12 mt-[-100%px] " style={{"background-color": "#1e293b"}}>
+      <div className="relative bg-blueGray-800 md:pt-32 pb-32  mt-[-2%] " style={{"background-color": "#1e293b"}}>
         <div className="px-4 md:px-10 mx-auto w-full">
           <div>
             {/* Card stats */}
@@ -307,7 +331,7 @@ const HomePage = () => {
 <div>
   
 
-<div className="relative overflow-x-auto ml-[50px] mt-[20%%] w-[1150px]">
+<div className="relative overflow-x-auto ml-[50px] mt-[-20%] w-[1150px]">
 
   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded" >
         <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
