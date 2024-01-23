@@ -4,6 +4,20 @@ const cors = require("cors")({ origin: true });
 const jwt = require("jsonwebtoken");
 const fetch = require("node-fetch");
 admin.initializeApp();
+const corsOptions = {
+  origin: function (origin, callback) {
+    // console.log(origin);
+
+    // if (whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true);
+    // } else {
+    //   callback(new Error("Not allowed by CORS"));
+    // }
+    callback(null, true);
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
 exports.sendFCM = functions.https.onRequest(async (request, response) => {
   cors(request, response, async () => {
     const message = {

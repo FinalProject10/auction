@@ -35,20 +35,18 @@ module.exports = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      let user = await Client.findAll({ where: { email } });
-      if (user.length === 0) {
+      let user = await Client.findOne({ where: { email } });
+      if (!user) {
         return res.status(404).json("user not found");
       }
       if (user) {
-        const hashed = await bcrypt.compare(password, user[0].password);
+        const hashed = await bcrypt.compare(password, user.password);
         if (hashed) {
-          const token = jwt.sign(
-            { id: user[0].id, role: "client" },
-            secretKey,
-            { expiresIn: "24h" }
-          );
+          const token = jwt.sign({ id: user.id, role: "client" }, secretKey, {
+            expiresIn: "24h",
+          });
           console.log(token);
-          return res.status(200).json(token);
+          return res.status(200).json({ token, user });
         }
         return res.status(404).json("password is incorrect");
       }
