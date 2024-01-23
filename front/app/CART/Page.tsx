@@ -1,17 +1,20 @@
 "use client"
 import React from 'react'
 import "./cart.css"
-// import  NavBar  from '../navbar/NavBar'
+import Navbar from "../home/navbar"
+import { IoIosCard } from "react-icons/io";
+
 
 const Cart = () => {
   return (
 
     <div className='body_cart'>
-    
+    <Navbar/>
       <div className='content_cart'>
+        <div className='cartt'>
 <h4 className='page_cart'>Home / Cart</h4>
 <h3 className='title_cart'>Cart</h3>
-
+</div>
 
     <div className='step_cart'>
       <div className='first_step'>1</div>
@@ -27,7 +30,8 @@ const Cart = () => {
 </div>
 
     <div className="line-container"></div>
-<div className='acount_stat'>
+    <div className='boxWithShadow'>
+<IoIosCard className='icon' /> 
   <h5 className='text_cart'>Your cart is currently empty.</h5>
 </div>
 <button className='button_cart'>Return To Shop</button>

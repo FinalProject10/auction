@@ -1,5 +1,5 @@
 .page_cart {
-    color: grey;
+    color:#D3D3D3;
   }
   .content_cart {
     margin: 60px;
@@ -78,7 +78,7 @@
       gap:20%
   }
   .text_step {
-      color: grey;
+      color:#A9A9A9;
       font-size: 13px;
     font-weight: 500;
     text-decoration: solid;
@@ -99,11 +99,13 @@
   }
   .text_cart {
     color: grey;
+    margin-top: -25px;
+    margin-left: 50px;
   }
   .button_cart {
     background-color: #ff2800;
-    color: white;
-    font-size: 18px;
+    color:black;
+    font-size: 15px;
     font-weight: 500;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
     border-radius: 5px;
@@ -117,4 +119,21 @@
     border: 2px solid black;
     border-radius: 10px;
   }
-  
+ .cartt{
+  margin-left: -85px;
+  margin-top: -80px;
+  background-color:#EFEFEF;
+  width: 30000px;
+  height: 100px;
+ }
+ .icon{
+  font-size: 25px;
+  color:#ff2800;
+  margin-top:0px
+ }
+ .boxWithShadow {
+  padding: 20px; /* Adjust the padding as needed */
+  borderRadius: 8px; /* Adjust the border radius as needed */
+  boxShadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adjust the shadow as needed */
+  background: #ffffff; /* Set your desired background color */
+}

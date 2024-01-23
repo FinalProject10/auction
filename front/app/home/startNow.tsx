@@ -12,7 +12,7 @@ const StartNow = () => {
         <h2 className='font-[700] text-[#0a0a0a] text-[20px] mb-[5%]'>Registration and Account</h2>
         <h1 className='font-[100] text-[15px]'>your premier destination for a thrilling and dynamic online auction experience. Our platform is designed to bring together buyers and sellers in a secure and user-friendly environment</h1>
         </div>
-        <img className='w-[285px] top-[440%] left-[20%] absolute' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-dots1.png" alt="" />
+        <img className='w-[285px] top-[420%] left-[20%] absolute' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-dots1.png" alt="" />
     </div>
     <div className='pl-[20%]'>
        <div>
@@ -26,7 +26,7 @@ const StartNow = () => {
         <img className='text-center ml-[20%] mb-[3%]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_how2.png" alt="" />
         <h2 className='font-[700] text-[#0a0a0a] text-[20px] mb-[5%]'>Place Bids and Monitor</h2>
         <h1 className='font-[100] text-[15px]'>Now that you've found the vehicle that resonates with your desires, it's time to take control of your bidding destiny with our user-friendly "Place Bid and Monitor" feature.</h1>
-        <img className='absolute w-[285px] left-[55%] top-[470%]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-dots2-1.png" alt="" />
+        <img className='absolute w-[285px] left-[55%] top-[460%]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-dots2-1.png" alt="" />
         </div>
     </div>
 </div>

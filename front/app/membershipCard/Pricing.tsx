@@ -1,9 +1,12 @@
 "use client"
 import React, { FC, useState } from 'react';
 import { FcInfo } from 'react-icons/fc';
+import { GrValidate } from "react-icons/gr";
 import { motion } from 'framer-motion';
+import Navbar from '../home/navbar.tsx'
+import Footer from '../footer/Footer.tsx'
 import { fadeIn } from './fadeIn';
-
+import "./mem.css"
 interface Package {
   name: string;
   monthlyPrice: number;
@@ -65,8 +68,10 @@ const Pricing: FC = () => {
 
 
   return (
-    <div className="py-10 md:px-14 p-4 max-w-screen-2xl mx-auto" id="pricing">
+    <div id="pricing">
+      <div className='nav'>   <Navbar/> </div>
       <div className="text-center">
+      
         <div className="bg-gray-100 p-8 rounded-lg shadow-lg mb-8">
           <h2 className="md:text-5xl text-2xl font-extrabold text-gray-900 mb-2">Pricing Services</h2>
           <p className="text-tertiary md:w-1/3 mx-auto">
@@ -106,21 +111,22 @@ const Pricing: FC = () => {
 
           <div
             key={index}
-            className={`border py-10 md:px-6 px-4 rounded-lg shadow-md ${pkg.name === 'Premium' ? 'bg-black text-white' : ''
-              }`}
+            className={`border py-10 md:px-6 px-4 rounded-lg shadow-md ${
+              pkg.name === 'Premium' ? 'bg-black text-white' : ''
+            }`}
           >
-            <h3 className="text-3xl font-bold text-center text-[#010851]">{pkg.name}</h3>
+            <h3 className="text-3xl font-bold text-center text-[#]">{pkg.name}</h3>
             <p className="text-tertiary text-center my-6">{pkg.description}</p>
             {pkg.features && (
-              <ul className="mt-4 space-y-2 px-4">
-                {pkg.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center">
-                    <FcInfo className="mr-2 text-xl" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            )}
+  <ul className="mt-4 space-y-2 px-4">
+    {pkg.features.map((feature, featureIndex) => (
+      <li key={featureIndex} className="flex items-center">
+        <GrValidate className="mr-2 text-xl notification-icon" /> {/* Use GrValidate instead of FcInfo */}
+        {feature}
+      </li>
+    ))}
+  </ul>
+)}
             <p className="mt-5 text-center text-secondary text-4xl font-bold">
               {isYearly ? `$${pkg.yearlyPrice}` : `$${pkg.monthlyPrice}`}
               <span className="text-base text-tertiary font-medium">/{isYearly ? 'year' : 'month'}</span>
@@ -135,12 +141,10 @@ const Pricing: FC = () => {
         ))}
 
       </motion.div>
-      <div className="bg-orange-500 p-200 mt-6000   right-0 left-0 w-full">
-        <img src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-newsletter_pic.png" width={600} alt="car" />
-      </div>
+    
 
 
-
+<Footer className='ft'/>
     </div>
   );
 };
