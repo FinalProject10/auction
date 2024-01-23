@@ -1,6 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import SideBare from '../AdminSidebar/page'
+
+import dynamic from "next/dynamic";
+const SideBare = dynamic(() => import("../AdminSidebar/page"));
 import '../AdminClientNotBid/bt.css'
 import axios from 'axios'
 import { Refresh } from '@mui/icons-material'
@@ -48,7 +50,7 @@ const remove= async (id)=>
   return (
     <div className="flex-row lg:flex"> 
     <SideBare/>
-    <div className="container mx-auto mt-4 lg:mt-12">
+    <div className="container mx-auto mt-4 lg:mt-12 overflow-y-auto">
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
