@@ -64,7 +64,7 @@ const Inbox = () => {
       <div className="flex justify-between items-center h-48 border-b-2 mb-8">
         <div className="flex space-x-4 items-center">
           <div className="h-12 w-12 rounded-full overflow-hidden">
-            <img src="https://shorturl.at/eosQ1"
+            <img src={mess?.image}
    className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col">
