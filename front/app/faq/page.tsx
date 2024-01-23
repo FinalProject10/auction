@@ -74,13 +74,13 @@ const FAQ: React.FC = () => {
       <div className="vc_tta-panel-heading">
         {accordionItems.map((item) => (
           <div className="accordion-item" key={item.id}>
-            <button
+            <button 
               onClick={() => toggleAccordion(item.id)}
               aria-expanded={item.expanded}
             >
               <span className="accordion-title">{item.title}</span>
               <span className="icon" aria-hidden="true"></span>
-            </button>
+            </button >
             {item.expanded && (
               <div className="accordion-content">
                 <p>{item.content}</p>

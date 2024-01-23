@@ -41,13 +41,16 @@ const Products = () => {
     const[index,setIndex]=useState(1)
     const [page, setPage] = useState(1);
     const[size,setSize]=useState(0)
+    const[new1,setNew1]=useState(3)
+  const[pages,setPages]=useState(-1)
     const router=useRouter()
-    useEffect(()=>{ axios.get('http://localhost:5000/items/get').then(r=>{
+    useEffect(()=>{ 
+      axios.get('http://localhost:5000/items/get').then(r=>{
           setAllData(r.data);setAllData1(r.data)
-        setr(r.data)})
+        setr(r.data);setPages(Math.floor((r.data.length-1)/8)+1)})
         .catch(err=>console.log(err))},[])
    
-    
+    console.log("pages",pages)
    
     const setr=(arr:any)=>{      
       
@@ -910,7 +913,7 @@ const filter2=(property:any,value:any)=>{
             </div>
             <div className='p-[15px] text-[#333333]'>
             <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'>{el.name}</h1>
-            <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
+            <h1 className='mb-[10px] font-[500]'>{el.short_description}</h1>
             
 
             <h1 className='font-[300] text-[13px]'>Auction Ended</h1>
@@ -942,9 +945,11 @@ const filter2=(property:any,value:any)=>{
     </div>))}
     
         </div>}
+        {/* buttons pagination */}
         <div className="flex gap-[2%] mb-[30px]">
         {index>1&&<div 
     onClick={()=>{
+      index>2&&new1>3&&setNew1(index-1)
       setIndex(index-1)
        handleLoadMore(index-1)
     }}
@@ -965,29 +970,37 @@ const filter2=(property:any,value:any)=>{
     style={{color:index===2?'white':'black',backgroundColor:index===2?'#ff2800':'white'}}
     className=" w-[50px] h-[50px]  hover:text-white hover:bg-[#ff2800] rounded flex justify-center items-center cursor-pointer">2</div>
 
-            <div
+           {pages>2&& <div className="flex gap-[20px]"> <div
               onClick={() => {
                 setIndex(3);
                 if (index === 3) handleLoadMore(index);
               }}
               style={{
-                color: index === 3 ? "white" : "black",
-                backgroundColor: index === 3 ? "#ff2800" : "white",
+                color:"black",
+                backgroundColor:"white",
               }}
               className=" w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer"
             >
-              3
+              ...
             </div>
+            <div
+              onClick={() => {
+                setIndex(new1);
+                if (index === new1) handleLoadMore(index);
+              }}
+              style={{color:index===new1?'white':'black',backgroundColor:index===new1?'#ff2800':'white'}}
+              className=" w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer"
+            >
+              {new1}
+              </div>
+            </div>}
 
-    <div 
-    onClick={()=>{
-      setIndex(4)
-      handleLoadMore(index)
-      }}
-    style={{color:index===4?'white':'black',backgroundColor:index===4?'#ff2800':'white'}}
-    className=" w-[50px] h-[50px] text-white bg-[#ff2800] rounded flex justify-center items-center cursor-pointer">4</div>
-    {index<4&&<div 
+    
+     
+    
+    {index<pages&&<div 
     onClick={()=>{setIndex(index+1),
+      index===3&&setNew1(new1+1)
       handleLoadMore(index+1)
     }}
     className=" w-[50px] h-[50px]  bg-white rounded flex justify-center items-center cursor-pointer hover:text-white hover:bg-[#ff2800] transition-all">→</div>
