@@ -27,13 +27,13 @@ const ItemBid = ({ items }) => {
 
     // Function to leave the current room and join a new one
     const joinNewRoom = (newRoomId) => {
-      socket.emit("leaveRoom", items[0].id);
+      socket.emit("leaveRoom", items[0]?.id);
 
       socket.emit("joinRoom", newRoomId);
     };
 
     // Join the initial room when the component mounts
-    socket.emit("create", items[0].id);
+    socket.emit("create", items[0]?.id);
 
     // Set up socket event listeners
     socket.on("placeBid", handleNewBidFromOthers);
@@ -67,7 +67,7 @@ const ItemBid = ({ items }) => {
         setErrorMessage(false);
         setSuccessMessage("");
         setNewBidMessageVisible(false);
-      }, 1000);
+      }, 5000);
       setNewBidMessageVisible(false);
 
       return () => clearTimeout(hideTimeout);

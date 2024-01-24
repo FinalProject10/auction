@@ -6,6 +6,7 @@ import axios from "axios";
 function AuctionHistory({ items, timeStart, timeEnd, price }) {
   const [data, setData] = useState([]);
   const [visibleItems, setVisibleItems] = useState(10);
+  console.log(data);
 
   const fetchData = async () => {
     try {

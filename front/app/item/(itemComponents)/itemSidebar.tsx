@@ -16,14 +16,13 @@ import axios from "axios";
 const ItemSidebar = ({ items }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  console.log("page,data", page, data);
 
   useEffect(() => {
     // Function to fetch items from the server
     const fetchItems = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/items/fetch-items/?page=${page}`
+          `http://localhost:5000/items/fetch-4items/?page=${page}`
         );
         setData(response.data);
       } catch (error) {
@@ -44,6 +43,32 @@ const ItemSidebar = ({ items }) => {
     // Decrement the page when the "Back" button is clicked
     setPage((prevPage) => prevPage - 1);
   };
+  const calculateRemainingTime = (endDate) => {
+    const currentDate = new Date();
+    const auctionEndDate = new Date(endDate);
+    const timeDifference = auctionEndDate - currentDate;
+
+    if (timeDifference > 0) {
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+      );
+
+      if (days > 0) {
+        return `${days} days`;
+      } else if (hours > 0) {
+        return `${hours} hours`;
+      } else {
+        return `${minutes} minutes`;
+      }
+    } else {
+      return "Auction ended";
+    }
+  };
+
   return (
     <>
       <div>
@@ -101,16 +126,24 @@ const ItemSidebar = ({ items }) => {
           ))}
         </div>
         <div>
-          {data.length > 0 && (
-            <button onClick={handleLoadBack}>
-              <FaCircleArrowLeft />
-            </button>
-          )}
-          {data.length > 0 && (
-            <button onClick={handleLoadMore}>
-              <FaCircleArrowRight />
-            </button>
-          )}
+          <div className="flex justify-end mr-10 mt-5">
+            {data && (
+              <button
+                onClick={handleLoadBack}
+                className="rounded-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 p-8 "
+              >
+                <FaCircleArrowLeft />
+              </button>
+            )}
+            {data.length > 0 && (
+              <button
+                className="rounded-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 p-8"
+                onClick={handleLoadMore}
+              >
+                <FaCircleArrowRight />
+              </button>
+            )}
+          </div>
         </div>
         <div className="flex flex-wrap mt-3 max-w-[400px]">
           {data.map((el) => (
@@ -136,7 +169,9 @@ const ItemSidebar = ({ items }) => {
                   </Link>
                 </div>
 
-                <h1 className="name font-bold object-center mb-3 ">26 daays</h1>
+                <h1 className="name font-bold object-center mb-3 ">
+                  {calculateRemainingTime(el.timeEnd)}{" "}
+                </h1>
 
                 <div className="font-semibold	 text-sm/[30px] border border-black-200 rounded-sm p-4 drop-shadow-lg bg-white rounded-b-lg">
                   <p>{el.name}</p>

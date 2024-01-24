@@ -1,8 +1,9 @@
-import React from "react";
-import Navbar from "../home/navbar.tsx";
-import Footer from "../footer/Footer.tsx";
-import "./404.css";
-const page: React.FC = () => {
+import Link from "next/link";
+import { headers } from "next/headers";
+import "./404/404.css";
+import Navbar from "./home/navbar";
+import Footer from "./footer/Footer";
+export default function NotFound() {
   return (
     <div className="container">
       <Navbar />
@@ -123,6 +124,4 @@ const page: React.FC = () => {
       <Footer className="footer" />
     </div>
   );
-};
-
-export default page;
+}
