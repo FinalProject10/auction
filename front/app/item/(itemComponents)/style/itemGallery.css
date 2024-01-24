@@ -23,12 +23,12 @@ body {
     font-family: Kumbh Sans;
 }
 
-button {
+/* button {
     cursor: pointer;
     border: none;
     font-family: inherit;
     background-color: unset;
-}
+} */
 
 .gallery-holder {
     width: 100%;
