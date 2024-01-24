@@ -42,35 +42,35 @@ const Home = () => {
     "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-home2.jpg",
   ];
   const [i, setI] = useState(0);
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    const token = localStorage.getItem("user");
-    if(!token){
-      router.push("/")
-    }
-    if (role === "client") {
-      axios
-        .get(`http://localhost:5000/client/home`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((r) => console.log("r"))
-        .catch((err) => router.push("/register/client"));
-    } else if (role === "seller") {
-      axios
-        .get(`http://localhost:5000/seller/home`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((r) => console.log("r"))
-        .catch((err) => router.push("/register/seller"));
-    } else if (role === "admin") {
-      axios
-        .get(`http://localhost:5000/admin/home`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((r) => console.log("r"))
-        .catch((err) => router.push("/register/seller"));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const role = localStorage.getItem("role");
+  //   const token = localStorage.getItem("user");
+  //   if(!token){
+  //     router.push("/")
+  //   }
+  //   if (role === "client") {
+  //     axios
+  //       .get(`http://localhost:5000/client/home`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       })
+  //       .then((r) => console.log("r"))
+  //       .catch((err) => router.push("/register/client"));
+  //   } else if (role === "seller") {
+  //     axios
+  //       .get(`http://localhost:5000/seller/home`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       })
+  //       .then((r) => console.log("r"))
+  //       .catch((err) => router.push("/register/seller"));
+  //   } else if (role === "admin") {
+  //     axios
+  //       .get(`http://localhost:5000/admin/home`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       })
+  //       .then((r) => console.log("r"))
+  //       .catch((err) => router.push("/register/seller"));
+  //   }
+  // }, []);
   return (
     <div>
       <div

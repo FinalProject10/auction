@@ -5,7 +5,7 @@ const Items = require("./items");
 const Memberships = require("./memberships");
 const Seller = require("./sellers");
 const Reclamation = require("./reclamation");
-
+const Chat=require('./chat')
 Client.hasMany(Bid);
 Bid.belongsTo(Client);
 
@@ -18,8 +18,14 @@ Reclamation.belongsTo(Client);
 Seller.hasMany(Items);
 Items.belongsTo(Seller);
 
-Memberships.hasMany(Client, { foreignKey: "membershipId" });
-Client.belongsTo(Memberships);
+Client.hasMany(Memberships);
+Memberships.belongsTo(Client);
+
+Client.hasMany(Chat)
+Chat.belongsTo(Client)
+
+Seller.hasMany(Chat)
+Chat.belongsTo(Seller)
 
 // Items.belongsTo(Client, { foreignKey: "clientId", as: "client" });
 
@@ -31,4 +37,5 @@ module.exports = {
   Memberships,
   Seller,
   Reclamation,
+  Chat
 };

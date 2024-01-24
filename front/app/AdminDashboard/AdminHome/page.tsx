@@ -285,7 +285,7 @@ const HomePage = () => {
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="subscription revenue"
+                  statSubtitle="subscription rev"
                   statTitle={total}
                   statArrow="down"
                   statPercent="3.48"
