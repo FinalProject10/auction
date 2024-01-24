@@ -8,7 +8,7 @@ const Auctions = () => {
     const[allData,setAllData]=useState([])
     const[allData1,setAllData1]=useState([])
     useEffect(()=>{
-        axios.get('http://localhost:5000/items/fetch-items').then(r=>{setData(r.data);setAllData(r.data);setAllData1(r.data)}).catch(err=>console.log(err))
+        axios.get('http://localhost:5000/items/fetch-items').then(r=>{console.log(r.data);setData(r.data);setAllData(r.data);setAllData1(r.data)}).catch(err=>console.log(err))
     },[])
     const endingSoon=()=>{
         const filtered=allData.filter(el=>{
@@ -36,7 +36,7 @@ const Auctions = () => {
             <Link href={`/item/${el.id}`}> <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'
         
             >{el.name}</h1></Link>
-            <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
+            <h1 className='mb-[10px] font-[500]'>{el.short_description}</h1>
             <h1 className='font-[300] text-[13px]'>{Math.floor((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)}h</h1>
             </div>
         </div>))}

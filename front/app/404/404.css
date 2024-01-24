@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
+/* General styling for the container */
+.container {
+  text-align: center;
+  size: 1000%; /* Not a standard CSS property, consider removing or using a different property */
+}
+
+.four1{
+animation: swing ease-in-out 1.5s infinite alternate;
+    display: inline-block;
+   
+}
+.zero{
+  animation: swing2 ease-in-out 1.5s infinite alternate;
+  display: inline-block;
+ 
+}
+.four2{
+animation: swing3 ease-in-out 1.5s infinite alternate;
+    display: inline-block;
+}
+@keyframes swing {
+    0% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+  }
+  
+  @keyframes swing2 {
+    0% { transform: rotate(-3deg); }
+    100% { transform: rotate(3deg); }
+  }
+  
+  @keyframes swing3 {
+    0% { transform: rotate(-3deg); }
+    100% { transform: rotate(8deg); }
+  }
+  
+  /* Styling for the h1 heading */
+  h1 {
+    font-family: 'Fjalla One';
+    text-align: center;
+    color: #666;
+  }
+  
+h1{
+  font-family: 'Fjalla One';
+  text-align: center; 
+  color: #666;
+}
+.title{
+margin-top:90px;
+margin-left:00px;
+
+}
+.button_cart {
+    margin-top: 40px;
+    background-color:#ff2800;
+    color:white;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+    border-radius: 5px;
+    width: 12%;
+    height: 20%;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .button_cart:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+  .footer{
+    margin-top:100px;
+  }
+  @media screen and (min-width: 900px) {
+    .container {
+      max-width: 1500px; 
+    }
+  }
