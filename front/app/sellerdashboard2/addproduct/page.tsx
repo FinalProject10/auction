@@ -23,10 +23,27 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
           alert ('product saved successfully!')
         }
         const generateRandomOptions = () => {
-            const options = [];
-            for (let i = 1; i <= 20; i++) {
-              options.push(`Option ${i}`);
-            }
+            const options = ['Toyota Camry',
+            'Honda Accord',
+            'Ford Mustang',
+            'Chevrolet Silverado',
+            'BMW 3 Series',
+            'Mercedes-Benz C-Class',
+            'Volkswagen Golf',
+            'Nissan Altima',
+            'Tesla Model 3',
+            'Subaru Outback',
+            'Audi A4',
+            'Hyundai Sonata',
+            'Jeep Wrangler',
+            'Ford F-150',
+            'Lexus RX',
+            'Porsche 911',
+            'Mazda CX-5',
+            'Kia Sorento',
+            'Volvo XC90',
+            'Jaguar F-PACE'];
+           
             return options;
           };
     return (

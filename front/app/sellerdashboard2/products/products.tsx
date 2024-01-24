@@ -1,9 +1,27 @@
+"use client"
+import {useState,useEffect} from 'react'
+import axios from 'axios'
+
 import './products.css'
 import SideBar from '../sidebar/page'
 import Table from './table'
 import Link from 'next/link'
 
 export default function Products(){
+    const [products,setProducts]=useState<[]>([])
+    
+    const fetchAll = ()=>{
+        axios.get('http://localhost:5000/items/fetch-items/').then((result)=>{
+            setProducts(result.data)
+        }).catch((err)=>{
+            console.log(err)
+        }) 
+       }
+    useEffect(()=>{
+        fetchAll()
+          },[])
+   
+   
     return(
         <div className="container">
             <div className="side">
@@ -14,15 +32,15 @@ export default function Products(){
                 <div className="stats">
                     <div className="all">
                     <p>All</p>
-                    <span>(0)</span>
+                    <span>{(products.length)}</span>
                     </div>
                     <div className="all">
                     <p>Pending Review</p>
-                    <span>(0)</span>
+                    <span>{(products.length)}</span>
                     </div>
                     <div className="all">
                     <p>In stock</p>
-                    <span>(0)</span>
+                    <span>{(products.length)}</span>
                     </div>
                     
                 </div>
@@ -51,7 +69,7 @@ export default function Products(){
                     <button>Apply</button>
                 </div>
                 <div className="table">
-                <Table/>
+                <Table products={products} />
                 </div>
                 </div>
         </div>

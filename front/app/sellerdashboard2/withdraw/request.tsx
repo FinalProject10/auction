@@ -37,16 +37,15 @@ export default function Request(props:RequestProps){
           {/* Container */}
           <Box sx={{ borderBottom: '2px solid red' }}>
             {/* Body */}
-            <Box>
+            <Box  className='dok'>
               {/* First div */}
-              <div>
+              <div  >
               <div className="dokan-panel dokan-panel-default">
           <div className="dokan-panel-heading">
-            <h3>Balance</h3>
+            <h3>Withdraw Amount</h3>
           </div>
           <div className="dokan-panel-body">
             <p>Your Balance: $0.00</p>
-            <button className="withdraw-button" >Request Withdraw</button>
           </div>
         </div>
               </div>
@@ -56,11 +55,11 @@ export default function Request(props:RequestProps){
               <div>
               <div className="dokan-panel dokan-panel-default">
           <div className="dokan-panel-heading">
-            <h3>Balance</h3>
+            <h3>View Method</h3>
           </div>
           <div className="dokan-panel-body">
             <p>Your Balance: $0.00</p>
-            <button className="withdraw-button" >Request Withdraw</button>
+            
           </div>
         </div>
               </div>

@@ -24,6 +24,7 @@ const cloudRoute = require("./routes/cloudinary");
 const cors = require("cors");
 const ProductsRouter = require("./routes/products");
 const sellerRouter = require("./routes/seller");
+const getInTouch=require("./routes/getInTouch.js")
 
 const app = express();
 app.use(cors());
@@ -89,6 +90,7 @@ app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
 app.use("/cloudinary", cloudRoute);
+app.use("/getInTouch",getInTouch)
 app.get("/getallusers", async (req, res) => {
   let d = await Client.findAll();
   let s = await Seller.findAll();

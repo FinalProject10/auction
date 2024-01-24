@@ -1,26 +1,18 @@
 "use client"
-import {useState,useEffect} from 'react'
-import axios from 'axios'
-import Link from 'next/link'
+// import {useState,useEffect} from 'react'
+ import Link from 'next/link'
 import './table.css'
+interface Props {
+    products:[]
+}
 interface Product {
     name:string;
     category:string;
     price:number;
 }
-export default function Table(){
-    const [products,setProducts]=useState<[]>([])
-   const fetchAll = ()=>{
-    axios.get('http://localhost:5000/items//fetch-items/').then((result)=>{
-        setProducts(result.data)
-    }).catch((err)=>{
-        console.log(err)
-    })
-   }
-   useEffect(()=>{
-    fetchAll()
-    
-   },[])
+export default function Table(props:Props){
+   
+    const products = props.products
    console.log(products)
     return(
       
@@ -70,7 +62,7 @@ export default function Table(){
                             <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white"> {e.category} </td>
                             <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"> {e.price} </td>
                             <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                <Link href="/sellerdashboard2/edit/product" className="text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                                <Link href='edit/account'  className="text-blue-600 dark:text-blue-500 hover:underline"  >Edit </Link >
                             </td>
                            
                             </tr>
