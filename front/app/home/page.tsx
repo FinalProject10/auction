@@ -42,32 +42,35 @@ const Home = () => {
     "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-home2.jpg",
   ];
   const [i, setI] = useState(0);
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    const token = localStorage.getItem("user");
-    if (role === "client") {
-      axios
-        .get(`http://localhost:5000/client/home`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((r) => console.log("r"))
-        .catch((err) => router.push("/register/client"));
-    } else if (role === "seller") {
-      axios
-        .get(`http://localhost:5000/seller/home`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((r) => console.log("r"))
-        .catch((err) => router.push("/register/seller"));
-    } else if (role === "admin") {
-      axios
-        .get(`http://localhost:5000/admin/home`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((r) => console.log("r"))
-        .catch((err) => router.push("/register/seller"));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const role = localStorage.getItem("role");
+  //   const token = localStorage.getItem("user");
+  //   if(!token){
+  //     router.push("/")
+  //   }
+  //   if (role === "client") {
+  //     axios
+  //       .get(`http://localhost:5000/client/home`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       })
+  //       .then((r) => console.log("r"))
+  //       .catch((err) => router.push("/register/client"));
+  //   } else if (role === "seller") {
+  //     axios
+  //       .get(`http://localhost:5000/seller/home`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       })
+  //       .then((r) => console.log("r"))
+  //       .catch((err) => router.push("/register/seller"));
+  //   } else if (role === "admin") {
+  //     axios
+  //       .get(`http://localhost:5000/admin/home`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       })
+  //       .then((r) => console.log("r"))
+  //       .catch((err) => router.push("/register/seller"));
+  //   }
+  // }, []);
   return (
     <div>
       <div
@@ -87,10 +90,14 @@ const Home = () => {
               Startin bid from 3400$
             </h1>
             <div className="flex gap-[30px] mt-[3%]">
-              <button className="w-[150px] h-[45px] rounded-[4px] bg-[#ff2800] text-white hover:bg-transparent transition-all">
+              <button 
+              onClick={()=>router.push('/shop')}
+              className="w-[150px] h-[45px] rounded-[4px] bg-[#ff2800] text-white hover:bg-transparent transition-all">
                 Place Bid
               </button>
-              <button className="w-[150px] h-[45px] rounded-[4px] bg-white text-black hover:font-[600] transition-all">
+              <button 
+              onClick={()=>router.push(`/item/${6}`)}
+              className="w-[150px] h-[45px] rounded-[4px] bg-white text-black hover:font-[600] transition-all">
                 Check Car
               </button>
             </div>
@@ -104,10 +111,14 @@ const Home = () => {
               Startin bid from 3400$
             </h1>
             <div className="flex gap-[30px] mt-[3%]">
-              <button className="w-[150px] h-[45px] rounded-[4px] bg-[#ff2800] text-white hover:bg-transparent transition-all">
+              <button 
+              onClick={()=>router.push('/shop')}
+              className="w-[150px] h-[45px] rounded-[4px] bg-[#ff2800] text-white hover:bg-transparent transition-all">
                 Place Bid
               </button>
-              <button className="w-[150px] h-[45px] rounded-[4px] bg-white text-black hover:font-[600] transition-all">
+              <button 
+              onClick={()=>router.push(`/item/${2}`)}
+              className="w-[150px] h-[45px] rounded-[4px] bg-white text-black hover:font-[600] transition-all">
                 Check Car
               </button>
             </div>

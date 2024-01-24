@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import "./style/itemGaliry.css";
+import "./style/itemGallery.css";
 
 const Gallery: React.FC<GalleryProps> = ({ items }) => {
   const [currentImage, setCurrentImage] = useState(items[0]?.images[0] || "");
