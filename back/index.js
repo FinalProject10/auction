@@ -66,7 +66,7 @@ storeItemMap.set("item2", { id: "item2", name: "Product B", priceInDt: 150 });
 // });
 /////////////
 
-app.get("/bidNotification", async (req, res) => {
+app.get("/bidNotification/:id", async (req, res) => {
   try {
     const lastBid = await Bid.findOne({
       attributes: ["bidAmount", "createdAt"],
@@ -80,7 +80,7 @@ app.get("/bidNotification", async (req, res) => {
     if (lastBid) {
       const bidAmount = parseInt(lastBid.bidAmount, 10);
 
-      sendMessageToUser(3, bidAmount.toString());
+      sendMessageToRoom(parseInt(req.params.id), bidAmount.toString());
       console.log(bidAmount, "bidAmount##########");
       return res.json(bidAmount);
     } else {
@@ -91,6 +91,8 @@ app.get("/bidNotification", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+///
+
 ///
 app.post("/create-checkout-session", async (req, res) => {
   try {
@@ -166,7 +168,6 @@ io.on("connection", (socket) => {
   socket.on("create", function (room) {
     console.log("room", room);
 
-    // Get the list of rooms the user is currently in
     const rooms = Array.from(socket.rooms);
 
     // Remove the default room from the list (if present)
@@ -196,7 +197,6 @@ io.on("connection", (socket) => {
     // Remove the default room from the list (if present)
     const currentRoom = rooms.find((room) => room !== socket.id);
 
-    // Leave the current room if exists
     if (currentRoom) {
       socket.leave(currentRoom);
       console.log("Left room: ", currentRoom);
@@ -216,23 +216,23 @@ function sendMessageToRoom(roomId, message) {
   }
 }
 
-// function sendMessageToUser(userId, message) {
-//   let userSocket = null;
-//   console.log(userSocketMap, "userSocketMap");
-//   if (userId?.id) {
-//     userSocket = userSocketMap.get(userId.id);
-//   } else {
-//     userSocket = userSocketMap.get(userId);
-//   }
-//   if (userSocket) {
-//     console.log("sending message to user ", userId);
+function sendMessageToUser(userId, message) {
+  let userSocket = null;
+  console.log(userSocketMap, "userSocketMap");
+  if (userId?.id) {
+    userSocket = userSocketMap.get(userId.id);
+  } else {
+    userSocket = userSocketMap.get(userId);
+  }
+  if (userSocket) {
+    console.log("sending message to user ", userId);
 
-//     userSocket.emit("notification", message);
-//   } else {
-//     console.log(userId, " do not exist");
-//   }
-// }
+    userSocket.emit("notification", message);
+  } else {
+    console.log(userId, " do not exist");
+  }
+}
 module.exports = {
-  // sendMessageToUser: sendMessageToUser,
+  sendMessageToUser: sendMessageToUser,
   sendMessageToRoom: sendMessageToRoom,
 };
