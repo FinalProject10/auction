@@ -98,4 +98,21 @@ const getAllItems = async (req, res) => {
     res.status(500).json("Internal server error");
   }
 };
-module.exports = { getItems, addItem, getAllItems, getAll, geBid };
+const getItemsBided = async (req, res) => {
+  try {
+    let d = await Items.findAll({
+      include: [
+        {
+          model: Bids,
+          where: { ClientId: req.params.id },
+          attributes: [],
+        },
+      ],
+    });
+    if (d) return res.status(200).json(d);
+    return res.status(404).json("404");
+  } catch (err) {
+    res.status(500).json("internal err");
+  }
+};
+module.exports = { getItems, addItem, getAllItems, getAll, getItemsBided };
