@@ -115,4 +115,11 @@ const getItemsBided = async (req, res) => {
     res.status(500).json("internal err");
   }
 };
-module.exports = { getItems, addItem, getAllItems, getAll, getItemsBided };
+module.exports = {
+  getItems,
+  addItem,
+  getAllItems,
+  getAll,
+  getItemsBided,
+  geBid,
+};

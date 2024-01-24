@@ -6,11 +6,17 @@ import AuctionTimer from "./auctionTimer";
 import socket from "./bid/socket";
 
 const ItemBid = ({ items }) => {
-  const [quant, setQuant] = useState();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [quant, setQuant] = useState(
+    items[0]?.bids.length > 0
+      ? items[0]?.bids[items[0]?.bids.length - 1]?.bidAmount
+      : items[0]?.price
+  );
+  const [errorMessage, setErrorMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [newBidMessageVisible, setNewBidMessageVisible] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+
   const userId = localStorage.getItem("userId");
   useEffect(() => {
     // Function to handle new bids from others
@@ -33,9 +39,18 @@ const ItemBid = ({ items }) => {
     socket.on("placeBid", handleNewBidFromOthers);
     socket.on("notification", (bidData) => {
       setQuant(bidData);
+      setNewBidMessageVisible(true);
+      const hideTimeout = setTimeout(() => {
+        setNewBidMessageVisible(false);
+      }, 1000);
+
+      return () => clearTimeout(hideTimeout);
+
       console.log("test socket from back");
     });
-
+    socket.on("notification", (message) => {
+      setNotifications((prevNotifications) => [...prevNotifications, message]);
+    });
     // Clean up socket event listener on component unmount
     return () => {
       socket.off("notification", handleNewBidFromOthers);
@@ -49,14 +64,18 @@ const ItemBid = ({ items }) => {
     if (isPopupVisible) {
       const hideTimeout = setTimeout(() => {
         setPopupVisible(false);
-        setErrorMessage("");
+        setErrorMessage(false);
         setSuccessMessage("");
-      }, 10000);
+        setNewBidMessageVisible(false);
+      }, 1000);
+      setNewBidMessageVisible(false);
 
       return () => clearTimeout(hideTimeout);
     }
   }, [isPopupVisible]);
-
+  const handlePopupClose = () => {
+    setPopupVisible(false);
+  };
   const adjustQuant = (amount) => {
     setQuant((prevQuant) => parseInt(prevQuant) + amount);
   };
@@ -66,7 +85,7 @@ const ItemBid = ({ items }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    // setNewBidMessageVisible(true);
     const itemId = items[0].id;
 
     // socket.emit("placeBid", {
@@ -90,6 +109,9 @@ const ItemBid = ({ items }) => {
 
       if (!response.ok) {
         console.error("Failed to place bid");
+        setErrorMessage(true);
+        setPopupVisible(true);
+
         return;
       }
 
@@ -107,6 +129,7 @@ const ItemBid = ({ items }) => {
         // If the response is successful, update the state with the bid data
         const bidData = await bidNotificationResponse.json();
         console.log("Bid notification response:", bidData);
+
         setQuant(bidData);
       } else {
         console.error("Failed to fetch bid notification");
@@ -121,7 +144,7 @@ const ItemBid = ({ items }) => {
       setQuant(data.bidAmount);
     });
 
-    setErrorMessage("");
+    setErrorMessage(false);
     setSuccessMessage("Bid submitted successfully!");
     setPopupVisible(true);
   };
@@ -226,7 +249,7 @@ const ItemBid = ({ items }) => {
                         {/* Close button for success message */}
                         <svg
                           className="fill-current h-6 w-6 mr-4 cursor-pointer"
-                          // onClick={handlePopupClose}
+                          onClick={handlePopupClose}
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                         >
@@ -237,7 +260,7 @@ const ItemBid = ({ items }) => {
                         {/* Success message content */}
                         <p className="font-bold">Success!</p>
                         <p className="text-sm">
-                          Your message has been sent successfully.
+                          Your Bid has been sent successfully.
                         </p>
                       </div>
                     </div>
@@ -270,8 +293,7 @@ const ItemBid = ({ items }) => {
                         {/* Error message content */}
                         <p className="font-bold">Error!</p>
                         <p className="text-sm">
-                          Your message could not be sent. Please try again
-                          later.
+                          Your Bid could not be sent. Please try again later.
                         </p>
                       </div>
                     </div>
@@ -306,7 +328,8 @@ const ItemBid = ({ items }) => {
                         {/* New bid message content */}
                         <p className="font-bold">New Bid!</p>
                         <p className="text-sm">
-                          Someone placed a new bid on this item.
+                          Someone placed a new bid on this item. With{" "}
+                          {notifications[notifications.length - 1]}
                         </p>
                       </div>
                     </div>
