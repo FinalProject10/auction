@@ -13,10 +13,11 @@ const Payment = () => {
   const handleClick = async () => {
     try {
       setIsLoading(true);
+const membership=localStorage.getItem('membership')
 
       const response = await axios.post('http://localhost:5000/create-checkout-session', {
-        id: 'item1',  // Replace with the actual item ID
-        quantity: 5,
+        id: parseInt(membership)>60?(parseInt(membership)===590?'item4':'item3'):(parseInt(membership)===59?'item2':'item1'),  // Replace with the actual item ID
+        quantity: membership,
       }, {
         headers: {
           'Content-Type': 'application/json',

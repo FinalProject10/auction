@@ -69,5 +69,19 @@ module.exports = {
       res.status(500).json({ err: "server err" });
     }
   },
+  updateProfileClient:async(req,res)=>{
+    try{
+      const {fname,lname,email,newPass}=req.body
+      let hashed=await bcrypt.hash(newPass,10)
+      let d=Client.update({name:fname,lastName:lname,email,password:hashed},{where:{id:req.params.id}})
+      if(d) return res.status(200).json('updated')
+      return res.status(404).json('not updated')
+
+    }catch(err){
+      res.status(500).json('internal server err')
+    }
+
+  }
+  
 };
 // exports.login = functions.https.onRequest(this.login);
