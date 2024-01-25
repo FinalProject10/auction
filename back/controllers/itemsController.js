@@ -114,8 +114,24 @@ const getItemsBided = async (req, res) => {
   } catch (err) {
     res.status(500).json("internal err");
   }
+  
 };
+const getitemswinner=async(req,res)=>{
+  try{
+    
+    let f=await Items.findAll({
+      where:{sold:req.params.id}
+    })
+    console.log('helo',f)
+    if (f) return res.status(200).json(f)
+    else return res.status(404).json('error')
+  }catch(err){
+    res.status(500).json('internal server error')
+  }
+ 
+}
 module.exports = {
+  getitemswinner,
   getItems,
   addItem,
   getAllItems,
