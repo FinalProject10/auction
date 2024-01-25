@@ -3,7 +3,7 @@
 /* General styling for the container */
 .container {
   text-align: center;
-  size: 1000%; /* Not a standard CSS property, consider removing or using a different property */
+  size: 100%; 
 }
 
 .four1{

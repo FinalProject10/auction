@@ -16,18 +16,40 @@ const Dashboard = () => {
   const[email,setEmail]=useState('')
   const[newPass,setNewpass]=useState("")
   const[cars,setCars]=useState([])
-  const id=parseInt(localStorage.getItem('id'))
+  const[bids,setBids]=useState([])
+  const[page,setPages]=useState(1)
+  const[ended,setEnded]=useState([])
+  const id=parseInt(localStorage.getItem('userId'))
+
   const add=()=>{
-    console.log(id)
     axios.put(`http://localhost:5000/client/update/${id}`,{name:fname,lastName:lname,email,newPass:newPass}).then(r=>console.log(r))
     .catch(err=>console.log(err))
   }
   useEffect(()=>{
     axios.get(`http://localhost:5000/items/itemsBided/${id}`).then(r=>{
-    console.log('rrrr',r.data)  
-    setCars(r.data)})
+    setCars(r.data)
+    setEnded(r.data.filter((el:any)=>{
+      return new Date(el.timeEnd)<new Date()
+    }))
+    })
     .catch(err=>console.log(err))
   },[])
+  useEffect(()=>{
+    axios.get(`http://localhost:5000/bid/fetch-items/${id}?page=${page}`)
+    .then(r=>setBids((prev)=>[...prev,...r.data])).catch(err=>console.log(err))
+  },[page])
+//   const [currentTime, setCurrentTime] = useState(new Date());
+
+//   useEffect(() => {
+//     const intervalId = setInterval(() => {
+//       setCurrentTime(new Date());
+//     }, 1000);
+// console.log(currentTime)
+//     return () => clearInterval(intervalId); // Clean up interval on component unmount
+//   }, [currentTime]);
+// console.log(cars)
+ console.log('im ended',ended)
+ 
   const router=useRouter()
   return (
     <div>
@@ -133,24 +155,24 @@ const Dashboard = () => {
           <h1 className='font-[800] text-[20px]'>Active Auctions</h1>
           <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
 {/* map HERE */}
-          <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
-            <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src=""
-            // {el.images[0]} 
+          
+         {cars.length===0?<h1>No Product Yet</h1>:cars.map(el=>( <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
+            <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src={el.images&&el.images[0]} 
             alt="" />
             <div className='p-[15px] text-[#333333]'>
              <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'
-        
+            onClick={()=>router.push(`/item/${el.id}`)}
             >
-              {/* {el.name} */}
+              {el.name} 
               </h1>
             <h1 className='mb-[10px] font-[500]'>
-              {/* {el.short_description} */}
+            {el.short_description}
               </h1>
             <h1 className='font-[300] text-[13px]'>
-              {/* {Math.floor((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)} */}
+               {Math.floor(((new Date(el.timeEnd)-new Date())>0?(new Date(el.timeEnd)-new Date()):0)/3600000)} 
               h</h1>
             </div>
-            </div>
+            </div>))}
         </div>
           <h1 className='font-[800] text-[20px]'>Won Auctions</h1>
           <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
@@ -184,11 +206,15 @@ const Dashboard = () => {
             <div className='w-[33%] h-[40px] border-[1px] border-gray-200'>Bid</div>
           </div>
           {/* map HERE */}
+          { bids.map(el=>(
           <div className='w-full flex font-[600] bg-[#e5f2e5]'>
-            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center'>Date</div>
-            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center text-[red] cursor-pointer'>Auction</div>
-            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center'>Bid</div>
-          </div>
+            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center'>{el.createdAt&&el.createdAt}</div>
+            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center text-[red] cursor-pointer' onClick={()=>router.push(`/item/${el.item.id}`)}>{el.item.name&&el.item.name}</div>
+            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center'>{el.bidAmount&&el.bidAmount}$</div>
+        
+         
+          </div>))}
+          <button className='mt-[25px] bg-black text-white rounded w-[120px] h-[40px]' onClick={()=>setPages(page+1)}>See More</button>
           {/*  */}
          </div>}
          {data[4]&&localStorage.clear()&&router.push('/')}
