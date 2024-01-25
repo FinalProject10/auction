@@ -1,46 +1,62 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const serviceAccount = require("./serviceAccountKey.json");
+const cors = require("cors")({ origin: true });
 const jwt = require("jsonwebtoken");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "http://localhost:5005",
-});
+const fetch = require("node-fetch");
+admin.initializeApp();
+const corsOptions = {
+  origin: function (origin, callback) {
+    // console.log(origin);
 
+    // if (whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true);
+    // } else {
+    //   callback(new Error("Not allowed by CORS"));
+    // }
+    callback(null, true);
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
 exports.sendFCM = functions.https.onRequest(async (request, response) => {
-  const message = {
-    data: {
-      title: "FCM Notification",
-      body: "This is a test notification.",
-    },
-    topic: "testTopic",
-  };
-
-  try {
-    await admin.messaging().send(message);
-    response.status(200).send("FCM message sent successfully.");
-  } catch (error) {
-    console.error("Error sending FCM message:", error);
-    response.status(500).send("Error sending FCM message: " + error.message);
-  }
-});
-
-exports.secureFunction = functions.https.onRequest(async (req, res) => {
-  const jwtToken = req.headers.authorization;
-  const headers = {
-    Authorization: `Bearer ${jwtToken}`,
-  };
-  await fetch("http://localhost:5005/auction-adca9/us-central1/sendFCM", {
-    method: "POST",
-    headers,
-    body: JSON.stringify({
+  cors(request, response, async () => {
+    const message = {
       data: {
         title: "FCM Notification",
         body: "This is a test notification.",
       },
       topic: "testTopic",
-    }),
+    };
+
+    try {
+      // Send FCM message
+      await admin.messaging().send(message);
+
+      // Save message details in Firestore
+      const firestore = admin.firestore();
+      const messagesCollection = firestore.collection("messages");
+
+      const newMessage = {
+        title: message.data.title,
+        body: message.data.body,
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      };
+
+      await messagesCollection.add(newMessage);
+
+      response.status(200).send("FCM message sent and saved successfully.");
+    } catch (error) {
+      console.error("Error sending/saving FCM message:", error);
+      response
+        .status(500)
+        .send("Error sending/saving FCM message: " + error.message);
+    }
   });
+});
+
+exports.secureFunction = functions.https.onRequest(async (req, res) => {
+  const jwtToken = req.headers.authorization;
+
   try {
     if (!jwtToken) {
       throw new Error("Authorization header is missing.");
@@ -59,6 +75,22 @@ exports.secureFunction = functions.https.onRequest(async (req, res) => {
     const decodedToken = jwt.verify(actualToken, "salim123");
 
     console.log("Decoded Token:", decodedToken);
+
+    // Use 'await' when making an asynchronous request with 'node-fetch'
+    await fetch("http://localhost:5001/auction-adca9/us-central1/sendFCM", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: jwtToken,
+      },
+      body: JSON.stringify({
+        data: {
+          title: "FCM Notification",
+          body: "This is a test notification.",
+        },
+        topic: "testTopic",
+      }),
+    });
 
     res.status(200).send("Token is valid!");
   } catch (error) {
