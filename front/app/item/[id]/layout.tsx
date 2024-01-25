@@ -14,9 +14,9 @@ const Layout = ({ children }) => {
       <div>
         <main>{children}</main>
         <ProgressBar
-          height="4px"
+          height="5px"
           color="#FF2800"
-          options={{ showSpinner: false }}
+          options={{ showSpinner: true }}
           shallowRouting
         />
       </div>

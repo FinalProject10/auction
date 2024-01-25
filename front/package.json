@@ -50,6 +50,7 @@
     "react-icons": "^4.12.0",
     "socket.io-client": "^4.7.4",
     "styled-components": "^6.1.6",
+    "tailwind-scrollbar": "^3.0.5",
     "tw-elements": "^1.1.0"
   },
   "devDependencies": {
