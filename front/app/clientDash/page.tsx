@@ -28,9 +28,7 @@ const Dashboard = () => {
   useEffect(()=>{
     axios.get(`http://localhost:5000/items/itemsBided/${id}`).then(r=>{
     setCars(r.data)
-    setEnded(r.data.filter((el:any)=>{
-      return new Date(el.timeEnd)<new Date()
-    }))
+    
     })
     .catch(err=>console.log(err))
   },[])
@@ -38,6 +36,10 @@ const Dashboard = () => {
     axios.get(`http://localhost:5000/bid/fetch-items/${id}?page=${page}`)
     .then(r=>setBids((prev)=>[...prev,...r.data])).catch(err=>console.log(err))
   },[page])
+  useEffect(()=>{
+    axios.get(`http://localhost:5000/items/items-winner/${id}`).then(r=>setEnded(r.data))
+    .catch(err=>console.log(err))
+  },[])
 //   const [currentTime, setCurrentTime] = useState(new Date());
 
 //   useEffect(() => {
@@ -177,25 +179,26 @@ const Dashboard = () => {
           <h1 className='font-[800] text-[20px]'>Won Auctions</h1>
           <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
             {/* map HERE */}
-            <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
-            <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src=""
-            // {el.images[0]} 
+
+           {ended?.map(el=>( 
+           <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
+            <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src={el.images&&el.images[0]} 
             alt="" />
             <div className='p-[15px] text-[#333333]'>
             <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'
         
             >
-              {/* {el.name} */}
+              {el.name}
               </h1>
             <h1 className='mb-[10px] font-[500]'>
-              {/* {el.short_description} */}
+              {el.short_description}
               </h1>
             <h1 className='font-[300] text-[13px]'>
-              {/* {Math.floor((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)} */}
+              {Math.floor(((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)>0?((new Date(el.timeEnd)-new Date(el.timeStart))/3600000):0)}
               h
               </h1>
             </div>
-        </div>
+        </div>))}
 </div>
          </div>}
          {data[3]&&<div>
