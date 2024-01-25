@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from '../home/navbar.tsx'
-import Footer from '../footer/Footer.tsx'
+import Navbar from '../home/navbar'
+import Footer from '../footer/Footer'
 import "./404.css"
-const page: React.FC = () => {
+const Custom404: React.FC = () => {
   return (
     <div className="container">
     <Navbar />
@@ -44,14 +44,14 @@ const page: React.FC = () => {
         </g>
       </svg>
     </div>
-    <h1>PAGE NOT FOUND</h1>
+    <h1 id="farid">PAGE NOT FOUND</h1>
     <h1 className='title'>Sorry! The page you were looking for could not be found.
 Try searching for it or browse through our website.</h1>
     <button className='button_cart'>Return To Shop</button>
 
-    <Footer className="footer" />
+    <Footer  />
   </div>
 );
 };
 
-export default page
+export default Custom404

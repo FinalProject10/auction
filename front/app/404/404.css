@@ -36,17 +36,13 @@ animation: swing3 ease-in-out 1.5s infinite alternate;
   }
   
   /* Styling for the h1 heading */
-  h1 {
+  #farid {
     font-family: 'Fjalla One';
     text-align: center;
     color: #666;
   }
   
-h1{
-  font-family: 'Fjalla One';
-  text-align: center; 
-  color: #666;
-}
+
 .title{
 margin-top:90px;
 margin-left:00px;
