@@ -194,15 +194,14 @@ const Dashboard = () => {
               {el.short_description}
               </h1>
             <h1 className='font-[300] text-[13px]'>
-              {Math.floor(((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)>0?((new Date(el.timeEnd)-new Date(el.timeStart))/3600000):0)}
-              h
+               Auction Ended
               </h1>
             </div>
         </div>))}
 </div>
          </div>}
          {data[3]&&<div>
-          <h1 className='font-[800] text-[20px]'>My Auction Activity</h1>
+          <h1 className='font-[800] text-[20px] mb-[3%]'>My Auction Activity</h1>
           <div className='w-full flex font-[600] text-center'>
             <div className='w-[33%] h-[40px] border-[1px] border-gray-200'>Date</div>
             <div className='w-[33%] h-[40px] border-[1px] border-gray-200'>Auction</div>
