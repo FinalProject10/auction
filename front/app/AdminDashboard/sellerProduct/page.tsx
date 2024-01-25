@@ -119,7 +119,7 @@ const adminId=localStorage.getItem('adminId')
 
 
                 </p>
-                <a href="#pablo" className="font-normal text-pink-500">Show more</a>
+                
               </div>
             </div>
           </div>
