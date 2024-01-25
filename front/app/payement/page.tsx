@@ -15,8 +15,8 @@ const Payment = () => {
       setIsLoading(true);
 
       const response = await axios.post('http://localhost:5000/create-checkout-session', {
-        id: 'item1',  // Replace with the actual item ID
-        quantity: 5,
+        id: 'item4',  // Replace with the actual item ID
+        quantity: 590 ,
       }, {
         headers: {
           'Content-Type': 'application/json',

@@ -271,7 +271,7 @@ const HomePage = () => {
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap mt-[-7%]">
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4 ">
                 <CardStats
                   statSubtitle="total revenue"
                   statTitle={total1}
@@ -331,7 +331,7 @@ const HomePage = () => {
 <div>
   
 
-<div className="relative overflow-x-auto ml-[50px] mt-[-20%] w-[1150px]">
+<div className="relative overflow-x-auto ml-[50px] mt-[-20%] w-[1200px]">
 
   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded" >
         <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
@@ -356,7 +356,7 @@ const HomePage = () => {
    
 </div>
 <div>
-<div className="relative">
+{/* <div className="relative">
 <div className=" flex  rounded-md w-[1220px] h-[50%] overflow-x-scroll ml-[15px]">
 {cordoner.map((el, index) => (
    el.seller.items.length > 0 && (
@@ -411,7 +411,7 @@ const HomePage = () => {
    
 </div>
 
-</div>
+</div> */}
  </div>
   </div>
 </div>

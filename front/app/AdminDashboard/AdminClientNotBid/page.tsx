@@ -23,15 +23,29 @@ useEffect(() => {
       console.log(err);
     });
 }, [refrech]);
-
-const delet = async (id:number) => {
+const delet = async (id: number) => {
   try {
-    await axios.delete(`http://127.0.0.1:5000/dash/remove/${id}`);
-    setRefrech(!refrech);
+    // Ask for confirmation before deleting
+    const confirmDelete = window.confirm("Are you sure you want to delete this client?");
+    
+    if (confirmDelete) {
+      await axios.delete(`http://127.0.0.1:5000/dash/remove/${id}`);
+      setRefrech(!refrech);
+    } else {
+      console.log("Deletion canceled.");
+    }
   } catch (err) {
     console.log(err);
   }
 };
+// const delet = async (id:number) => {
+//   try {
+//     await axios.delete(`http://127.0.0.1:5000/dash/remove/${id}`);
+//     setRefrech(!refrech);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
   return (
     <div  className="flex-row lg:flex">
     <SideBare/>

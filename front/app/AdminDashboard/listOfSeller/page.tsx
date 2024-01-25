@@ -1,13 +1,15 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import '../AdminClientNotBid/bt.css'
+import SellerProduct from '../sellerProduct/page'
+import Link from 'next/link';
 import axios from 'axios'
 import dynamic from "next/dynamic";
 const SideBare = dynamic(() => import("../AdminSidebar/page"));
 const listOfSeller = () => {
   const [data,setData]= useState<[]>([])
   const[refrech,setRefrech]=useState(false)
-
+  const [oneProduct,setOneProduct]= useState<[]>([])
   
   useEffect(() => {
     axios
@@ -20,14 +22,32 @@ const listOfSeller = () => {
         console.log(err);
       });
   }, [refrech]);
-  const delet = async (id:number) => {
+  const delet = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/dash/removeSel/${id}`);
-      setRefrech(!refrech);
+      // Ask for confirmation before deleting
+      const confirmDelete = window.confirm("Are you sure you want to delete this client?");
+      
+      if (confirmDelete) {
+        await axios.delete(`http://localhost:5000/dash/removeSel/${id}`);
+        setRefrech(!refrech);
+      } else {
+        console.log("Deletion canceled.");
+      }
     } catch (err) {
       console.log(err);
     }
   };
+  const onePr=(id)=>{
+    setOneProduct(id)
+  }
+  // const delet = async (id:number) => {
+  //   try {
+  //     await axios.delete(`http://localhost:5000/dash/removeSel/${id}`);
+  //     setRefrech(!refrech);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
 
   return (
@@ -81,7 +101,7 @@ const listOfSeller = () => {
               <tbody>
               <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                 {el.name} 
+               <Link href="/AdminDashboard/sellerProduct/" onClick={()=>localStorage.setItem('adminId',el.id)}> {el.name} </Link> 
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {el.lastName}

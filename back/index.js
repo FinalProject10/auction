@@ -35,8 +35,10 @@ const PORT = 5000;
 const storeItemMap = new Map();
 
 // Assume you have store items defined in some way, for example:
-storeItemMap.set("item1", { id: "item1", name: "Product A", priceInDt: 100 });
-storeItemMap.set("item2", { id: "item2", name: "Product B", priceInDt: 150 });
+storeItemMap.set("item1", { id: "item1", name: "BASIC", priceInDt: 100 });
+storeItemMap.set("item2", { id: "item2", name: "VIP", priceInDt: 150 });
+storeItemMap.set("item3", { id: "item3", name: "BASIC", priceInDt: 10 });
+storeItemMap.set("item4", { id: "item4", name: "VIP", priceInDt: 590 });
 // Add more store items as needed
 
 app.post("/create-checkout-session", async (req, res) => {
