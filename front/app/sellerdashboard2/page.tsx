@@ -6,7 +6,7 @@ import  MyOrdersList from "./homedashboard/orders/orders"
 import SalesListItem from "./homedashboard/saless/sales"
 import OurProducts from "./homedashboard/ourproduct/ourproduct"
 import SideBar from "./sidebar/page"
-import AddProduct from "./addproduct/page"
+import AddProduct from "./addproduct/formulaire"
 import './page.css'
 export default function Dashboard(){
     return (
