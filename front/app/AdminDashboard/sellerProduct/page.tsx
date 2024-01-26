@@ -42,16 +42,14 @@ const adminId=localStorage.getItem('adminId')
   return (
     <div  className="flex-row lg:flex">
     <SideBare/>
-    <div className="container mx-auto mt-4 lg:mt-12 overflow-y-scroll ">
-    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+    <div className="container mx-auto mt-4 lg:mt-12 ">
+    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded ">
 
-   
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"/>
 <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"/>
-
 <main className="profile-page">
-  <section className="relative block h-[400px]">
-    <div className="absolute top-0 w-full h-full bg-center bg-cover" style=
+  <section className="relative block h-[400px] mt-[-7%]">
+    <div className=" top-0 w-full h-full bg-center bg-cover" style=
             {{"background-image": "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80)"}}
           >
       <span id="blackOverlay" className="w-full h-full absolute opacity-50 bg-black"></span>
@@ -62,9 +60,9 @@ const adminId=localStorage.getItem('adminId')
       </svg>
     </div>
   </section>
-  <section className="relative py-16 bg-blueGray-200">
+  <section >
     <div className="container mx-auto px-4">
-      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded-lg -mt-64">
         <div className="px-6">
           <div className="flex flex-wrap justify-center">
             <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -84,7 +82,7 @@ const adminId=localStorage.getItem('adminId')
               </div>
             </div>
           </div>
-          <div className="text-center mt-12">
+          <div className="text-center">
             <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
             {oneProduct[0]?.name} {oneProduct[0]?.lastName}
             </h3>
@@ -92,41 +90,36 @@ const adminId=localStorage.getItem('adminId')
               <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
               {oneProduct[0]?.address}
             </div>
-            <div className="mb-2 text-blueGray-600 mt-10">
+            <div className="mb-2 text-blueGray-600 ">
               <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>{oneProduct[0]?.telNumb}
             </div>
             <div className="mb-2 text-blueGray-600">
               <i className="fas fa-address-card mr-2 text-lg text-blueGray-400"></i>{oneProduct[0]?.cinNum}
             </div>
           </div>
-          <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-            <div className="flex flex-wrap justify-center">
-              <div className="w-full lg:w-9/12 px-4">
-                <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-              
-
-
-    <div className="grid grid-cols-5 gap-4">
-      {oneProduct[0]?.items.map((el,i) => (
-        <div>
-
-                 {el.name}
-                 {el.price }
-            <img className="h-auto max-w-full rounded-lg" src={el.images[0]} alt=""/>
-        </div>
-      ))}
-    </div>
-
-
-                </p>
+          <div className=" py-10 border-t border-blueGray-200 text-center">
+            {/* <div className="flex flex-wrap justify-center">
+              <div className="w-full lg:w-9/12 px-4"> */}
+                
+                <div className="grid grid-cols-5 gap-4 mt-[-10%]">
+                {oneProduct[0]?.items.map((el,i) => (
+                <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto mt-24">
+    <img src={el.images[0]} alt="University of Southern California" className="absolute inset-0 h-full w-full object-cover"/>
+    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+    <h3 className="z-10 mt-3 text-3xl font-bold text-white">{el.name}</h3>
+    <div className="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">  
+                 {el.price }</div>
+</article>
+   ))}
+</div>
                 
               </div>
-            </div>
-          </div>
+            {/* </div>
+          </div> */}
         </div>
       </div>
     </div>
-    <footer className="relative bg-blueGray-200 pt-8 pb-6 mt-8">
+    {/* <footer className="relative bg-blueGray-200 pt-8 pb-6 mt-8">
   <div className="container mx-auto px-4">
     <div className="flex flex-wrap items-center md:justify-between justify-center">
       <div className="w-full md:w-6/12 px-4 mx-auto text-center">
@@ -134,7 +127,7 @@ const adminId=localStorage.getItem('adminId')
       </div>
     </div>
   </div>
-</footer>
+</footer> */}
   </section>
 </main>
 
