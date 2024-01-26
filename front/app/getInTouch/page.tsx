@@ -1,8 +1,12 @@
 import './page.css'
 import '../contactus/contact.css'
+import Navbar from '../home/navbar'
+import Footer from '../footer/Footer'
 export default function GetInTouch(){
-    return (<div className="container">
+    return (<div className='w-full'>
+      <Navbar/>
     <div className="vc_row wpb_row vc_row-fluid bg-contact vc_custom_1601885870901 vc_row-has-fill" >
+    
     <div className="wpb_column vc_column_container vc_col-sm-12">
       <div className="vc_column-inner">
         <div className="wpb_wrapper">
@@ -179,6 +183,7 @@ York, United States, 26483
                     </div>
                 </div>
             </div>
+            <Footer/>
   </div>
  )
 }

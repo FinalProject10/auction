@@ -14,7 +14,8 @@ const ClientLogin = () => {
       .post(`http://localhost:5000/client/login`, { email, password: pass })
       .then((r) => {
         localStorage.setItem("role", "client");
-        localStorage.setItem("user", r.data);
+        localStorage.setItem("user", r.data.token);
+        localStorage.setItem("userId", r.data.user.id);
         router.push("/home");
       })
       .catch((err) => setErr(err.response.data));
