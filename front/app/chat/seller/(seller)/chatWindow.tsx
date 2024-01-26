@@ -2,10 +2,12 @@ import React from "react";
 import ChatHeader from "./chatHeader";
 import MessageList from "./messageList";
 const ChatInput = dynamic(() => import("./chatInpout"));
-
+import { useChat } from "../chatContext";
 import dynamic from "next/dynamic";
 
-const ChatWindow = ({ selectedChat }) => {
+const ChatWindow = () => {
+  const { selectedChat } = useChat();
+
   if (!selectedChat) {
     return <div className="flex-1 p-4">Select a chat to start messaging</div>;
   }

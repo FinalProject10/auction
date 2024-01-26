@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from "react";
 import "./style/itemBid.css";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { store } from "react-notifications-component";
+import Sound from "react-sound";
 import AuctionTimer from "./auctionTimer";
 import socket from "./bid/socket";
-
 const ItemBid = ({ items }) => {
   const [quant, setQuant] = useState(
     items[0]?.bids.length > 0
@@ -16,6 +17,9 @@ const ItemBid = ({ items }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [newBidMessageVisible, setNewBidMessageVisible] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [playSound, setPlaySound] = useState(false);
+  const soundUrl =
+    "https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3?filename=short-success-sound-glockenspiel-treasure-video-game-6346.mp3";
 
   const userId = localStorage.getItem("userId");
   useEffect(() => {
@@ -23,6 +27,7 @@ const ItemBid = ({ items }) => {
     const handleNewBidFromOthers = (data) => {
       setNewBidMessageVisible(true);
       setQuant(data.bidAmount);
+      setPlaySound(true);
     };
 
     // Function to leave the current room and join a new one
@@ -224,6 +229,7 @@ const ItemBid = ({ items }) => {
                 {/* Bid button */}
                 <div className="bid ml-24">
                   <button
+                    onClick={() => setPlaySound(true)}
                     type="submit"
                     className="bg-red-500 text-white text-sm leading-6 font-bold py-2 px-4 rounded-lg hover:bg-red-700"
                   >
@@ -232,6 +238,13 @@ const ItemBid = ({ items }) => {
                 </div>
               </form>
 
+              <Sound
+                url={soundUrl}
+                playStatus={
+                  playSound ? Sound.status.PLAYING : Sound.status.STOPPED
+                }
+                onFinishedPlaying={() => setPlaySound(false)}
+              />
               {/* Display success and error messages */}
               <div className="flex justify-center items-center">
                 {/* Display success message */}

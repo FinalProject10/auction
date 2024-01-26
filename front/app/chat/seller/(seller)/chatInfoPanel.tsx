@@ -4,11 +4,17 @@ import { FaVideo, FaUser } from "react-icons/fa";
 import { Avatar } from "@material-tailwind/react";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdAccountCircle } from "react-icons/md";
+import { useChat } from "../chatContext";
 
 const ChatInfoPanel = () => {
+  const { selectedChat } = useChat();
+
+  // console.log("chats", chats[0]);
+
   // Placeholder data for seller info
   const clientInfo = {
-    name: "Kina Mayer",
+    name: selectedChat?.name || "No chat selected",
+    avatar: selectedChat?.avatar,
     status: "Online",
     attachments: [
       "https://i.pinimg.com/originals/e0/a1/7f/e0a17f490d0e7a479b2a38325b269846.jpg",
@@ -28,11 +34,11 @@ const ChatInfoPanel = () => {
     <div className="w-1/4 p-4 border-l  bg-gray-100 h-screen">
       <div className="flex flex-col items-center justify-center">
         <Avatar
-          src="https://docs.material-tailwind.com/img/face-2.jpg"
+          src={clientInfo.avatar}
           alt="avatar"
           className="w-[108px] h-[108px] rounded-full mb-4"
         />
-        <h2 className="text-xl font-bold mb-4">Client Info</h2>
+        <h2 className="text-xl font-bold mb-4">{clientInfo.name}</h2>
         <p>Status: {clientInfo.status}</p>
       </div>
       <div className="flex  items-center justify-center gap-10 mt-4">
@@ -43,7 +49,7 @@ const ChatInfoPanel = () => {
           <br />
           <p className="text-sm font-bold">
             {" "}
-            <p className="text-sm font-bold"> Check Profile</p>
+            <p className="text-sm font-bold"> Make a Call</p>
           </p>
         </div>
         <div className="flex flex-col items-center mt-2">
@@ -57,7 +63,7 @@ const ChatInfoPanel = () => {
       <p className="text-sm font-bold mt-10"> Attachment</p>
 
       <div className="mt-4 grid grid-cols-4 ">
-        {clientInfo.attachments.map((attachment, index) => (
+        {clientInfo.attachments?.map((attachment, index) => (
           <img
             key={index}
             src={attachment}

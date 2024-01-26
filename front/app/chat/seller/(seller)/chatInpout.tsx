@@ -3,7 +3,7 @@ import { IoSend } from "react-icons/io5";
 import { FaImages } from "react-icons/fa";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 
-const ChatInput = ({ onSend }) => {
+const ChatInput = ({ selectedChat }) => {
   const [userMessage, setUserMessage] = useState("");
 
   const handleInputChange = (e) => {
