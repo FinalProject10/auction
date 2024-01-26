@@ -2,7 +2,7 @@ import { Avatar } from "antd";
 import React from "react";
 
 const MessageBubble = ({ message }) => {
-  const isSender = message.sender === "Kina Mayer";
+  const isSender = message.sender === "Lina Dry";
 
   return (
     <div

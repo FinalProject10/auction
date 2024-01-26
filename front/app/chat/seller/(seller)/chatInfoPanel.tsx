@@ -23,10 +23,10 @@ const ChatInfoPanel = () => {
 
       "https://i.pinimg.com/originals/e0/a1/7f/e0a17f490d0e7a479b2a38325b269846.jpg",
       "https://i.pinimg.com/originals/c5/38/46/c53846feb978fe55f6ca633d05a30c7a.jpg",
-      "https://i.pinimg.com/originals/e0/a1/7f/e0a17f490d0e7a479b2a38325b269846.jpg",
+      "https://i.pinimg.com/originals/62/98/8e/62988e83f7186961c71d76a914074a5d.jpg",
       "https://i.pinimg.com/originals/c5/38/46/c53846feb978fe55f6ca633d05a30c7a.jpg",
 
-      "https://i.pinimg.com/originals/e0/a1/7f/e0a17f490d0e7a479b2a38325b269846.jpg",
+      "https://i.pinimg.com/originals/e0/97/06/e09706997d1d4dbd52255d6b4cb3d634.jpg",
       "https://i.pinimg.com/originals/c5/38/46/c53846feb978fe55f6ca633d05a30c7a.jpg",
     ],
   };

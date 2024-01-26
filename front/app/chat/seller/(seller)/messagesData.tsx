@@ -29,6 +29,18 @@ export const messagesData = [
     text: "Nice! I'm working on a similar project too.",
     sender: "Lina Dry",
   },
+  {
+    id: 10,
+    roomId: 1,
+    text: "Nice! I'm working on a similar project too.",
+    sender: "Kina Mayer",
+  },
+  {
+    id: 11,
+    roomId: 1,
+    text: "Nice! I'm working on a similar project too.",
+    sender: "Lina Dry",
+  },
 
   // Room 2
   { id: 1, roomId: 2, text: "hi", sender: "Lina Dry" },

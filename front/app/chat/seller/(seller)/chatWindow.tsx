@@ -1,24 +1,43 @@
 import React, { useState } from "react";
-import ChatHeader from "./chatHeader";
-import MessageList from "./messageList";
-const ChatInput = dynamic(() => import("./chatInpout"));
-import { useChat } from "../chatContext";
 import dynamic from "next/dynamic";
 import { TbMenu2 } from "react-icons/tb";
+import { CgMenuRightAlt } from "react-icons/cg";
+import ChatHeader from "./chatHeader";
+import MessageList from "./messageList";
+import { useChat } from "../chatContext";
 import ChatInfoPanel from "./chatInfoPanel";
+
+const ChatInput = dynamic(() => import("./chatInpout"));
 const ChatWindow = () => {
-  const { selectedChat } = useChat();
+  const { selectedChat, chatMessages, addMessageToRoom } = useChat();
+
   const [infoPanelVisible, setInfoPanelVisible] = useState(false);
-  // const [selectedChat, setSelectedChat] = useState(false);
+  const [icon, setIcon] = useState(
+    <TbMenu2 className="text-red-500 h-11 w-11 absolute z-50 right-4" />
+  );
 
-  // const handleChatSelect = (chat) => {
-  //   setSelectedChat(chat);
-  //   // console.log("dddddddddddddds", selectedChat);
+  const handleSendMessage = (message) => {
+    const roomId = selectedChat.id;
+    const newMessage = {
+      id: chatMessages[roomId].length + 1,
+      roomId,
+      text: message,
+      sender: "Lina Dry",
+    };
+    addMessageToRoom(newMessage);
+  };
 
-  //   // setInfoPanelVisible(true);
-  // };
   const handleToggleInfoPanel = () => {
     setInfoPanelVisible((prevVisible) => !prevVisible);
+
+    // Change the icon every time the button is clicked
+    setIcon(() =>
+      infoPanelVisible ? (
+        <TbMenu2 className="text-red-500 h-11 w-11 absolute z-50 right-4" />
+      ) : (
+        <CgMenuRightAlt className="text-red-500 h-11 w-11 absolute z-50 right-4" />
+      )
+    );
   };
   if (!selectedChat) {
     return (
@@ -43,7 +62,7 @@ const ChatWindow = () => {
           onClick={handleToggleInfoPanel}
           className="absolute top-4 right-2 hello"
         >
-          <TbMenu2 className="text-red-500 h-11 w-11 absolute z-50 right-4" />
+          {icon}
         </button>
       )}
 
@@ -51,7 +70,7 @@ const ChatWindow = () => {
         <div className="flex-1">
           <ChatHeader chat={selectedChat} />
           <MessageList chat={selectedChat} />
-          <ChatInput />
+          <ChatInput onSend={handleSendMessage} />
         </div>
 
         {infoPanelVisible && (
