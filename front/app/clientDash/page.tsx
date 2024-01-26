@@ -50,8 +50,6 @@ const Dashboard = () => {
 //     return () => clearInterval(intervalId); // Clean up interval on component unmount
 //   }, [currentTime]);
 // console.log(cars)
- console.log('im ended',ended)
- 
   const router=useRouter()
   return (
     <div>
@@ -154,7 +152,7 @@ const Dashboard = () => {
          } 
          {data[2]&&<div>
 
-          <h1 className='font-[800] text-[20px]'>Active Auctions</h1>
+          <h1 className='font-[800] text-[20px] mb-[3%]'>Active Auctions</h1>
           <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
 {/* map HERE */}
           
@@ -176,7 +174,7 @@ const Dashboard = () => {
             </div>
             </div>))}
         </div>
-          <h1 className='font-[800] text-[20px]'>Won Auctions</h1>
+          <h1 className='font-[800] text-[20px] mb-[]'>Won Auctions</h1>
           <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
             {/* map HERE */}
 
@@ -194,7 +192,7 @@ const Dashboard = () => {
               {el.short_description}
               </h1>
             <h1 className='font-[300] text-[13px]'>
-               Auction Ended
+               Auction
               </h1>
             </div>
         </div>))}
