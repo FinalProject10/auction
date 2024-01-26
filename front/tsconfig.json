@@ -30,6 +30,6 @@
     "**/*.ts",
     "**/*.tsx",
     "app/firebase/firebase.js"
-  ],
+, "app/404", "app/404/page.tsx"  ],
   "exclude": ["node_modules"]
 }
