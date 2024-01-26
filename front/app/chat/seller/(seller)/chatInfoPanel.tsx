@@ -5,6 +5,7 @@ import { Avatar } from "@material-tailwind/react";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdAccountCircle } from "react-icons/md";
 import { useChat } from "../chatContext";
+import Link from "next/link";
 
 const ChatInfoPanel = () => {
   const { selectedChat } = useChat();
@@ -31,7 +32,7 @@ const ChatInfoPanel = () => {
   };
 
   return (
-    <div className="w-1/4 p-4 border-l  bg-gray-100 h-screen">
+    <div className=" p-4 border-l  bg-gray-100 h-screen">
       <div className="flex flex-col items-center justify-center">
         <Avatar
           src={clientInfo.avatar}
@@ -53,11 +54,13 @@ const ChatInfoPanel = () => {
           </p>
         </div>
         <div className="flex flex-col items-center mt-2">
-          <div className="bg-red-400 rounded-full p-8">
-            <MdAccountCircle className="text-white w-8 h-8" />
-          </div>
-          <br />
-          <p className="text-sm font-bold"> Check Profile</p>
+          <Link href="/seller/profile/" as={`/seller/profile/1`}>
+            <div className="bg-red-400 rounded-full p-8">
+              <MdAccountCircle className="text-white w-8 h-8" />
+            </div>
+            <br />
+            <p className="text-sm font-bold">Check Profile </p>
+          </Link>{" "}
         </div>
       </div>
       <p className="text-sm font-bold mt-10"> Attachment</p>

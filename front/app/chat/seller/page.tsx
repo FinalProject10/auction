@@ -7,11 +7,8 @@ import ChatInfoPanel from "./(seller)/chatInfoPanel";
 import { ChatProvider } from "./chatContext";
 
 const ChatSeller = () => {
-  const [selectedChat, setSelectedChat] = useState(null);
+  // const [selectedChat, setSelectedChat] = useState(null);
 
-  const handleChatSelect = (chat) => {
-    setSelectedChat(chat);
-  };
   const chats = [
     { id: 1, name: "zaki zakou" },
     { id: 2, name: "Kina Mayer" },
@@ -29,10 +26,9 @@ const ChatSeller = () => {
     <>
       <ChatProvider>
         <div className="" style={{ height: "100vh", overflow: "hidden" }}>
-          <div className="flex">
-            <ChatList onSelect={handleChatSelect} />
-            <ChatWindow selectedChat={selectedChat} />
-            <ChatInfoPanel chats={chats} />
+          <div className="flex relative">
+            <ChatList />
+            <ChatWindow />
           </div>
         </div>
       </ChatProvider>
