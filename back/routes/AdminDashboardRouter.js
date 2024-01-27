@@ -20,6 +20,8 @@ dashboardRouter.delete('/removeProduct/:id',dashctr.removePro)
 dashboardRouter.delete('/removeRec/:id',dashctr.removerec)
 dashboardRouter.get('/vip',dashctr.vip)
 dashboardRouter.get('/getAllProduc',dashctr.getAllProduct)
+dashboardRouter.get('/getOne/:id',dashctr.getOne)
+dashboardRouter.get('/getbid/:id',dashctr.getBid)
 
 
 

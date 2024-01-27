@@ -1,9 +1,11 @@
 import React from 'react'
-import Navbar from '../home/navbar'
-import Footer from '../footer/Footer'
-import "./404.css"
-const Custom404: React.FC = () => {
+import Navbar from './home/navbar'
+import Footer from './footer/Footer'
+import "./404/404.css"
+ 
+const NotFound: React.FC = () => {
   return (
+    <>
     <div className="container">
     <Navbar />
     <div className="four1">
@@ -49,9 +51,11 @@ const Custom404: React.FC = () => {
 Try searching for it or browse through our website.</h1>
     <button className='button_cart'>Return To Shop</button>
 
-    <Footer  />
+   
   </div>
+  <Footer  />
+  </>
 );
 };
 
-export default Custom404
+export default NotFound
