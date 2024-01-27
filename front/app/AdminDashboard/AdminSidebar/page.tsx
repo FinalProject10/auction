@@ -13,7 +13,7 @@ import Link from 'next/link';
 const sideBare = () => {
    return (
   
-    <div className="flex-row lg:flex ">
+    <div className="flex-row lg:flex">
 
       <div className="space-y-3 ">
         

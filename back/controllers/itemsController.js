@@ -98,23 +98,6 @@ const getAllItems = async (req, res) => {
     res.status(500).json("Internal server error");
   }
 };
-const getSidParItems = async (req, res) => {
-  const itemsPerPage = 4;
-  const page = parseInt(req.query.page, 10) || 1;
-
-  try {
-    const offset = (page - 1) * itemsPerPage;
-    const items = await Items.findAll({
-      limit: itemsPerPage,
-      offset: offset,
-    });
-
-    res.status(200).json(items);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json("Internal server error");
-  }
-};
 const getItemsBided = async (req, res) => {
   try {
     let d = await Items.findAll({
@@ -155,5 +138,4 @@ module.exports = {
   getAll,
   getItemsBided,
   geBid,
-  getSidParItems,
 };

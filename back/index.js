@@ -15,7 +15,6 @@ const {
   Seller,
   Reclamation,
 } = require("./models/relations");
-const sellersRoutes = require("./routes/seller");
 const clientRoutes = require("./routes/client");
 const adminRoutes = require("./routes/admin");
 const dashboard = require("./routes/AdminDashboardRouter");
@@ -24,7 +23,6 @@ const cloudRoute = require("./routes/cloudinary");
 const cors = require("cors");
 const ProductsRouter = require("./routes/products");
 const sellerRouter = require("./routes/seller");
-const PaymentRouting = require("./routes/AdminPayemnt");
 const memRouter = require("./routes/memberships");
 const bidRouter = require("./routes/bidRouter");
 
@@ -148,7 +146,6 @@ app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
-app.use("/flousi", PaymentRouting);
 app.use("/cloudinary", cloudRoute);
 app.get("/getallusers", async (req, res) => {
   let d = await Client.findAll();
@@ -169,7 +166,6 @@ io.on("connection", (socket) => {
   console.log(userId, itemsId);
   userSocketMap.set(userId, socket);
   console.log("User Connected ", userId);
-  console.log("userScoket", userSocketMap);
 
   socket.on("create", function (room) {
     console.log("room", room);

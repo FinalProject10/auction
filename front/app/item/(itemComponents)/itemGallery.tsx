@@ -11,7 +11,7 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
   };
 
   return (
-    <section className="gallery-holder hide-in-mobile mt-10">
+    <section className="gallery-holder hide-in-mobile">
       <section className="gallery">
         <div className="image">
           <Image
