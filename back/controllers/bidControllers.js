@@ -1,7 +1,7 @@
 // sendMessageToUser(3, "test");
 const Bid = require("../models/bid");
 const Item = require("../models/items");
-const Client = require("../models/clients");
+const Client =require("../models/clients")
 const bidController = {
   placeBid: async (req, res) => {
     const { userId, itemId, bidAmount } = req.body;
@@ -74,78 +74,39 @@ const bidController = {
       });
     }
   },
-  getBids: async (req, res) => {
-    const itemsPerPage = 10;
-    const page = parseInt(req.query.page, 10) || 1;
-
-    try {
-      const offset = (page - 1) * itemsPerPage;
-      const items = await Bid.findAll({
-        where: { ClientId: req.params.id },
-        include: [
-          {
+    getBids: async (req, res) => {
+      const itemsPerPage = 10;
+      const page = parseInt(req.query.page, 10) || 1;
+      
+      try {
+        const offset = (page - 1) * itemsPerPage;
+        const items = await Bid.findAll({where:{ClientId:req.params.id},
+          include: [{
             model: Item,
-            attributes: ["name", "id"], // Specify the columns you want to include from the Item table
-            required: true, // Use inner join to include only bids with associated items
-          },
-          {
-            model: Client,
-            attributes: ["name"],
-            required: true,
-          },
-        ],
-        // include:[{
-        //   model:Client,
-        //   attributes:['name'],
-        //   required:true
-        // }],
+            attributes: ['name','id'], // Specify the columns you want to include from the Item table
+            required: true // Use inner join to include only bids with associated items
+          },{
+            model:Client,
+            attributes:['name'],
+            required:true
+          }],
+          // include:[{
+          //   model:Client,
+          //   attributes:['name'],
+          //   required:true
+          // }],
 
-        limit: itemsPerPage,
-        offset: offset,
+          limit: itemsPerPage,
+          offset: offset,
+          
       });
-
-      res.status(200).json(items);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json("Internal server error");
+    
+        res.status(200).json(items);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json("Internal server error");
+      }
     }
-  },
-  getBidsByItems: async (req, res) => {
-    const itemsPerPage = 10;
-    const page = parseInt(req.query.page, 10) || 1;
-
-    try {
-      const offset = (page - 1) * itemsPerPage;
-      const items = await Bid.findAll({
-        where: { itemId: req.params.id },
-        include: [
-          {
-            model: Item,
-            attributes: ["name", "id"], // Specify the columns you want to include from the Item table
-            required: true, // Use inner join to include only bids with associated items
-          },
-          {
-            model: Client,
-            attributes: ["name", "lastName"],
-            required: true,
-          },
-        ],
-        // include:[{
-        //   model:Client,
-        //   attributes:['name'],
-        //   required:true
-        // }],
-
-        limit: itemsPerPage,
-        offset: offset,
-      });
-
-      res.status(200).json(items);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json("Internal server error");
-    }
-  },
 };
 
-module.exports = bidController;
+module.exports = bidController

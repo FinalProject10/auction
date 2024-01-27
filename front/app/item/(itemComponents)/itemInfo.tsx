@@ -34,7 +34,6 @@ function Icon({ id, open }) {
 }
 const ItemInfo = ({ items }) => {
   const [open, setOpen] = React.useState(0);
-  console.log("item in info", items);
 
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
   return (
@@ -249,7 +248,7 @@ const ItemInfo = ({ items }) => {
             </AccordionHeader>
             <AccordionBody>
               <AuctionHistory
-                items={items}
+                items={item.bids}
                 timeStart={item.timeStart}
                 price={item.price}
                 timeEnd={item.timeEnd}
