@@ -20,9 +20,6 @@ const Layout = ({ children }) => {
           shallowRouting
         />
       </div>
-      <footer>
-        <Footer />
-      </footer>
     </>
   );
 };
