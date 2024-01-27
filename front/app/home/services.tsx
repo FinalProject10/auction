@@ -45,11 +45,11 @@ fontSize={'large'} className='text-black' />
         </div>
 
         <div className='w-[95%] ml-[6%] h-[90%] flex justify-center items-center  mt-[15%] bg-white shadow-xl rounded-[20px] '>
-<div>
-  <img src={data[index]&&data[index]['Client'].image} alt="" />
-  <h1 className='text-center mt-[3%] mb-[3%]'>{data[index]&&data[index]['Client'].name}</h1>
-  <p className='p-[30px]'>{data[index]&&data[index].message}</p>
-</div>
+    <div>
+  <img src={data[index]&&data[index]['Client']?.image} className='w-[80px] rounded-full ml-[45%]' alt="" />
+  <h1 className='text-center mt-[3%] mb-[3%]'>{data[index]&&data[index]['Client']?.name}</h1>
+  <p className='p-[30px] text-[20px] font-[600]'>{data[index]&&data[index].message}</p>
+  </div>
 
         </div>
         <div 

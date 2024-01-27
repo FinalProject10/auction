@@ -42,13 +42,17 @@
     "jsdom": "^23.2.0",
     "next": "^14.1.0",
     "next-cloudinary": "^5.18.0",
+    "next-nprogress-bar": "^2.1.2",
     "node-html-parser": "^6.1.12",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
+    "react-notifications-component": "^4.0.1",
+    "react-sound": "^1.2.0",
     "socket.io-client": "^4.7.4",
     "styled-components": "^6.1.6",
+    "tailwind-scrollbar": "^3.0.5",
     "tw-elements": "^1.1.0"
   },
   "devDependencies": {

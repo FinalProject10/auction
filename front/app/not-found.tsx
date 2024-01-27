@@ -1,9 +1,11 @@
 import React from 'react'
-import Navbar from '../home/navbar.tsx'
-import Footer from '../footer/Footer.tsx'
-import "./404.css"
-const page: React.FC = () => {
+import Navbar from './home/navbar'
+import Footer from './footer/Footer'
+import "./404/404.css"
+ 
+const NotFound: React.FC = () => {
   return (
+    <>
     <div className="container">
     <Navbar />
     <div className="four1">
@@ -44,14 +46,16 @@ const page: React.FC = () => {
         </g>
       </svg>
     </div>
-    <h1>PAGE NOT FOUND</h1>
+    <h1 id="farid">PAGE NOT FOUND</h1>
     <h1 className='title'>Sorry! The page you were looking for could not be found.
 Try searching for it or browse through our website.</h1>
     <button className='button_cart'>Return To Shop</button>
 
-    <Footer className="footer" />
+   
   </div>
+  <Footer  />
+  </>
 );
 };
 
-export default page
+export default NotFound
