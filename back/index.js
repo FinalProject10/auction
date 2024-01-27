@@ -4,7 +4,7 @@ const stripe = require("stripe")(
   "sk_test_51Oa23kFgyHOf8MRLBiQ7NHVMbtwjQadZr4dQEePKGWzkjL5y1xpBDSD7COvLpuLiTXe5LQe3GUuQlEp7aF4Qf76l009Im1ojcX"
 );
 
-const express = require("express")
+const express = require("express");
 const db = require("./database/index");
 const {
   Bid,
@@ -15,6 +15,7 @@ const {
   Seller,
   Reclamation,
 } = require("./models/relations");
+const sellersRoutes = require("./routes/seller");
 const clientRoutes = require("./routes/client");
 const adminRoutes = require("./routes/admin");
 const dashboard = require("./routes/AdminDashboardRouter");
@@ -23,12 +24,12 @@ const cloudRoute = require("./routes/cloudinary");
 const cors = require("cors");
 const ProductsRouter = require("./routes/products");
 const sellerRouter = require("./routes/seller");
+const PaymentRouting = require("./routes/AdminPayemnt");
 const memRouter = require("./routes/memberships");
 const bidRouter = require("./routes/bidRouter");
 
 const app = express();
 const userSocketMap = new Map();
-console.log('userScoket',userSocketMap)
 const corsOptions = {
   origin: function (origin, callback) {
     // console.log(origin);
@@ -147,6 +148,7 @@ app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
+app.use("/flousi", PaymentRouting);
 app.use("/cloudinary", cloudRoute);
 app.get("/getallusers", async (req, res) => {
   let d = await Client.findAll();
@@ -167,6 +169,7 @@ io.on("connection", (socket) => {
   console.log(userId, itemsId);
   userSocketMap.set(userId, socket);
   console.log("User Connected ", userId);
+  console.log("userScoket", userSocketMap);
 
   socket.on("create", function (room) {
     console.log("room", room);
