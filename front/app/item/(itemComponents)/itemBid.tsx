@@ -153,7 +153,16 @@ const ItemBid = ({ items }) => {
     setSuccessMessage("Bid submitted successfully!");
     setPopupVisible(true);
   };
-
+  const formatDateTime = (dateString) => {
+    return new Date(dateString).toLocaleString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+  };
   return (
     <div className="summary">
       {items.map((item) => (
@@ -178,7 +187,7 @@ const ItemBid = ({ items }) => {
           {/* Display auction end details */}
           <div className="auction">
             <p className="auction-end">
-              Auction ends:{item.timeEnd} <br />
+              Auction end: {formatDateTime(item.timeEnd)} <br />
               Timezone: UTC +2
             </p>
 
