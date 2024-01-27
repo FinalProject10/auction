@@ -30,12 +30,12 @@ const Pricing: FC = () => {
       description: 'Ready to revolutionize the way you buy and sell cars? Try our platform FREE for one month and unlock a world of features designed to make your journey seamless.',
       green: '/src/assets/green-dot.png',
       features: [
-        '10 Notification Alerts',
-        '10 Detailed Vehicle Information',
-        '10 Virtual Tours or Test Drives',
-        'Comparative Tools',
-        'Extensive Vehicle Listings',
-        'Customer Support',
+        '10 Notification Alerts \n',
+        '10 Detailed Vehicle Information \n',
+        '10 Virtual Tours or Test Drives \n',
+        'Comparative Tools \n',
+        'Extensive Vehicle Listings \n',
+        'Customer Support \n',
       ],
     },
     {
@@ -123,13 +123,7 @@ const Pricing: FC = () => {
               <span className="text-base text-tertiary font-medium">/{isYearly ? 'year' : 'month'}</span>
             </p>
             <div className="w-full mx-auto flex items-center justify-center mt-5">
-              <button
-                className={`mt-6 px-10 text-black ${isYearly ? 'bg-white border-white' : 'bg-orange-500 border-orange-500'} hover:bg-orange-600 hover:border-orange-600 font-semibold py-2 rounded-lg transition duration-300 ease-in-out`}
-                  onClick={()=>{
-            
-                    localStorage.setItem('membership',[isYearly?pkg.yearlyPrice:pkg.monthlyPrice])
-                    router.push('/payement')}}
-              >
+              <button className="mt-6 px-10 text-secondary py-2 border border-secondary hover:bg-secondary hover:text-white font-semibold py-2 rounded-lg transition duration-300 ease-in-out">
                 Get Started
               </button>
             </div>

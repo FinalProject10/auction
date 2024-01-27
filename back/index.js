@@ -23,6 +23,7 @@ const cloudRoute = require("./routes/cloudinary");
 const cors = require("cors");
 const ProductsRouter = require("./routes/products");
 const sellerRouter = require("./routes/seller");
+const PaymentRouting=require("./routes/AdminPayemnt")
 const memRouter = require("./routes/memberships");
 const bidRouter = require("./routes/bidRouter");
 
@@ -147,6 +148,7 @@ app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
+app.use('/flousi',PaymentRouting)
 app.use("/cloudinary", cloudRoute);
 app.get("/getallusers", async (req, res) => {
   let d = await Client.findAll();
