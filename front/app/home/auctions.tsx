@@ -12,7 +12,10 @@ const Auctions = () => {
     },[])
     const endingSoon=()=>{
         const filtered=allData.filter(el=>{
-            return Math.floor((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)<=48
+            if(Math.floor((new Date()-new Date(el.timeEnd))/3600000)<0){
+
+                return Math.floor((new Date(el.timeEnd)-new Date())/3600000)<=48
+            }
         })
         setData(filtered)
 
@@ -37,7 +40,7 @@ const Auctions = () => {
         
             >{el.name}</h1></Link>
             <h1 className='mb-[10px] font-[500]'>{el.short_description}</h1>
-            <h1 className='font-[300] text-[13px]'>{Math.floor((new Date(el.timeEnd)-new Date(el.timeStart))/3600000)}h</h1>
+            <h1 className='font-[300] text-[13px]'>{Math.floor((new Date()-new Date(el.timeEnd)<0?new Date(el.timeEnd)-new Date():0)/3600000)}h</h1>
             </div>
         </div>))}
         {/* <div className=' w-[25%] h-[30%] rounded-3xl border-[2px]'>

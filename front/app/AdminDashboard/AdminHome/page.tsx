@@ -1,6 +1,5 @@
 "use client"
 import React ,{useState,useEffect}from 'react'
-
 import dynamic from "next/dynamic";
 const SideBare = dynamic(() => import("../AdminSidebar/page"));
 import CardStats from "../AdminCard/page";
@@ -63,7 +62,30 @@ const HomePage = () => {
    const [graph , setGraph]=useState([])
    const [graph2,setGraph2]=useState ([])
    const [reclamtion,setReclamation]= useState <[]>([])
-
+   const [month1,setMonth1]=useState([])
+   const [month2,setMonth2]=useState([])
+   const [month3,setMonth3]=useState([])
+   const [month4,setMonth4]=useState([])
+   const [month5,setMonth5]=useState([])
+   const [month6,setMonth6]=useState([])
+   const [month7,setMonth7]=useState([])
+   const [month8,setMonth8]=useState([])
+   const [month9,setMonth9]=useState([])
+   const [month10,setMonth10]=useState([])
+   const [month11,setMonth11]=useState([])
+   const [month12,setMonth12]=useState([])
+   const [month13,setMonth13]=useState([])
+   const [month14,setMonth14]=useState([])
+   const [month15,setMonth15]=useState([])
+   const [month16,setMonth16]=useState([])
+   const [month17,setMonth17]=useState([])
+   const [month18,setMonth18]=useState([])
+   const [month19,setMonth19]=useState([])
+   const [month20,setMonth20]=useState([])
+   const [month21,setMonth21]=useState([])
+   const [month22,setMonth22]=useState([])
+   const [month23,setMonth23]=useState([])
+   const [month24,setMonth24]=useState([])
 
     useEffect(() => {
         axios
@@ -132,7 +154,124 @@ const HomePage = () => {
       }, []);
    
 
- 
+      useEffect(() => {
+        axios
+          .get('http://127.0.0.1:5000/dash/getReclam')
+          .then((res) => {
+            const Data: [] = res.data;
+            setReclamation(Data);
+           const reclamation1= Data.filter((item)=>{
+            return new Date(item.createdAt).getFullYear()===new Date().getFullYear()})
+           const reclamtion2 = Data.filter((item2)=>{
+            return new Date(item2.createdAt).getFullYear()===new Date().getFullYear()-1})
+           setGraph(reclamation1)
+           setGraph2(reclamtion2)
+           fltr1(reclamation1)
+           fltr2(reclamation1)
+           fltr3(reclamation1)
+           fltr4(reclamation1)
+           fltr5(reclamation1)
+           fltr6(reclamation1)
+           fltr7(reclamation1)
+           fltr8(reclamation1)
+           fltr9(reclamation1)
+           fltr10(reclamation1)
+           fltr11(reclamation1)
+           fltr12(reclamation1)
+           fltr13(reclamtion2)
+           fltr14(reclamtion2)
+           fltr15(reclamtion2)
+           fltr16(reclamtion2)
+           fltr17(reclamtion2)
+           fltr18(reclamtion2)
+           fltr18(reclamtion2)
+           fltr19(reclamtion2)
+           fltr20(reclamtion2)
+           fltr21(reclamtion2)
+           fltr22(reclamtion2)
+           fltr23(reclamtion2)
+           fltr24(reclamtion2)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, []);
+    
+  const fltr1 = (graph)=>{
+    return setMonth1( graph.filter((el) =>new Date(el.createdAt).getMonth()+1===1))
+  }
+  const fltr2 = (graph)=>{
+    return setMonth2 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===2))
+  }
+  const fltr3 = (graph)=>{
+    return setMonth3( graph.filter((el) =>new Date(el.createdAt).getMonth()+1===3))
+  }
+  const fltr4 = (graph)=>{
+    return  setMonth4 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===4))
+  }
+  const fltr5 = (graph)=>{
+    return setMonth5 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===5))
+  }
+  const fltr6 = (graph)=>{
+    return setMonth6( graph.filter((el) =>new Date(el.createdAt).getMonth()+1===6))
+  }
+  const fltr7 = (graph)=>{
+    return setMonth7 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===7))
+  }
+  const fltr8 = (graph)=>{
+    return setMonth8 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===8))
+  }
+  const fltr9 = (graph)=>{
+    return setMonth9 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===9))
+  }
+  const fltr10 = (graph)=>{
+    return setMonth10 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===10))
+  }
+  const fltr11 = (graph)=>{
+    return setMonth11 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===11))
+  }
+  const fltr12 = (graph)=>{
+    return setMonth12 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===12))
+  }
+   //the last years
+  const fltr13 = (graph2)=>{
+    return setMonth13( graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===1))
+  }
+  const fltr14 = (graph2)=>{
+    return setMonth14 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===2))
+  }
+  const fltr15 = (graph2)=>{
+    return setMonth15( graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===3))
+  }
+  const fltr16 = (graph2)=>{
+    return  setMonth16 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===4))
+  }
+  const fltr17 = (graph2)=>{
+    return setMonth17 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===5))
+  }
+  const fltr18 = (graph2)=>{
+    return setMonth18( graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===6))
+  }
+  const fltr19 = (graph2)=>{
+    return setMonth19 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===7))
+  }
+  const fltr20= (graph2)=>{
+    return setMonth20 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===8))
+  }
+  const fltr21 = (graph2)=>{
+    return setMonth21 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===9))
+  }
+  const fltr22 = (graph2)=>{
+    return setMonth22 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===10))
+  }
+  const fltr23 = (graph2)=>{
+    return setMonth23 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===11))
+  }
+  const fltr24 = (graph2)=>{
+    return setMonth24 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===12))
+  }
+
+      
     // const router=useRouter()
     // useEffect(()=>{
     //     const role=localStorage.getItem('role')
@@ -169,7 +308,7 @@ const HomePage = () => {
             label: new Date().getFullYear(),
             backgroundColor: '#ed64a6',
             borderColor: '#ed64a6',
-            data: [30, 78, 56, 34, 100, 45, 13,45,45,45,46,12],
+            data: [month1.length, month2.length, month3.length, month4.length, month5.length, month6.length, month7.length,month8.length,month9.length,month10.length,month11.length,month12.length],
             fill: false,
             barThickness: 8,
           },
@@ -178,7 +317,7 @@ const HomePage = () => {
             fill: false,
             backgroundColor: '#4c51bf',
             borderColor: '#4c51bf',
-            data: [27, 68, 86, 74, 10, 4, 87,10,12,22,45,96],
+            data: [month13.length, month14.length, month15.length,  month16.length,  month17.length,  month18.length,  month19.length, month20.length, month21.length, month22.length, month23.length, month24.length],
             barThickness: 8,
           },
         ],
@@ -242,21 +381,21 @@ const HomePage = () => {
     }
   }, []);
  
-  useEffect(() => {
-    axios
-      .get('http://127.0.0.1:5000/dash/getReclam')
-      .then((res) => {
-        const Data: [] = res.data;
-        setReclamation(Data);
-       const reclamation1= Data.filter((item)=>{item.createdAt.getFullYear()===new Date().getFullYear()}).sort()
-       const reclamtion2 = Data.filter((item2)=>{item2.createdAt.getFullYear()===new Date().getFullYear()-1}).sort()
-       setGraph(reclamation1)
-       setGraph2(reclamtion2)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('http://127.0.0.1:5000/dash/getReclam')
+  //     .then((res) => {
+  //       const Data: [] = res.data;
+  //       setReclamation(Data);
+  //      const reclamation1= Data.filter((item)=>{item.createdAt.getFullYear()===new Date().getFullYear()}).sort()
+  //      const reclamtion2 = Data.filter((item2)=>{item2.createdAt.getFullYear()===new Date().getFullYear()-1}).sort()
+  //      setGraph(reclamation1)
+  //      setGraph2(reclamtion2)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
 
   
@@ -268,6 +407,7 @@ const HomePage = () => {
  
       <div className="relative bg-blueGray-800 md:pt-32 pb-32  mt-[-2%] " style={{"background-color": "#1e293b"}}>
         <div className="px-4 md:px-10 mx-auto w-full">
+        
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap mt-[-7%]">
@@ -412,10 +552,11 @@ const HomePage = () => {
 </div>
 
 </div> */}
+{/* <AdminChart/> */}
  </div>
   </div>
 </div>
-       
+     
 
         </div>
     </div>

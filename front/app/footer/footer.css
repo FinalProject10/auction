@@ -4,10 +4,6 @@
   padding: 30px 0;
 }
 
-.container {
-  /* max-width: 1200px;
-  margin: 0 auto; */
-}
 
 .row {
   display: flex;
@@ -24,10 +20,7 @@ h5 {
   margin-bottom: 15px;
 }
 
-ul {
-  /* list-style: none; */
-  /* padding: 0; */
-}
+
 
 ul li {
   margin-bottom: 10px;

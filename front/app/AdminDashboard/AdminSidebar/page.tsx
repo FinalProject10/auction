@@ -21,7 +21,7 @@ const sideBare = () => {
 <div className="hidden md:flex flex-col w-64 bg-gray-800 ">
     <div className="flex items-center justify-center h-16 bg-gray-900" style={{"height": "217px"}}>
         <span className="text-white font-bold uppercase">
-        <img className='flex rounded-4 rounded-full   ' src="https://th.bing.com/th/id/R.e2f3a5e0449e571659a07c7e1c722e25?rik=jIukIjREndAEYQ&pid=ImgRaw&r=0-" alt="" 
+        <img className='flex rounded-4 rounded-full   ' src="https://th.bing.com/th?q=Avatar+Visage&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.3&pid=InlineBlock&mkt=en-XA&cc=TN&setlang=fr&adlt=strict&t=1&mw=247" alt="" 
         style={{"width": "170px",
     "height": "170px",
     "object-fit": "cover"}}/>

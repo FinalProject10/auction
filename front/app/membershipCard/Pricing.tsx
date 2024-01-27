@@ -123,17 +123,7 @@ const Pricing: FC = () => {
               <span className="text-base text-tertiary font-medium">/{isYearly ? 'year' : 'month'}</span>
             </p>
             <div className="w-full mx-auto flex items-center justify-center mt-5">
-              <button
-                className={`mt-6 px-10 text-black ${isYearly ? 'bg-white border-white' : 'bg-orange-500 border-orange-500'} hover:bg-orange-600 hover:border-orange-600 font-semibold py-2 rounded-lg transition duration-300 ease-in-out`}
-                  onClick={()=>{
-                    localStorage.setItem('membe',pkg.name==='VIP'?packages[1].features:packages[0].features)
-                    localStorage.setItem('memb',pkg.name==='VIP'?'VIP':'BASIC')
-                    localStorage.setItem('date',isYearly?"years":"Month")
-                    localStorage.setItem('membership',[isYearly?pkg.yearlyPrice:pkg.monthlyPrice])
-                    // localStorage.setItem('membership',[isYearly?pkg.yearlyPrice:pkg.monthlyPrice])
-
-                    router.push('/payement')}}
-              >
+              <button className="mt-6 px-10 text-secondary py-2 border border-secondary hover:bg-secondary hover:text-white font-semibold py-2 rounded-lg transition duration-300 ease-in-out">
                 Get Started
               </button>
             </div>

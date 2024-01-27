@@ -97,13 +97,13 @@ const adminId=localStorage.getItem('adminId')
               <i className="fas fa-address-card mr-2 text-lg text-blueGray-400"></i>{oneProduct[0]?.cinNum}
             </div>
           </div>
-          <div className=" py-10 border-t border-blueGray-200 text-center">
+          <div className=" py-10 border-t border-blueGray-200 text-center overflow-y-auto " style={{"height": "40vh"}} >
             {/* <div className="flex flex-wrap justify-center">
               <div className="w-full lg:w-9/12 px-4"> */}
-                
+                <div>
                 <div className="grid grid-cols-5 gap-4 mt-[-10%]">
                 {oneProduct[0]?.items.map((el,i) => (
-                <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto mt-24">
+                <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8  max-w-sm mx-auto mt-[85px]">
     <img src={el.images[0]} alt="University of Southern California" className="absolute inset-0 h-full w-full object-cover"/>
     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
     <h3 className="z-10 mt-3 text-3xl font-bold text-white">{el.name}</h3>
@@ -112,9 +112,11 @@ const adminId=localStorage.getItem('adminId')
 </article>
    ))}
 </div>
+                </div>
+     
                 
               </div>
-            {/* </div>
+     ,       {/* </div>
           </div> */}
         </div>
       </div>
