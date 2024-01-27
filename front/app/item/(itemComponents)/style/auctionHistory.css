@@ -1,0 +1,7 @@
+.custom-transition {
+    transition: background-color 1s ease-in-out;
+}
+
+.custom-transition:hover {
+    background-color: #c53030;
+}

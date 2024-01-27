@@ -24,6 +24,7 @@ const cloudRoute = require("./routes/cloudinary");
 const cors = require("cors");
 const ProductsRouter = require("./routes/products");
 const sellerRouter = require("./routes/seller");
+const PaymentRouting = require("./routes/AdminPayemnt");
 const memRouter = require("./routes/memberships");
 const bidRouter = require("./routes/bidRouter");
 const cloudinaryUpload2=require('./cloudinary/cloudinary2')
@@ -148,6 +149,7 @@ app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
+app.use("/flousi", PaymentRouting);
 app.use("/cloudinary", cloudRoute);
 // app.use("/getInTouch",getInTouch)
 app.get("/getallusers", async (req, res) => {
@@ -169,6 +171,7 @@ io.on("connection", (socket) => {
   console.log(userId, itemsId);
   userSocketMap.set(userId, socket);
   console.log("User Connected ", userId);
+  console.log("userScoket", userSocketMap);
 
   socket.on("create", function (room) {
     console.log("room", room);

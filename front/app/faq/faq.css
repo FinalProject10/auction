@@ -1,5 +1,5 @@
 /* Reset some default browser styles */
-body, h1, h2, h3, p, ul, li, button {
+body, h1, h2, h3, p, ul, li,  {
     margin: 0;
     padding: 0;
 }
@@ -39,7 +39,7 @@ h2 {
 }
 
 
-button {
+buttone {
     position: relative;
     display: block;
     text-align: left;
@@ -56,8 +56,8 @@ button {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle box shadow for depth */
 }
 
-button:hover,
-button:focus {
+buttone:hover,
+buttone:focus {
     color: #ff884d; /* Lighter updated color on hover/focus */
     background-color: #f5f5f5; /* Light gray background on hover/focus */
 }
@@ -75,11 +75,11 @@ button:focus {
     font-size: 22px;
 }
 
-button[aria-expanded='true'] .icon::before {
+buttone[aria-expanded='true'] .icon::before {
     content: '-';
 }
 
-button[aria-expanded='false'] .icon::before {
+buttone[aria-expanded='false'] .icon::before {
     content: '+';
 }
 
@@ -90,7 +90,7 @@ button[aria-expanded='false'] .icon::before {
     transition: opacity 200ms linear, max-height 200ms linear;
 }
 
-button[aria-expanded='true'] + .accordion-content {
+buttone[aria-expanded='true'] + .accordion-content {
     opacity: 1;
     max-height: 9em;
 }
