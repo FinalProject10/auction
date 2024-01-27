@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../home/navbar";
 import Link from "next/link";
-import Footer from "../footer/Footer";
 import { GiFlatHammer } from "react-icons/gi";
 import { IoStatsChart } from "react-icons/io5";
 import { dividerClasses } from "@mui/material";
@@ -383,7 +382,6 @@ const Dashboard = () => {
         )}
         {data[4] && localStorage.clear() && router.push("/")}
       </div>
-      <Footer />
     </div>
   );
 };

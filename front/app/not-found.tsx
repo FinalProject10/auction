@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from './home/navbar'
-import Footer from './footer/Footer'
 import "./404/404.css"
  
 const NotFound: React.FC = () => {
@@ -53,7 +52,6 @@ Try searching for it or browse through our website.</h1>
 
    
   </div>
-  <Footer  />
   </>
 );
 };

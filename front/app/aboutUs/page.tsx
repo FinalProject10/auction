@@ -3,7 +3,6 @@ import React, { FC, useCallback } from 'react';
 import Link from 'next/link'
 import "./about.css";
 import Navbar from "../home/navbar";
-import Footer from "../footer/Footer.tsx";
 
 const Page: FC = () => {
   const onHeaderContainer1Click = useCallback(() => {

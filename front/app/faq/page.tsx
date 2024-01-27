@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import "./faq.css";
-import Footer from "../footer/Footer.tsx";
 import Navbar from "../home/navbar.tsx";
 interface AccordionItem {
   id: number;
