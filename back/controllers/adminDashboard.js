@@ -5,9 +5,8 @@ const Item =require ('../models/items')
 const Membership=require('../models/memberships')
 const Reclamation = require('../models/reclamation')
 const bid =require ('../models/bid')
-
+const { where } = require('sequelize')
 const Items = require('../models/items')
-const Bid = require('../models/bid')
 module.exports.addAdmin = async (req, res) => {
     const { name, password, email, lastName, image, telNumb, cinNum } = req.body;
 
@@ -296,52 +295,6 @@ module.exports.removeSel = async (req, res) => {
     }
   } catch (error) {
     console.error(error); 
-    res.status(500).send(error.message);
-  }
-};
-module.exports.getOne = async (req, res) => {
-  try {
-    const one = await Seller.findAll({
-      attributes: ['name', 'lastName', 'image','cinNum','address','telNumb'],
-      include: [
-        {
-          model: Item,
-          attributes: ['name', 'images', 'price']
-        },
-      ],
-      where: { id: req.params.id }
-    });
-
-    if (one.length > 0) {
-      // Send the 'one' object as the response
-      res.status(200).json(one);
-    } else {
-      res.status(404).send('Seller not found');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error.message);
-  }
-};
-module.exports.getBid = async (req, res) => {
-  try {
-    const one = await Bid.findAll({
-      include: [
-        {
-          model: Client,
-        },
-      ],
-      where: { id: req.params.id }
-    });
-
-    if (one.length > 0) {
-      // Send the 'one' object as the response
-      res.status(200).json(one);
-    } else {
-      res.status(404).send('Seller not found');
-    }
-  } catch (error) {
-    console.error(error);
     res.status(500).send(error.message);
   }
 };

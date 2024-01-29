@@ -4,7 +4,6 @@ const bidController = require("../controllers/bidControllers");
 
 router.post("/placeBid", bidController.placeBid);
 router.get("/fetch-items/:id", bidController.getBids);
-router.get("/fetch-items/BidsByItems/:id", bidController.getBidsByItems);
 router.get("/bidNotification", async (req, res) => {
   try {
     const lastBid = await Bid.findOne({
