@@ -79,6 +79,18 @@ module.exports = {
       res.status(500).json('internal server err')
     }
 
+  },
+  updateMembership:async(req,res)=>{
+      try{
+        console.log(req.body.membership,req.params.id)
+        let d=await Client.update({membership:req.body.membership},{where:{id:req.params.id}})
+        if(d){ 
+          console.log(d)
+      return res.status(200).json('updated')}
+        return res.status(404).json('not updated')
+      }catch(err){
+        res.status(500).json('internal serv err')
+      }
   }
   
 };

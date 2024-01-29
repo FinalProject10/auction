@@ -6,7 +6,7 @@ import { TbLayoutGrid } from "react-icons/tb";
 import { FaRegListAlt } from "react-icons/fa";
 import { Select, Option } from "@material-tailwind/react";
 import { dividerClasses } from "@mui/material";
-// import Image from "next/image";
+import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
 import {
@@ -852,7 +852,7 @@ const filter2=(property:any,value:any)=>{
               </AccordionBody>
             </Accordion>
           </div>
-          {/* <Image
+          <Image
             className="cursor-pointer mt-[20%]"
             width={250}
             height={250}
@@ -860,7 +860,7 @@ const filter2=(property:any,value:any)=>{
             src={
               "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-sidebar_pic-922x1024.jpg"
             }
-          /> */}
+          />
         </div>
     <div className='w-[1190px] h-auto '>
     <div className='flex justify-between'>

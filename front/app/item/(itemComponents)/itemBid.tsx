@@ -232,10 +232,7 @@ const ItemBid = ({ items }) => {
                 </div>
               </form>
 
-<<<<<<< HEAD
              
-=======
->>>>>>> 9c17aa40b01da1b76a7133136021631f26a9d7c0
               {/* Display success and error messages */}
               <div className="flex justify-center items-center">
                 {/* Display success message */}

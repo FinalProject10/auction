@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import '../payement/chek.css'
+import '../payement/check.css'
 
 const stripePromise = loadStripe('pk_test_51Oa23kFgyHOf8MRLCpOxilmegVe8iPiOSt91sLXtveMRE8zLgyVOFofgKCUKNsRTzirOhr0psYY3aBqh89GML3Ep006HA3dFsH');
 
