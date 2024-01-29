@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import "./style/itemBid.css";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { store } from "react-notifications-component";
 import AuctionTimer from "./auctionTimer";
 import socket from "./bid/socket";
+
 const ItemBid = ({ items }) => {
   const [quant, setQuant] = useState(
     items[0]?.bids.length > 0
@@ -16,9 +16,6 @@ const ItemBid = ({ items }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [newBidMessageVisible, setNewBidMessageVisible] = useState(false);
   const [notifications, setNotifications] = useState([]);
-  const [playSound, setPlaySound] = useState(false);
-  const soundUrl =
-    "https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3?filename=short-success-sound-glockenspiel-treasure-video-game-6346.mp3";
 
   const userId = localStorage.getItem("userId");
   useEffect(() => {
@@ -26,18 +23,17 @@ const ItemBid = ({ items }) => {
     const handleNewBidFromOthers = (data) => {
       setNewBidMessageVisible(true);
       setQuant(data.bidAmount);
-      setPlaySound(true);
     };
 
     // Function to leave the current room and join a new one
     const joinNewRoom = (newRoomId) => {
-      socket.emit("leaveRoom", items[0]?.id);
+      socket.emit("leaveRoom", items[0].id);
 
       socket.emit("joinRoom", newRoomId);
     };
 
     // Join the initial room when the component mounts
-    socket.emit("create", items[0]?.id);
+    socket.emit("create", items[0].id);
 
     // Set up socket event listeners
     socket.on("placeBid", handleNewBidFromOthers);
@@ -71,7 +67,7 @@ const ItemBid = ({ items }) => {
         setErrorMessage(false);
         setSuccessMessage("");
         setNewBidMessageVisible(false);
-      }, 5000);
+      }, 1000);
       setNewBidMessageVisible(false);
 
       return () => clearTimeout(hideTimeout);
@@ -152,16 +148,7 @@ const ItemBid = ({ items }) => {
     setSuccessMessage("Bid submitted successfully!");
     setPopupVisible(true);
   };
-  const formatDateTime = (dateString) => {
-    return new Date(dateString).toLocaleString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-  };
+
   return (
     <div className="summary">
       {items.map((item) => (
@@ -186,7 +173,7 @@ const ItemBid = ({ items }) => {
           {/* Display auction end details */}
           <div className="auction">
             <p className="auction-end">
-              Auction end: {formatDateTime(item.timeEnd)} <br />
+              Auction ends:{item.timeEnd} <br />
               Timezone: UTC +2
             </p>
 
@@ -237,7 +224,6 @@ const ItemBid = ({ items }) => {
                 {/* Bid button */}
                 <div className="bid ml-24">
                   <button
-                    onClick={() => setPlaySound(true)}
                     type="submit"
                     className="bg-red-500 text-white text-sm leading-6 font-bold py-2 px-4 rounded-lg hover:bg-red-700"
                   >
@@ -246,7 +232,10 @@ const ItemBid = ({ items }) => {
                 </div>
               </form>
 
+<<<<<<< HEAD
              
+=======
+>>>>>>> 9c17aa40b01da1b76a7133136021631f26a9d7c0
               {/* Display success and error messages */}
               <div className="flex justify-center items-center">
                 {/* Display success message */}

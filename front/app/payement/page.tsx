@@ -1,7 +1,51 @@
-import React from 'react'
-import Strip from '../payement/stripe'
-import Flouci from '../payement/flouci'
-const payment = () => {
+"use client"
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+import Flouci from './flouci'
+import Strip from './stripe'
+const stripePromise = loadStripe('pk_test_51Oa23kFgyHOf8MRLCpOxilmegVe8iPiOSt91sLXtveMRE8zLgyVOFofgKCUKNsRTzirOhr0psYY3aBqh89GML3Ep006HA3dFsH');
+
+const Payment = () => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async () => {
+    try {
+      setIsLoading(true);
+const membership=localStorage.getItem('membership')
+
+      const response = await axios.post('http://localhost:5000/create-checkout-session', {
+        id: parseInt(membership)>60?(parseInt(membership)===590?'item4':'item3'):(parseInt(membership)===59?'item2':'item1'),  // Replace with the actual item ID
+        quantity: membership,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status !== 200) {
+        throw new Error(response.data.error || 'Failed to create checkout session');
+      }
+
+      const { sessionId } = response.data;
+
+      const stripe = await stripePromise; // Use await to wait for the promise
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: sessionId,
+      });
+
+      if (error) {
+        throw new Error(error.message || 'Failed to redirect to checkout');
+      }
+    } catch (error) {
+      console.error('Checkout failed:', error.message || error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex" >
        <div className="w-full h-screen" style={{"background-image":"url('https://vojislavd.com/ta-template-demo/assets/img/coming-soon.jpg')"}}>
@@ -31,7 +75,7 @@ const payment = () => {
 
       
     </div>
-  )
-}
+  );
+};
 
-export default payment
+export default Payment;

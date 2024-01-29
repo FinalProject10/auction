@@ -1,5 +1,6 @@
 "use client"
 import React ,{useState,useEffect}from 'react'
+
 import dynamic from "next/dynamic";
 const SideBare = dynamic(() => import("../AdminSidebar/page"));
 import CardStats from "../AdminCard/page";
@@ -62,30 +63,7 @@ const HomePage = () => {
    const [graph , setGraph]=useState([])
    const [graph2,setGraph2]=useState ([])
    const [reclamtion,setReclamation]= useState <[]>([])
-   const [month1,setMonth1]=useState([])
-   const [month2,setMonth2]=useState([])
-   const [month3,setMonth3]=useState([])
-   const [month4,setMonth4]=useState([])
-   const [month5,setMonth5]=useState([])
-   const [month6,setMonth6]=useState([])
-   const [month7,setMonth7]=useState([])
-   const [month8,setMonth8]=useState([])
-   const [month9,setMonth9]=useState([])
-   const [month10,setMonth10]=useState([])
-   const [month11,setMonth11]=useState([])
-   const [month12,setMonth12]=useState([])
-   const [month13,setMonth13]=useState([])
-   const [month14,setMonth14]=useState([])
-   const [month15,setMonth15]=useState([])
-   const [month16,setMonth16]=useState([])
-   const [month17,setMonth17]=useState([])
-   const [month18,setMonth18]=useState([])
-   const [month19,setMonth19]=useState([])
-   const [month20,setMonth20]=useState([])
-   const [month21,setMonth21]=useState([])
-   const [month22,setMonth22]=useState([])
-   const [month23,setMonth23]=useState([])
-   const [month24,setMonth24]=useState([])
+
 
     useEffect(() => {
         axios
@@ -154,6 +132,7 @@ const HomePage = () => {
       }, []);
    
 
+<<<<<<< HEAD
       useEffect(() => {
         axios
           .get('http://127.0.0.1:5000/dash/getReclam')
@@ -272,6 +251,9 @@ const HomePage = () => {
   }
 
       
+=======
+ 
+>>>>>>> 9c17aa40b01da1b76a7133136021631f26a9d7c0
     // const router=useRouter()
     // useEffect(()=>{
     //     const role=localStorage.getItem('role')
@@ -308,7 +290,11 @@ const HomePage = () => {
             label: new Date().getFullYear(),
             backgroundColor: '#ed64a6',
             borderColor: '#ed64a6',
+<<<<<<< HEAD
             data: [4, month2.length, month3.length, month4.length, month5.length, month6.length, month7.length,month8.length,month9.length,month10.length,month11.length,month12.length],
+=======
+            data: [30, 78, 56, 34, 100, 45, 13,45,45,45,46,12],
+>>>>>>> 9c17aa40b01da1b76a7133136021631f26a9d7c0
             fill: false,
             barThickness: 8,
           },
@@ -317,7 +303,7 @@ const HomePage = () => {
             fill: false,
             backgroundColor: '#4c51bf',
             borderColor: '#4c51bf',
-            data: [month13.length, month14.length, month15.length,  month16.length,  month17.length,  month18.length,  month19.length, month20.length, month21.length, month22.length, month23.length, month24.length],
+            data: [27, 68, 86, 74, 10, 4, 87,10,12,22,45,96],
             barThickness: 8,
           },
         ],
@@ -381,21 +367,21 @@ const HomePage = () => {
     }
   }, []);
  
-  // useEffect(() => {
-  //   axios
-  //     .get('http://127.0.0.1:5000/dash/getReclam')
-  //     .then((res) => {
-  //       const Data: [] = res.data;
-  //       setReclamation(Data);
-  //      const reclamation1= Data.filter((item)=>{item.createdAt.getFullYear()===new Date().getFullYear()}).sort()
-  //      const reclamtion2 = Data.filter((item2)=>{item2.createdAt.getFullYear()===new Date().getFullYear()-1}).sort()
-  //      setGraph(reclamation1)
-  //      setGraph2(reclamtion2)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get('http://127.0.0.1:5000/dash/getReclam')
+      .then((res) => {
+        const Data: [] = res.data;
+        setReclamation(Data);
+       const reclamation1= Data.filter((item)=>{item.createdAt.getFullYear()===new Date().getFullYear()}).sort()
+       const reclamtion2 = Data.filter((item2)=>{item2.createdAt.getFullYear()===new Date().getFullYear()-1}).sort()
+       setGraph(reclamation1)
+       setGraph2(reclamtion2)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
 
   
@@ -407,11 +393,10 @@ const HomePage = () => {
  
       <div className="relative bg-blueGray-800 md:pt-32 pb-32  mt-[-2%] " style={{"background-color": "#1e293b"}}>
         <div className="px-4 md:px-10 mx-auto w-full">
-        
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap mt-[-7%]">
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4 ">
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="total rev"
                   statTitle={total1}
@@ -471,7 +456,7 @@ const HomePage = () => {
 <div>
   
 
-<div className="relative overflow-x-auto ml-[50px] mt-[] w-[1150px]">
+<div className="relative overflow-x-auto ml-[50px] mt-[-20%] w-[1150px]">
 
   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded" >
         <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
@@ -496,7 +481,7 @@ const HomePage = () => {
    
 </div>
 <div>
-{/* <div className="relative">
+<div className="relative">
 <div className=" flex  rounded-md w-[1220px] h-[50%] overflow-x-scroll ml-[15px]">
 {cordoner.map((el, index) => (
    el.seller.items.length > 0 && (
@@ -551,12 +536,11 @@ const HomePage = () => {
    
 </div>
 
-</div> */}
-{/* <AdminChart/> */}
+</div>
  </div>
   </div>
 </div>
-     
+       
 
         </div>
     </div>
