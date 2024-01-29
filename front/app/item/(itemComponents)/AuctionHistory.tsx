@@ -5,12 +5,15 @@ import axios from "axios";
 
 function AuctionHistory({ items, timeStart, timeEnd, price }) {
   const [data, setData] = useState([]);
+  const [visibleItems, setVisibleItems] = useState(10);
 
   const fetchData = async () => {
     try {
-      const requests = items.map((item) =>
-        axios.get(`http://localhost:5000/Seller/profile/${item.ClientId}`)
-      );
+      const requests = items
+        .slice(0, visibleItems)
+        .map((item) =>
+          axios.get(`http://localhost:5000/Seller/profile/${item.ClientId}`)
+        );
 
       const responses = await Promise.all(requests);
       const responseData = responses.map((response) => response.data);
@@ -22,7 +25,11 @@ function AuctionHistory({ items, timeStart, timeEnd, price }) {
 
   useEffect(() => {
     fetchData();
-  }, [items]);
+  }, [items, visibleItems]);
+
+  const loadMore = () => {
+    setVisibleItems((prev) => prev + 10);
+  };
 
   const formatDateTime = (dateString) => {
     return new Date(dateString).toLocaleString("en-US", {
@@ -48,7 +55,7 @@ function AuctionHistory({ items, timeStart, timeEnd, price }) {
           {data.map((item, index) => (
             <tr key={index}>
               <th>
-                {item?.name}" "{item?.lastName}
+                {item?.name} {item?.lastName}
               </th>
               <td>{formatDateTime(items[index]?.updatedAt)}</td>
               <td>{items[index]?.bidAmount}$</td>
@@ -59,7 +66,7 @@ function AuctionHistory({ items, timeStart, timeEnd, price }) {
             <td>{formatDateTime(timeEnd)}</td>
             <td>
               {new Date(timeEnd) > new Date()
-                ? "still not finshed"
+                ? "still not finished"
                 : items.length > 0
                 ? items[items.length - 1].bidAmount
                 : "No bids yet"}
@@ -67,6 +74,9 @@ function AuctionHistory({ items, timeStart, timeEnd, price }) {
           </tr>
         </tbody>
       </table>
+      {items.length > visibleItems && (
+        <button onClick={loadMore}>Load More</button>
+      )}
     </>
   );
 }

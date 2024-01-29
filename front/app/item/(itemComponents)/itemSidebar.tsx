@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import "./style/itemSidebar.css";
 import Image from "next/image";
@@ -7,11 +8,15 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { RiAccountPinCircleFill } from "react-icons/ri";
+import { FaCircleArrowLeft } from "react-icons/fa6";
+import { FaCircleArrowRight } from "react-icons/fa6";
+
 import Link from "next/link";
 import axios from "axios";
 const ItemSidebar = ({ items }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  console.log("page,data", page, data);
 
   useEffect(() => {
     // Function to fetch items from the server
@@ -20,7 +25,7 @@ const ItemSidebar = ({ items }) => {
         const response = await axios.get(
           `http://localhost:5000/items/fetch-items/?page=${page}`
         );
-        setData((prevItems) => [...prevItems, ...response.data]);
+        setData(response.data);
       } catch (error) {
         console.error("Error fetching items:", error);
       }
@@ -32,9 +37,13 @@ const ItemSidebar = ({ items }) => {
 
   const handleLoadMore = () => {
     // Increment the page when the "Load More" button is clicked
-    setPage((prevPage) => prevPage + 1);
+    setPage(page + 1);
   };
 
+  const handleLoadBack = () => {
+    // Decrement the page when the "Back" button is clicked
+    setPage((prevPage) => prevPage - 1);
+  };
   return (
     <>
       <div>
@@ -61,8 +70,8 @@ const ItemSidebar = ({ items }) => {
               <p className="mb-3">
                 <RiAccountPinCircleFill className="black-icon w-[15px] inline-block mx-2" />
                 <Link
-                  href="/Seller/profile/"
-                  as={`/Seller/profile/${item.seller?.id}`}
+                  href="/seller/profile/"
+                  as={`/seller/profile/${item.seller?.id}`}
                 >
                   Check more offers from this vendor.
                 </Link>
@@ -90,6 +99,18 @@ const ItemSidebar = ({ items }) => {
               </div>
             </div>
           ))}
+        </div>
+        <div>
+          {data.length > 0 && (
+            <button onClick={handleLoadBack}>
+              <FaCircleArrowLeft />
+            </button>
+          )}
+          {data.length > 0 && (
+            <button onClick={handleLoadMore}>
+              <FaCircleArrowRight />
+            </button>
+          )}
         </div>
         <div className="flex flex-wrap mt-3 max-w-[400px]">
           {data.map((el) => (
@@ -130,7 +151,6 @@ const ItemSidebar = ({ items }) => {
             </div>
           ))}
         </div>
-        {data.length > 0 && <button onClick={handleLoadMore}>Load More</button>}
       </div>
     </>
   );

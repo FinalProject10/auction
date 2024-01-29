@@ -1,23 +1,100 @@
 const functions = require("firebase-functions");
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const admin = require("firebase-admin");
+const cors = require("cors")({ origin: true });
+const jwt = require("jsonwebtoken");
+const fetch = require("node-fetch");
+admin.initializeApp();
+const corsOptions = {
+  origin: function (origin, callback) {
+    // console.log(origin);
 
-const { onRequest } = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+    // if (whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true);
+    // } else {
+    //   callback(new Error("Not allowed by CORS"));
+    // }
+    callback(null, true);
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
+exports.sendFCM = functions.https.onRequest(async (request, response) => {
+  cors(request, response, async () => {
+    const message = {
+      data: {
+        title: "FCM Notification",
+        body: "This is a test notification.",
+      },
+      topic: "testTopic",
+    };
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+    try {
+      // Send FCM message
+      await admin.messaging().send(message);
 
-exports.helloWorld = onRequest((request, response) => {
-  logger.info("Hello logs!", { structuredData: true });
-  response.send("Hello from Firebase!");
+      // Save message details in Firestore
+      const firestore = admin.firestore();
+      const messagesCollection = firestore.collection("messages");
+
+      const newMessage = {
+        title: message.data.title,
+        body: message.data.body,
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      };
+
+      await messagesCollection.add(newMessage);
+
+      response.status(200).send("FCM message sent and saved successfully.");
+    } catch (error) {
+      console.error("Error sending/saving FCM message:", error);
+      response
+        .status(500)
+        .send("Error sending/saving FCM message: " + error.message);
+    }
+  });
 });
 
-// // The Firebase Admin SDK to access Firestore.
-const { getFirestore } = require("firebase-admin/firestore");
+exports.secureFunction = functions.https.onRequest(async (req, res) => {
+  const jwtToken = req.headers.authorization;
+
+  try {
+    if (!jwtToken) {
+      throw new Error("Authorization header is missing.");
+    }
+
+    // Check for the "Bearer " prefix and extract the actual token
+    const tokenParts = jwtToken.split(" ");
+
+    if (tokenParts.length !== 2 || tokenParts[0] !== "Bearer") {
+      throw new Error("Invalid Authorization header format.");
+    }
+
+    const actualToken = tokenParts[1];
+
+    // Verify and decode the JWT token
+    const decodedToken = jwt.verify(actualToken, "salim123");
+
+    console.log("Decoded Token:", decodedToken);
+
+    // Use 'await' when making an asynchronous request with 'node-fetch'
+    await fetch("http://localhost:5001/auction-adca9/us-central1/sendFCM", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: jwtToken,
+      },
+      body: JSON.stringify({
+        data: {
+          title: "FCM Notification",
+          body: "This is a test notification.",
+        },
+        topic: "testTopic",
+      }),
+    });
+
+    res.status(200).send("Token is valid!");
+  } catch (error) {
+    console.error("Error verifying token:", error);
+    res.status(401).send("Unauthorized: " + error.message);
+  }
+});

@@ -1,9 +1,30 @@
+"use client"
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-
+import axios from 'axios'
 const Services = () => {
+  const [data,setData]=useState([])
+  const[index,setIndex]=useState(0)
+  useEffect(()=>{
+    axios.get(`http://localhost:5000/dash/getReclam`).then(r=>{
+    console.log(r.data)  
+    setData(r.data)})
+    .catch(err=>console.log(err))
+  },[])
+  const handleIndex=(value:any)=>{
+    if(index===data.length-1){
+      setIndex(0)
+      return
+    }
+    if(index===0){
+      setIndex(data.length-1)
+      return
+    }
+    
+    setIndex(value)
+  }
   return (
     <>
     <div className='mt-[40px] bg-auto' style={{background:'url(https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_about.jpg?id=6765)',backgroundSize:'cover',height:'600px'}}>
@@ -18,21 +39,25 @@ const Services = () => {
     <div 
        
         className='bg-white absolute  mt-[20%] flex justify-center items-center w-[50px] h-[50px] rounded-[5px]'>
-<KeyboardArrowLeftIcon fontSize={'large'} className='text-black'/>
+<KeyboardArrowLeftIcon 
+onClick={()=>{handleIndex(index-1)}}
+fontSize={'large'} className='text-black' />
         </div>
 
         <div className='w-[95%] ml-[6%] h-[90%] flex justify-center items-center  mt-[15%] bg-white shadow-xl rounded-[20px] '>
-<div>
-  <img src="" alt="" />
-  <h1 className='text-center mt-[3%] mb-[3%]'>salim ben slim</h1>
-  <p className='p-[30px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam dolorem, voluptates alias ducimus nostrum perferendis, dicta eveniet esse recusandae inventore debitis voluptate deserunt quam voluptatem libero expedita! Laudantium, porro voluptatibus?</p>
-</div>
+    <div>
+  <img src={data[index]&&data[index]['Client'].image} className='w-[80px] rounded-full ml-[45%]' alt="" />
+  <h1 className='text-center mt-[3%] mb-[3%]'>{data[index]&&data[index]['Client'].name}</h1>
+  <p className='p-[30px] text-[20px] font-[600]'>{data[index]&&data[index].message}</p>
+  </div>
 
         </div>
         <div 
        
         className='bg-white absolute right-0 -mt-[16%] flex justify-center items-center w-[50px] h-[50px] rounded-[5px]'>
-        <KeyboardArrowRightIcon fontSize={'large'} className='text-black absolute'/>
+        <KeyboardArrowRightIcon 
+        onClick={()=>{handleIndex(index+1)}}
+        fontSize={'large'} className='text-black absolute'/>
         </div>
 
     </div>

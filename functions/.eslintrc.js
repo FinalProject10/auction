@@ -4,7 +4,7 @@ module.exports = {
     node: true,
   },
   parserOptions: {
-    "ecmaVersion": 2018,
+    ecmaVersion: 2018, // Change the value from "2018" to 2018 (without quotes)
   },
   extends: [
     "eslint:recommended",
