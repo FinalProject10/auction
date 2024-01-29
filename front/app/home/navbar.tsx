@@ -22,6 +22,13 @@ const Navbar = () => {
     const[pages,setPages]=useState(false)
     const[cart,setCart]=useState(false)
     const[account,setAcoount]=useState(false)
+    const ripitiw=()=>{
+      const ra=localStorage.getItem('role')
+      if(ra==="seller"){
+        return '/sellerDash'
+      }
+      return '/clientDash'
+    }
   return (
     <>
     <div className='w-full h-[54px] overflow-hidden border-b-[1px] border-gray-200 flex'>
@@ -55,9 +62,9 @@ const Navbar = () => {
       {account&&<div className='text-[#333333] bg-white w-[170px] h-[120px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl right-[55px] absolute top-[7%] '
          onMouseLeave={()=>setAcoount(false)}
         >
-           <Link href={'/clientDash'}> <div className='flex '> <RiDashboardFill className='mt-[5px]'/><h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Dashboard</h1></div></Link>
-           <Link href={'/membershipCard'}> <div className='flex'><CiLogout className='mt-[5px]'/><h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Account Details</h1></div> </Link>
-          <Link href={'/'} onClick={()=>localStorage.clear()}> <div className='flex'><IoPersonOutline className='mt-[5px]'/><h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Log out</h1></div> </Link> 
+           <Link href={`${ripitiw()}`}> <div className='flex '> <RiDashboardFill className='mt-[5px]'/><h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Dashboard</h1></div></Link>
+           <Link href={'/membershipCard'}> <div className='flex'><IoPersonOutline className='mt-[5px]'/><h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Services</h1></div> </Link>
+          <Link href={'/'} onClick={()=>localStorage.clear()}> <div className='flex'><CiLogout className='mt-[5px]'/><h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Log out</h1></div> </Link> 
         </div>}
 
       {/* <div className='flex justify-center items-center ml-[8%]'>

@@ -1,6 +1,5 @@
 import Navbar from "../home/navbar"
 // import Header from "./header/page"
-import Footer from "../footer/Footer"
 import CanvasComponent from "./homedashboard/courbe/courbe"
 import  MyOrdersList from "./homedashboard/orders/orders"
 import SalesListItem from "./homedashboard/saless/sales"
@@ -36,7 +35,6 @@ export default function Dashboard(){
            
           
         </div>
-        <Footer/>
         </div>
     )
 }

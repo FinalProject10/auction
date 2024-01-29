@@ -95,8 +95,8 @@ const ItemSidebar = ({ items }) => {
               <p className="mb-3">
                 <RiAccountPinCircleFill className="black-icon w-[15px] inline-block mx-2" />
                 <Link
-                  href="/seller/profile/"
-                  as={`/seller/profile/${item.seller?.id}`}
+                  href="/Seller/profile/"
+                  as={`/Seller/profile/${item.seller?.id}`}
                 >
                   Check more offers from this vendor.
                 </Link>

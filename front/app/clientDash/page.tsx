@@ -151,13 +151,6 @@ const Dashboard = () => {
         </div>
         {data[0] && (
           <div>
-            <h1 className="mb-[2%]">
-              Hello {localStorage.getItem("role")} not{" "}
-              {localStorage.getItem("role")}{" "}
-              <Link href={"/"} onClick={() => localStorage.clear()}>
-                Log out
-              </Link>{" "}
-            </h1>
             <h1 className="mb-[3%]">
               From your account dashboard you can view your recent orders,
               manage your shipping and billing addresses, and edit your password

@@ -253,7 +253,7 @@ const HomePage = () => {
     return setMonth18( graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===6))
   }
   const fltr19 = (graph2)=>{
-    return setMonth19 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===7))
+    return setMonth19 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===7))
   }
   const fltr20= (graph2)=>{
     return setMonth20 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===8))
@@ -308,7 +308,7 @@ const HomePage = () => {
             label: new Date().getFullYear(),
             backgroundColor: '#ed64a6',
             borderColor: '#ed64a6',
-            data: [month1.length, month2.length, month3.length, month4.length, month5.length, month6.length, month7.length,month8.length,month9.length,month10.length,month11.length,month12.length],
+            data: [4, month2.length, month3.length, month4.length, month5.length, month6.length, month7.length,month8.length,month9.length,month10.length,month11.length,month12.length],
             fill: false,
             barThickness: 8,
           },
@@ -413,7 +413,7 @@ const HomePage = () => {
             <div className="flex flex-wrap mt-[-7%]">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4 ">
                 <CardStats
-                  statSubtitle="total revenue"
+                  statSubtitle="total rev"
                   statTitle={total1}
                   statArrow="up"
                   statPercent="3.48"
@@ -425,7 +425,7 @@ const HomePage = () => {
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="subscription revenue"
+                  statSubtitle="subscription rev"
                   statTitle={total}
                   statArrow="down"
                   statPercent="3.48"
@@ -471,7 +471,7 @@ const HomePage = () => {
 <div>
   
 
-<div className="relative overflow-x-auto ml-[50px] mt-[-20%] w-[1200px]">
+<div className="relative overflow-x-auto ml-[50px] mt-[] w-[1150px]">
 
   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded" >
         <div className="rounded-t mb-0 px-4 py-3 bg-transparent">

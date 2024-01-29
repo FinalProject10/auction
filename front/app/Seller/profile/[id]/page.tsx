@@ -4,7 +4,6 @@ import { IoMdPhonePortrait } from "react-icons/io";
 import { MdLocationOn } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdStarRate } from "react-icons/md";
-import Footer from "../../../footer/Footer.tsx";
 import Navbar from "../../../home/navbar.tsx"
 import { GiThorHammer } from "react-icons/gi";
 import axios from 'axios'
@@ -298,7 +297,6 @@ const Page = () => {
     </div>
 </div>
 
-      <Footer/>
     </div>
   );
 };

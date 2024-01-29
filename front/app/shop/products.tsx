@@ -6,7 +6,7 @@ import { TbLayoutGrid } from "react-icons/tb";
 import { FaRegListAlt } from "react-icons/fa";
 import { Select, Option } from "@material-tailwind/react";
 import { dividerClasses } from "@mui/material";
-import Image from "next/image";
+// import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
 import {
@@ -206,7 +206,7 @@ const Products = () => {
       const filtered=allData.filter(el=>{
         return el.name.includes(value)
       })
-      
+      console.log(filtered)
       setData(filtered)
     }
 const filter2=(property:any,value:any)=>{
@@ -852,7 +852,7 @@ const filter2=(property:any,value:any)=>{
               </AccordionBody>
             </Accordion>
           </div>
-          <Image
+          {/* <Image
             className="cursor-pointer mt-[20%]"
             width={250}
             height={250}
@@ -860,7 +860,7 @@ const filter2=(property:any,value:any)=>{
             src={
               "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-sidebar_pic-922x1024.jpg"
             }
-          />
+          /> */}
         </div>
     <div className='w-[1190px] h-auto '>
     <div className='flex justify-between'>
@@ -898,7 +898,9 @@ const filter2=(property:any,value:any)=>{
     {data.map((el,i)=>(
     
     <div className=' w-[32%] bg-white rounded-3xl mb-[17px]  shadow-2xl'>
-            <div style={{background:`url(${el.images[0]})`,backgroundSize:'cover'}}  className='w-full h-[190px]  rounded-t-3xl overflow-hidden'>
+            <div style={{backgroundImage:`url(${el?.images[0]})`,
+             backgroundSize:'cover',backgroundPosition: 'center'
+            }}  className='w-full h-[190px]  rounded-t-3xl overflow-hidden'>
             <div className="flex justify-between mt-[56%]">
             <div>
                 <h1 className="text-white font-[700]">{Math.floor((new Date()-new Date(el.timeEnd)<0?new Date(el.timeEnd)-new Date():0)/3600000)}H</h1>
@@ -927,7 +929,9 @@ const filter2=(property:any,value:any)=>{
     <div className="w-full h-[198px]   rounded-[10px] bg-white flex shadow-2xl mb-[5%]">
         <div 
         className="w-[313px] h-full rounded-l-[10px] inline-block "
-        style={{background:`url(${el.images[0]})`,backgroundSize:'cover'}}>
+        style={{backgroundImage:`url(${el?.images[0]})`,
+         backgroundSize:'cover'
+        }}>
             <div className="flex justify-center items-center rounded-[10px] w-[100px] h-[40px]  ml-[5%]  backdrop-blur-[50px]	text-white">
                 <h1 >{Math.floor((new Date()-new Date(el.timeEnd)<0?new Date(el.timeEnd)-new Date():0)/3600000)}H</h1>
                 </div>

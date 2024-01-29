@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import "./style/itemBid.css";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { store } from "react-notifications-component";
-import Sound from "react-sound";
 import AuctionTimer from "./auctionTimer";
 import socket from "./bid/socket";
 const ItemBid = ({ items }) => {
@@ -247,13 +246,7 @@ const ItemBid = ({ items }) => {
                 </div>
               </form>
 
-              <Sound
-                url={soundUrl}
-                playStatus={
-                  playSound ? Sound.status.PLAYING : Sound.status.STOPPED
-                }
-                onFinishedPlaying={() => setPlaySound(false)}
-              />
+             
               {/* Display success and error messages */}
               <div className="flex justify-center items-center">
                 {/* Display success message */}

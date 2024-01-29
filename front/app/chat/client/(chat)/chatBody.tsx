@@ -29,9 +29,10 @@ import React from "react";
 const ChatBody = ({ messages }) => {
   // Add a triggering message to the messages prop
   const updatedMessages = [
-    ...messages,
     { text: "This is a sent message", isBot: false },
     { text: "This is a received message", isBot: true },
+    ...messages,
+
   ];
 
   return (
