@@ -164,6 +164,7 @@ if(i===3){
 }
    }
      export default function Formulaire(props:Handlers){
+      console.log(props.title)
       const params=useParams()
       const [name,setName]=useState<string>("")
       const [category,setCategory]=useState<string>("")
@@ -211,39 +212,51 @@ if(i===3){
          setOpen(true)
          
           const productToPost={
-             name:name,
-             fuel:fuel,
-            timeStart:timeStart,
-            timeEnd:timeEnd,
-             short_description:short,
-             category:category,
+            name:name,
+             category: category,
              price:price,
-             description:description,
-             body:body,
-             climatisation:climatisation,
-             cubicCapacity:cubic,
-             emissionClass:emission,
-             mileage:mileage,
-             parkingSensors:sencors,
-             airbags: airbags,
-             color:color,
-             doorCount:doorCount,
-             gearBox:gearBox,
-             numberOfSeats:seats,
-             power:power
+            timeStart:timeStart,
+            // timeEnd:timeEnd,
+             
+            //  price:price,
+            //  climatisation:true,
+            //  parkingSensors:true,
+            //  doorCount:doorCount,
+            //  gearBox:gearBox,
+
+            //      name: "Sample Car",
+            // fuel: "Petrol",
+            // timeStart: "2024-01-27T08:00:00",
+            // timeEnd: "2024-01-27T18:00:00",
+            // short_description: "A stylish and efficient car",
+           
+            // price: 25000,
+            // description: "This car is perfect for daily commuting and long drives.",
+            // body: "Sedan",
+            // climatisation: true,
+            // cubicCapacity: 2000,
+            // emissionClass: "Euro 6",
+            // mileage: 30,
+            // parkingSensors: true,
+            // airbags: 6,
+            // color: "Blue",
+            // doorCount: 4,
+            // gearBox: "Automatic",
+            // numberOfSeats: 5,
+            // power: 150
           }
           if(props.title==="Edit Product Details"){
            axios.put(`http://localhost:5000/items/update/${params.id}`,productToPost).then((results)=>{
             console.log(results.data)
            }).catch((error)=>{console.log(error)})
           }
-          else if(props.title==="Add new Product"){
+          else if(props.title==="Add Product Details"){
             axios.post("http://localhost:5000/items/add",productToPost).then((response)=>{
               console.log(response.data)
               setConfirm(true)
             }).catch((err)=>console.log(err.message))
           }
-          
+          setOpen(false)
         }
       const setPropsGrid1=(i,event)=>{
         if(i===0){
@@ -278,7 +291,7 @@ if(i===3){
     return (
       
         <div className="comp">
-            {addCategory&&<Popup addCategory={setAddCategory}/>}
+            {addCategory&&<Popup setCategory={setCategory} addCategory={setAddCategory}/>}
            { open&&<Confirm open={open} setOpen={setOpen} setConfirm={setConfirm} saveProduct={saveProduct} />}
             <Navbar/>
     <Header/>
@@ -455,7 +468,7 @@ if(i===3){
         <div className="nested">
     <div className="nested-div">
       <label>time start</label>
-      <input onChange={(e)=>{setTimeStart(e.target.value)}} type="text" id="input1" placeholder="time start" />
+      <input onChange={(e)=>{setTimeStart(e.target.value);console.log(timeStart)}} type="text" id="input1" placeholder="time start" />
     </div>
     <div className="nested-div">
       <label >time end</label>

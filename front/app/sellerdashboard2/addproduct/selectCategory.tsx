@@ -8,6 +8,7 @@ import '../withdraw/request.css'
 import { Dispatch } from 'react';
 interface RequestProps {
     addCategory:Dispatch<React.SetStateAction<boolean>>;
+    setCategory:Dispatch<React.SetStateAction<string>>;
 }
 export default function Popup(props:RequestProps){
     const setRequest = props.addCategory
@@ -44,7 +45,7 @@ export default function Popup(props:RequestProps){
              
             </div>
             <div className="dokan-panel-body">
-              <select className="category-select" >
+              <select onChange={(e)=>{props.setCategory(e.target.value)}} className="category-select" >
                 
                 <option value="Category 1">SUV</option>
                 <option value="Category 2">Coupe</option>

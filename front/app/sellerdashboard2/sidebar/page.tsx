@@ -38,18 +38,18 @@ export default function SideBar(props:SideProps) {
                         </Link>
                     </li>
                     <li className="orders">
-                        <Link href="sellerdashboard2/orders">
+                        <Link href="/sellerdashboard2/orders">
                             <ShoppingCartIcon />
                             Orders
                         </Link>
                     </li>
                     <li className="withdraw">
-                        <Link href="sellerdashboard2/withdraw">
+                        <Link href="/sellerdashboard2/withdraw">
                             <FileUploadIcon />
                             Withdraw
                         </Link>
                     </li>
-                    <li onClick={()=>{router.push(`sellerdashboard2/edit/account/1`)}} style={{marginLeft:'0',textAlign:'center',color:'white',fontWeight:'bold',padding:'15px 0 15px 5px'}} className="settings has-submenu">
+                    <li onClick={()=>{router.push(`/sellerdashboard2/edit/account/1`)}} style={{marginLeft:'0',textAlign:'center',color:'white',fontWeight:'bold',padding:'15px 0 15px 5px'}} className="settings has-submenu">
 
                        
                             <SettingsIcon  />
@@ -68,7 +68,7 @@ export default function SideBar(props:SideProps) {
                             </a>
                         </div>
                         <div className="icon-item" >
-                            <Link href="#">
+                            <Link href="/">
                                 <PowerSettingsNewIcon />
                             </Link>
                         </div>

@@ -37,7 +37,7 @@ const Confirm = ({setOpen,open,setConfirm,saveProduct}:ConfirmProps) => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button style={{backgroundColor:"#FF2800",color:"white"}} onClick={()=> {saveProduct();handleClose()}} >
+          <Button style={{backgroundColor:"#FF2800",color:"white"}} onClick={()=> {saveProduct()}} >
             Confirm
           </Button>
         </DialogActions>
