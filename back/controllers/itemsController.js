@@ -140,6 +140,6 @@ module.exports = {
   getAll,
   getItemsBided,
   geBid,
-  getSidParItems,
+  
   editItem
 };
