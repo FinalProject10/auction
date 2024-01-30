@@ -23,24 +23,24 @@ useEffect(()=>{
       < BusinessCenterIcon/>
         <h2 style={{color:'white'}} >Products</h2> 
         </div>
-        <div className="add-product-btn">
-            <Link  href='/sellerdashboard2/addproduct/product/add'>+ add new product</Link>
+        <div className="bt">
+            <Link className='link'  href='/sellerdashboard2/addproduct/product/add'>+ add new product</Link>
         </div>
       
       </div>
-      <div className="list-item">
+      <div className="list-item2">
         <p>Total</p>
         <p className='p2'> {products.length} </p>
       </div>
-      <div className="list-item">
+      <div className="list-item2">
         <p>Live</p>
         <p className='p2'> {products.length} </p>
       </div>
-      <div className="list-item">
+      <div className="list-item2">
         <p>Offline</p>
         <p className='p2'> {products.length} </p>
       </div>
-      <div className="list-item">
+      <div className="list-item2">
         <p>Pending Review</p>
         <p className='p2'> {products.length} </p>
       </div>

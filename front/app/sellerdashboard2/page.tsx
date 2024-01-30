@@ -14,9 +14,9 @@ export default function Dashboard(){
             <Navbar/>
            {/* < Header/> */}
             <div className="body-container">
-            <div className="sidebar">
+            
                 <SideBar h={1000}/>
-            </div>
+          
            
             <div className="sales-orders-products">
                 <div className="sales">
@@ -31,8 +31,8 @@ export default function Dashboard(){
           
            
            </div>
-           <CanvasComponent/>
-           
+          
+           <CanvasComponent />
            
           
         </div>

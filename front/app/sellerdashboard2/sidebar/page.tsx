@@ -11,6 +11,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import Link from 'next/link';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import { CgOverflow } from 'react-icons/cg';
 interface SideProps {
     h:number
 }
@@ -23,7 +24,7 @@ export default function SideBar(props:SideProps) {
    
     return (
         
-        <div >
+        <div style={{height:`${h} px`,overflow:'visible'}} >
             <div className="sideb" style={{height:`${h} px`}}>
                 <ul className="dokan-dashboard-menu">
                     <li className="active dashboard">

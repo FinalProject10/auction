@@ -6,6 +6,19 @@
   }
   
   .list-header {
+   
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    padding: 15px;
+    background-color: #FF2800; 
+    color: #fff; 
+    text-align: start;
+    text-transform: capitalize;
+  }
+  .text-icon{
+    max-width: 15%;
+    margin: 3px;
     display:flex;
     align-items: center;
     justify-content:flex-start;
@@ -13,13 +26,11 @@
     background-color: #FF2800; 
     color: #fff; 
     text-align: start;
-    text-transform: capitalize;
+    height:30px;
   }
 
   .list-header h2{
-    display:flex;
-    align-items: center;
-    justify-content:flex-start;
+    
  
     background-color: #FF2800; 
     color: #fff; 
@@ -27,7 +38,7 @@
     text-transform: capitalize;
 
   }
-  .list-header:last-child:hover{
+  .list-header .shop-icon:hover{
     color: #fff; 
     background-color: #FF2800; 
 
@@ -35,8 +46,11 @@
   .list-item {
     padding: 15px;
     border-bottom: 1px solid #ccc; 
-    width: 50%;
+    max-width: 50%;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     list-style: none;
     color: #555;
   }
