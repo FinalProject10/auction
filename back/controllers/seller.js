@@ -91,8 +91,9 @@ res.status(500).json(err)
         res.status(500).json({err:'server err'})
     }
     },
-    updateProfile: (req,res)=>{
-        Seller.update({name:req.body.name,lastName:req.body.lastName},{where:{id:req.params.id}}).then((data)=>{
+    updateProfile: async(req,res)=>{
+        const hashed=await bcrypt.hash(req.body.newPass,10)
+        Seller.update({name:req.body.name,lastName:req.body.lastName,email:req.body.email,newPass:hashed},{where:{id:req.params.id}}).then((data)=>{
             res.status(200).send(data)
         }).catch((err)=>{res.status(500).send(err.message)})
     }

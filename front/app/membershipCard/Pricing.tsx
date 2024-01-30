@@ -4,7 +4,6 @@ import { FcInfo } from 'react-icons/fc';
 import { GrValidate } from "react-icons/gr";
 import { motion } from 'framer-motion';
 import Navbar from '../home/navbar.tsx'
-import Footer from '../footer/Footer.tsx'
 import { fadeIn } from './fadeIn';
 import "./mem.css"
 import axios from 'axios'
@@ -136,7 +135,6 @@ const Pricing: FC = () => {
           </div>
         ))}
       </motion.div>
-      <Footer className='ft' />
     </div>
   );
 };

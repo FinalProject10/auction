@@ -2,7 +2,6 @@
 import React, { FC, useCallback } from 'react';
 import "./HowItWork.css";
 import Navbar from "../home/navbar"
-import Footer from "../footer/Footer.tsx"
 const Howitwork: FC = () => {
   const onHeaderContainer1Click = useCallback(() => {
   }, []);
@@ -78,7 +77,6 @@ Compare and Contrast: Easily compare multiple vehicles side by side to make the 
 <p className='para'>
 A trusted website is characterized by its reliability, credibility, and security. It consistently provides accurate information, maintains a transparent and ethical approach, and ensures the privacy and safety of its users. Verified by reputable sources, a trusted website fosters user confidence through a track record of dependability and a commitment to delivering a secure and valuable online experience.</p>
 </div>
-<div className='footer'><Footer/ ></div>
 </div>
   );
 };

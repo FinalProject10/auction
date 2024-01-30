@@ -232,6 +232,7 @@ const ItemBid = ({ items }) => {
                 </div>
               </form>
 
+             
               {/* Display success and error messages */}
               <div className="flex justify-center items-center">
                 {/* Display success message */}

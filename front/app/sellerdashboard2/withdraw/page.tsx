@@ -3,7 +3,6 @@ import {useState} from 'react'
 import Navbar from "../../home/navbar";
 import Header from "../header/page";
 import SideBar from "../sidebar/page";
-import Footer from "../../footer/Footer";
 // import './page.css'
 import Request from './request';
 import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone';
@@ -59,7 +58,6 @@ export default function Withdraw(){
         </div>
         </div>
        
-       < Footer/>
         </div>
       );
 }

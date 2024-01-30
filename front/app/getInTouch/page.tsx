@@ -1,7 +1,6 @@
 import './page.css'
 import '../contactus/contact.css'
 import Navbar from '../home/navbar'
-import Footer from '../footer/Footer'
 export default function GetInTouch(){
     return (<div className='w-full'>
       <Navbar/>
@@ -183,7 +182,6 @@ York, United States, 26483
                     </div>
                 </div>
             </div>
-            <Footer/>
   </div>
  )
 }
