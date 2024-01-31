@@ -31,30 +31,7 @@ justify-content: space-between;
   font-weight: 1000;
 }
 
-.names-email {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-  padding: 20px;
-  margin-left: 0;
-}
-
-.first-last-names {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between; /* Improved spacing between name and email fields */
-  margin-bottom: 15px; /* Increased margin between name and email fields */
-}
-.first-name label,
-.last-name label, .email label{
-  width: 263px;
-  height: 20.8px;
-  font-weight: 500;
-}
-.first-name span ,
-.last-name span,
-.email span{
+ span{
 color: #FF0000; 
 }
 .first-name,

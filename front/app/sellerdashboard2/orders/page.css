@@ -64,6 +64,9 @@ border-radius: 1px;}
 
 .awesome-buttons {
   display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .awesome-button {
@@ -71,9 +74,11 @@ border-radius: 1px;}
   background-color: #d9534f;
   border: 1px solid #d43f3a;
   padding: 10px;
-  margin-left: 5px;
+  margin-left: 10%;
   cursor: pointer;
   border-radius: 6px;
+  max-width: 50%;
+
 }
 
 .reset-btn {

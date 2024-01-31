@@ -56,7 +56,28 @@ const Formulaire=(props:FormulaireProps)=>{
             <div className="header-container">
                 {header}
             </div>
-            <div className="names-email">
+            <div className='flex gap-[5%] mt-[5%] mb-[5%]'>
+            <div>
+            <h1>First Name<span>*</span></h1>
+            <input 
+            onChange={(e)=>{setFirstName(e.target.value)}} 
+            type="text" className='w-[431px] p-4 h-[52px] border-[1px] border-gray-300 rounded' />
+            </div>
+            <div>
+            <h1>Last Name<span>*</span></h1>
+            <input 
+             onChange={(e)=>{setLastName(e.target.value)}}
+            type="text" className='w-[431px] p-4 h-[52px] border-[1px] border-gray-300 rounded' />
+            </div>
+          </div>
+          <div className='mb-[3%]'>
+            <h1>Email Adress</h1>
+            <input 
+            onChange={(e:any)=>setEmail(e.target.value)}
+            type="text" className='w-[925px] p-4 h-[52px] border-[1px] border-gray-300 rounded' />
+
+          </div>
+            {/* <div className="names-email">
                 <div className="first-last-names">
                     <div className="first-name">
                         <label >
@@ -70,7 +91,7 @@ const Formulaire=(props:FormulaireProps)=>{
                             Last Name
                             <span>*</span>
                         </label>
-                        <input onChange={(e)=>{setLastName(e.target.value)}} type="text"  className='input-style'/>
+                        <input type="text"  className='input-style'/>
                     </div>
                 </div>
                 <div className="email">
@@ -80,7 +101,7 @@ const Formulaire=(props:FormulaireProps)=>{
                     </label>
                     <input onChange={(e)=>{setEmail(e.target.value)}} type="text"  className='input-style email'/>
                 </div>
-            </div>
+            </div> */}
             <div className="passwords-btn">
                 <div className="header">Password Changes</div>
              <div className="current">
