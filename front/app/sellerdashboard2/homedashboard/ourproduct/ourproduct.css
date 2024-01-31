@@ -29,33 +29,36 @@
     text-align: start;
     height:30px;
   }
-  .add-product-btn{
+  .bt{
     background-color: #FF2800; 
     color: #fff; 
     text-decoration: none;
   }
 
-  .add-product-btn:first-child:hover{
-   
+  .bt .link:hover{
+    background-color: #FF2800; 
+    color: #fff; 
     text-decoration: none;
+  
   }
   .list-header h2{
     color: #fff; 
   }
   
-  .list-item {
+  .list-item2 {
     display:flex;
     align-items: center;
     justify-content:space-between;
     padding: 15px;
     border-bottom: 1px solid #ccc; 
-    width: 100%; 
+    min-width: 100%; 
     text-align: center;
     list-style: none;
     color: #555;
   }
   .p2{
-    font-weight: 500;
+
+    font-weight: 800;
     text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);;
   }
   

@@ -9,7 +9,26 @@
     transition: opacity 0.5s ease;
     overflow: hidden;
   }
+  .box-container {
+    z-index: 10;
+    margin-bottom: 18%;
+    min-width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff; /* Adjust background color as needed */
+  }
   
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Removed the shadow for the box-container */
+  .box-container.shadow-lg-md {
+    box-shadow: none;
+  }
   .vc_custom_1601885870901 {
     margin-bottom: 0px ;
     background-image: url(https://angro.modeltheme.com/wp-content/uploads/2020/10/Iffiliate-Contact_bg.jpg?id=7264) !important;

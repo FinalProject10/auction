@@ -1,108 +1,103 @@
-.container{
-  display:grid;
-  grid-template-columns:250px auto;
-  width:auto;
-  max-height:350px;
-  overflow:hidden;
-  
-  /* margin-left:30%; */
-  /* max-height: ; */
+.container {
+  display: flex;
 }
-.your-component-container {
-    max-width: 655,2;
-    margin-top:30%;
-    margin-left:30%;
 
-    margin: 20px;
-  }
-  .flex{
-    display :flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-  .status-list {
-    display: flex;
-    flex-wrap: wrap;
-    list-style:none;
-  }
-  
-  .list-item {
-    font-size: 12px;
-    color: #6d6d6d; /* Green color */
-    border-left: 0.5px solid #6d6d6d; /* Lighter green border */
-    padding: 5px;
-    margin-right: 10px; /* Adjust the margin as needed */
-  }
-  
-  .filter-section {
-    margin-top: 20px;
-  }
-  
-  .custom-select {
-    border-radius: 5px 5px 0 0;
-    border: 1px solid #6d6d6d;
-    padding: 5px;
-    margin-right: 5px;
-  }
-  .search-input{
-    border: 1px solid #000;
-    margin-right: 5px;
-    padding: 5px;
-    width:70,7px
-    
-  }
-  
-  .calendar-input {
-    border: 1px solid #6d6d6d;
-    margin-right: 5px;
-    padding: 5px;
-    width:70,7px
-  }
-  
-  .filter-button {
-    background-color: #FF2800;
-    color: white;
-    padding: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 5px;
-    cursor: pointer;
-    display: inline-block;
-    border-radius: 6px;
-  }
-  
-  .awesome-button {
-    color: #fff !important;
-    background-color: #d9534f !important;
-    border-color: #d43f3a;
-    margin-left:8px;
-    padding: 10px;
-    margin-left: 5px;
-    cursor: pointer;
-    display: inline-block;
-    border-radius: 6px;
+.SideBar {
+  width: 250px;
+}
 
-  }
-  .reset-btn {
-    display: flex;
-    align-items: center;
-  }
-  
-  .reset-btn button {
-    margin-left:10%;
-    background-color: #FF2800;
-    color: white;
-    padding: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    /* width:124,98; */
-    height:35px;
-    border-radius: 1px;
-  }
-  
-  .reset-btn button svg {
-    margin-right: 5px;
-  }
+.cont {
+  flex: 1; /* Take remaining space */
+  max-width: calc(100% - 250px); /* Adjust based on your needs */
+  margin-left: 10%;
+}
+.status-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.list-item {
+  font-size: 12px;
+  color: #6d6d6d;
+  border-left: 0.5px solid #6d6d6d;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.filter-section {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  margin-top: 20px;
+  width: 100%;
+}
+
+.custom-select,
+.search-input,
+.calendar-input,
+.filter-button,
+.awesome-button {
+  margin-right: 10px; /* Adjust margin as needed */
+}
+.filter-button{background-color: #FF2800;
+color: white;
+padding: 8px;
+font-size: 16px;
+font-weight: 500;
+cursor: pointer;
+display: flex;
+align-items: center;
+height: 35px;
+border-radius: 1px;}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.reset-btn {
+  margin-top: 20px;
+}
+
+.awesome-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.awesome-button {
+  color: #fff;
+  background-color: #d9534f;
+  border: 1px solid #d43f3a;
+  padding: 10px;
+  margin-left: 10%;
+  cursor: pointer;
+  border-radius: 6px;
+  max-width: 50%;
+
+}
+
+.reset-btn {
+  margin-top: 20px;
+}
+
+.reset-btn button {
+  background-color: #FF2800;
+  color: white;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  border-radius: 1px;
+}
+
+.reset-btn button svg {
+  margin-right: 5px;
+}

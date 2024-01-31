@@ -3,14 +3,15 @@ import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import './request.css'
-import './page.css'
+import './selectCategory.css'
+import '../withdraw/request.css'
 import { Dispatch } from 'react';
 interface RequestProps {
-    request:Dispatch<React.SetStateAction<boolean>>;
+    addCategory:Dispatch<React.SetStateAction<boolean>>;
+    setCategory:Dispatch<React.SetStateAction<string>>;
 }
-export default function Request(props:RequestProps){
-    const setRequest = props.request
+export default function Popup(props:RequestProps){
+    const setRequest = props.addCategory
     return(
         <div className="overlay">
         <Box className="centered-box">
@@ -25,7 +26,7 @@ export default function Request(props:RequestProps){
               }}
             >
               {/* Left side */}
-              <Typography sx={{ color: 'white' }}>Header Text</Typography>
+              <Typography sx={{ color: 'white' }}>Select A category</Typography>
   
               {/* Right side */}
               <IconButton color="inherit" edge="end">
@@ -38,32 +39,23 @@ export default function Request(props:RequestProps){
           <Box sx={{ borderBottom: '2px solid red' }}>
             {/* Body */}
             <Box  className='dok'>
-              {/* First div */}
-              <div  >
-              <div className="dokan-panel dokan-panel-default">
-          <div className="dokan-panel-heading">
-            <h3>Withdraw Amount</h3>
-          </div>
-          <div className="dokan-panel-body">
-            <p>Your Balance: $0.00</p>
-          </div>
-        </div>
-              </div>
-  
-              {/* Second div */}
-              <div>
-              <div>
-              <div className="dokan-panel dokan-panel-default">
-          <div className="dokan-panel-heading">
-            <h3>View Method</h3>
-          </div>
-          <div className="dokan-panel-body">
-            <p>Your Balance: $0.00</p>
-            
-          </div>
-        </div>
-              </div>
-              </div>
+           
+          <div className="dokan-panel-default">
+            <div className="dokan-panel-heading">
+             
+            </div>
+            <div className="dokan-panel-body">
+              <select onChange={(e)=>{props.setCategory(e.target.value)}} className="category-select" >
+                
+                <option value="Category 1">SUV</option>
+                <option value="Category 2">Coupe</option>
+                <option value="Category 3">Hatchback</option>
+              </select>
+              
+            </div>
+         
+    </div>
+             
             </Box>
           </Box>
         </Box>

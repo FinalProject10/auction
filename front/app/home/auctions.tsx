@@ -32,7 +32,7 @@ const Auctions = () => {
         <h1 style={{color:color[1]?'black':'#666',marginRight:'28px'}} onClick={()=>{setColor([false,true]);endingSoon()}}>Ending Soon</h1>
         </div>
     <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
-        {data.map((el,i)=>(
+        {!data.length?data.map((el,i)=>(
         <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
             <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src={el.images[0]} alt="" />
             <div className='p-[15px] text-[#333333]'>
@@ -42,7 +42,7 @@ const Auctions = () => {
             <h1 className='mb-[10px] font-[500]'>{el.short_description}</h1>
             <h1 className='font-[300] text-[13px]'>{Math.floor((new Date()-new Date(el.timeEnd)<0?new Date(el.timeEnd)-new Date():0)/3600000)}h</h1>
             </div>
-        </div>))}
+        </div>)):""}
         {/* <div className=' w-[25%] h-[30%] rounded-3xl border-[2px]'>
             <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg" alt="" />
             <div className='p-[15px] text-[#333333]'>

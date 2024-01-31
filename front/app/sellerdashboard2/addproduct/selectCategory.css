@@ -1,0 +1,33 @@
+.popup-container {
+  background-color: #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.popup-container.show-popup {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.category-select {
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #FF2800;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.category-select:hover {
+  background-color: #FF2800;
+}

@@ -66,13 +66,15 @@ const getItems = async (req, res) => {
   }
 };
 const addItem = async (req, res) => {
-  try {
-    const d = await Items.create(req.body);
-    res.status(200).json("created");
-  } catch (err) {
-    res.status(500).json("server err");
-  }
+  Items.create(req.body).then((data)=>{
+    res.status(200).send(data)
+  }).catch(error=>res.status(500).send(error.message))
 };
+const editItem=(req,res) =>{
+  Items.update(req.body,{where:{id:req.params.id}})
+  .then((data)=>{res.status(200).send(data)})
+  .catch((err)=>{res.status(500).send(err)})
+}
 const getAll = async (req, res) => {
   try {
     const d = await Items.findAll();
@@ -138,4 +140,6 @@ module.exports = {
   getAll,
   getItemsBided,
   geBid,
+  
+  editItem
 };

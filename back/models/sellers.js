@@ -4,7 +4,11 @@ const sequelize = require("../database/index");
 const Seller = sequelize.define(
   "seller",
   {
-    name: {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    lastName: {
       type: DataTypes.STRING,
       allowNull: true,
     },

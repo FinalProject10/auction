@@ -25,8 +25,9 @@ const ProductsRouter = require("./routes/products");
 const sellerRouter = require("./routes/seller");
 const memRouter = require("./routes/memberships");
 const bidRouter = require("./routes/bidRouter");
-
+const cloudinaryUpload2=require('./cloudinary/cloudinary2')
 const app = express();
+app.post('/upload2',cloudinaryUpload2)
 const userSocketMap = new Map();
 const corsOptions = {
   origin: function (origin, callback) {
@@ -147,6 +148,7 @@ app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
 app.use("/cloudinary", cloudRoute);
+// app.use("/getInTouch",getInTouch)
 app.get("/getallusers", async (req, res) => {
   let d = await Client.findAll();
   let s = await Seller.findAll();

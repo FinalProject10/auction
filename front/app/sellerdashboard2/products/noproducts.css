@@ -1,51 +1,56 @@
-.container{
-    height: auto;
-    width: auto;
-   
-    
-    margin-left: -25%; 
-    margin-top: 0; 
-    overflow:hidden;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh;  */
+  width: 100%;   /* Set to 100% of the viewport width */
+  overflow: hidden;
 }
+
 .no-products-container {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  img {
-    width: 100px; /* Adjust the size as needed */
-    margin-bottom: 20px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  p {
-    margin-bottom: 20px;
-  }
-  
-  .add-product-button {
-    background-color: #FF2800;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .add-product-button:hover {
-    background-color: white;
-    color: black;
-    border: 2px solid black;
-    transition: background-color 0.5s, color 0.5s, border 0.5s;
-  }
-  img {
-    display: block;
-    margin: 0 auto 20px; /* Center the image and add some margin */
-    width: 100px; /* Adjust the size as needed */
-  }
+  text-align: center;
+  padding: 20px;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  width: 100%;
+}
+
+/* Rest of the styles remain the same */
+img {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+.add-product-button {
+  background-color: #FF2800;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-product-button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+/* Center the image and add some margin */
+img {
+  display: block;
+  margin: 0 auto 20px;
+  width: 100px;
+}

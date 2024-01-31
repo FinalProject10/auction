@@ -9,7 +9,7 @@ const CanvasComponent: React.FC = () => {
      </div>
     <div >
        
-      <canvas className="canvas" width="400" height="200"></canvas>
+      <canvas className="canvas" ></canvas>
     </div>
     </div>
   );

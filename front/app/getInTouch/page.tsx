@@ -122,16 +122,13 @@ export default function GetInTouch(){
               <label htmlFor="oldPassword" className="block mb-1">
                your message here
               </label>
-              <input
-                type="password"
-                id="oldPassword"
-                name="oldPassword"
-                placeholder="your message here"
-               
-                
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-red-500"
-                required
-              />
+              <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Your message here"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-red-500"
+                    required
+                  />
             </div>
             <div>
               

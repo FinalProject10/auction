@@ -6,7 +6,7 @@ import  MyOrdersList from "./homedashboard/orders/orders"
 import SalesListItem from "./homedashboard/saless/sales"
 import OurProducts from "./homedashboard/ourproduct/ourproduct"
 import SideBar from "./sidebar/page"
-import AddProduct from "./addproduct/page"
+import AddProduct from "./addproduct/formulaire"
 import './page.css'
 export default function Dashboard(){
     return (
@@ -14,9 +14,9 @@ export default function Dashboard(){
             <Navbar/>
            {/* < Header/> */}
             <div className="body-container">
-            <div className="sidebar">
+            
                 <SideBar h={1000}/>
-            </div>
+          
            
             <div className="sales-orders-products">
                 <div className="sales">
@@ -31,8 +31,8 @@ export default function Dashboard(){
           
            
            </div>
-           <CanvasComponent/>
-           
+          
+           <CanvasComponent />
            
           
         </div>
