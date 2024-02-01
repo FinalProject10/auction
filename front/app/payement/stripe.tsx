@@ -6,7 +6,9 @@ import { loadStripe } from '@stripe/stripe-js';
 import '../payement/check.css'
 
 const stripePromise = loadStripe('pk_test_51Oa23kFgyHOf8MRLCpOxilmegVe8iPiOSt91sLXtveMRE8zLgyVOFofgKCUKNsRTzirOhr0psYY3aBqh89GML3Ep006HA3dFsH');
-
+const memb=localStorage.getItem('memb')
+const membe=localStorage.getItem('membe')
+const date = localStorage.getItem('date')
 const Payment = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +20,7 @@ const membership=localStorage.getItem('membership')
 
       const response = await axios.post('http://localhost:5000/create-checkout-session', {
         id: parseInt(membership)>60?(parseInt(membership)===590?'item4':'item3'):(parseInt(membership)===59?'item2':'item1'),  // Replace with the actual item ID
-        quantity: 5,
+        quantity: membership,
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -45,9 +47,7 @@ const membership=localStorage.getItem('membership')
       setIsLoading(false);
     }
   };
-  const memb=localStorage.getItem('memb')
-const membe=localStorage.getItem('membe')
-const date = localStorage.getItem('date')
+
   return (
     <div>
     

@@ -4,7 +4,6 @@ import './page.css'
 import React,{useState} from "react"
 import Navbar from "../../home/navbar";
 import Header from "../header/page";
-import Footer from "../../footer/Footer";
 import SideBar from "../sidebar/page";
 import { Edit, FormatBold, FormatItalic, FormatUnderlined,
      FormatAlignLeft, FormatAlignCenter, FormatAlignRight
@@ -217,7 +216,6 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
   </div>
   </div>
             </div>
-            <Footer/>
 
             </div>
  

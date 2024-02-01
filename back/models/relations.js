@@ -21,6 +21,9 @@ Items.belongsTo(Seller);
 Client.hasMany(Memberships);
 Memberships.belongsTo(Client);
 
+Seller.hasMany(Memberships);
+Memberships.belongsTo(Seller);
+
 Client.hasMany(Chat)
 Chat.belongsTo(Client)
 

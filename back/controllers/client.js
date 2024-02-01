@@ -1,6 +1,7 @@
 const Client = require("../models/clients");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Memberships = require("../models/memberships");
 const secretKey = "salim123";
 module.exports = {
   register: async (req, res) => {
@@ -82,12 +83,12 @@ module.exports = {
   },
   updateMembership:async(req,res)=>{
       try{
-        console.log(req.body.membership,req.params.id)
-        let d=await Client.update({membership:req.body.membership},{where:{id:req.params.id}})
+        
+        let d=await Memberships.create(req.body)
         if(d){ 
           console.log(d)
-      return res.status(200).json('updated')}
-        return res.status(404).json('not updated')
+      return res.status(200).json('created')}
+        return res.status(404).json('not created')
       }catch(err){
         res.status(500).json('internal serv err')
       }

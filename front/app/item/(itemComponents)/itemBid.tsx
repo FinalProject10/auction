@@ -4,6 +4,7 @@ import "./style/itemBid.css";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import AuctionTimer from "./auctionTimer";
 import socket from "./bid/socket";
+import { useRouter } from "next/navigation";
 
 const ItemBid = ({ items }) => {
   const [quant, setQuant] = useState(
@@ -16,7 +17,7 @@ const ItemBid = ({ items }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [newBidMessageVisible, setNewBidMessageVisible] = useState(false);
   const [notifications, setNotifications] = useState([]);
-
+const router=useRouter()
   const userId = localStorage.getItem("userId");
   useEffect(() => {
     // Function to handle new bids from others
@@ -85,14 +86,16 @@ const ItemBid = ({ items }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setNewBidMessageVisible(true);
+    if(localStorage.getItem('bid')==='true'){
+    setNewBidMessageVisible(true);
     const itemId = items[0].id;
 
-    // socket.emit("placeBid", {
-    //   userId: localStorage.getItem("userId"),
-    //   itemId: items[0].id,
-    //   bidAmount: quant,
-    // });
+    socket.emit("placeBid", {
+      userId: localStorage.getItem("userId"),
+      itemId: items[0].id,
+      bidAmount: quant,
+    });}
+    router.push('/membershipCard')
 
     try {
       const response = await fetch("http://localhost:5000/bid/placeBid", {

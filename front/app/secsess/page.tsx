@@ -1,5 +1,23 @@
+"use client"
 import React from 'react'
+import axios from 'axios'
 const seccess = () => {
+
+  setTimeout(() => {
+    const id= localStorage.getItem('userId')
+    const role=localStorage.getItem('role')
+    
+  
+    if(role==='client'){
+      axios.post(`http://localhost:5000/client/addMembership`,{price:localStorage.getItem('membership'),type:"Ligature",ClientId:id})
+      .then(r=>localStorage.setItem('bid','true')).catch(err=>console.log(err))
+      console.log('done')}
+      else if(role==="seller"){
+        axios.post(`http://localhost:5000/client/addMembership`,{price:localStorage.getItem('membership'),type:"Seller Plan",sellerId:id})
+      .then(r=>localStorage.setItem('add','true')).catch(err=>console.log(err))
+      }
+
+  }, 1000)
 
   return (
     <div className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">

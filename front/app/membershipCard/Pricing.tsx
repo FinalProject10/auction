@@ -23,29 +23,27 @@ const Pricing: FC = () => {
   const packages: Package[] = [
    
     {
-      name: 'Basic',
+      name: 'Ligature ',
       monthlyPrice: 39,
       yearlyPrice: 390,
-      description: 'Ready to revolutionize the way you buy and sell cars? Try our platform FREE for one month and unlock a world of features designed to make your journey seamless.',
       green: '/src/assets/green-dot.png',
       features: [
-        '10 Notification Alerts',
-        '10 Detailed Vehicle Information',
-        '10 Virtual Tours or Test Drives',
+        'Ability To Bid',
+        'Detailed Vehicle Information',
+      '10 Virtual Tours',
         'Comparative Tools',
         'Extensive Vehicle Listings',
         'Customer Support',
       ],
     },
     {
-      name: 'VIP',
+      name: 'Seller Plan',
       monthlyPrice: 59,
       yearlyPrice: 590,
-      description: 'Ready to revolutionize the way you buy and sell cars? Try our platform FREE for one month and unlock a world of features designed to make your journey seamless..',
       green: '/src/assets/green-dot.png',
       features: [
-        'Unlimited Notification Alerts',
-        'Unlimited Detailed Vehicle ',
+        'All In Ligature',
+        'Add A Vehicule To Buy ',
         'Unlimited Virtual Tours',
         'Comparative Tools',
         'Extensive Vehicle Listings',
