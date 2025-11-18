@@ -69,3 +69,8 @@ node_modules/
 back/.env
 front/.env.local
 front/.env
+
+# Google Cloud Service Account credentials
+**/serviceAccountKey.json
+**/auction-*.json
+functions/auction-*.json

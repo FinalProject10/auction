@@ -3,7 +3,28 @@ const admin = require("firebase-admin");
 const cors = require("cors")({ origin: true });
 const jwt = require("jsonwebtoken");
 const fetch = require("node-fetch");
-admin.initializeApp();
+const path = require("path");
+
+// Initialize Firebase Admin with service account
+const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_PATH || 
+  path.join(__dirname, "auction-adca9-77aeb27bd088.json");
+
+let adminConfig = {};
+
+try {
+  // Try to load service account from file
+  const serviceAccount = require(serviceAccountPath);
+  adminConfig = {
+    credential: admin.credential.cert(serviceAccount),
+  };
+} catch (error) {
+  // If file doesn't exist or can't be loaded, use default credentials
+  // This works in Firebase Cloud Functions environment
+  console.log("Using default Firebase Admin credentials");
+}
+
+admin.initializeApp(adminConfig);
+
 const corsOptions = {
   origin: function (origin, callback) {
     // console.log(origin);
@@ -17,7 +38,6 @@ const corsOptions = {
   },
   credentials: true,
 };
-app.use(cors(corsOptions));
 exports.sendFCM = functions.https.onRequest(async (request, response) => {
   cors(request, response, async () => {
     const message = {

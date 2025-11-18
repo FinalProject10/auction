@@ -180,7 +180,7 @@ const ItemBid = ({ items }) => {
 
   // Adjust bid amount
   const adjustBid = (amount) => {
-    if (isAuctionEnded) return;
+    if (isAuctionEnded || isLoading) return;
     
     const newAmount = bidAmount + amount;
     const minBid = hasBids && currentBid ? 
@@ -195,7 +195,7 @@ const ItemBid = ({ items }) => {
 
   // Handle input change
   const handleInputChange = (e) => {
-    if (isAuctionEnded) return;
+    if (isAuctionEnded || isLoading) return;
     
     const value = Number(e.target.value);
     if (!isNaN(value) && value >= 0) {
@@ -217,6 +217,12 @@ const ItemBid = ({ items }) => {
   // Handle bid submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Prevent concurrent bid submissions - early return if already processing
+    if (isLoading) {
+      console.log("Bid submission already in progress. Please wait...");
+      return;
+    }
     
     // Check if user is logged in and is a client
     if (!userId || userRole !== "client") {
@@ -269,7 +275,15 @@ const ItemBid = ({ items }) => {
         }),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error("Error parsing response:", parseError);
+        setErrorMessage("Invalid response from server. Please try again.");
+        setIsLoading(false);
+        return;
+      }
 
       if (!response.ok) {
         setErrorMessage(data.message || "Failed to place bid. Please try again.");
@@ -360,7 +374,7 @@ const ItemBid = ({ items }) => {
         {/* Bid Form */}
         {!isAuctionEnded && (
           <div className="bid-form-section">
-            <form onSubmit={handleSubmit} className="bid-form">
+            <form onSubmit={handleSubmit} className="bid-form" noValidate>
               <div className="bid-input-group">
                 <label className="bid-label">
                   {hasBids ? `Minimum Bid: ${formatCurrency(minimumBid)}` : "Enter your bid"}
@@ -406,6 +420,7 @@ const ItemBid = ({ items }) => {
                       type="button"
                       onClick={() => setBidAmount(minimumBid)}
                       className="increment-btn"
+                      disabled={isLoading}
                     >
                       +{calculateMinIncrement(minimumBid)}
                     </button>
@@ -413,6 +428,7 @@ const ItemBid = ({ items }) => {
                       type="button"
                       onClick={() => setBidAmount(minimumBid + 10)}
                       className="increment-btn"
+                      disabled={isLoading}
                     >
                       +10
                     </button>
@@ -420,6 +436,7 @@ const ItemBid = ({ items }) => {
                       type="button"
                       onClick={() => setBidAmount(minimumBid + 50)}
                       className="increment-btn"
+                      disabled={isLoading}
                     >
                       +50
                     </button>
@@ -427,6 +444,7 @@ const ItemBid = ({ items }) => {
                       type="button"
                       onClick={() => setBidAmount(minimumBid + 100)}
                       className="increment-btn"
+                      disabled={isLoading}
                     >
                       +100
                     </button>

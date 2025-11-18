@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const ChatPage = () => {
+interface ChatPageProps {
+  onClose?: () => void;
+}
+
+const ChatPage: React.FC<ChatPageProps> = ({ onClose }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
@@ -41,33 +45,38 @@ const ChatPage = () => {
   };
   return (
     <>
-      <div className="container">
-        <div className="nav-bar">
+      <div className="chat-container">
+        <div className="chat-nav-bar">
           <a>Chat</a>
-          <div className="close">
+          <div className="chat-close" onClick={onClose}>
             <div className="line one"></div>
             <div className="line two"></div>
           </div>
         </div>
-        <div className="messages-area">
+        <div className="chat-messages-area">
           {messages.map((message, index) => (
-            <div key={index} className={`message ${message.sender}`}>
+            <div key={index} className={`chat-message chat-message-${message.sender}`}>
               {message.text}
             </div>
           ))}
         </div>
-        <div className="sender-area">
-          <div className="input-place">
+        <div className="chat-sender-area">
+          <div className="chat-input-place">
             <input
               placeholder="Send a message."
-              className="send-input"
+              className="chat-send-input"
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSendMessage();
+                }
+              }}
             />
-            <div className="send" onClick={handleSendMessage}>
+            <div className="chat-send" onClick={handleSendMessage}>
               <svg
-                className="send-icon"
+                className="chat-send-icon"
                 version="1.1"
                 id="Capa_1"
                 xmlns="http://www.w3.org/2000/svg"
