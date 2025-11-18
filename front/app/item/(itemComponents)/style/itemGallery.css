@@ -35,8 +35,16 @@ body {
 }
 
 .image img {
-    height: 800px;
+    height: 600px;
+    width: 100%;
     object-fit: cover;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .image img {
+        height: 400px;
+    }
 }
 
 .activated {
@@ -513,8 +521,20 @@ header nav .right .cart button.checkout:hover {
 
 .gallery .image img {
     height: 500px;
-    border-radius: 10px;
+    width: 100%;
+    border-radius: 12px;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery .image img:hover {
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .gallery .image img {
+        height: 350px;
+    }
 }
 
 /* 
@@ -534,6 +554,12 @@ header nav .right .cart button.checkout:hover {
     position: relative;
     height: 90px;
     width: 90px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.gallery .thumbnails .img-holder:hover {
+    transform: scale(1.05);
 }
 
 /* @media (max-width: 992px) {

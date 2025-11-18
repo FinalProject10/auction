@@ -14,7 +14,7 @@ const Inbox = () => {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:5000/dash/getReclam')
+      .get('http://127.0.0.1:5001/dash/getReclam')
       .then((res) => {
         const Data: [] = res.data;
         setReclamatio(Data);
@@ -26,7 +26,7 @@ const Inbox = () => {
   }, [refresh]);
   const remove =async (id:number) => {
     try {
-      await axios.delete(`http://localhost:5000/dash/removeRec/${id}`)
+      await axios.delete(`http://localhost:5001/dash/removeRec/${id}`)
       setRefrech(!refresh)
     } catch  (err) {
       console.log(err);

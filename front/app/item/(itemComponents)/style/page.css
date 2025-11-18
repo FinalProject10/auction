@@ -1,4 +1,18 @@
 .galoryBid {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 32px;
+    margin-top: 32px;
+    margin-bottom: 48px;
+}
+
+@media (max-width: 1024px) {
+    .galoryBid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+.iteminfo {
+    margin-top: 32px;
 }

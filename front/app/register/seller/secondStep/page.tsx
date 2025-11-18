@@ -18,7 +18,7 @@ const SecondStep = () => {
   const [cin, setCin] = useState("");
   const [grise,setGrise]=useState("")
   // const add=()=>{
-  //   axios.post(`http://localhost:5000/seller/registerSec`,{batinda:grise,cinNum:cin})
+  //   axios.post(`http://localhost:5001/seller/registerSec`,{batinda:grise,cinNum:cin})
   //   .then(r=>router.push('/register/seller/thirdStep')
   //   ).catch(err=>console.log(err))
   // }
@@ -29,9 +29,9 @@ const addCin=()=>{
   form.append('img',cin)
   form.append('img',grise)
   form.append('id',id)
-  axios.post(`http://localhost:5000/cloudinary/get`,form).then(r=>{
+  axios.post(`http://localhost:5001/cloudinary/get`,form).then(r=>{
    console.log(r.data)
-    axios.post(`http://localhost:5000/seller/registerSec/${id}`,{batinda:r.data[1].url,cinNum:r.data[0].url})
+    axios.post(`http://localhost:5001/seller/registerSec/${id}`,{batinda:r.data[1].url,cinNum:r.data[0].url})
     .then(r=>router.push('/register/seller/thirdStep')).catch(err=>console.log(err))
   })
   .catch(err=>console.log(err))

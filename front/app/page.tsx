@@ -1,46 +1,149 @@
 "use client"
 
 import { useState } from 'react'
-
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { FaUser, FaStore, FaArrowRight } from 'react-icons/fa'
 
 export default function Home() {
-  const [client,setClient]=useState(false)
-  const [seller,setSeller]=useState(false)
-  const router=useRouter()
-  return (
-   <div>
-    {client&&
-    <div
-    onMouseEnter={()=>setClient(true)}
-    onMouseLeave={()=>setClient(false)}
-    className='absolute opacity-85 w-[50%] h-full left-0 z-30 bg-black'>
-      <h1 
-      onClick={()=>router.push('/login/client')}
-      className='text-white text-center text-[40px] font-bold cursor-pointer animate-pulse absolute bottom-0 left-[30%]	'>Login as a client</h1>
-      </div>
-       }  
-       {seller&&
-    <div 
-    onMouseEnter={()=>setSeller(true)}
-    onMouseLeave={()=>setSeller(false)}
-    className='absolute opacity-85 w-[50%] h-full right-0 z-10 bg-black'>
-      <h1 
-      onClick={()=>router.push('/login/seller')}
-      className='text-white text-center text-[40px] font-bold cursor-pointer animate-pulse absolute bottom-0 left-[30%]	'>Login as a seller</h1>
-      </div>
-       }  
-    <img 
-    onMouseEnter={()=>setClient(true)}
-    onMouseLeave={()=>setClient(false)}
-    className='absolute top-0 left-0 w-[50%] h-full' src="https://dealerdotcom.webdamdb.com/embeddables/display.php?size=550&webid=gVE5hZYd9nT72gKZ" alt="" />
-    
-    <hr className='rotate-[90deg]'/>
-    <img
-    onMouseEnter={()=>setSeller(true)}
-    onMouseLeave={()=>setSeller(false)}
-    className='absolute top-0 right-0 w-[50%] h-full' src="https://group.mercedes-benz.com/bilder/unternehmen/chancengleichheit-und-inklusion/diversity-inclusion-03-w1680xh945-cutout.jpg" alt="" />
+  const [selectedRole, setSelectedRole] = useState<'client' | 'seller' | null>(null)
+  const router = useRouter()
 
-   </div>
+  const handleRoleSelect = (role: 'client' | 'seller') => {
+    setSelectedRole(role)
+    // Small delay for visual feedback, then redirect
+    setTimeout(() => {
+      router.push(`/login/${role}`)
+    }, 300)
+  }
+
+  return (
+    <div className="relative min-h-screen w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-4">
+      {/* Background Image */}
+      <div className="absolute inset-0 opacity-20">
+        <Image
+          src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&q=80"
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-2xl">
+            AutoBid
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 mb-2">
+            Premium Car Auction Platform
+          </p>
+          <p className="text-lg text-gray-400">
+            Select your account type to continue
+          </p>
+        </div>
+
+        {/* Role Selection Cards */}
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+          {/* Client Card */}
+          <div
+            onClick={() => handleRoleSelect('client')}
+            className={`relative bg-white rounded-2xl shadow-2xl overflow-hidden cursor-pointer transform transition-all duration-300 ${
+              selectedRole === 'client' 
+                ? 'scale-105 ring-4 ring-red-500' 
+                : 'hover:scale-105 hover:shadow-3xl'
+            }`}
+          >
+            <div className="relative h-64 bg-gradient-to-br from-blue-600 to-blue-800">
+              <Image
+                src="https://dealerdotcom.webdamdb.com/embeddables/display.php?size=550&webid=gVE5hZYd9nT72gKZ"
+                alt="Client"
+                fill
+                className="object-cover opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute top-6 right-6">
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
+                  <FaUser className="text-white text-2xl" />
+                </div>
+              </div>
+            </div>
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-3">I'm a Buyer</h2>
+              <p className="text-gray-600 mb-6 text-lg">
+                Browse and bid on premium vehicles. Find your dream car at auction.
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                  Client Account
+                </span>
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+                  selectedRole === 'client'
+                    ? 'bg-red-500 text-white'
+                    : 'bg-gray-100 text-gray-700 group-hover:bg-red-500 group-hover:text-white'
+                }`}>
+                  <span className="font-semibold">Continue</span>
+                  <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Seller Card */}
+          <div
+            onClick={() => handleRoleSelect('seller')}
+            className={`relative bg-white rounded-2xl shadow-2xl overflow-hidden cursor-pointer transform transition-all duration-300 ${
+              selectedRole === 'seller' 
+                ? 'scale-105 ring-4 ring-red-500' 
+                : 'hover:scale-105 hover:shadow-3xl'
+            }`}
+          >
+            <div className="relative h-64 bg-gradient-to-br from-green-600 to-green-800">
+              <Image
+                src="https://group.mercedes-benz.com/bilder/unternehmen/chancengleichheit-und-inklusion/diversity-inclusion-03-w1680xh945-cutout.jpg"
+                alt="Seller"
+                fill
+                className="object-cover opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute top-6 right-6">
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
+                  <FaStore className="text-white text-2xl" />
+                </div>
+              </div>
+            </div>
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-3">I'm a Seller</h2>
+              <p className="text-gray-600 mb-6 text-lg">
+                List your vehicles and reach thousands of buyers. Maximize your sales potential.
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                  Seller Account
+                </span>
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+                  selectedRole === 'seller'
+                    ? 'bg-red-500 text-white'
+                    : 'bg-gray-100 text-gray-700 group-hover:bg-red-500 group-hover:text-white'
+                }`}>
+                  <span className="font-semibold">Continue</span>
+                  <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Note */}
+        <div className="text-center mt-8">
+          <p className="text-gray-400 text-sm">
+            Don't have an account?{' '}
+            <span className="text-white font-semibold">Select a role above to sign up</span>
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }

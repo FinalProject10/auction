@@ -12,7 +12,7 @@ const listClientBid = () => {
   
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:5000/dash/canBid')
+      .get('http://127.0.0.1:5001/dash/canBid')
       .then((res) => {
         const Data: [] = res.data;
         setData(Data);
@@ -23,7 +23,7 @@ const listClientBid = () => {
   }, [refrech]);
   const delet = async (id:number) => {
     try {
-      await axios.delete(`http://127.0.0.1:5000/dash/remove/${id}`);
+      await axios.delete(`http://127.0.0.1:5001/dash/remove/${id}`);
       setRefrech(!refrech);
     } catch (err) {
       console.log(err);

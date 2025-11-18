@@ -54,7 +54,7 @@ const Pricing: FC = () => {
   const router=useRouter()
   // const add=(value:any,price:any)=>{
   //   const id=localStorage.getItem('id')
-  //   axios.post(`http://localhost:5000/Membership/add`,{id,type:"ea",price:isYearly?pkg.yearlyPrice:pkg.monthlyPrice})
+  //   axios.post(`http://localhost:5001/Membership/add`,{id,type:"ea",price:isYearly?pkg.yearlyPrice:pkg.monthlyPrice})
   // }
   return (
     <div id="pricing">

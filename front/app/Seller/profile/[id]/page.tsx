@@ -18,7 +18,7 @@ const Page = () => {
   const[data,setData]=useState([])
   useEffect(() => {
   
-   axios.get(`http://localhost:5000/seller/profile/1`).then(r=>setData(r.data)).catch(err=>console.log(err))
+   axios.get(`http://localhost:5001/seller/profile/1`).then(r=>setData(r.data)).catch(err=>console.log(err))
   }, []);
   
 

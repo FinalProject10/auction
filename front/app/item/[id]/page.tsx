@@ -13,6 +13,8 @@ const ItemDescrption = dynamic(
 );
 const ItemSidebar = dynamic(() => import("../(itemComponents)/itemSidebar"));
 import axios from "axios";
+import { API_URL } from "../../../utils/api";
+
 const Item = ({ params }) => {
   console.log(params);
   const [items, setItems] = useState<Item[]>([]);
@@ -22,7 +24,7 @@ const Item = ({ params }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          ` http://localhost:5000/items/fetch-items/${params.id}`
+          `${API_URL}/items/fetch-items/${params.id}`
         );
         setItems(response.data as Item[]);
       } catch (error) {
@@ -57,21 +59,19 @@ const Item = ({ params }) => {
         </>
       ) : (
         <>
-          <div>
+          <div className="min-h-screen bg-gray-50">
             <ItemHeader items={items} />
-            <div className="mx-[5%]">
+            <div className="max-w-[1400px] mx-auto px-6">
               <div className="galoryBid">
-                <div>
+                <div className="flex flex-col">
                   <Gallery items={items} />
-                  <div className="iteminfo galoryBid">
-                    <div className="w-11/12">
-                      <ItemInfo items={items} />
-                      <ItemDescrption items={items} />
-                    </div>
+                  <div className="iteminfo">
+                    <ItemInfo items={items} />
+                    <ItemDescrption items={items} />
                   </div>
                 </div>
 
-                <div>
+                <div className="flex flex-col gap-6 sticky top-6 h-fit">
                   <ItemBid items={items} />
                   <ItemSidebar items={items} />
                 </div>

@@ -56,8 +56,29 @@ const getItems = async (req, res) => {
       ],
     });
 
-    // console.log(items);
-    res.status(200).json(items);
+    // Parse images JSON if they're strings
+    const parsedItems = items.map(item => {
+      const itemData = item.toJSON();
+      if (itemData.images) {
+        if (typeof itemData.images === 'string') {
+          try {
+            itemData.images = JSON.parse(itemData.images);
+          } catch (e) {
+            // If parsing fails, wrap in array
+            itemData.images = [itemData.images];
+          }
+        }
+        // Ensure it's always an array
+        if (!Array.isArray(itemData.images)) {
+          itemData.images = [itemData.images];
+        }
+      } else {
+        itemData.images = [];
+      }
+      return itemData;
+    });
+
+    res.status(200).json(parsedItems);
   } catch (error) {
     console.error(error);
     res
@@ -75,8 +96,29 @@ const addItem = async (req, res) => {
 };
 const getAll = async (req, res) => {
   try {
-    const d = await Items.findAll();
-    res.status(200).json(d);
+    const items = await Items.findAll();
+    
+    // Parse images JSON if they're strings
+    const parsedItems = items.map(item => {
+      const itemData = item.toJSON();
+      if (itemData.images) {
+        if (typeof itemData.images === 'string') {
+          try {
+            itemData.images = JSON.parse(itemData.images);
+          } catch (e) {
+            itemData.images = [itemData.images];
+          }
+        }
+        if (!Array.isArray(itemData.images)) {
+          itemData.images = [itemData.images];
+        }
+      } else {
+        itemData.images = [];
+      }
+      return itemData;
+    });
+    
+    res.status(200).json(parsedItems);
   } catch (err) {
     res.status(500).json("server err");
   }
@@ -92,7 +134,27 @@ const getAllItems = async (req, res) => {
       offset: offset,
     });
 
-    res.status(200).json(items);
+    // Parse images JSON if they're strings
+    const parsedItems = items.map(item => {
+      const itemData = item.toJSON();
+      if (itemData.images) {
+        if (typeof itemData.images === 'string') {
+          try {
+            itemData.images = JSON.parse(itemData.images);
+          } catch (e) {
+            itemData.images = [itemData.images];
+          }
+        }
+        if (!Array.isArray(itemData.images)) {
+          itemData.images = [itemData.images];
+        }
+      } else {
+        itemData.images = [];
+      }
+      return itemData;
+    });
+
+    res.status(200).json(parsedItems);
   } catch (err) {
     console.error(err);
     res.status(500).json("Internal server error");
@@ -100,7 +162,7 @@ const getAllItems = async (req, res) => {
 };
 const getItemsBided = async (req, res) => {
   try {
-    let d = await Items.findAll({
+    let items = await Items.findAll({
       include: [
         {
           model: Bids,
@@ -109,7 +171,28 @@ const getItemsBided = async (req, res) => {
         },
       ],
     });
-    if (d) return res.status(200).json(d);
+    
+    // Parse images JSON if they're strings
+    const parsedItems = items.map(item => {
+      const itemData = item.toJSON();
+      if (itemData.images) {
+        if (typeof itemData.images === 'string') {
+          try {
+            itemData.images = JSON.parse(itemData.images);
+          } catch (e) {
+            itemData.images = [itemData.images];
+          }
+        }
+        if (!Array.isArray(itemData.images)) {
+          itemData.images = [itemData.images];
+        }
+      } else {
+        itemData.images = [];
+      }
+      return itemData;
+    });
+    
+    if (parsedItems) return res.status(200).json(parsedItems);
     return res.status(404).json("404");
   } catch (err) {
     res.status(500).json("internal err");
@@ -119,11 +202,32 @@ const getItemsBided = async (req, res) => {
 const getitemswinner=async(req,res)=>{
   try{
     
-    let f=await Items.findAll({
+    let items=await Items.findAll({
       where:{sold:req.params.id}
     })
-    console.log('helo',f)
-    if (f) return res.status(200).json(f)
+    
+    // Parse images JSON if they're strings
+    const parsedItems = items.map(item => {
+      const itemData = item.toJSON();
+      if (itemData.images) {
+        if (typeof itemData.images === 'string') {
+          try {
+            itemData.images = JSON.parse(itemData.images);
+          } catch (e) {
+            itemData.images = [itemData.images];
+          }
+        }
+        if (!Array.isArray(itemData.images)) {
+          itemData.images = [itemData.images];
+        }
+      } else {
+        itemData.images = [];
+      }
+      return itemData;
+    });
+    
+    console.log('helo',parsedItems)
+    if (parsedItems) return res.status(200).json(parsedItems)
     else return res.status(404).json('error')
   }catch(err){
     res.status(500).json('internal server error')

@@ -11,7 +11,7 @@ const listOfSeller = () => {
   
   useEffect(() => {
     axios
-      .get('http://localhost:5000/dash/getsel')
+      .get('http://localhost:5001/dash/getsel')
       .then((res) => {
         const Data: [] = res.data;
         setData(Data);
@@ -22,7 +22,7 @@ const listOfSeller = () => {
   }, [refrech]);
   const delet = async (id:number) => {
     try {
-      await axios.delete(`http://localhost:5000/dash/removeSel/${id}`);
+      await axios.delete(`http://localhost:5001/dash/removeSel/${id}`);
       setRefrech(!refrech);
     } catch (err) {
       console.log(err);

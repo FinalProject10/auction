@@ -8,6 +8,8 @@ import { IoStatsChart } from "react-icons/io5";
 import { dividerClasses } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { API_URL } from '../../utils/api'
+
 const Dashboard = () => {
   const[show,setShow]=useState([true,false,false,false])
   const[data,setData]=useState([true,false,false,false])
@@ -22,22 +24,22 @@ const Dashboard = () => {
   const id=parseInt(localStorage.getItem('userId'))
 
   const add=()=>{
-    axios.put(`http://localhost:5000/client/update/${id}`,{name:fname,lastName:lname,email,newPass:newPass}).then(r=>console.log(r))
+    axios.put(`${API_URL}/client/update/${id}`,{name:fname,lastName:lname,email,newPass:newPass}).then(r=>console.log(r))
     .catch(err=>console.log(err))
   }
   useEffect(()=>{
-    axios.get(`http://localhost:5000/items/itemsBided/${id}`).then(r=>{
+    axios.get(`${API_URL}/items/itemsBided/${id}`).then(r=>{
     setCars(r.data)
     
     })
     .catch(err=>console.log(err))
   },[])
   useEffect(()=>{
-    axios.get(`http://localhost:5000/bid/fetch-items/${id}?page=${page}`)
+    axios.get(`${API_URL}/bid/fetch-items/${id}?page=${page}`)
     .then(r=>setBids((prev)=>[...prev,...r.data])).catch(err=>console.log(err))
   },[page])
   useEffect(()=>{
-    axios.get(`http://localhost:5000/items/items-winner/${id}`).then(r=>setEnded(r.data))
+    axios.get(`${API_URL}/items/items-winner/${id}`).then(r=>setEnded(r.data))
     .catch(err=>console.log(err))
   },[])
 //   const [currentTime, setCurrentTime] = useState(new Date());
@@ -54,26 +56,63 @@ const Dashboard = () => {
   return (
     <div>
         <Navbar/>
-        <div className="bg-[#F2F2F2] h-[170px] w-full">
-        <div className="pl-[6%] pt-[3%]">
-          <Link href={"/home"}>
-            {" "}
-            <h1 className="text-[#999999] inline-block mb-[2%]">Home / </h1>
-          </Link>
-          <span className="text-[#999999]">dashboard</span>
-          <h1 className="text-[35px] font-[700]">My Account</h1>
+        <div className="bg-gradient-to-r from-gray-100 to-gray-50 border-b border-gray-200 py-12">
+        <div className="container mx-auto px-4">
+          <nav className="flex items-center gap-2 text-sm text-gray-600 mb-4">
+            <Link href={"/home"} className="hover:text-primary transition-colors">
+              Home
+            </Link>
+            <span>/</span>
+            <span className="text-gray-900 font-medium">Dashboard</span>
+          </nav>
+          <h1 className="text-4xl font-bold text-gray-900">My Account</h1>
         </div>
       </div>
-      <div className='grid mb-[10%] gap-[30px] grid-cols-[411px,auto] w-[90%] ml-[5%] mt-[5%]'>
-        <div className=' shadow-2xl h-fit'>
-          <div onClick={()=>{setShow([true,false,false,false]);setData([true,false,false,false])}} className='w-full h-[55px] hover:text-[#ff2800] hover:bg-white border-b-[1px] border-white  cursor-pointer' style={{color:show[0]?'#ff2800':'white',backgroundColor:show[0]?'white':'#ff2800'}}> <h1 className='p-3 font-[500] text-[20px]'>Dashboard</h1></div>
-          <div onClick={()=>{setShow([false,true,false,false]);setData([false,true,false,false])}} className='w-full h-[55px] border-b-[1px] border-white cursor-pointer' style={{color:show[1]?'#ff2800':'white',backgroundColor:show[1]?'white':'#ff2800'}}> <h1 className='p-3 font-[400] text-[20px]'>Account Details</h1></div>
-          <div onClick={()=>{setShow([false,false,true,false]);setData([false,false,true,false])}} className='w-full h-[55px] border-b-[1px] border-white cursor-pointer' style={{color:show[2]?'#ff2800':'white',backgroundColor:show[2]?'white':'#ff2800'}}> <h1 className='p-3 font-[400] text-[20px]'>My Auction Bids</h1></div>
-          <div onClick={()=>{setShow([false,false,false,true]);;setData([false,false,false,true])}} className='w-full h-[55px] border-b-[1px] border-white cursor-pointer' style={{color:show[3]?'#ff2800':'white',backgroundColor:show[3]?'white':'#ff2800'}}> <h1 className='p-3 font-[400] text-[20px]'>My Auction Activity</h1></div>
-<div onClick={()=>{
-  localStorage.clear()
-  router.push('/')}} className='w-full h-[55px] border-b-[1px] border-white cursor-pointer' style={{color:show[4]?'#ff2800':'white',backgroundColor:show[4]?'white':'#ff2800'}}> <h1 className='p-3 font-[400] text-[20px]'>Log Out</h1></div>
-</div>
+      <div className='container mx-auto px-4 py-8'>
+        <div className='grid mb-10 gap-8 lg:grid-cols-[300px,1fr]'>
+          <div className='card p-0 overflow-hidden'>
+            <div 
+              onClick={()=>{setShow([true,false,false,false]);setData([true,false,false,false])}} 
+              className={`w-full px-4 py-4 cursor-pointer transition-all ${
+                show[0] ? 'bg-primary text-white' : 'hover:bg-gray-50'
+              }`}
+            >
+              <h1 className='font-semibold text-lg'>Dashboard</h1>
+            </div>
+            <div 
+              onClick={()=>{setShow([false,true,false,false]);setData([false,true,false,false])}} 
+              className={`w-full px-4 py-4 cursor-pointer transition-all border-t border-gray-200 ${
+                show[1] ? 'bg-primary text-white' : 'hover:bg-gray-50'
+              }`}
+            >
+              <h1 className='font-medium'>Account Details</h1>
+            </div>
+            <div 
+              onClick={()=>{setShow([false,false,true,false]);setData([false,false,true,false])}} 
+              className={`w-full px-4 py-4 cursor-pointer transition-all border-t border-gray-200 ${
+                show[2] ? 'bg-primary text-white' : 'hover:bg-gray-50'
+              }`}
+            >
+              <h1 className='font-medium'>My Auction Bids</h1>
+            </div>
+            <div 
+              onClick={()=>{setShow([false,false,false,true]);setData([false,false,false,true])}} 
+              className={`w-full px-4 py-4 cursor-pointer transition-all border-t border-gray-200 ${
+                show[3] ? 'bg-primary text-white' : 'hover:bg-gray-50'
+              }`}
+            >
+              <h1 className='font-medium'>My Auction Activity</h1>
+            </div>
+            <div 
+              onClick={()=>{
+                localStorage.clear()
+                router.push('/')
+              }} 
+              className='w-full px-4 py-4 cursor-pointer transition-all border-t border-gray-200 hover:bg-red-50 hover:text-red-600'
+            >
+              <h1 className='font-medium'>Log Out</h1>
+            </div>
+          </div>
        {data[0]&& <div>
           <h1 className='mb-[2%]'>Hello {localStorage.getItem('role')} not {localStorage.getItem('role')} <Link href={'/'} onClick={()=>localStorage.clear()}>Log out</Link> </h1>
           <h1 className='mb-[3%]'>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</h1>

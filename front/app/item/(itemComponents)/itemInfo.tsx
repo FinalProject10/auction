@@ -248,7 +248,7 @@ const ItemInfo = ({ items }) => {
             </AccordionHeader>
             <AccordionBody>
               <AuctionHistory
-                items={item.bids}
+                itemId={item.id}
                 timeStart={item.timeStart}
                 price={item.price}
                 timeEnd={item.timeEnd}

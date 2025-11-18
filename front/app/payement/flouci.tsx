@@ -15,7 +15,7 @@ const Payment = () => {
     e.preventDefault();
     console.log("clicked");
     axios
-      .post("http://localhost:5000/flousi/pay", 1200)
+      .post("http://localhost:5001/flousi/pay", 1200)
       .then((res) => {
         console.log("eee");
         const { result } = res.data;

@@ -12,6 +12,9 @@ const baseConfig: Config = withMT({
       colors: {
         'black-s': "#252525",
         'black-flou': '#000000c9',
+        'primary': '#ef4444',
+        'primary-dark': '#dc2626',
+        'primary-light': '#fee2e2',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

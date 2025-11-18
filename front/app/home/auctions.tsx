@@ -2,74 +2,128 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import Image from 'next/image'
+import { FaHammer } from 'react-icons/fa'
+import { API_URL } from '../../utils/api'
+
 const Auctions = () => {
-    const[color,setColor]=useState([false,false])
+    const[color,setColor]=useState([true,false]) // Default to Newly Listed
     const[data,setData]=useState([])
     const[allData,setAllData]=useState([])
     const[allData1,setAllData1]=useState([])
+    const[loading,setLoading]=useState(true)
+    
     useEffect(()=>{
-        axios.get('http://localhost:5000/items/fetch-items').then(r=>{console.log(r.data);setData(r.data);setAllData(r.data);setAllData1(r.data)}).catch(err=>console.log(err))
-    },[])
-    const endingSoon=()=>{
-        const filtered=allData.filter(el=>{
-            if(Math.floor((new Date()-new Date(el.timeEnd))/3600000)<0){
-
-                return Math.floor((new Date(el.timeEnd)-new Date())/3600000)<=48
-            }
+        axios.get(`${API_URL}/items/get`).then(r=>{
+            const items = r.data || [];
+            setAllData(items);
+            setAllData1(items);
+            // Default: Show newly listed (last 8 items)
+            const newlyListed = [...items].sort((a, b) => 
+                new Date(b.createdAt || b.timeStart).getTime() - new Date(a.createdAt || a.timeStart).getTime()
+            ).slice(0, 8);
+            setData(newlyListed);
+            setLoading(false);
+        }).catch(err=>{
+            console.log(err);
+            setLoading(false);
         })
-        setData(filtered)
-
+    },[])
+    
+    const endingSoon=()=>{
+        const now = new Date().getTime();
+        const filtered = allData1.filter(el=>{
+            const timeEnd = new Date(el.timeEnd).getTime();
+            const hoursLeft = (timeEnd - now) / (1000 * 60 * 60);
+            return hoursLeft > 0 && hoursLeft <= 48;
+        }).sort((a, b) => new Date(a.timeEnd).getTime() - new Date(b.timeEnd).getTime());
+        setData(filtered.slice(0, 8));
+    }
+    
+    const newlyListed=()=>{
+        const sorted = [...allData1].sort((a, b) => 
+            new Date(b.createdAt || b.timeStart).getTime() - new Date(a.createdAt || a.timeStart).getTime()
+        );
+        setData(sorted.slice(0, 8));
     }
   return (
-    <div className='w-[90%] h-[100%] ml-[5%]  '>
-        <h1 className='float-start font-[800] text-[34px] mt-[10%] '>Auctions</h1>
-        <div className='flex gap-[10px] mb-[10%] float-right mt-[10%] font-[700] text-[#666] cursor-pointer '> 
-        <h1  style={{color:color[0]?'black':'#666',marginRight:'15px'}} onClick={()=>{setColor([true,false])
-    setData(allData1.slice(allData1.length-8,allData1.length))    
-    }}
-    
-        >Newly Listed</h1>
-        <h1 style={{color:color[1]?'black':'#666',marginRight:'28px'}} onClick={()=>{setColor([false,true]);endingSoon()}}>Ending Soon</h1>
+    <div className='w-full max-w-[1400px] mx-auto px-6 py-16'>
+        <div className='flex items-center justify-between mb-12'>
+          <h1 className='text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight'>Auctions</h1>
+          <div className='flex gap-6 font-semibold text-gray-600'> 
+            <button 
+              className={`transition-all duration-200 pb-2 border-b-2 ${
+                color[0] 
+                  ? 'text-gray-900 border-red-500' 
+                  : 'text-gray-600 border-transparent hover:text-gray-900'
+              }`}
+              onClick={()=>{
+                setColor([true,false]);
+                newlyListed();    
+              }}
+            >
+              Newly Listed
+            </button>
+            <button 
+              className={`transition-all duration-200 pb-2 border-b-2 ${
+                color[1] 
+                  ? 'text-gray-900 border-red-500' 
+                  : 'text-gray-600 border-transparent hover:text-gray-900'
+              }`}
+              onClick={()=>{
+                setColor([false,true]);
+                endingSoon();
+              }}
+            >
+              Ending Soon
+            </button>
+          </div>
         </div>
-    <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
+    {loading ? (
+      <div className="text-center py-20">
+        <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-500"></div>
+        <p className="mt-4 text-gray-600">Loading auctions...</p>
+      </div>
+    ) : data.length === 0 ? (
+      <div className="text-center py-20 text-gray-500">No auctions found.</div>
+    ) : (
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
         {data.map((el,i)=>(
-        <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
-            <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src={el.images[0]} alt="" />
-            <div className='p-[15px] text-[#333333]'>
-            <Link href={`/item/${el.id}`}> <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'
-        
-            >{el.name}</h1></Link>
-            <h1 className='mb-[10px] font-[500]'>{el.short_description}</h1>
-            <h1 className='font-[300] text-[13px]'>{Math.floor((new Date()-new Date(el.timeEnd)<0?new Date(el.timeEnd)-new Date():0)/3600000)}h</h1>
+        <Link href={`/item/${el.id}`} key={el.id}>
+        <div className='group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 cursor-pointer'>
+            <div className='relative overflow-hidden h-[220px]'>
+              <Image
+                className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' 
+                src={Array.isArray(el.images) ? el.images[0] : (el.images || 'https://via.placeholder.com/400x300')} 
+                alt={el.name}
+                fill
+              />
+              <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent' />
+              <div className='absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1'>
+                <FaHammer size={12} />
+                {(() => {
+                  const now = new Date().getTime();
+                  const timeEnd = new Date(el.timeEnd).getTime();
+                  const hoursLeft = Math.floor((timeEnd - now) / (1000 * 60 * 60));
+                  return hoursLeft > 0 ? `${hoursLeft}h` : 'Ended';
+                })()}
+              </div>
             </div>
-        </div>))}
-        {/* <div className=' w-[25%] h-[30%] rounded-3xl border-[2px]'>
-            <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg" alt="" />
-            <div className='p-[15px] text-[#333333]'>
-            <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'>Tesla Model 3</h1>
-            <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
-            <h1 className='font-[300] text-[13px]'>Auction Ended</h1>
-            </div>
-        </div> */}
-        {/* <div className=' w-[25%] h-[30%] rounded-3xl border-[2px]'>
-            <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg" alt="" />
-            <div className='p-[15px] text-[#333333]'>
-            <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'>Tesla Model 3</h1>
-            <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
-            <h1 className='font-[300] text-[13px]'>Auction Ended</h1>
+            <div className='p-5'>
+              <h1 className='group-hover:text-[#ff2800] text-xl font-bold text-gray-900 mb-2 transition-colors duration-200 line-clamp-1'>
+                {el.name}
+              </h1>
+              <p className='mb-3 font-medium text-gray-600 text-sm line-clamp-2'>{el.short_description}</p>
+              <div className='flex items-center justify-between pt-3 border-t border-gray-100'>
+                <span className='text-xs font-semibold text-gray-500 uppercase tracking-wide'>Current Bid</span>
+                <span className='text-lg font-bold text-red-500'>{el.price ? `$${el.price.toLocaleString()}` : 'N/A'}</span>
+              </div>
             </div>
         </div>
-        <div className=' w-[25%] h-[30%] rounded-3xl border-[2px]'>
-            <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-6-500x317.jpg" alt="" />
-            <div className='p-[15px] text-[#333333]'>
-            <h1 className='cursor-pointer hover:text-[#ff2800] text-[20px] font-[600]'>Tesla Model 3</h1>
-            <h1 className='mb-[10px] font-[500]'>2018 · 121 787 km · 2 995 cm3 · Diesel</h1>
-            <h1 className='font-[300] text-[13px]'>Auction Ended</h1>
-            </div>
-        </div> */}
-       
-
-    </div>
+        </Link>
+        ))}
+      </div>
+    )}
     </div>
   )
 }

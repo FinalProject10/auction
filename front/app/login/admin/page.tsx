@@ -3,18 +3,30 @@ import axios from 'axios'
 import React,{useState} from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Alert from '@mui/material/Alert';
 const AdminLogin = () => {
   const[email,setEmail]=useState(null)
   const[pass,setPass]=useState(null)
   const[err,setErr]=useState('')
   const router=useRouter()
   const log=()=>{
-    axios.post(`http://localhost:5000/admin/login`,{email,password:pass})
+    axios.post(`http://localhost:5001/admin/login`,{email,password:pass})
     .then(r=>{
       localStorage.setItem('role','admin')
       localStorage.setItem('user',r.data)
                 router.push('/home')            
-  }).catch(err=>setErr(err.response.data))
+  }).catch(err=>{
+    let errorMessage = "Connection error. Please check if the server is running.";
+    if (err.response?.data) {
+      errorMessage = typeof err.response.data === 'string' 
+        ? err.response.data 
+        : err.response.data.message || JSON.stringify(err.response.data);
+    } else if (err.message) {
+      errorMessage = err.message;
+    }
+    setErr(errorMessage);
+    console.error("Login error:", err);
+  })
   } 
   return (
     <div>
@@ -42,6 +54,9 @@ const AdminLogin = () => {
             <h1 className='inline-block mr-[40%] font-bold'>remember me</h1>
             <Link href={'/forget'} className=' text-blue-600'>forget password ?</Link>
         </div>
+        {err && (
+          <Alert severity="error" className="mb-5">{err}</Alert>
+        )}
         <button 
     
         className='bg-black w-[20%] h-[45px] text-white rounded mt-[5%] '

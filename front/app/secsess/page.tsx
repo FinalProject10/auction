@@ -9,11 +9,11 @@ const seccess = () => {
     
   
     if(role==='client'){
-      axios.post(`http://localhost:5000/client/addMembership`,{price:localStorage.getItem('membership'),type:"Ligature",ClientId:id})
+      axios.post(`http://localhost:5001/client/addMembership`,{price:localStorage.getItem('membership'),type:"Ligature",ClientId:id})
       .then(r=>localStorage.setItem('bid','true')).catch(err=>console.log(err))
       console.log('done')}
       else if(role==="seller"){
-        axios.post(`http://localhost:5000/client/addMembership`,{price:localStorage.getItem('membership'),type:"Seller Plan",sellerId:id})
+        axios.post(`http://localhost:5001/client/addMembership`,{price:localStorage.getItem('membership'),type:"Seller Plan",sellerId:id})
       .then(r=>localStorage.setItem('add','true')).catch(err=>console.log(err))
       }
 

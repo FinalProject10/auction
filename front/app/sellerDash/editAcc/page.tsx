@@ -9,7 +9,7 @@ const Edit = () => {
   const id=localStorage.getItem('userId')
     const add = () => {
         axios
-          .put(`http://localhost:5000/seller/edit/${id}`, {
+          .put(`http://localhost:5001/seller/edit/${id}`, {
             name: fname,
             lastName: lname,
             email,

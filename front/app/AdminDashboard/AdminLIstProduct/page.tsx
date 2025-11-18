@@ -29,7 +29,7 @@ const listPro = () => {
 
  useEffect(() => {
   axios
-    .get('http://localhost:5000/dash/getAllProduc')
+    .get('http://localhost:5001/dash/getAllProduc')
     .then((res) => {
       const Data: productPro[] = res.data;
       setData(Data);
@@ -41,7 +41,7 @@ const listPro = () => {
 const remove= async (id)=>
 {
   try {
-    await axios.delete(`http://localhost:5000/dash/removeProduct/${id}`);
+    await axios.delete(`http://localhost:5001/dash/removeProduct/${id}`);
     setRefrech(!refrech);
   } catch (err) {
     console.log(err);

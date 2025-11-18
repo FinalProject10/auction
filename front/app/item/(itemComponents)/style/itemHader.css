@@ -1,31 +1,43 @@
 .autobid-breadcrumbs {
-    background: #F2F2F2;
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+    padding: 24px 0;
+    border-bottom: 1px solid #e9ecef;
 }
-
 
 .container {
-    margin: 20px;
-    padding: 20px 15px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
 }
-
 
 .description {
     padding-left: 0px;
     padding-right: 0px;
+    margin-top: 8px;
 }
 
 .description p {
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-
-    padding-top: 5px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #666666;
+    padding-top: 8px;
     margin-bottom: 0;
 }
 
 .col-md-6 h1 {
-    font-size: 26px !important;
-    line-height: 30px !important;
+    font-size: 36px !important;
+    line-height: 44px !important;
     font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.autobid-breadcrumbs a {
+    transition: color 0.2s ease;
+}
+
+.autobid-breadcrumbs a:hover {
+    color: #ff2800 !important;
 }

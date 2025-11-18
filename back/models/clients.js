@@ -41,8 +41,12 @@ const Client = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    memberships_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
-  { timestamps: false, tableName: "client" }
+  { timestamps: false, tableName: "clients" }
 );
 
 module.exports = Client;

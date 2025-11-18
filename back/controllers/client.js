@@ -2,6 +2,8 @@ const Client = require("../models/clients");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Memberships = require("../models/memberships");
+const db = require("../database/index");
+const { Op } = require("sequelize");
 const secretKey = "salim123";
 module.exports = {
   register: async (req, res) => {
@@ -36,23 +38,62 @@ module.exports = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      let user = await Client.findOne({ where: { email } });
-      if (!user) {
-        return res.status(404).json("user not found");
+      
+      // Validate input
+      if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required" });
       }
-      if (user) {
-        const hashed = await bcrypt.compare(password, user.password);
-        if (hashed) {
-          const token = jwt.sign({ id: user.id, role: "client" }, secretKey, {
-            expiresIn: "24h",
-          });
-          console.log(token);
-          return res.status(200).json({ token, user });
+
+      // Check database connection
+      try {
+        await db.authenticate();
+      } catch (dbError) {
+        console.error("Database connection error:", dbError);
+        return res.status(500).json({ message: "Database connection failed. Please check your database configuration." });
+      }
+
+      // Find user (case-insensitive email search)
+      let user = await Client.findOne({ 
+        where: {
+          email: {
+            [Op.like]: email.toLowerCase()
+          }
         }
-        return res.status(404).json("password is incorrect");
+      });
+      
+      // If not found with lowercase, try exact match
+      if (!user) {
+        user = await Client.findOne({ where: { email } });
       }
+      
+      if (!user) {
+        return res.status(404).json({ message: "User not found. Please check your email or sign up." });
+      }
+      
+      // Compare password
+      const hashed = await bcrypt.compare(password, user.password);
+      if (!hashed) {
+        return res.status(401).json({ message: "Incorrect password. Please try again." });
+      }
+
+      // Generate token
+      const token = jwt.sign({ id: user.id, role: "client" }, secretKey, {
+        expiresIn: "24h",
+      });
+      
+      console.log("✓ Client login successful:", user.email);
+      return res.status(200).json({ 
+        token, 
+        user: {
+          id: user.id,
+          name: user.name,
+          lastName: user.lastName,
+          email: user.email
+        }
+      });
     } catch (err) {
-      res.status(500).json(err);
+      console.error("Login error:", err);
+      return res.status(500).json({ message: "Internal server error. Please try again later." });
     }
   },
   getHome: async (req, res) => {

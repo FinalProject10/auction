@@ -67,7 +67,7 @@ const HomePage = () => {
 
     useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/het')
+          .get('http://127.0.0.1:5001/dash/het')
           .then((res) => {
             const Data: clientProps[] = res.data;
             setData(Data);
@@ -78,7 +78,7 @@ const HomePage = () => {
       }, []);
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/SelItem')
+          .get('http://127.0.0.1:5001/dash/SelItem')
           .then((res) => {
             const Data:[] = res.data;
             console.log(Data);
@@ -90,7 +90,7 @@ const HomePage = () => {
       }, []);
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/getsel')
+          .get('http://127.0.0.1:5001/dash/getsel')
           .then((res) => {
             const Data: sellerProps[] = res.data;
             setData1(Data);
@@ -101,7 +101,7 @@ const HomePage = () => {
       }, []);
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/getMember')
+          .get('http://127.0.0.1:5001/dash/getMember')
           .then((res) => {
             const fetchedData: MemberPr[] = res.data;
             setData2(fetchedData);
@@ -117,7 +117,7 @@ const HomePage = () => {
       
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/getPro')
+          .get('http://127.0.0.1:5001/dash/getPro')
           .then((res) => {
             const fetchedData: [] = res.data; 
             setData3(fetchedData);
@@ -135,7 +135,7 @@ const HomePage = () => {
 <<<<<<< HEAD
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/getReclam')
+          .get('http://127.0.0.1:5001/dash/getReclam')
           .then((res) => {
             const Data: [] = res.data;
             setReclamation(Data);
@@ -259,7 +259,7 @@ const HomePage = () => {
     //     const role=localStorage.getItem('role')
     //     const token=localStorage.getItem('user')
     //     if(role==='admin'){
-    //         axios.get(`http://localhost:5000/admin/home`,{headers:{Authorization:`Bearer ${token}`}})
+    //         axios.get(`http://localhost:5001/admin/home`,{headers:{Authorization:`Bearer ${token}`}})
     //         .then(r=>console.log("r")).catch(err=>router.push('/register/seller'))
     //         }
     //     else{
@@ -369,7 +369,7 @@ const HomePage = () => {
  
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:5000/dash/getReclam')
+      .get('http://127.0.0.1:5001/dash/getReclam')
       .then((res) => {
         const Data: [] = res.data;
         setReclamation(Data);
