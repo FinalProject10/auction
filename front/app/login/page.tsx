@@ -102,10 +102,14 @@ const Login = () => {
           >
             <div className="relative h-64 bg-gradient-to-br from-green-600 to-green-800">
               <Image
-                src="https://group.mercedes-benz.com/bilder/unternehmen/chancengleichheit-und-inklusion/diversity-inclusion-03-w1680xh945-cutout.jpg"
+                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920&q=80"
                 alt="Seller Login"
                 fill
                 className="object-cover opacity-80"
+                onError={(e) => {
+                  // Fallback to gradient background if image fails
+                  e.currentTarget.style.display = 'none';
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute top-6 right-6">

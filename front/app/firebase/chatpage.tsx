@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_URL } from "../../utils/api";
 
 interface ChatPageProps {
   onClose?: () => void;
@@ -20,7 +21,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ onClose }) => {
     try {
       // Send message to the server endpoint
       const response = await fetch(
-        "http://127.0.0.1:5001/auction-adca9/us-central1/sendFCM",
+        `${API_URL}/api/firebase/sendFCM`,
         {
           method: "POST",
           headers: {

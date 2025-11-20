@@ -161,7 +161,7 @@ export default function Contact(){
         </div>
       </form>
                 </div>
-                <div className="text-section bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8 md:p-10 rounded-lg">
+                <div className="text-section bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8 md:p-10 rounded-lg mt-8 md:mt-0">
                     <div className="texts">
                         <div className="mb-8">
                             <h2 className="heading text-2xl font-bold mb-4 flex items-center gap-2">
@@ -215,6 +215,7 @@ export default function Contact(){
                             </p>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
       </div>

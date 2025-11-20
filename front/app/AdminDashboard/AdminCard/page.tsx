@@ -1,16 +1,27 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+
+interface CardStatsProps {
+  statSubtitle?: string;
+  statTitle?: string | number;
+  statArrow?: "up" | "down";
+  statPercent?: string;
+  statPercentColor?: string;
+  statDescripiron?: string;
+  statIconName?: string;
+  statIconColor?: string;
+}
 
 export default function CardStats({
-  statSubtitle,
-  statTitle,
-  statArrow,
-  statPercent,
-  statPercentColor,
-  statDescripiron,
-  statIconName,
-  statIconColor,
-}) {
+  statSubtitle = "Traffic",
+  statTitle = "350,897",
+  statArrow = "up",
+  statPercent = "3.48",
+  statPercentColor = "text-emerald-500",
+  statDescripiron = "Since last month",
+  statIconName = "far fa-chart-bar",
+  statIconColor = "bg-red-500",
+}: CardStatsProps) {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -56,28 +67,28 @@ export default function CardStats({
   );
 }
 
-CardStats.defaultProps = {
-  statSubtitle: "Traffic",
-  statTitle: "350,897",
-  statArrow: "up",
-  statPercent: "3.48",
-  statPercentColor: "text-emerald-500",
-  statDescripiron: "Since last month",
-  statIconName: "far fa-chart-bar",
-  statIconColor: "bg-red-500",
-};
+// CardStats.defaultProps = {
+//   statSubtitle: "Traffic",
+//   statTitle: "350,897",
+//   statArrow: "up",
+//   statPercent: "3.48",
+//   statPercentColor: "text-emerald-500",
+//   statDescripiron: "Since last month",
+//   statIconName: "far fa-chart-bar",
+//   statIconColor: "bg-red-500",
+// };
 
-CardStats.propTypes = {
-  statSubtitle: PropTypes.string,
-  statTitle: PropTypes.string,
-  statArrow: PropTypes.oneOf(["up", "down"]),
-  statPercent: PropTypes.string,
-  // can be any of the text color utilities
-  // from tailwindcss
-  statPercentColor: PropTypes.string,
-  statDescripiron: PropTypes.string,
-  statIconName: PropTypes.string,
-  // can be any of the background color utilities
-  // from tailwindcss
-  statIconColor: PropTypes.string,
-};
+// CardStats.propTypes = {
+//   statSubtitle: PropTypes.string,
+//   statTitle: PropTypes.string,
+//   statArrow: PropTypes.oneOf(["up", "down"]),
+//   statPercent: PropTypes.string,
+//   // can be any of the text color utilities
+//   // from tailwindcss
+//   statPercentColor: PropTypes.string,
+//   statDescripiron: PropTypes.string,
+//   statIconName: PropTypes.string,
+//   // can be any of the background color utilities
+//   // from tailwindcss
+//   statIconColor: PropTypes.string,
+// };

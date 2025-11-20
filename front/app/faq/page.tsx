@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import './faq.css';
-import Navbar from "../home/navbar.tsx"
+import Navbar from "../home/navbar"
 interface AccordionItem {
   id: number;
   title: string;

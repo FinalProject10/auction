@@ -9,9 +9,10 @@ import Link from 'next/link';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 interface SideProps {
-    h:number
+    h?: number;
 }
-export default function SideBar(props:SideProps) {
+
+export default function SideBar(props: SideProps = { h: 100 }) {
     
    const h = props.h
    

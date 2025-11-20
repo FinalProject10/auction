@@ -6,20 +6,22 @@ const SideBare = dynamic(() => import("../AdminSidebar/page"));
 import '../AdminClientNotBid/bt.css'
 import axios from 'axios'
 import { Refresh } from '@mui/icons-material'
+import { getApiUrl } from '../../../utils/api'
 
 
 interface productPro{
+  id?: number;
   images:string
   name : string 
   price :number 
-  timeStart :TimeRanges 
-  timeEnd :TimeRanges 
+  timeStart : string | Date
+  timeEnd : string | Date
   reviews:number
   views :number 
   watching :number
   description: string 
   longitude :string
-  lattitude: string
+  lattitude: string 
   sold :number 
   sellers_id: number
 }
@@ -29,7 +31,7 @@ const listPro = () => {
 
  useEffect(() => {
   axios
-    .get('http://localhost:5001/dash/getAllProduc')
+    .get(getApiUrl('dash/getAllProduc'))
     .then((res) => {
       const Data: productPro[] = res.data;
       setData(Data);
@@ -41,7 +43,7 @@ const listPro = () => {
 const remove= async (id)=>
 {
   try {
-    await axios.delete(`http://localhost:5001/dash/removeProduct/${id}`);
+    await axios.delete(getApiUrl(`dash/removeProduct/${id}`));
     setRefrech(!refrech);
   } catch (err) {
     console.log(err);
@@ -114,10 +116,10 @@ const remove= async (id)=>
                   {el.price}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {el.timeStart}
+                  {el.timeStart ? new Date(el.timeStart).toLocaleString() : ''}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                {el.timeEnd}
+                {el.timeEnd ? new Date(el.timeEnd).toLocaleString() : ''}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">               
                 {el.reviews}

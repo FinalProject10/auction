@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import axios from 'axios'
+import { getApiUrl } from '../../utils/api'
 const seccess = () => {
 
   setTimeout(() => {
@@ -9,11 +10,11 @@ const seccess = () => {
     
   
     if(role==='client'){
-      axios.post(`http://localhost:5001/client/addMembership`,{price:localStorage.getItem('membership'),type:"Ligature",ClientId:id})
+      axios.post(getApiUrl('client/addMembership'),{price:localStorage.getItem('membership'),type:"Ligature",ClientId:id})
       .then(r=>localStorage.setItem('bid','true')).catch(err=>console.log(err))
       console.log('done')}
       else if(role==="seller"){
-        axios.post(`http://localhost:5001/client/addMembership`,{price:localStorage.getItem('membership'),type:"Seller Plan",sellerId:id})
+        axios.post(getApiUrl('client/addMembership'),{price:localStorage.getItem('membership'),type:"Seller Plan",sellerId:id})
       .then(r=>localStorage.setItem('add','true')).catch(err=>console.log(err))
       }
 

@@ -10,6 +10,17 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT || 3306,
     dialect: process.env.DB_DIALECT || "mysql",
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
+    pool: {
+      max: 5,              // Maximum number of connections in pool (default: 5)
+      min: 0,              // Minimum number of connections in pool (default: 0)
+      acquire: 30000,      // Maximum time (ms) to wait for connection (default: 60000)
+      idle: 10000,         // Maximum time (ms) a connection can be idle (default: 10000)
+      evict: 1000          // Interval (ms) to check for idle connections (default: 1000)
+    },
+    define: {
+      freezeTableName: true,  // Prevent Sequelize from pluralizing table names
+      timestamps: false       // Disable timestamps if not needed (saves memory)
+    }
   }
 );
 sequelize

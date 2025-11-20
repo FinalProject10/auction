@@ -1,6 +1,7 @@
 "use client"
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
+import { getApiUrl } from '../../../utils/api'
 const Edit = () => {
     const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -9,7 +10,7 @@ const Edit = () => {
   const id=localStorage.getItem('userId')
     const add = () => {
         axios
-          .put(`http://localhost:5001/seller/edit/${id}`, {
+          .put(getApiUrl(`seller/edit/${id}`), {
             name: fname,
             lastName: lname,
             email,

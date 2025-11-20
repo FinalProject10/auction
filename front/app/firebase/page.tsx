@@ -45,8 +45,8 @@ const Chat: React.FC = () => {
         body: payload.notification.body,
       };
 
-      if (self.registration) {
-        self.registration.showNotification(
+      if ((self as any).registration) {
+        (self as any).registration.showNotification(
           payload.notification.title,
           notificationOptions
         );

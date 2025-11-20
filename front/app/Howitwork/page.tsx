@@ -5,7 +5,7 @@ import Navbar from "../home/navbar"
 const Howitwork: FC = () => {
   const onHeaderContainer1Click = useCallback(() => {
   }, []);
-  const divStyle = {
+  const divStyle: React.CSSProperties = {
     backgroundImage: 'url(https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-hiw-banner-v2.jpg?id=7264)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',

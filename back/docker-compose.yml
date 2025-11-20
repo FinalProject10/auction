@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auction-backend
+    ports:
+      - "${PORT:-5001}:5001"
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=${PORT:-5001}
+      - DB_HOST=${DB_HOST:-mysql}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME:-final}
+      - DB_DIALECT=${DB_DIALECT:-mysql}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - JWT_SECRET=${JWT_SECRET}
+      - SOCKET_CORS_ORIGINS=${SOCKET_CORS_ORIGINS}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - FIREBASE_SERVICE_ACCOUNT_PATH=${FIREBASE_SERVICE_ACCOUNT_PATH}
+    volumes:
+      - ./auction-adca9-77aeb27bd088.json:/app/auction-adca9-77aeb27bd088.json:ro
+      - ./.env:/app/.env:ro
+    restart: unless-stopped
+    networks:
+      - auction-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: auction-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-rootpassword}
+      - MYSQL_DATABASE=${DB_NAME:-final}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - auction-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql-data:
+
+networks:
+  auction-network:
+    driver: bridge
+

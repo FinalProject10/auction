@@ -6,12 +6,27 @@
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  .summary {
+    margin-top: var(--spacing-md, 16px);
+    margin-right: 0;
+    padding: 0 var(--spacing-md, 16px);
+  }
+}
+
+@media (max-width: 480px) {
+  .summary {
+    margin-top: var(--spacing-sm, 8px);
+    padding: 0 var(--spacing-sm, 8px);
+  }
+}
+
 /* Card Container */
 .bid-card {
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 20px rgba(0, 0, 0, 0.05);
-  padding: 32px;
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 20px rgba(0, 0, 0, 0.05));
+  padding: var(--spacing-xl, 32px);
   transition: box-shadow 0.3s ease;
 }
 
@@ -61,25 +76,25 @@
 /* Current Bid Section */
 .current-bid-section {
   text-align: center;
-  padding: 24px 0;
+  padding: var(--spacing-lg, 24px) 0;
   border-bottom: 2px solid #f0f0f0;
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-lg, 24px);
 }
 
 .current-bid-label {
-  font-size: 14px;
+  font-size: var(--font-size-sm, 14px);
   color: #666;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-sm, 8px);
   font-weight: 600;
 }
 
 .current-bid-amount {
   font-size: 48px;
   font-weight: 700;
-  color: #ef4444;
-  margin: 12px 0;
+  color: var(--color-primary, #ef4444);
+  margin: var(--spacing-sm, 8px) 0;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
@@ -102,21 +117,21 @@
 
 /* Auction Time Section */
 .auction-time-section {
-  margin-bottom: 24px;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 8px;
+  margin-bottom: var(--spacing-lg, 24px);
+  padding: var(--spacing-md, 16px);
+  background: var(--color-gray-50, #f8f9fa);
+  border-radius: var(--radius-md, 8px);
 }
 
 /* Bid Form Section */
 .bid-form-section {
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-lg, 24px);
 }
 
 .bid-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-md, 16px);
 }
 
 .bid-input-group {
@@ -126,25 +141,25 @@
 }
 
 .bid-label {
-  font-size: 14px;
+  font-size: var(--font-size-sm, 14px);
   font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
+  color: var(--color-gray-900, #333);
+  margin-bottom: var(--spacing-xs, 4px);
 }
 
 .bid-input-container {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: #f8f9fa;
-  border-radius: 12px;
+  gap: var(--spacing-xs, 4px);
+  background: var(--color-gray-50, #f8f9fa);
+  border-radius: var(--radius-lg, 12px);
   padding: 4px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--color-gray-200, #e5e7eb);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .bid-input-container:focus-within {
-  border-color: #ef4444;
+  border-color: var(--color-primary, #ef4444);
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
@@ -153,13 +168,13 @@
   border: none;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: var(--radius-md, 8px);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #ef4444;
-  font-size: 18px;
+  color: var(--color-primary, #ef4444);
+  font-size: var(--font-size-lg, 18px);
   transition: background-color 0.2s ease, transform 0.2s ease;
   flex-shrink: 0;
 }
@@ -182,10 +197,10 @@
   flex: 1;
   border: none;
   background: transparent;
-  padding: 12px 16px;
-  font-size: 20px;
+  padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+  font-size: var(--font-size-xl, 20px);
   font-weight: 600;
-  color: #333;
+  color: var(--color-gray-900, #333);
   outline: none;
   text-align: center;
 }
@@ -203,29 +218,29 @@
 /* Quick Increment Buttons */
 .quick-increment-buttons {
   display: flex;
-  gap: 8px;
+  gap: var(--spacing-xs, 4px);
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-top: var(--spacing-xs, 4px);
 }
 
 .increment-btn {
   flex: 1;
   min-width: 60px;
-  padding: 8px 12px;
+  padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
   background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  font-size: 12px;
+  border: 1px solid var(--color-gray-200, #e5e7eb);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-xs, 12px);
   font-weight: 600;
-  color: #666;
+  color: var(--color-gray-600, #666);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .increment-btn:hover {
-  background: #ef4444;
+  background: var(--color-primary, #ef4444);
   color: white;
-  border-color: #ef4444;
+  border-color: var(--color-primary, #ef4444);
   transform: translateY(-2px);
 }
 
@@ -236,25 +251,25 @@
 /* Error and Success Messages */
 .error-message,
 .success-message {
-  padding: 12px 16px;
-  border-radius: 8px;
+  padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+  border-radius: var(--radius-md, 8px);
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: var(--spacing-xs, 4px);
+  font-size: var(--font-size-sm, 14px);
   font-weight: 500;
   animation: slideDown 0.3s ease;
 }
 
 .error-message {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--color-error-light, #fee2e2);
+  color: var(--color-error, #dc2626);
   border: 1px solid #fecaca;
 }
 
 .success-message {
-  background: #d1fae5;
-  color: #059669;
+  background: var(--color-success-light, #d1fae5);
+  color: var(--color-success, #059669);
   border: 1px solid #a7f3d0;
 }
 
@@ -266,20 +281,20 @@
 /* Submit Button */
 .bid-submit-btn {
   width: 100%;
-  padding: 16px 24px;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  padding: var(--spacing-md, 16px) var(--spacing-lg, 24px);
+  background: linear-gradient(135deg, var(--color-primary, #ef4444) 0%, var(--color-primary-dark, #dc2626) 100%);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 18px;
+  border-radius: var(--radius-lg, 12px);
+  font-size: var(--font-size-lg, 18px);
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);
+  gap: var(--spacing-xs, 4px);
+  box-shadow: var(--shadow-md, 0 4px 6px rgba(239, 68, 68, 0.3));
 }
 
 .bid-submit-btn:hover:not(:disabled) {
@@ -637,49 +652,316 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .bid-card {
-    padding: 20px;
+    padding: var(--spacing-md, 16px);
+    border-radius: var(--radius-lg, 12px);
+  }
+
+  .auction-ended-banner {
+    padding: var(--spacing-md, 16px);
+    margin-bottom: var(--spacing-md, 16px);
+  }
+
+  .auction-ended-banner h3 {
+    font-size: var(--font-size-xl, 20px);
+  }
+
+  .winner-amount {
+    font-size: var(--font-size-2xl, 24px);
+  }
+
+  .current-bid-section {
+    padding: var(--spacing-md, 16px) 0;
+    margin-bottom: var(--spacing-md, 16px);
+  }
+
+  .current-bid-label {
+    font-size: var(--font-size-xs, 12px);
+    margin-bottom: var(--spacing-xs, 4px);
   }
 
   .current-bid-amount {
-    font-size: 36px;
+    font-size: 28px;
+    margin: var(--spacing-xs, 4px) 0;
+  }
+
+  .current-bidder,
+  .no-bids-message {
+    font-size: var(--font-size-xs, 12px);
+  }
+
+  .auction-time-section {
+    margin-bottom: var(--spacing-md, 16px);
+    padding: var(--spacing-sm, 8px);
+  }
+
+  .bid-form-section {
+    margin-bottom: var(--spacing-md, 16px);
+  }
+
+  .bid-form {
+    gap: var(--spacing-sm, 8px);
+  }
+
+  .bid-label {
+    font-size: var(--font-size-sm, 14px);
+    margin-bottom: var(--spacing-xs, 4px);
+  }
+
+  .bid-input-container {
+    padding: 2px;
+    gap: 4px;
+  }
+
+  .bid-adjust-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
   }
 
   .bid-input {
-    font-size: 18px;
-  }
-
-  .bid-submit-btn {
     font-size: 16px;
-    padding: 14px 20px;
-  }
-
-  .new-bid-notification {
-    top: 10px;
-    right: 10px;
-    left: 10px;
-    max-width: none;
+    padding: 8px 10px;
   }
 
   .quick-increment-buttons {
-    gap: 6px;
+    gap: 4px;
+    margin-top: var(--spacing-xs, 4px);
   }
 
   .increment-btn {
-    font-size: 11px;
-    padding: 6px 10px;
+    font-size: 10px;
+    padding: 6px 8px;
+    min-width: 45px;
+  }
+
+  .error-message,
+  .success-message {
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
+    font-size: var(--font-size-sm, 14px);
+  }
+
+  .bid-submit-btn {
+    font-size: var(--font-size-base, 16px);
+    padding: var(--spacing-md, 12px) var(--spacing-lg, 16px);
+  }
+
+  .info-message {
+    font-size: var(--font-size-xs, 12px);
+    margin-top: var(--spacing-xs, 4px);
+  }
+
+  .new-bid-notification {
+    top: var(--spacing-sm, 8px);
+    right: var(--spacing-sm, 8px);
+    left: var(--spacing-sm, 8px);
+    max-width: none;
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
+  }
+
+  .notification-icon {
+    font-size: 18px;
+  }
+
+  .notification-title {
+    font-size: 10px;
+  }
+
+  .notification-amount {
+    font-size: 16px;
+  }
+
+  .auction-info {
+    margin-top: var(--spacing-md, 16px);
+    padding-top: var(--spacing-md, 16px);
+  }
+
+  .auction-end-info {
+    font-size: var(--font-size-xs, 12px);
   }
 
   .countdown_section {
-    min-width: 60px;
-    padding: 10px 12px;
+    min-width: 50px;
+    padding: 6px 8px;
   }
 
   .countdown_amount {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .countdown_label {
+    font-size: 8px;
+  }
+
+  .login-modal-content {
+    max-width: calc(100% - 32px);
+    margin: var(--spacing-md, 16px);
+  }
+
+  .login-modal-header {
+    padding: var(--spacing-xl, 24px) var(--spacing-lg, 20px) var(--spacing-md, 16px);
+  }
+
+  .login-modal-title {
+    font-size: var(--font-size-2xl, 24px);
+  }
+
+  .login-modal-message {
+    font-size: var(--font-size-sm, 14px);
+  }
+
+  .login-modal-body {
+    padding: var(--spacing-md, 16px) var(--spacing-lg, 20px) var(--spacing-lg, 20px);
+  }
+
+  .login-modal-btn-primary,
+  .login-modal-btn-secondary {
+    font-size: var(--font-size-base, 16px);
+    padding: var(--spacing-md, 12px) var(--spacing-lg, 16px);
+  }
+}
+
+@media (max-width: 480px) {
+  .summary {
+    margin-top: var(--spacing-md, 16px);
+    padding: 0 var(--spacing-sm, 8px);
+  }
+
+  .bid-card {
+    padding: var(--spacing-sm, 8px) var(--spacing-xs, 4px);
+    border-radius: var(--radius-md, 8px);
+  }
+
+  .current-bid-section {
+    padding: var(--spacing-sm, 8px) 0;
+    margin-bottom: var(--spacing-sm, 8px);
+  }
+
+  .current-bid-label {
     font-size: 10px;
+    margin-bottom: var(--spacing-xs, 4px);
+  }
+
+  .current-bid-amount {
+    font-size: 24px;
+    margin: var(--spacing-xs, 4px) 0;
+  }
+
+  .current-bidder,
+  .no-bids-message {
+    font-size: 11px;
+  }
+
+  .auction-time-section {
+    margin-bottom: var(--spacing-sm, 8px);
+    padding: var(--spacing-xs, 4px);
+  }
+
+  .bid-form-section {
+    margin-bottom: var(--spacing-sm, 8px);
+  }
+
+  .bid-form {
+    gap: var(--spacing-xs, 4px);
+  }
+
+  .bid-label {
+    font-size: 12px;
+    margin-bottom: var(--spacing-xs, 4px);
+  }
+
+  .bid-input-container {
+    padding: 2px;
+    gap: 3px;
+  }
+
+  .bid-adjust-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .bid-input {
+    font-size: 15px;
+    padding: 6px 8px;
+  }
+
+  .quick-increment-buttons {
+    gap: 3px;
+    margin-top: var(--spacing-xs, 4px);
+  }
+
+  .increment-btn {
+    font-size: 9px;
+    padding: 5px 6px;
+    min-width: 40px;
+  }
+
+  .error-message,
+  .success-message {
+    padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+    font-size: 12px;
+  }
+
+  .bid-submit-btn {
+    font-size: 15px;
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
+  }
+
+  .info-message {
+    font-size: 11px;
+    margin-top: var(--spacing-xs, 4px);
+  }
+
+  .auction-ended-banner {
+    padding: var(--spacing-sm, 8px);
+    margin-bottom: var(--spacing-sm, 8px);
+  }
+
+  .auction-ended-banner h3 {
+    font-size: var(--font-size-lg, 18px);
+    margin-bottom: var(--spacing-sm, 8px);
+  }
+
+  .winner-amount {
+    font-size: var(--font-size-xl, 20px);
+  }
+
+  .countdown_section {
+    min-width: 45px;
+    padding: 5px 6px;
+  }
+
+  .countdown_amount {
+    font-size: 18px;
+  }
+
+  .countdown_label {
+    font-size: 7px;
+  }
+
+  .auction-info {
+    margin-top: var(--spacing-sm, 8px);
+    padding-top: var(--spacing-sm, 8px);
+  }
+
+  .auction-end-info {
+    font-size: 11px;
+  }
+
+  .login-modal-header {
+    padding: var(--spacing-lg, 20px) var(--spacing-md, 16px) var(--spacing-sm, 8px);
+  }
+
+  .login-modal-title {
+    font-size: var(--font-size-xl, 20px);
+  }
+
+  .login-modal-message {
+    font-size: 13px;
+  }
+
+  .login-modal-body {
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 16px) var(--spacing-md, 16px);
   }
 }
 

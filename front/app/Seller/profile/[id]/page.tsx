@@ -4,9 +4,10 @@ import { IoMdPhonePortrait } from "react-icons/io";
 import { MdLocationOn } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdStarRate } from "react-icons/md";
-import Navbar from "../../../home/navbar.tsx"
+import Navbar from "../../../home/navbar"
 import { GiThorHammer } from "react-icons/gi";
 import axios from 'axios'
+import { getApiUrl } from '../../../../utils/api'
 const Page = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [name, setName] = useState('');
@@ -15,10 +16,11 @@ const Page = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
   const [items, setItems] = useState([]); // Make sure items is initialized correctly
+  const [displayedItems, setDisplayedItems] = useState([]);
   const[data,setData]=useState([])
   useEffect(() => {
   
-   axios.get(`http://localhost:5001/seller/profile/1`).then(r=>setData(r.data)).catch(err=>console.log(err))
+   axios.get(getApiUrl('seller/profile/1')).then(r=>setData(r.data)).catch(err=>console.log(err))
   }, []);
   
 
@@ -81,8 +83,8 @@ const Page = () => {
 
     setItems(sorteditems);
   };
-  const divStyle = {
-  position :"center",  
+  const divStyle: React.CSSProperties = {
+  position: "absolute" as const,  
   top:"90%",
   left: '50%',
   right: '50%',

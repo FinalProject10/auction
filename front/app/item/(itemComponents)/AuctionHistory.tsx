@@ -89,7 +89,7 @@ function AuctionHistory({ itemId, timeStart, timeEnd, price }) {
   }, [itemId, timeStart, timeEnd, price]);
 
   // Custom tooltip
-  const CustomTooltip = ({ active, payload }) => {
+  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
@@ -195,7 +195,7 @@ function AuctionHistory({ itemId, timeStart, timeEnd, price }) {
                 stroke="#666"
                 style={{ fontSize: "12px" }}
               />
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip content={(props: any) => <CustomTooltip {...props} />} />
               <ReferenceLine
                 y={price}
                 stroke="#9ca3af"

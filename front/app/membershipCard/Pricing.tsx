@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import { FcInfo } from 'react-icons/fc';
 import { GrValidate } from "react-icons/gr";
 import { motion } from 'framer-motion';
-import Navbar from '../home/navbar.tsx'
+import Navbar from '../home/navbar'
 import { fadeIn } from './fadeIn';
 import "./mem.css"
 import axios from 'axios'
@@ -13,8 +13,9 @@ interface Package {
   name: string;
   monthlyPrice: number;
   yearlyPrice: number;
-  description: string;
+  description?: string;
   green: string;
+  features?: string[];
 }
 
 const Pricing: FC = () => {
@@ -27,6 +28,7 @@ const Pricing: FC = () => {
       monthlyPrice: 39,
       yearlyPrice: 390,
       green: '/src/assets/green-dot.png',
+      description: '',
       features: [
         'Ability To Bid',
         'Detailed Vehicle Information',
@@ -41,6 +43,7 @@ const Pricing: FC = () => {
       monthlyPrice: 59,
       yearlyPrice: 590,
       green: '/src/assets/green-dot.png',
+      description: '',
       features: [
         'All In Ligature',
         'Add A Vehicule To Buy ',
@@ -124,7 +127,7 @@ const Pricing: FC = () => {
                 className={`mt-6 px-10 text-black ${isYearly ? 'bg-white border-white' : 'bg-orange-500 border-orange-500'} hover:bg-orange-600 hover:border-orange-600 font-semibold py-2 rounded-lg transition duration-300 ease-in-out`}
                   onClick={()=>{
             
-                    localStorage.setItem('membership',[isYearly?pkg.yearlyPrice:pkg.monthlyPrice])
+                    localStorage.setItem('membership',String(isYearly?pkg.yearlyPrice:pkg.monthlyPrice))
                     router.push('/payement')}}
               >
                 Get Started

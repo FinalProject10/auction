@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Navbar from "../home/navbar";
 import Footer from "../footer/Footer";
 import { FaStar, FaQuoteLeft, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { API_URL } from '../../../utils/api';
+import { API_URL } from '../../utils/api';
 import axios from 'axios';
 import "./about.css";
 

@@ -68,9 +68,19 @@ async function setupDatabase() {
         password: hashedPassword,
         telNumb: 87654321,
         cinNum: '87654321',
+        batinda: '87654321', // Required for seller login
         address: 'Test Address'
       }
     });
+    
+    // Update existing seller if batinda is missing
+    if (!sellerCreated && (!seller.batinda || !seller.cinNum)) {
+      await seller.update({
+        batinda: seller.batinda || '87654321',
+        cinNum: seller.cinNum || '87654321'
+      });
+      console.log('✓ Updated existing seller with required fields');
+    }
 
     if (sellerCreated) {
       console.log('✓ Test Seller created');

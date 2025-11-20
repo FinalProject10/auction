@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import { getApiUrl } from '../../../../utils/api'
 import Input from '@mui/joy/Input';
 import Key from '@mui/icons-material/Key';
 import { IoPersonCircle } from "react-icons/io5";
@@ -26,7 +27,7 @@ const FirstStep = () => {
 const[err,setErr]=useState('')
 
   const add=()=>{
-    axios.post(`http://localhost:5001/client/register`,{name:firstName,lastName:lastName,pass:pass,email:email,phone:phone})
+    axios.post(getApiUrl('client/register'),{name:firstName,lastName:lastName,pass:pass,email:email,phone:phone})
     .then(r=>{router.push('/login/client')
     console.log(r.data)}).catch(err=>setErr(err.response.data['err']))
   }

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import { getApiUrl } from '../../../../utils/api'
 import Alert from '@mui/material/Alert';
 import Input from '@mui/joy/Input';
 import Image from 'next/image'
@@ -30,7 +31,7 @@ const FirstStep = () => {
 
 
   const add=()=>{
-    axios.post(`http://localhost:5001/seller/register`,{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
+    axios.post(getApiUrl('seller/register'),{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
     .then(r=>{
       console.log(r.data)
       localStorage.setItem('id',r.data.id)

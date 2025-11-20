@@ -3,17 +3,23 @@ import { SOCKET_URL } from "../../../../utils/api";
 
 // Create socket instance - will be initialized on client side
 let socket: Socket | null = null;
+let socketInstance: Socket | null = null;
+
+// Mock socket for SSR
+const createMockSocket = (): Socket => {
+  return {
+    emit: () => {},
+    on: () => {},
+    off: () => {},
+    connect: () => {},
+    disconnect: () => {},
+    close: () => {},
+  } as unknown as Socket;
+};
 
 const initializeSocket = (): Socket => {
   if (typeof window === "undefined") {
-    // Return a mock socket for SSR
-    return {
-      emit: () => {},
-      on: () => {},
-      off: () => {},
-      connect: () => {},
-      disconnect: () => {},
-    } as Socket;
+    return createMockSocket();
   }
 
   if (!socket) {
@@ -23,6 +29,24 @@ const initializeSocket = (): Socket => {
       transports: ["websocket"],
       query: { userId: userId || undefined },
       autoConnect: true,
+      reconnection: true,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      reconnectionAttempts: 5,
+      timeout: 20000,
+    });
+    
+    // Handle connection errors
+    socket.on("connect_error", (error) => {
+      console.error("Socket connection error:", error);
+    });
+    
+    // Handle disconnection
+    socket.on("disconnect", (reason) => {
+      if (reason === "io server disconnect") {
+        // Server disconnected, reconnect manually
+        socket?.connect();
+      }
     });
   }
 
@@ -30,18 +54,9 @@ const initializeSocket = (): Socket => {
 };
 
 // Export a function to get socket instance (lazy initialization)
-let socketInstance: Socket | null = null;
-
 const getSocket = (): Socket => {
   if (typeof window === "undefined") {
-    // Return a mock socket for SSR
-    return {
-      emit: () => {},
-      on: () => {},
-      off: () => {},
-      connect: () => {},
-      disconnect: () => {},
-    } as Socket;
+    return createMockSocket();
   }
 
   if (!socketInstance) {
@@ -49,6 +64,15 @@ const getSocket = (): Socket => {
   }
 
   return socketInstance;
+};
+
+// Cleanup function to disconnect socket (useful for cleanup)
+export const disconnectSocket = (): void => {
+  if (socketInstance && socketInstance.connected) {
+    socketInstance.disconnect();
+    socketInstance = null;
+    socket = null;
+  }
 };
 
 export default getSocket;

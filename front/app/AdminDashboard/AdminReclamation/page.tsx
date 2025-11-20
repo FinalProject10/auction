@@ -4,19 +4,33 @@ import React, { useEffect, useState } from 'react'
 import dynamic from "next/dynamic";
 const SideBare = dynamic(() => import("../AdminSidebar/page"));
 import axios from 'axios'
-// interface reclam{
-//   message:string
-// }
+import { getApiUrl } from '../../../utils/api'
+
+interface ReclamationData {
+  id?: number;
+  message: string;
+  createdAt?: string | Date;
+  Client: {
+    id: number;
+    name: string;
+    lastName: string;
+    email: string;
+    image: string;
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
+
 const Inbox = () => {
-  const [reclamtion,setReclamatio]= useState <[]>([])
+  const [reclamtion,setReclamatio]= useState<ReclamationData[]>([])
   const [mess,setMess] =useState(null)
   const [refresh , setRefrech]= useState (true)
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:5001/dash/getReclam')
+      .get(getApiUrl('dash/getReclam'))
       .then((res) => {
-        const Data: [] = res.data;
+        const Data = res.data as ReclamationData[];
         setReclamatio(Data);
        
       })
@@ -26,7 +40,7 @@ const Inbox = () => {
   }, [refresh]);
   const remove =async (id:number) => {
     try {
-      await axios.delete(`http://localhost:5001/dash/removeRec/${id}`)
+      await axios.delete(getApiUrl(`dash/removeRec/${id}`))
       setRefrech(!refresh)
     } catch  (err) {
       console.log(err);
@@ -49,7 +63,7 @@ const Inbox = () => {
         <input className="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full"
           placeholder="Search..." />
       </label> */}
-      {reclamtion.map((el=>(
+      {reclamtion.map((el: ReclamationData, index: number) => (
         <ul className="mt-6 overflow-y-scroll" onClick={()=>{Msg(el.Client.id,el.Client.email,el.Client.image,el.Client.name,el.Client.lastName,el.message)}}>
         <li className="py-5 border-b px-3 transition hover:bg-indigo-100">
           <a href="#" className="flex justify-between items-center">
@@ -58,7 +72,7 @@ const Inbox = () => {
           </a>
         </li>
       </ul>
-      )))}
+      ))}
     </section>
     <section className="w-6/12 px-4 flex flex-col bg-white rounded-r-3xl">
       <div className="flex justify-between items-center h-48 border-b-2 mb-8">
@@ -88,7 +102,7 @@ const Inbox = () => {
       
       </section>
       <section className="mt-6 border rounded-xl bg-gray-50 mb-3">
-        <textarea className="w-full bg-gray-50 p-2 rounded-xl" placeholder="Type your reply here..." rows="3"></textarea>
+        <textarea className="w-full bg-gray-50 p-2 rounded-xl" placeholder="Type your reply here..." rows={3}></textarea>
         <div className="flex items-center justify-between p-2">
         
           <button className="bg-purple-600 text-white px-6 py-2 rounded-xl" >Reply</button>

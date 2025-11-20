@@ -1,11 +1,21 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Image from "next/image";
 import "./style/itemGallery.css";
 
+interface Item {
+  id?: number;
+  images?: string | string[];
+  [key: string]: any;
+}
+
+interface GalleryProps {
+  items: Item[] | Item;
+}
+
 const Gallery: React.FC<GalleryProps> = ({ items }) => {
-  // Helper function to parse images (handle string, array, or null)
-  const parseImages = (images: any): string[] => {
+  // Helper function to parse images (handle string, array, or null) - memoized
+  const parseImages = useCallback((images: any): string[] => {
     if (!images) return [];
     if (Array.isArray(images)) return images;
     if (typeof images === 'string') {
@@ -18,28 +28,33 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
       }
     }
     return [];
-  };
+  }, []);
 
-  // Get images for the first item
-  const firstItemImages = items && items.length > 0 ? parseImages(items[0]?.images) : [];
+  // Normalize items to always be an array - memoized
+  const itemsArray = useMemo(() => {
+    return Array.isArray(items) ? items : [items];
+  }, [items]);
+  
+  // Get images for the first item - memoized
+  const firstItemImages = useMemo(() => {
+    return itemsArray.length > 0 ? parseImages(itemsArray[0]?.images) : [];
+  }, [itemsArray, parseImages]);
+  
   const [currentImage, setCurrentImage] = useState(firstItemImages[0] || "");
 
   // Update current image when items change
   useEffect(() => {
-    if (items && items.length > 0) {
-      const images = parseImages(items[0]?.images);
-      if (images.length > 0) {
-        setCurrentImage(images[0]);
-      }
+    if (firstItemImages.length > 0 && firstItemImages[0] !== currentImage) {
+      setCurrentImage(firstItemImages[0]);
     }
-  }, [items]);
+  }, [firstItemImages, currentImage]);
 
-  const handleClick = (image: string) => {
+  const handleClick = useCallback((image: string) => {
     setCurrentImage(image);
-  };
+  }, []);
 
   // Don't render if no items or no images
-  if (!items || items.length === 0 || firstItemImages.length === 0) {
+  if (itemsArray.length === 0 || firstItemImages.length === 0) {
     return (
       <section className="gallery-holder hide-in-mobile">
         <section className="gallery">
@@ -69,12 +84,12 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
         </div>
 
         <div className="thumbnails">
-          {items.map((item) => {
+          {itemsArray.map((item) => {
             const itemImages = parseImages(item.images);
             return itemImages.map((image, index) => (
               <div
                 className="img-holder"
-                key={index}
+                key={`${item.id || index}-${index}`}
                 onClick={() => handleClick(image)}
               >
                 <div
@@ -85,6 +100,9 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
                   alt={`product-${index + 1}`}
                   width={100}
                   height={100}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                 />
               </div>
             ));
@@ -95,4 +113,4 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
   );
 };
 
-export default Gallery;
+export default React.memo(Gallery);

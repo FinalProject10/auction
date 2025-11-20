@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FaBasketShopping, FaBars, FaTimes } from "react-icons/fa";
+import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FaPhoneAlt } from "react-icons/fa";
@@ -21,6 +21,9 @@ const Navbar = () => {
   const [account, setAccount] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [mobilePlatformOpen, setMobilePlatformOpen] = useState(false)
+  const [mobilePagesOpen, setMobilePagesOpen] = useState(false)
+  const [mobileAccountOpen, setMobileAccountOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,8 +43,8 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top Bar */}
-      <div className={`w-full h-[54px] overflow-hidden border-b border-gray-200 bg-white transition-all duration-300 ${isScrolled ? 'hidden md:block' : ''}`}>
+      {/* Top Bar - Hidden on mobile */}
+      <div className={`hidden md:block w-full h-[54px] overflow-hidden border-b border-gray-200 bg-white transition-all duration-300 ${isScrolled ? 'hidden md:block' : ''}`}>
         <div className="container mx-auto h-full flex items-center justify-between text-sm text-gray-700">
           <div className="flex items-center gap-0">
             <div className="px-6 border-x border-gray-200 h-full flex items-center justify-center gap-2">
@@ -91,11 +94,11 @@ const Navbar = () => {
       {/* Main Navigation */}
       <nav className={`bg-white border-b border-gray-200 sticky top-0 z-40 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
         <div className="container mx-auto">
-          <div className="flex items-center justify-between h-20 px-4">
+          <div className="flex items-center justify-between h-16 md:h-20 px-2 md:px-4">
             {/* Logo */}
-            <Link href="/home" className="flex items-center">
+            <Link href="/home" className="flex items-center flex-shrink-0">
               <Image
-                className="h-12 w-auto"
+                className="h-8 md:h-12 w-auto"
                 width={120}
                 height={48}
                 src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg"
@@ -253,15 +256,165 @@ const Navbar = () => {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="lg:hidden border-t border-gray-200 py-4 animate-slide-down">
-              <div className="flex flex-col gap-4 px-4">
-                <Link href="/home" className="text-gray-700 font-semibold hover:text-primary transition-colors py-2">Home</Link>
-                <Link href="/shop" className="text-gray-700 font-semibold hover:text-primary transition-colors py-2">Shop</Link>
-                <Link href="/getInTouch" className="text-gray-700 font-semibold hover:text-primary transition-colors py-2">Get In Touch</Link>
-                <Link href="/Howitwork" className="text-gray-700 font-semibold hover:text-primary transition-colors py-2">How It Works</Link>
-                <Link href="/aboutUs" className="text-gray-700 font-semibold hover:text-primary transition-colors py-2">About Us</Link>
-                <Link href="/faq" className="text-gray-700 font-semibold hover:text-primary transition-colors py-2">FAQ</Link>
-                <Link href="/createitem" className="btn btn-primary w-full mt-2">Sell Now</Link>
+            <div className="lg:hidden border-t border-gray-200 py-4 animate-slide-down max-h-[calc(100vh-64px)] overflow-y-auto">
+              <div className="flex flex-col gap-2 px-4">
+                <Link 
+                  href="/home" 
+                  className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                
+                {/* Platform Dropdown */}
+                <div className="flex flex-col">
+                  <button
+                    className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50 flex items-center justify-between"
+                    onClick={() => setMobilePlatformOpen(!mobilePlatformOpen)}
+                  >
+                    <span>Platform</span>
+                    <MdArrowDownward size={16} className={`transition-transform ${mobilePlatformOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {mobilePlatformOpen && (
+                    <div className="pl-4 mt-2 space-y-2 border-l-2 border-gray-200">
+                      <div className="mb-3">
+                        <h4 className="font-bold text-sm text-gray-900 mb-2">Search Cars</h4>
+                        <div className="space-y-2">
+                          {[
+                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-1.png", label: "Body", filter: { body: 'Convertible' } },
+                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-2.png", label: "Color", filter: { Color: 'Black' } },
+                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-4.png", label: "Capacity", filter: { Capacity: '1.0L' } },
+                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-3.png", label: "Gearbox", filter: { Gearbox: 'automatic' } },
+                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-5.png", label: "Climatisation", filter: { Climatisation: 'Automatic Climate Control' } },
+                          ].map((item, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-2 py-1 px-2 rounded-md hover:bg-gray-50"
+                              onClick={() => {
+                                Object.entries(item.filter).forEach(([key, value]) => {
+                                  localStorage.setItem(key, value as string)
+                                })
+                                router.push('/shop')
+                                setMobileMenuOpen(false)
+                              }}
+                            >
+                              <img className="w-4 h-4" src={item.icon} alt={item.label} />
+                              <span className="text-sm text-gray-700">{item.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-sm text-gray-900 mb-2">Search Parts</h4>
+                        <div className="space-y-2">
+                          {['Appointment', 'Dimensions', 'Manufacturer', 'Material', 'Weight'].map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-2 py-1 px-2 rounded-md hover:bg-gray-50">
+                              <img className="w-4 h-4" src={`https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-${6 + idx}.png`} alt={item} />
+                              <span className="text-sm text-gray-700">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <Link 
+                  href="/shop" 
+                  className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Shop
+                </Link>
+
+                {/* Pages Dropdown */}
+                <div className="flex flex-col">
+                  <button
+                    className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50 flex items-center justify-between"
+                    onClick={() => setMobilePagesOpen(!mobilePagesOpen)}
+                  >
+                    <span>Pages</span>
+                    <MdArrowDownward size={16} className={`transition-transform ${mobilePagesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {mobilePagesOpen && (
+                    <div className="pl-4 mt-2 space-y-1 border-l-2 border-gray-200">
+                      {[
+                        { href: '/Howitwork', label: 'How It Works' },
+                        { href: '/membershipCard', label: 'Pricing Services' },
+                        { href: '/aboutUs', label: 'About us' },
+                        { href: '/faq', label: 'FAQ' },
+                        { href: '/404', label: '404 Not Found' },
+                      ].map((item, idx) => (
+                        <Link
+                          key={idx}
+                          href={item.href}
+                          className="block py-2 px-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <Link 
+                  href="/getInTouch" 
+                  className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Get In Touch
+                </Link>
+
+                {/* Mobile Account Menu */}
+                <div className="flex flex-col border-t border-gray-200 pt-2 mt-2">
+                  <button
+                    className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50 flex items-center justify-between"
+                    onClick={() => setMobileAccountOpen(!mobileAccountOpen)}
+                  >
+                    <span>My Account</span>
+                    <MdArrowDownward size={16} className={`transition-transform ${mobileAccountOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {mobileAccountOpen && (
+                    <div className="pl-4 mt-2 space-y-1 border-l-2 border-gray-200">
+                      <Link 
+                        href={`${ripitiw()}`} 
+                        className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <RiDashboardFill className="text-primary" />
+                        Dashboard
+                      </Link>
+                      <Link 
+                        href={'/membershipCard'} 
+                        className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <IoPersonOutline className="text-primary" />
+                        Services
+                      </Link>
+                      <Link 
+                        href={'/'} 
+                        onClick={() => {
+                          localStorage.clear()
+                          setMobileMenuOpen(false)
+                        }} 
+                        className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                      >
+                        <CiLogout className="text-primary" />
+                        Log out
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                <Link 
+                  href="/createitem" 
+                  className="btn btn-primary w-full mt-4"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sell Now
+                </Link>
               </div>
             </div>
           )}

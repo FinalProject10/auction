@@ -5,18 +5,29 @@ import dynamic from "next/dynamic";
 const SideBare = dynamic(() => import("../AdminSidebar/page"));
 import "../AdminClientNotBid/bt.css"
 import axios from 'axios'
+import { getApiUrl } from '../../../utils/api'
 
+interface ClientData {
+  id?: number;
+  name: string;
+  lastName: string;
+  email: string;
+  address?: string;
+  cinNum?: number;
+  telNumb?: number;
+  [key: string]: any;
+}
 
 const ListClientCan_t_Bid = () => {
-const [data, setData]=useState<[]>([])
+const [data, setData]=useState<ClientData[]>([])
 const[refrech,setRefrech]=useState(false)
 
 
 useEffect(() => {
   axios
-    .get('http://127.0.0.1:5001/dash/cantBid')
+    .get(getApiUrl('dash/cantBid'))
     .then((res) => {
-      const Data: [] = res.data;
+      const Data = res.data as ClientData[];
       setData(Data);
     })
     .catch((err) => {
@@ -26,7 +37,7 @@ useEffect(() => {
 
 const delet = async (id:number) => {
   try {
-    await axios.delete(`http://127.0.0.1:5001/dash/remove/${id}`);
+    await axios.delete(getApiUrl(`dash/remove/${id}`));
     setRefrech(!refrech);
   } catch (err) {
     console.log(err);
@@ -77,10 +88,9 @@ const delet = async (id:number) => {
                 </th>
               </tr>
             </thead>
-        
-            {data.map((el=>(
             <tbody>
-              <tr>
+            {data.map((el: ClientData, index: number) => (
+              <tr key={el.id || el.email || index}>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                  {el.name} 
                 </th>
@@ -112,8 +122,8 @@ const delet = async (id:number) => {
                 </td>
       
               </tr>
+            ))}
             </tbody>
-            )))}
           </table>
             
         </div>

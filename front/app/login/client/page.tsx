@@ -8,11 +8,24 @@ import Image from "next/image";
 import { API_URL } from "../../../utils/api";
 
 const ClientLogin = () => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  // Pre-fill with test user credentials
+  const [email, setEmail] = useState("testclient@test.com");
+  const [pass, setPass] = useState("Test123@");
   const [err, setErr] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  
+  // Quick fill test credentials
+  const fillTestCredentials = () => {
+    setEmail("testclient@test.com");
+    setPass("Test123@");
+  };
+  
+  // Quick fill saved user credentials
+  const fillSavedCredentials = () => {
+    setEmail("saveduser@test.com");
+    setPass("Saved123@");
+  };
 
   const log = async () => {
     if (!email || !pass) {
@@ -83,14 +96,59 @@ const ClientLogin = () => {
             <p className="text-gray-600">Sign in to your client account to continue</p>
           </div>
 
-          <div className="space-y-6">
+            <div className="space-y-6">
+            {/* Test User Quick Fill */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-sm text-blue-800 font-medium">Test Accounts</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={fillTestCredentials}
+                  className="text-xs text-blue-600 hover:text-blue-800 font-semibold underline"
+                >
+                  Quick Fill
+                </button>
+              </div>
+              <div className="space-y-1">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-blue-700">
+                    <span className="font-semibold">Test:</span> testclient@test.com | Test123@
+                  </p>
+                  <button
+                    type="button"
+                    onClick={fillTestCredentials}
+                    className="text-xs text-blue-600 hover:text-blue-800 underline ml-2"
+                  >
+                    Fill
+                  </button>
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-blue-700">
+                    <span className="font-semibold">Saved:</span> saveduser@test.com | Saved123@
+                  </p>
+                  <button
+                    type="button"
+                    onClick={fillSavedCredentials}
+                    className="text-xs text-blue-600 hover:text-blue-800 underline ml-2"
+                  >
+                    Fill
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <div className="form-group">
               <label className="form-label">Email Address</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
+                placeholder="testclient@test.com"
                 className="form-input"
                 disabled={isLoading}
               />
@@ -102,7 +160,7 @@ const ClientLogin = () => {
                 type="password"
                 value={pass}
                 onChange={(e) => setPass(e.target.value)}
-                placeholder="Enter your password"
+                placeholder="Test123@"
                 className="form-input"
                 disabled={isLoading}
                 onKeyPress={(e) => {

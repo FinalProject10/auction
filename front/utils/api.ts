@@ -1,9 +1,18 @@
 // API Configuration Utility
 // Centralized API URL management
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
-export const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:5001";
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// Validate required environment variables
+if (!process.env.NEXT_PUBLIC_API_URL) {
+  throw new Error(
+    '❌ Missing required environment variable: NEXT_PUBLIC_API_URL\n' +
+    'Please create a .env.local file with NEXT_PUBLIC_API_URL set.\n' +
+    'See .env.example for reference.'
+  );
+}
+
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || process.env.NEXT_PUBLIC_API_URL;
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_API_URL.replace(/:\d+$/, ':3000');
 
 // Helper function to build API endpoints
 export const getApiUrl = (endpoint: string): string => {

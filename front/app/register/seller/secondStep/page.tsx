@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import { getApiUrl } from '../../../../utils/api'
 import img1 from '../../../images/img1.png'
 import Image from 'next/image'
 import { IoPersonCircle } from "react-icons/io5";
@@ -29,9 +30,9 @@ const addCin=()=>{
   form.append('img',cin)
   form.append('img',grise)
   form.append('id',id)
-  axios.post(`http://localhost:5001/cloudinary/get`,form).then(r=>{
+  axios.post(getApiUrl('cloudinary/get'),form).then(r=>{
    console.log(r.data)
-    axios.post(`http://localhost:5001/seller/registerSec/${id}`,{batinda:r.data[1].url,cinNum:r.data[0].url})
+    axios.post(getApiUrl(`seller/registerSec/${id}`),{batinda:r.data[1].url,cinNum:r.data[0].url})
     .then(r=>router.push('/register/seller/thirdStep')).catch(err=>console.log(err))
   })
   .catch(err=>console.log(err))

@@ -115,6 +115,9 @@ const ItemBid = ({ items }) => {
     // Join the item's room
     socket.emit("create", itemId.toString());
 
+    // Track notification timeout for cleanup
+    let notificationTimeout: NodeJS.Timeout | null = null;
+
     // Handle new bid notifications
     const handlePlacedBid = (data) => {
       if (data.bidAmount) {
@@ -150,7 +153,16 @@ const ItemBid = ({ items }) => {
           timestamp: new Date()
         });
         
-        setTimeout(() => setNewBidNotification(null), 3000);
+        // Clear existing timeout if any
+        if (notificationTimeout) {
+          clearTimeout(notificationTimeout);
+        }
+        
+        // Set new timeout
+        notificationTimeout = setTimeout(() => {
+          setNewBidNotification(null);
+          notificationTimeout = null;
+        }, 3000);
       }
     };
 
@@ -165,8 +177,14 @@ const ItemBid = ({ items }) => {
     socket.on("notification", handleNotification);
 
     return () => {
+      // Clean up socket listeners
       socket.off("placedBid", handlePlacedBid);
       socket.off("notification", handleNotification);
+      
+      // Clean up notification timeout
+      if (notificationTimeout) {
+        clearTimeout(notificationTimeout);
+      }
     };
   }, [itemId, userId]);
 

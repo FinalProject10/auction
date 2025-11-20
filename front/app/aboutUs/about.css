@@ -1,6 +1,6 @@
 /* About Page Styles */
 .about-page {
-  min-h-screen;
+  min-height: 100vh;
   background: #f9fafb;
 }
 

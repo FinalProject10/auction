@@ -1,5 +1,5 @@
 'use client'
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState, useMemo, useCallback} from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -14,20 +14,35 @@ const Auctions = () => {
     const[loading,setLoading]=useState(true)
     
     useEffect(()=>{
-        axios.get(`${API_URL}/items/get`).then(r=>{
-            const items = r.data || [];
-            setAllData(items);
-            setAllData1(items);
-            // Default: Show newly listed (last 8 items)
-            const newlyListed = [...items].sort((a, b) => 
-                new Date(b.createdAt || b.timeStart).getTime() - new Date(a.createdAt || a.timeStart).getTime()
-            ).slice(0, 8);
-            setData(newlyListed);
-            setLoading(false);
-        }).catch(err=>{
-            console.log(err);
-            setLoading(false);
-        })
+        let isMounted = true;
+        const abortController = new AbortController();
+        
+        axios.get(`${API_URL}/items/get`, { signal: abortController.signal })
+            .then(r=>{
+                if (!isMounted) return;
+                
+                const items = r.data || [];
+                setAllData(items);
+                setAllData1(items);
+                // Default: Show newly listed (last 8 items)
+                const newlyListed = [...items].sort((a, b) => 
+                    new Date(b.createdAt || b.timeStart).getTime() - new Date(a.createdAt || a.timeStart).getTime()
+                ).slice(0, 8);
+                setData(newlyListed);
+                setLoading(false);
+            })
+            .catch(err=>{
+                if (axios.isCancel(err)) return;
+                if (isMounted) {
+                    console.error(err);
+                    setLoading(false);
+                }
+            });
+        
+        return () => {
+            isMounted = false;
+            abortController.abort();
+        };
     },[])
     
     const endingSoon=()=>{

@@ -17,11 +17,29 @@ const Dashboard = () => {
   const[lname,setLname]=useState("")
   const[email,setEmail]=useState('')
   const[newPass,setNewpass]=useState("")
-  const[cars,setCars]=useState([])
-  const[bids,setBids]=useState([])
+  interface CarItem {
+    id?: number;
+    name: string;
+    short_description?: string;
+    images?: string[];
+    timeEnd?: string | Date;
+    [key: string]: any;
+  }
+  const[cars,setCars]=useState<CarItem[]>([])
+  interface BidItem {
+    createdAt?: string | Date;
+    bidAmount?: number;
+    item: {
+      id?: number;
+      name?: string;
+      [key: string]: any;
+    };
+    [key: string]: any;
+  }
+  const[bids,setBids]=useState<BidItem[]>([])
   const[page,setPages]=useState(1)
-  const[ended,setEnded]=useState([])
-  const id=parseInt(localStorage.getItem('userId'))
+  const[ended,setEnded]=useState<CarItem[]>([])
+  const id=typeof window !== 'undefined' ? parseInt(localStorage.getItem('userId') || '0') : 0
 
   const add=()=>{
     axios.put(`${API_URL}/client/update/${id}`,{name:fname,lastName:lname,email,newPass:newPass}).then(r=>console.log(r))
@@ -29,17 +47,17 @@ const Dashboard = () => {
   }
   useEffect(()=>{
     axios.get(`${API_URL}/items/itemsBided/${id}`).then(r=>{
-    setCars(r.data)
+    setCars(r.data as CarItem[])
     
     })
     .catch(err=>console.log(err))
   },[])
   useEffect(()=>{
     axios.get(`${API_URL}/bid/fetch-items/${id}?page=${page}`)
-    .then(r=>setBids((prev)=>[...prev,...r.data])).catch(err=>console.log(err))
+    .then(r=>setBids((prev)=>[...prev,...(r.data as BidItem[])])).catch(err=>console.log(err))
   },[page])
   useEffect(()=>{
-    axios.get(`${API_URL}/items/items-winner/${id}`).then(r=>setEnded(r.data))
+    axios.get(`${API_URL}/items/items-winner/${id}`).then(r=>setEnded(r.data as CarItem[]))
     .catch(err=>console.log(err))
   },[])
 //   const [currentTime, setCurrentTime] = useState(new Date());
@@ -195,7 +213,7 @@ const Dashboard = () => {
           <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
 {/* map HERE */}
           
-         {cars.length===0?<h1>No Product Yet</h1>:cars.map(el=>( <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
+         {cars.length===0?<h1>No Product Yet</h1>:cars.map((el: CarItem, index: number) => ( <div key={el.id || index} className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
             <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src={el.images&&el.images[0]} 
             alt="" />
             <div className='p-[15px] text-[#333333]'>
@@ -208,7 +226,7 @@ const Dashboard = () => {
             {el.short_description}
               </h1>
             <h1 className='font-[300] text-[13px]'>
-               {Math.floor(((new Date(el.timeEnd)-new Date())>0?(new Date(el.timeEnd)-new Date()):0)/3600000)} 
+               {el.timeEnd ? Math.floor(((new Date(el.timeEnd).getTime()-new Date().getTime())>0?(new Date(el.timeEnd).getTime()-new Date().getTime()):0)/3600000) : 0} 
               h</h1>
             </div>
             </div>))}
@@ -217,8 +235,8 @@ const Dashboard = () => {
           <div className='flex gap-[2%]   w-[100%] h-auto top-[150%] flex-wrap '>
             {/* map HERE */}
 
-           {ended?.map(el=>( 
-           <div className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
+           {ended?.map((el: CarItem, index: number) => ( 
+           <div key={el.id || index} className=' w-[23%] h-[30%] rounded-3xl mb-[2%] border-[2px]  shadow-2xl'>
             <img className='w-[350px] hover:w-[351px] transition-all rounded-t-3xl overflow-hidden' src={el.images&&el.images[0]} 
             alt="" />
             <div className='p-[15px] text-[#333333]'>
@@ -245,18 +263,18 @@ const Dashboard = () => {
             <div className='w-[33%] h-[40px] border-[1px] border-gray-200'>Bid</div>
           </div>
           {/* map HERE */}
-          { bids.map(el=>(
-          <div className='w-full flex font-[600] bg-[#e5f2e5]'>
-            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center'>{el.createdAt&&el.createdAt}</div>
-            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center text-[red] cursor-pointer' onClick={()=>router.push(`/item/${el.item.id}`)}>{el.item.name&&el.item.name}</div>
-            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center'>{el.bidAmount&&el.bidAmount}$</div>
+          { bids.map((el: BidItem, index: number) => (
+          <div key={index} className='w-full flex font-[600] bg-[#e5f2e5]'>
+            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center'>{el.createdAt ? new Date(el.createdAt).toLocaleString() : ''}</div>
+            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center text-[red] cursor-pointer' onClick={()=>router.push(`/item/${el.item.id}`)}>{el.item.name||''}</div>
+            <div className='w-[33%] h-[40px] border-[1px] border-gray-200 flex justify-center items-center'>{el.bidAmount||0}$</div>
         
          
           </div>))}
           <button className='mt-[25px] bg-black text-white rounded w-[120px] h-[40px]' onClick={()=>setPages(page+1)}>See More</button>
           {/*  */}
          </div>}
-         {data[4]&&localStorage.clear()&&router.push('/')}
+        </div>
          
          
       </div>

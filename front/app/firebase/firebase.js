@@ -1,11 +1,7 @@
 import { initializeApp } from "firebase/app";
-// import {
-//   getFirestore,
-//   useEmulator as useFirestoreEmulator,
-// } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getMessaging } from "firebase/messaging";
-import { useFirestoreEmulator } from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -22,22 +18,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-if (useFirestoreEmulator) {
-  if (
-    typeof window !== "undefined" &&
-    window.location.hostname === "localhost"
-  ) {
-    useFirestoreEmulator(getFirestore(app), "localhost", 5005);
-  }
 
-  var auth = getAuth(app);
-  var firestore = getFirestore(app);
+// Initialize Firebase services
+const auth = getAuth(app);
+const firestore = getFirestore(app);
 
-  var messaging;
-  if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-    messaging = getMessaging(app);
-  }
+// Initialize Firebase messaging only on the client side
+let messaging;
+if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+  messaging = getMessaging(app);
 }
+
 export { auth, messaging, firestore };
 
 // import { initializeApp } from "firebase/app";
