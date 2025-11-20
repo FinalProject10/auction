@@ -136,7 +136,7 @@ const ItemBid = ({ items }) => {
         
         // IMMEDIATELY update price display - no delay, instant socket update
         setCurrentBid(prev => ({
-          ...prev,
+          ...(prev || {}),
           bidAmount: newBidAmount,
           createdAt: new Date()
         }));
