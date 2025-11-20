@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static export for GitHub Pages
-  output: 'export',
+  // Enable static export for GitHub Pages (disabled for local dev)
+  // output: 'export',
   // Add basePath if deploying to a subdirectory (e.g., /repository-name)
   // Uncomment and set if your GitHub Pages URL is: username.github.io/repository-name
   // basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
@@ -37,8 +37,8 @@ const nextConfig = {
     domains: ['autobid.modeltheme.com'],
     // Increase timeout for external images
     loader: 'default',
-    // Disable image optimization for static export (required for GitHub Pages)
-    unoptimized: true, // Must be true for static export
+    // Image optimization enabled for production hosting (Vercel, Netlify, etc.)
+    unoptimized: false, // Enable image optimization for better performance
   },
   webpack: (config, { isServer }) => {
     // Fix for Ant Design CSS-in-JS compatibility with Next.js

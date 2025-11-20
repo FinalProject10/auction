@@ -87,6 +87,10 @@ NEXT_PUBLIC_SOCKET_URL=http://localhost:5001
 # Site Configuration
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
+# Testing Mode (set to 'true' to skip payment processing)
+# When enabled, deposits and payments will be processed without actual payment gateway integration
+NEXT_PUBLIC_TESTING_MODE=false
+
 # Stripe Public Key (if using Stripe)
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key_here
 
@@ -103,6 +107,7 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
 | `NEXT_PUBLIC_API_URL` | Backend API URL | http://localhost:5001 | Yes |
 | `NEXT_PUBLIC_SOCKET_URL` | Socket.IO server URL | http://localhost:5001 | Yes |
 | `NEXT_PUBLIC_SITE_URL` | Frontend site URL | http://localhost:3000 | No |
+| `NEXT_PUBLIC_TESTING_MODE` | Enable testing mode (skip payments) | false | No |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key | - | No |
 | `NEXT_PUBLIC_FIREBASE_*` | Firebase configuration | - | No |
 

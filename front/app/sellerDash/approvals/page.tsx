@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { API_URL } from "../../../utils/api";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import InfoTooltip from "../../components/InfoTooltip";
 
 export const dynamic = 'force-dynamic';
 

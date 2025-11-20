@@ -18,7 +18,8 @@ import {
   FaCheckCircle,
   FaArrowRight,
   FaEdit,
-  FaEye
+  FaEye,
+  FaCarSide
 } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
@@ -492,7 +493,7 @@ const Dashboard = () => {
                               />
                             ) : (
                               <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                                <FaCar className="text-gray-400 text-4xl" />
+                                <FaCarSide className="text-gray-400 text-4xl" />
                               </div>
                             )}
                             <div className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
@@ -552,7 +553,7 @@ const Dashboard = () => {
                               />
                             ) : (
                               <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                                <FaCar className="text-gray-400 text-4xl" />
+                                <FaCarSide className="text-gray-400 text-4xl" />
                               </div>
                             )}
                             <div className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">

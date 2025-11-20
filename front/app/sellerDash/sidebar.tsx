@@ -11,6 +11,7 @@ import axios from "axios";
 import Prod from "./products.tsx/page";
 import Edit from './editAcc/page'
 const Dashboard = () => {
+  const router = useRouter();
   const [show, setShow] = useState([true, false, false, false]);
   const [data, setData] = useState([true, false, false, false]);
   const [fname, setFname] = useState("");
@@ -45,7 +46,6 @@ const Dashboard = () => {
   //     return () => clearInterval(intervalId); // Clean up interval on component unmount
   //   }, [currentTime]);
   // console.log(cars)
-  const router = useRouter();
   return (
     <div>
       <Navbar />
