@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: .
+      context: ./back
       dockerfile: Dockerfile
     container_name: auction-backend
     ports:
@@ -24,8 +24,8 @@ services:
       - FRONTEND_URL=${FRONTEND_URL}
       - FIREBASE_SERVICE_ACCOUNT_PATH=${FIREBASE_SERVICE_ACCOUNT_PATH}
     volumes:
-      - ./auction-adca9-77aeb27bd088.json:/app/auction-adca9-77aeb27bd088.json:ro
-      - ./.env:/app/.env:ro
+      - ./back/auction-adca9-77aeb27bd088.json:/app/auction-adca9-77aeb27bd088.json:ro
+      - ./back/.env:/app/.env:ro
     restart: unless-stopped
     networks:
       - auction-network
