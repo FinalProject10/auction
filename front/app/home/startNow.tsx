@@ -5,17 +5,17 @@ import Image from 'next/image';
 const StartNow = () => {
   const steps = [
     {
-      icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_how1-2.svg",
+      icon: "/images/how-it-works/autobid-main_how1-2.svg",
       title: "Registration and Account",
       description: "Your premier destination for a thrilling and dynamic online auction experience. Our platform is designed to bring together buyers and sellers in a secure and user-friendly environment."
     },
     {
-      icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_how3.svg",
+      icon: "/images/how-it-works/autobid-main_how3.svg",
       title: "Browse and Select a Vehicle",
       description: "Embark on your journey to automotive excellence with our curated selection of high-quality vehicles spanning various makes, models, and styles."
     },
     {
-      icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_how2.png",
+      icon: "/images/how-it-works/autobid-main_how2.png",
       title: "Place Bids and Monitor",
       description: "Take control of your bidding destiny with our user-friendly Place Bid and Monitor feature. Track your bids in real-time and stay ahead of the competition."
     }

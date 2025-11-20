@@ -233,12 +233,89 @@ const ItemInfo = ({ items }) => {
                         </th>
                         <td>{item.power}</td>
                       </tr>
+                      {item.vin && (
+                        <tr className="border-bottom">
+                          <th>
+                            <p>
+                              <FontAwesomeIcon
+                                icon={["fas", "fingerprint"]}
+                                className="red-icon h-6 w-6 float-start mx-1"
+                              />
+                              <p className="text-lg font-semibold mb-2">VIN</p>
+                            </p>
+                          </th>
+                          <td className="font-mono">{item.vin}</td>
+                        </tr>
+                      )}
+                      {item.titleType && (
+                        <tr className="border-bottom">
+                          <th>
+                            <p>
+                              <FontAwesomeIcon
+                                icon={["fas", "file-alt"]}
+                                className="red-icon h-6 w-6 float-start mx-1"
+                              />
+                              <p className="text-lg font-semibold mb-2">Title Type</p>
+                            </p>
+                          </th>
+                          <td>
+                            <span className={`px-2 py-1 rounded text-sm font-semibold ${
+                              item.titleType === 'Clean' ? 'bg-green-100 text-green-800' :
+                              item.titleType === 'Salvage' ? 'bg-red-100 text-red-800' :
+                              item.titleType === 'Rebuilt' ? 'bg-yellow-100 text-yellow-800' :
+                              'bg-gray-100 text-gray-800'
+                            }`}>
+                              {item.titleType}
+                            </span>
+                          </td>
+                        </tr>
+                      )}
+                      {item.damageType && (
+                        <tr className="border-bottom">
+                          <th>
+                            <p>
+                              <FontAwesomeIcon
+                                icon={["fas", "exclamation-triangle"]}
+                                className="red-icon h-6 w-6 float-start mx-1"
+                              />
+                              <p className="text-lg font-semibold mb-2">Damage Type</p>
+                            </p>
+                          </th>
+                          <td>{item.damageType}</td>
+                        </tr>
+                      )}
+                      {item.lotNumber && (
+                        <tr className="border-bottom">
+                          <th>
+                            <p>
+                              <FontAwesomeIcon
+                                icon={["fas", "hashtag"]}
+                                className="red-icon h-6 w-6 float-start mx-1"
+                              />
+                              <p className="text-lg font-semibold mb-2">Lot Number</p>
+                            </p>
+                          </th>
+                          <td className="font-semibold">{item.lotNumber}</td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
               </div>
             </AccordionBody>
           </Accordion>
+          {item.inspectionReport && (
+            <Accordion open={open === 3} icon={<Icon id={3} open={open} />} placeholder="">
+              <AccordionHeader onClick={() => handleOpen(3)} placeholder="">
+                Inspection Report
+              </AccordionHeader>
+              <AccordionBody>
+                <div className="bg-gray-50 p-4 rounded">
+                  <p className="text-gray-700 whitespace-pre-wrap">{item.inspectionReport}</p>
+                </div>
+              </AccordionBody>
+            </Accordion>
+          )}
           <hr />
           <hr />
           <hr />

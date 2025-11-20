@@ -7,7 +7,9 @@ const fs = require("fs");
 
 const express = require("express");
 const compression = require("compression");
+const helmet = require("helmet");
 const { networkInterfaces } = require("os");
+const getLocalIP = require("./utils/getLocalIP");
 const db = require("./database/index");
 const {
   Bid,
@@ -29,6 +31,14 @@ const ProductsRouter = require("./routes/products");
 const sellerRouter = require("./routes/seller");
 const memRouter = require("./routes/memberships");
 const bidRouter = require("./routes/bidRouter");
+const depositRouter = require("./routes/deposit");
+const proxyBidRouter = require("./routes/proxyBid");
+const sellerApprovalRouter = require("./routes/sellerApproval");
+const paymentRouter = require("./routes/payment");
+const pickupRouter = require("./routes/pickup");
+const titleTransferRouter = require("./routes/titleTransfer");
+const errorHandler = require("./middleware/errorHandler");
+const { apiLimiter, biddingLimiter } = require("./middleware/rateLimiter");
 
 // Initialize Firebase Admin SDK (optional - only if service account file exists)
 let firebaseAdmin = null;
@@ -71,6 +81,21 @@ const getNetworkIP = () => {
 
 const app = express();
 const userSocketMap = new Map();
+
+// Security headers (production)
+if (process.env.NODE_ENV === "production") {
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        imgSrc: ["'self'", "data:", "https:"],
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+  }));
+}
 
 // Compression middleware - reduces response size and memory usage
 app.use(compression({
@@ -258,6 +283,41 @@ app.use("/admin", adminRoutes);
 app.use("/products", ProductsRouter);
 app.use("/items", itemsRoute);
 app.use("/cloudinary", cloudRoute);
+// Apply rate limiting
+app.use("/api/", apiLimiter);
+app.use("/bid/placeBid", biddingLimiter);
+
+// Routes
+app.use("/deposit", depositRouter);
+app.use("/proxy", proxyBidRouter);
+app.use("/approval", sellerApprovalRouter);
+app.use("/payment", paymentRouter);
+app.use("/pickup", pickupRouter);
+app.use("/title", titleTransferRouter);
+
+// Health check endpoint
+app.get("/health", async (req, res) => {
+  try {
+    // Test database connection
+    await db.authenticate();
+    res.status(200).json({
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      database: "connected",
+    });
+  } catch (error) {
+    res.status(503).json({
+      status: "unhealthy",
+      timestamp: new Date().toISOString(),
+      database: "disconnected",
+      error: error.message,
+    });
+  }
+});
+
+// Error handling middleware (must be last)
+app.use(errorHandler);
 
 // Firebase routes (only if Firebase is initialized)
 // Reuse Firestore instance to avoid creating new instances on each request

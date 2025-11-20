@@ -1,18 +1,39 @@
 // API Configuration Utility
-// Centralized API URL management
+// Centralized API URL management with localhost/network IP support
 
-// Validate required environment variables
-if (!process.env.NEXT_PUBLIC_API_URL) {
-  throw new Error(
-    '❌ Missing required environment variable: NEXT_PUBLIC_API_URL\n' +
-    'Please create a .env.local file with NEXT_PUBLIC_API_URL set.\n' +
-    'See .env.example for reference.'
-  );
+import { getBackendURL } from './detectBackendIP';
+
+// Get IP mode from environment
+const IP_MODE = process.env.NEXT_PUBLIC_IP_MODE || 'localhost';
+
+// Get API URL based on mode
+let API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+// Client-side: Auto-detect if needed
+if (typeof window !== 'undefined') {
+  if (IP_MODE === 'auto' || (!API_URL || API_URL.includes('localhost'))) {
+    // Auto-detect: use network IP if not on localhost
+    const hostname = window.location.hostname;
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1' && IP_MODE !== 'localhost') {
+      API_URL = getBackendURL();
+    }
+  } else if (IP_MODE === 'network') {
+    // Force network IP
+    API_URL = getBackendURL();
+  }
+  // If IP_MODE is 'localhost', use the env variable (localhost)
 }
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
-export const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || process.env.NEXT_PUBLIC_API_URL;
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_API_URL.replace(/:\d+$/, ':3000');
+// Fallback if still not set
+if (!API_URL) {
+  API_URL = IP_MODE === 'network' 
+    ? (typeof window !== 'undefined' ? getBackendURL() : 'http://localhost:3001')
+    : 'http://localhost:3001';
+}
+
+export { API_URL };
+export const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || API_URL;
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || API_URL.replace(/:\d+$/, ':3000');
 
 // Helper function to build API endpoints
 export const getApiUrl = (endpoint: string): string => {

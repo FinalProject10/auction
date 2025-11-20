@@ -22,7 +22,18 @@ const Dashboard = () => {
   const [page, setPages] = useState(1);
   const [ended, setEnded] = useState([]);
 
-
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const userId = localStorage.getItem('userId')
+      const role = localStorage.getItem('role')
+      
+      // Check if user is logged in and is a seller
+      if (!userId || role !== 'seller') {
+        router.push('/login/seller')
+        return
+      }
+    }
+  }, [router])
   
   //   const [currentTime, setCurrentTime] = useState(new Date());
 

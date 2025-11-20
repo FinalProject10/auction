@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `final`.`bid` (
   `bidAmount` FLOAT NULL DEFAULT NULL,
   `items_id` INT NOT NULL,
   `clients_id` INT NOT NULL,
+  `createdAt` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `fk_bid_items_idx` (`items_id` ASC) VISIBLE,
   INDEX `fk_bid_clients1_idx` (`clients_id` ASC) VISIBLE,

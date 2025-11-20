@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useLoadingNavigation } from "../hooks/useLoadingNavigation";
 import dynamic from "next/dynamic";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -15,9 +16,10 @@ const Services = dynamic(() => import("./services"));
 
 const Home = () => {
   const router = useRouter();
+  const { navigateWithLoading } = useLoadingNavigation();
   const image = [
-    "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-home-scaled.jpg",
-    "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-home2.jpg",
+    "/images/home/autobid-home-scaled.jpg",
+    "/images/home/autobid-home2.jpg",
   ];
   const [i, setI] = useState(0);
 
@@ -75,7 +77,7 @@ const Home = () => {
                 Place Bid
               </button>
               <button
-                onClick={() => router.push(`/item/${currentCar.itemId}`)}
+                onClick={() => navigateWithLoading(`/item/${currentCar.itemId}`, "Loading car details...")}
                 className="btn-hero btn-hero-secondary"
               >
                 Check Car

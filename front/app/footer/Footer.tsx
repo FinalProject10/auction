@@ -13,16 +13,17 @@ const Footer = () => {
     <footer className="site-footer">
       {/* Main Footer Content */}
       <div className="footer-main">
-        <div className="footer-container">
+        <div className="footer-container" style={{ width: '100%' }}>
           {/* Company Info Section */}
           <div className="footer-section footer-about">
             <div className="footer-logo">
               <Image
-                src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg"
+                src="/images/logo/logo-autobid.svg"
                 alt="AutoBid Logo"
-                width={150}
-                height={40}
+                width={335}
+                height={151}
                 className="logo-img"
+                style={{ width: 'auto' }}
               />
             </div>
             <p className="footer-description">
@@ -135,8 +136,8 @@ const Footer = () => {
                 <FaPhoneAlt className="contact-icon" />
                 <div>
                   <span className="contact-label">Phone</span>
-                  <a href="tel:+21697152240" className="contact-value">
-                    +216 97 152 240
+                  <a href="tel:+84961566302" className="contact-value">
+                    +84961566302
                   </a>
                 </div>
               </li>
@@ -144,8 +145,8 @@ const Footer = () => {
                 <FaEnvelope className="contact-icon" />
                 <div>
                   <span className="contact-label">Email</span>
-                  <a href="mailto:auctionBid@gmail.tn" className="contact-value">
-                    auctionBid@gmail.tn
+                  <a href="mailto:khelifisalmen9@gmail.com" className="contact-value">
+                    khelifisalmen9@gmail.com
                   </a>
                 </div>
               </li>

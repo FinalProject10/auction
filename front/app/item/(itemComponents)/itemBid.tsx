@@ -3,9 +3,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import "./style/itemBid.css";
 import { FaPlus, FaMinus, FaTimes } from "react-icons/fa";
 import AuctionTimer from "./auctionTimer";
+import LiveAuctionTimer from "./liveAuctionTimer";
+import ProxyBid from "./proxyBid";
 import getSocket from "./bid/socket";
 import { API_URL } from "../../../utils/api";
 import { useRouter } from "next/navigation";
+import InfoTooltip from "../../components/InfoTooltip";
 
 const ItemBid = ({ items }) => {
   const [currentBid, setCurrentBid] = useState(null);
@@ -123,15 +126,15 @@ const ItemBid = ({ items }) => {
       if (data.bidAmount) {
         const newBidAmount = typeof data.bidAmount === 'string' ? parseFloat(data.bidAmount) : data.bidAmount;
         
-        // If someone else bid (not current user), reset the highest bidder status
-        // This allows the user to bid again
-        if (data.userId && data.userId !== userId) {
-          setIsCurrentHighestBidder(false);
-        } else if (data.userId === userId) {
-          // If current user bid, mark them as highest bidder
-          setIsCurrentHighestBidder(true);
-        }
+        // Convert both userIds to integers for proper comparison
+        const currentUserIdInt = userId ? parseInt(userId) : null;
+        const bidUserIdInt = data.userId ? parseInt(data.userId) : null;
         
+        // Check if this is someone else's bid (not current user)
+        const isSomeoneElseBid = bidUserIdInt && currentUserIdInt && bidUserIdInt !== currentUserIdInt;
+        const isCurrentUserBid = bidUserIdInt && currentUserIdInt && bidUserIdInt === currentUserIdInt;
+        
+        // IMMEDIATELY update price display - no delay, instant socket update
         setCurrentBid(prev => ({
           ...prev,
           bidAmount: newBidAmount,
@@ -139,7 +142,7 @@ const ItemBid = ({ items }) => {
         }));
         setHasBids(true);
         
-        // Calculate new minimum bid
+        // Calculate new minimum bid immediately
         const minIncrement = newBidAmount < 100 ? 5 : 
                             newBidAmount < 1000 ? 10 : 
                             newBidAmount < 10000 ? 50 : 100;
@@ -147,29 +150,66 @@ const ItemBid = ({ items }) => {
         setMinimumBid(newMinimum);
         setBidAmount(newMinimum);
         
-        // Show notification
-        setNewBidNotification({
-          amount: newBidAmount,
-          timestamp: new Date()
-        });
+        // If someone else bid (not current user), IMMEDIATELY allow bidding again
+        if (isSomeoneElseBid) {
+          setIsCurrentHighestBidder(false);
+          setErrorMessage("");
+          setSuccessMessage(""); // Clear success message too
+          
+          // Show prominent notification for someone else's bid
+          setNewBidNotification({
+            amount: newBidAmount,
+            timestamp: new Date(),
+            isNewBidder: true // Flag to show it's someone else
+          });
+        } else if (isCurrentUserBid) {
+          // If current user bid, mark them as highest bidder
+          setIsCurrentHighestBidder(true);
+          setNewBidNotification({
+            amount: newBidAmount,
+            timestamp: new Date(),
+            isNewBidder: false
+          });
+        } else {
+          // If userId is not available, assume it's someone else and allow bidding
+          setIsCurrentHighestBidder(false);
+          setErrorMessage("");
+          setNewBidNotification({
+            amount: newBidAmount,
+            timestamp: new Date(),
+            isNewBidder: true
+          });
+        }
+        
+        // Refresh current bid data in background to get full bidder information
+        // This doesn't block the immediate UI update
+        setTimeout(() => {
+          fetchCurrentBid();
+        }, 300);
         
         // Clear existing timeout if any
         if (notificationTimeout) {
           clearTimeout(notificationTimeout);
         }
         
-        // Set new timeout
+        // Set new timeout - show notification longer for someone else's bid
+        const notificationDuration = isSomeoneElseBid ? 5000 : 3000;
         notificationTimeout = setTimeout(() => {
           setNewBidNotification(null);
           notificationTimeout = null;
-        }, 3000);
+        }, notificationDuration);
       }
     };
 
     const handleNotification = (message) => {
       const bidAmount = parseFloat(message);
       if (!isNaN(bidAmount)) {
-        handlePlacedBid({ bidAmount });
+        // When notification comes without userId, treat it as someone else's bid
+        // This allows the user to bid again
+        handlePlacedBid({ 
+          bidAmount,
+          userId: null // No userId means it's not from current user
+        });
       }
     };
 
@@ -186,7 +226,7 @@ const ItemBid = ({ items }) => {
         clearTimeout(notificationTimeout);
       }
     };
-  }, [itemId, userId]);
+  }, [itemId, userId, fetchCurrentBid]);
 
   // Calculate minimum increment based on current bid
   const calculateMinIncrement = (amount) => {
@@ -258,15 +298,10 @@ const ItemBid = ({ items }) => {
       return;
     }
 
-    // Client-side validation
-    if (!hasBids) {
-      setErrorMessage("You cannot place the first bid. Please wait for someone else to start the bidding.");
-      return;
-    }
-
-    // Check if user is the current highest bidder
+    // Check if user is the current highest bidder on THIS SPECIFIC ITEM
+    // Users can bid on multiple items, but cannot bid twice on the same item until someone else bids
     if (isCurrentHighestBidder) {
-      setErrorMessage("You are currently the highest bidder. Please wait for another user to place a bid before you can bid again.");
+      setErrorMessage("You are currently the highest bidder on this item. Please wait for another user to place a bid before you can bid again on this item. (You can still bid on other items)");
       return;
     }
 
@@ -364,11 +399,28 @@ const ItemBid = ({ items }) => {
         )}
 
         {/* Current Bid Display */}
-        <div className="current-bid-section">
+        <div className="current-bid-section relative">
+          <div className="absolute top-2 right-2">
+            <InfoTooltip 
+              content={
+                <div>
+                  <p className="font-semibold mb-1 text-yellow-300">Bidding Power:</p>
+                  <p className="mb-2">Your maximum bidding power = Total Deposits × 10</p>
+                  <p className="text-xs mb-1">Example: $100 deposit = $1,000 bidding power</p>
+                  <p className="text-xs mt-2">You can bid up to your total bidding power across all auctions. Check your deposit account to see your current bidding power.</p>
+                </div>
+              }
+              position="left"
+              iconSize="sm"
+            />
+          </div>
           {hasBids && currentBid ? (
             <>
               <p className="current-bid-label">Current Highest Bid</p>
-              <p className="current-bid-amount pulse-animation">
+              <p 
+                key={`bid-${currentBid.bidAmount}-${currentBid.createdAt?.getTime() || Date.now()}`}
+                className="current-bid-amount pulse-animation"
+              >
                 {formatCurrency(currentBid.bidAmount)}
               </p>
               {currentBid.bidder && (
@@ -386,16 +438,52 @@ const ItemBid = ({ items }) => {
 
         {/* Auction Timer */}
         <div className="auction-time-section">
+          {hasBids ? (
+            <LiveAuctionTimer 
+              itemId={itemId} 
+              endTime={item.timeEnd}
+              lastBidTime={currentBid?.createdAt}
+            />
+          ) : (
             <AuctionTimer startTime={item.timeStart} endTime={item.timeEnd} />
+          )}
+        </div>
+
+        {/* Proxy Bid Component */}
+        {!isAuctionEnded && userId && userRole === "client" && (
+          <div className="proxy-bid-section" style={{ marginTop: "20px" }}>
+            <ProxyBid 
+              itemId={itemId}
+              currentBid={currentBid?.bidAmount || 0}
+              openingBid={item.price || 0}
+            />
           </div>
+        )}
 
         {/* Bid Form */}
         {!isAuctionEnded && (
           <div className="bid-form-section">
             <form onSubmit={handleSubmit} className="bid-form" noValidate>
               <div className="bid-input-group">
-                <label className="bid-label">
+                <label className="bid-label flex items-center gap-2">
                   {hasBids ? `Minimum Bid: ${formatCurrency(minimumBid)}` : "Enter your bid"}
+                  <InfoTooltip 
+                    content={
+                      <div>
+                        <p className="font-semibold mb-1 text-yellow-300">Minimum Bid Calculation:</p>
+                        <p className="mb-2">The minimum bid is calculated based on the current highest bid plus an increment:</p>
+                        <ul className="list-disc list-inside space-y-1 text-xs">
+                          <li>Bids under $100: +$5 increment</li>
+                          <li>Bids $100-$999: +$10 increment</li>
+                          <li>Bids $1,000-$9,999: +$50 increment</li>
+                          <li>Bids $10,000+: +$100 increment</li>
+                        </ul>
+                        <p className="mt-2 text-xs">Your bid must meet or exceed this minimum amount.</p>
+                      </div>
+                    }
+                    position="top"
+                    iconSize="sm"
+                  />
                 </label>
                 
                 <div className="bid-input-container">
@@ -416,7 +504,7 @@ const ItemBid = ({ items }) => {
                     onChange={handleInputChange}
                     min={minimumBid}
                     step={calculateMinIncrement(bidAmount)}
-                    disabled={isLoading || !hasBids}
+                    disabled={isLoading || isAuctionEnded || isCurrentHighestBidder}
                     placeholder={formatCurrency(minimumBid)}
                   />
                   
@@ -431,50 +519,108 @@ const ItemBid = ({ items }) => {
                   </button>
                 </div>
 
-                {/* Quick increment buttons */}
-                {hasBids && (
-                  <div className="quick-increment-buttons">
-                    <button
-                      type="button"
-                      onClick={() => setBidAmount(minimumBid)}
-                      className="increment-btn"
-                      disabled={isLoading}
-                    >
-                      +{calculateMinIncrement(minimumBid)}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBidAmount(minimumBid + 10)}
-                      className="increment-btn"
-                      disabled={isLoading}
-                    >
-                      +10
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBidAmount(minimumBid + 50)}
-                      className="increment-btn"
-                      disabled={isLoading}
-                    >
-                      +50
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBidAmount(minimumBid + 100)}
-                      className="increment-btn"
-                      disabled={isLoading}
-                    >
-                      +100
-                    </button>
+                {/* Quick bid amount buttons - shown for both first bids and existing bids */}
+                <div className="quick-increment-buttons relative">
+                  <div className="absolute -top-6 right-0">
+                    <InfoTooltip 
+                      content="Quick bid buttons let you quickly increase your bid by preset amounts. These amounts are automatically calculated based on the item's value."
+                      position="top"
+                      iconSize="sm"
+                    />
                   </div>
-                )}
+                  {(() => {
+                    const openingBid = item?.price || 0;
+                    const currentHighest = hasBids && currentBid ? currentBid.bidAmount : openingBid;
+                    
+                    // Calculate quick bid amounts based on item value
+                    let quickAmounts = [];
+                    if (openingBid < 100) {
+                      // Low value items: 10, 25, 50, 100
+                      quickAmounts = [10, 25, 50, 100];
+                    } else if (openingBid < 1000) {
+                      // Medium value items: 50, 100, 250, 500
+                      quickAmounts = [50, 100, 250, 500];
+                    } else if (openingBid < 10000) {
+                      // High value items: 100, 500, 1000, 2500
+                      quickAmounts = [100, 500, 1000, 2500];
+                    } else {
+                      // Very high value items: 500, 1000, 5000, 10000
+                      quickAmounts = [500, 1000, 5000, 10000];
+                    }
+                    
+                    return quickAmounts.map((amount) => {
+                      const bidValue = hasBids ? currentHighest + amount : openingBid + amount;
+                      return (
+                        <button
+                          key={amount}
+                          type="button"
+                          onClick={() => setBidAmount(bidValue)}
+                          className="increment-btn"
+                          disabled={isLoading || isAuctionEnded || isCurrentHighestBidder}
+                          title={`Bid ${formatCurrency(bidValue)}`}
+                        >
+                          {hasBids ? `+${formatCurrency(amount)}` : formatCurrency(bidValue)}
+                        </button>
+                      );
+                    });
+                  })()}
+                </div>
               </div>
 
               {/* Error Message */}
               {errorMessage && (
-                <div className="error-message" role="alert">
-                  <span className="error-icon">⚠️</span>
-                  {errorMessage}
+                <div className="error-message relative" role="alert">
+                  <div className="flex items-start gap-2">
+                    <span className="error-icon">⚠️</span>
+                    <span className="flex-1">{errorMessage}</span>
+                    <InfoTooltip 
+                      content={
+                        <div>
+                          <p className="font-semibold mb-2 text-yellow-300">What does this error mean?</p>
+                          <p className="mb-2">
+                            {errorMessage.includes("bidding power") ? 
+                              "You don't have enough bidding power to place this bid. Your bidding power = Total Deposits × 10." :
+                              errorMessage.includes("outbid yourself") || errorMessage.includes("highest bidder") ?
+                              "You are currently the highest bidder on this item. Wait for someone else to bid first before you can bid again." :
+                              errorMessage.includes("minimum bid") ?
+                              "Your bid amount is too low. It must meet the minimum bid requirement." :
+                              "An error occurred while placing your bid."}
+                          </p>
+                          <p className="font-semibold mb-2 text-yellow-300">What should you do?</p>
+                          <ul className="list-disc list-inside space-y-1 mb-2">
+                            {errorMessage.includes("bidding power") ? (
+                              <>
+                                <li>Go to your Dashboard → Deposit Account</li>
+                                <li>Add more deposits to increase bidding power</li>
+                                <li>Each $1 deposit = $10 in bidding power</li>
+                                <li>Example: $100 deposit = $1,000 bidding power</li>
+                              </>
+                            ) : errorMessage.includes("outbid yourself") || errorMessage.includes("highest bidder") ? (
+                              <>
+                                <li>Wait for another user to place a bid</li>
+                                <li>You can still bid on other items</li>
+                                <li>Once someone else bids, you can bid again</li>
+                              </>
+                            ) : errorMessage.includes("minimum bid") ? (
+                              <>
+                                <li>Increase your bid amount</li>
+                                <li>Check the minimum bid shown above</li>
+                                <li>Use the quick bid buttons for suggested amounts</li>
+                              </>
+                            ) : (
+                              <>
+                                <li>Check your internet connection</li>
+                                <li>Make sure you're logged in</li>
+                                <li>Try again in a moment</li>
+                              </>
+                            )}
+                          </ul>
+                        </div>
+                      }
+                      position="left"
+                      iconSize="sm"
+                    />
+                  </div>
                 </div>
               )}
 
@@ -490,17 +636,18 @@ const ItemBid = ({ items }) => {
                   <button
                     type="submit"
                 className="bid-submit-btn"
-                disabled={isLoading || !hasBids || isAuctionEnded || isCurrentHighestBidder}
+                    disabled={isLoading || isAuctionEnded || isCurrentHighestBidder}
+                    title={!hasBids ? "Be the first one to bid!" : isCurrentHighestBidder ? "Wait for another bidder" : "Place your bid"}
               >
                 {isLoading ? (
                   <>
                     <span className="spinner"></span>
                     Placing Bid...
                   </>
-                ) : !hasBids ? (
-                  "Waiting for First Bid"
                 ) : isCurrentHighestBidder ? (
                   "Waiting for Another Bidder"
+                ) : !hasBids ? (
+                  `Place First Bid - ${formatCurrency(bidAmount)}`
                 ) : (
                   `Place Bid - ${formatCurrency(bidAmount)}`
                 )}
@@ -508,30 +655,48 @@ const ItemBid = ({ items }) => {
 
               {!hasBids && (
                 <p className="info-message">
-                  You cannot place the first bid. Please wait for someone else to start the bidding.
+                  Be the first to bid! Enter your bid amount above.
                 </p>
               )}
 
               {isCurrentHighestBidder && hasBids && (
-                <div className="info-message bg-blue-50 border-blue-200 text-blue-800">
-                  <span className="font-semibold">✓ You are the current highest bidder!</span>
-                  <p className="text-sm mt-1">Please wait for another user to place a bid before you can bid again.</p>
+                <div className="info-message bg-blue-50 border-blue-200 text-blue-800 flex items-start gap-2">
+                  <div className="flex-1">
+                    <span className="font-semibold">✓ You are the current highest bidder!</span>
+                    <p className="text-sm mt-1">Please wait for another user to place a bid before you can bid again.</p>
+                  </div>
+                  <InfoTooltip 
+                    content={
+                      <div>
+                        <p className="font-semibold mb-1 text-yellow-300">Why can't I bid again?</p>
+                        <p className="mb-2">To prevent bidding wars, you can only place one bid at a time. Once someone else bids, you'll be able to bid again.</p>
+                        <p className="text-xs mt-2">💡 You can still bid on other items while waiting!</p>
+                      </div>
+                    }
+                    position="left"
+                    iconSize="sm"
+                  />
                 </div>
               )}
               </form>
                       </div>
         )}
 
-        {/* New Bid Notification */}
+        {/* New Bid Notification - Prominent display when someone else bids */}
         {newBidNotification && (
-          <div className="new-bid-notification slide-in">
-            <span className="notification-icon">🔔</span>
-                      <div>
-              <p className="notification-title">New Bid Placed!</p>
+          <div className={`new-bid-notification slide-in ${newBidNotification.isNewBidder ? 'new-bidder-notification' : ''}`}>
+            <span className="notification-icon">{newBidNotification.isNewBidder ? '🎯' : '🔔'}</span>
+            <div>
+              <p className="notification-title">
+                {newBidNotification.isNewBidder ? 'New Bidder!' : 'Your Bid Placed!'}
+              </p>
               <p className="notification-amount">{formatCurrency(newBidNotification.amount)}</p>
-                    </div>
-                  </div>
-                )}
+              {newBidNotification.isNewBidder && (
+                <p className="notification-subtitle">You can bid now!</p>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Auction End Info */}
         <div className="auction-info">

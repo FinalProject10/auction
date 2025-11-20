@@ -8,7 +8,7 @@
 .about-hero {
   position: relative;
   height: 500px;
-  background-image: url('https://autobid.modeltheme.com/wp-content/uploads/2023/11/Autobid-about.jpg?id=7148');
+  background-image: url('/images/about/Autobid-about.jpg');
   background-size: cover;
   background-position: center;
   display: flex;

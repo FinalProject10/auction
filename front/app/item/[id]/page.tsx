@@ -4,6 +4,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
 import { API_URL } from "../../../utils/api";
+import { useLoading } from "../../components/LoadingContext";
 
 // Lazy load components with loading states
 const Loading = dynamic(() => import("./loading"), {
@@ -35,6 +36,7 @@ const Item = ({ params }) => {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { setLoading: setGlobalLoading } = useLoading();
 
   // Memoize itemId to prevent unnecessary re-renders
   const itemId = useMemo(() => params?.id, [params?.id]);
@@ -55,8 +57,11 @@ const Item = ({ params }) => {
         );
         
         if (isMounted) {
-          setItems(response.data as Item[]);
+          // Backend now returns a single object, wrap it in an array for compatibility
+          const itemData = response.data;
+          setItems(Array.isArray(itemData) ? itemData : [itemData]);
           setLoading(false);
+          setGlobalLoading(false); // Hide global loading spinner
         }
       } catch (error) {
         if (axios.isCancel(error)) {
@@ -67,6 +72,7 @@ const Item = ({ params }) => {
           console.error("Error fetching data:", error);
           setError("Failed to load item. Please try again.");
           setLoading(false);
+          setGlobalLoading(false); // Hide global loading spinner even on error
         }
       }
     };
@@ -79,6 +85,13 @@ const Item = ({ params }) => {
       abortController.abort();
     };
   }, [itemId]);
+
+  // Hide loading on initial mount if already loaded
+  useEffect(() => {
+    if (!loading && items.length > 0) {
+      setGlobalLoading(false);
+    }
+  }, [loading, items, setGlobalLoading]);
 
   // Memoize items to prevent unnecessary re-renders
   const memoizedItems = useMemo(() => items, [items]);
@@ -104,11 +117,11 @@ const Item = ({ params }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <ItemHeader items={memoizedItems} />
-      <div className="max-w-[1400px] mx-auto px-6">
+      <div className="max-w-[1400px] mx-auto px-6 w-full">
         <div className="galoryBid">
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             <Gallery items={memoizedItems} />
             <div className="iteminfo">
               <ItemInfo items={memoizedItems} />
@@ -116,7 +129,7 @@ const Item = ({ params }) => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-6 sticky top-6 h-fit">
+          <div className="flex flex-col gap-6 sticky top-6 h-fit w-full">
             <ItemBid items={memoizedItems} />
             <ItemSidebar items={memoizedItems} />
           </div>

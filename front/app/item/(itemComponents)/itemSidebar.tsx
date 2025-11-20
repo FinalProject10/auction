@@ -9,6 +9,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
+import LoadingLink from "../../components/LoadingLink";
 import axios from "axios";
 import { API_URL } from "../../../utils/api";
 
@@ -83,7 +84,7 @@ const ItemSidebar = ({ items }) => {
             <div className="seller-avatar">
               <Image
                 className="seller-avatar-img"
-                src={item.seller?.avatar || "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-13-768x486.jpg"}
+                src={item.seller?.avatar || "/images/vehicles/autobid-vehicle-13-768x486.jpg"}
                 alt={item.seller?.name || "Seller"}
                 width={70}
                 height={70}
@@ -163,7 +164,7 @@ const ItemSidebar = ({ items }) => {
         ) : (
           <div className="related-auctions-grid">
             {data.map((el) => (
-              <Link href={`/item/${el.id}`} key={el.id} className="auction-card-link">
+              <LoadingLink href={`/item/${el.id}`} key={el.id} className="auction-card-link">
                 <div className="auction-card">
                   <div className="auction-image-container">
                     <Image
@@ -203,7 +204,7 @@ const ItemSidebar = ({ items }) => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </LoadingLink>
             ))}
           </div>
         )}

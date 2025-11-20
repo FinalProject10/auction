@@ -8,6 +8,7 @@ import { Select, Option } from "@material-tailwind/react";
 import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
+import LoadingLink from "../components/LoadingLink";
 import {
   Accordion,
   AccordionHeader,
@@ -481,7 +482,7 @@ const Products = () => {
                 width={250}
                 height={250}
                 alt="AutoBid Safety"
-                src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-sidebar_pic-922x1024.jpg"
+                src="/images/sidebar/autobid-sidebar_pic-922x1024.jpg"
               />
             </div>
           </div>
@@ -527,7 +528,7 @@ const Products = () => {
                   const timeLeft = calculateTimeLeft(el.timeEnd);
                   const ended = isAuctionEnded(el.timeEnd);
                   return (
-                    <Link key={i} href={`/item/${el.id}`}>
+                    <LoadingLink key={i} href={`/item/${el.id}`}>
                       <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
                         <div
                           className="relative w-full h-48 bg-cover bg-center"
@@ -574,7 +575,7 @@ const Products = () => {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </LoadingLink>
                   );
                 })}
               </div>
@@ -585,7 +586,7 @@ const Products = () => {
                   const timeLeft = calculateTimeLeft(el.timeEnd);
                   const ended = isAuctionEnded(el.timeEnd);
                   return (
-                    <Link key={i} href={`/item/${el.id}`}>
+                    <LoadingLink key={i} href={`/item/${el.id}`}>
                       <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden group cursor-pointer">
                         <div className="flex flex-col sm:flex-row">
                           <div
@@ -637,7 +638,7 @@ const Products = () => {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </LoadingLink>
                   );
                 })}
               </div>

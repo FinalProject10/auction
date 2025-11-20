@@ -2,6 +2,7 @@
 import React,{useEffect, useState, useMemo, useCallback} from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import LoadingLink from '../components/LoadingLink'
 import Image from 'next/image'
 import { FaHammer } from 'react-icons/fa'
 import { API_URL } from '../../utils/api'
@@ -104,7 +105,7 @@ const Auctions = () => {
     ) : (
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
         {data.map((el,i)=>(
-        <Link href={`/item/${el.id}`} key={el.id}>
+        <LoadingLink href={`/item/${el.id}`} key={el.id}>
         <div className='group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 cursor-pointer'>
             <div className='relative overflow-hidden h-[220px]'>
               <Image
@@ -135,7 +136,7 @@ const Auctions = () => {
               </div>
             </div>
         </div>
-        </Link>
+        </LoadingLink>
         ))}
       </div>
     )}

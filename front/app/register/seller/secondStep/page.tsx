@@ -46,7 +46,7 @@ const addBatinda=()=>{
   return (
     <div>
 
-        <img className='absolute right-0 h-full w-1/2' src="https://static01.nyt.com/images/2023/09/21/multimedia/21sp-cli-stadium-02-mljv/21sp-cli-stadium-02-mljv-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="" />
+        <img className='absolute right-0 h-full w-1/2' src="/images/backgrounds/login-background.jpg" alt="" />
         {/* <Image  src={img1} className='absolute right-[17.25rem] rounded-xl top-[6rem] z-30'
         alt=''/> */}
         <div className='flex mt-20 ml-40 absolute'>

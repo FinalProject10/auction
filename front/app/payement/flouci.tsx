@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { getApiUrl } from '../../utils/api';
+
+export const dynamic = 'force-dynamic';
 // import "./Payment.css";
 
 const Payment = () => {
@@ -36,7 +38,7 @@ const Payment = () => {
         </button>
         <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
 <img
-  src="https://assets-global.website-files.com/642eb7fb48d9b60d4759b72b/6544f5b63236c6a5ce77792d_open%20graph%20image.png"
+  src="/images/payment/flouci-logo.png"
   className="mb-[20px] w-[250px] max-w-xs transition duration-300 ease-in-out hover:scale-110"
   alt="Louvre" onClick={onsubmit} />
 </div>

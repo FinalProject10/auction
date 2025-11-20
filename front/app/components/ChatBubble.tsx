@@ -16,7 +16,12 @@ const ChatBubble = () => {
     <>
       {/* Chat Widget */}
       {isOpen && (
-        <div className="chat-widget-container">
+        <div className="chat-widget-container" onClick={(e) => {
+          // Close chat when clicking on the backdrop (mobile)
+          if (e.target === e.currentTarget) {
+            toggleChat();
+          }
+        }}>
           <ChatPage onClose={toggleChat} />
         </div>
       )}

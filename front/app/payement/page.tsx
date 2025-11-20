@@ -6,6 +6,9 @@ import { loadStripe } from '@stripe/stripe-js';
 import Flouci from './flouci'
 import Strip from './stripe'
 import { getApiUrl } from '../../utils/api';
+
+export const dynamic = 'force-dynamic';
+
 const stripePromise = loadStripe('pk_test_51Oa23kFgyHOf8MRLCpOxilmegVe8iPiOSt91sLXtveMRE8zLgyVOFofgKCUKNsRTzirOhr0psYY3aBqh89GML3Ep006HA3dFsH');
 
 const Payment = () => {
@@ -15,7 +18,11 @@ const Payment = () => {
   const handleClick = async () => {
     try {
       setIsLoading(true);
-const membership=localStorage.getItem('membership')
+      const membership = typeof window !== 'undefined' ? localStorage.getItem('membership') : null
+      if (!membership) {
+        console.error('Membership not found');
+        return;
+      }
 
       const response = await axios.post(getApiUrl('create-checkout-session'), {
         id: parseInt(membership)>60?(parseInt(membership)===590?'item4':'item3'):(parseInt(membership)===59?'item2':'item1'),  // Replace with the actual item ID
@@ -49,7 +56,7 @@ const membership=localStorage.getItem('membership')
 
   return (
     <div className="flex" >
-       <div className="w-full h-screen" style={{"backgroundImage":"url('https://vojislavd.com/ta-template-demo/assets/img/coming-soon.jpg')"}}>
+       <div className="w-full h-screen" style={{"backgroundImage":"url('/images/backgrounds/coming-soon.jpg')"}}>
     <div className="w-full h-screen flex flex-col items-center justify-between bg-black bg-opacity-70 py-8">
         <div className="flex-1 flex flex-col items-center justify-center">
             <div className="bg-white bg-opacity-10 px-4 py-2 rounded-xl flex items-center justify-center text-cyan-100 space-x-2 lg:space-x-4">

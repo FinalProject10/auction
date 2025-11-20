@@ -65,11 +65,12 @@ const Aboutus = () => {
 
           <div className="signature">
             <Image
-              src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-signature.png"
+              src="/images/about/autobid-signature.png"
               alt="AutoBid Signature"
               width={200}
               height={60}
               className="signature-img"
+              unoptimized={true}
             />
           </div>
         </div>

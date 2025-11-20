@@ -10,6 +10,11 @@ const ChatBubble = dynamic(() => import("./components/ChatBubble"), {
   ssr: false,
 });
 
+// Dynamically import LoadingProvider to avoid SSR issues
+const LoadingProvider = dynamic(() => import("./components/LoadingContext").then(mod => ({ default: mod.LoadingProvider })), {
+  ssr: false,
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: "AutoBid - Premium Car Auction Platform",
@@ -43,8 +48,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-        <ChatBubble />
+        <LoadingProvider>
+          {children}
+          <ChatBubble />
+        </LoadingProvider>
       </body>
     </html>
   );

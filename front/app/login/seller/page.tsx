@@ -206,7 +206,7 @@ const SellerLogin = () => {
       {/* Right Side - Image */}
       <div className="hidden lg:block w-1/2 relative">
         <Image
-          src="https://static01.nyt.com/images/2023/09/21/multimedia/21sp-cli-stadium-02-mljv/21sp-cli-stadium-02-mljv-articleLarge.jpg?quality=75&auto=webp&disable=upscale"
+          src="/images/backgrounds/login-background.jpg"
           alt="Seller Login"
           fill
           className="object-cover"

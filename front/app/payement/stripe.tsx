@@ -1,27 +1,44 @@
 "use client"
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import '../payement/check.css'
 import { getApiUrl } from '../../utils/api';
 
+export const dynamic = 'force-dynamic';
+
 const stripePromise = loadStripe('pk_test_51Oa23kFgyHOf8MRLCpOxilmegVe8iPiOSt91sLXtveMRE8zLgyVOFofgKCUKNsRTzirOhr0psYY3aBqh89GML3Ep006HA3dFsH');
-const memb=localStorage.getItem('memb')
-const membe=localStorage.getItem('membe')
-const date = localStorage.getItem('date')
+
 const Payment = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [memb, setMemb] = useState<string | null>(null);
+  const [membe, setMembe] = useState<string | null>(null);
+  const [date, setDate] = useState<string | null>(null);
+  const [membership, setMembership] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setMemb(localStorage.getItem('memb'));
+      setMembe(localStorage.getItem('membe'));
+      setDate(localStorage.getItem('date'));
+      setMembership(localStorage.getItem('membership'));
+    }
+  }, []);
 
   const handleClick = async () => {
     try {
       setIsLoading(true);
-const membership=localStorage.getItem('membership')
+      const membershipValue = typeof window !== 'undefined' ? localStorage.getItem('membership') : null;
+      if (!membershipValue) {
+        console.error('Membership not found');
+        return;
+      }
 
       const response = await axios.post(getApiUrl('create-checkout-session'), {
-        id: parseInt(membership)>60?(parseInt(membership)===590?'item4':'item3'):(parseInt(membership)===59?'item2':'item1'),  // Replace with the actual item ID
-        quantity: membership,
+        id: parseInt(membershipValue)>60?(parseInt(membershipValue)===590?'item4':'item3'):(parseInt(membershipValue)===59?'item2':'item1'),  // Replace with the actual item ID
+        quantity: membershipValue,
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +71,7 @@ const membership=localStorage.getItem('membership')
     
     <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
    <img
-     src="https://images.ctfassets.net/fzn2n1nzq965/6JEjxpwMd1OIIk6RosReNU/3d5c5f5217a7cce4af750ebfe599b6fc/Payments-social-card.png?q=80"
+     src="/images/payment/stripe-logo.png"
      className="max-w-xs w-[250px] transition duration-300 ease-in-out hover:scale-110"
     alt="Louvre" onClick={handleClick} />
    

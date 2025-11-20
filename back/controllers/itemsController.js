@@ -1,6 +1,6 @@
-const Items = require("../models/items");
-const Seller = require("../models/sellers");
-const Bids = require("../models/bid");
+// Import models from relations to ensure associations are loaded
+const { Items, Seller, Bid } = require("../models/relations");
+const Bids = Bid; // Keep Bids alias for compatibility
 const geBid = async (req, res) => {
   const itemId = req.params.itemId;
   const page = req.query.page || 1;
@@ -35,12 +35,13 @@ const getItems = async (req, res) => {
   const itemId = req.params.itemId;
 
   try {
-    const items = await Items.findAll({
+    const item = await Items.findOne({
       where: { id: itemId },
       include: [
         {
           model: Seller,
           as: "seller",
+          required: false, // LEFT JOIN - don't fail if seller doesn't exist
           attributes: [
             "id",
             "name",
@@ -52,38 +53,53 @@ const getItems = async (req, res) => {
             "address",
           ],
         },
-        { model: Bids, as: "bids" },
+        { 
+          model: Bid, 
+          as: "bids",
+          required: false, // LEFT JOIN - don't fail if no bids exist
+        },
       ],
     });
 
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
     // Parse images JSON if they're strings
-    const parsedItems = items.map(item => {
-      const itemData = item.toJSON();
-      if (itemData.images) {
-        if (typeof itemData.images === 'string') {
-          try {
-            itemData.images = JSON.parse(itemData.images);
-          } catch (e) {
-            // If parsing fails, wrap in array
-            itemData.images = [itemData.images];
-          }
-        }
-        // Ensure it's always an array
-        if (!Array.isArray(itemData.images)) {
+    const itemData = item.toJSON();
+    if (itemData.images) {
+      if (typeof itemData.images === 'string') {
+        try {
+          itemData.images = JSON.parse(itemData.images);
+        } catch (e) {
+          // If parsing fails, wrap in array
           itemData.images = [itemData.images];
         }
-      } else {
-        itemData.images = [];
       }
-      return itemData;
-    });
+      // Ensure it's always an array
+      if (!Array.isArray(itemData.images)) {
+        itemData.images = [itemData.images];
+      }
+    } else {
+      itemData.images = [];
+    }
 
-    res.status(200).json(parsedItems);
+    res.status(200).json(itemData);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching item:", error);
+    console.error("Error stack:", error.stack);
+    console.error("Error details:", {
+      name: error.name,
+      message: error.message,
+      itemId: itemId
+    });
     res
       .status(500)
-      .json({ message: "Internal server error", error: error.message });
+      .json({ 
+        message: "Internal server error", 
+        error: error.message,
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      });
   }
 };
 const addItem = async (req, res) => {

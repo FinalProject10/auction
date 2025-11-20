@@ -382,6 +382,15 @@
 }
 
 @media (max-width: 768px) {
+  .item-sidebar-container {
+    gap: 20px;
+  }
+
+  .seller-card,
+  .related-auctions-section {
+    padding: 20px;
+  }
+
   .seller-header {
     flex-direction: column;
     align-items: center;
@@ -392,13 +401,104 @@
     text-align: center;
   }
 
+  .seller-name {
+    font-size: 18px;
+  }
+
   .section-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
 
+  .section-title {
+    font-size: 20px;
+  }
+
   .related-auctions-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .auction-content {
+    padding: 12px;
+  }
+
+  .auction-title {
+    font-size: 15px;
+  }
+
+  .auction-specs {
+    font-size: 12px;
+  }
+
+  .bid-amount {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .item-sidebar-container {
+    gap: 16px;
+  }
+
+  .seller-card,
+  .related-auctions-section {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .seller-name {
+    font-size: 16px;
+  }
+
+  .seller-location {
+    font-size: 13px;
+  }
+
+  .btn-send-message,
+  .btn-call-vendor {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .pagination-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .page-indicator {
+    font-size: 13px;
+    min-width: 50px;
+  }
+
+  .auction-image-container {
+    height: 160px;
+  }
+
+  .auction-content {
+    padding: 12px;
+  }
+
+  .auction-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .auction-specs {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  .bid-label {
+    font-size: 12px;
+  }
+
+  .bid-amount {
+    font-size: 15px;
   }
 }

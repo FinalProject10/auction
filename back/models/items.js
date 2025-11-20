@@ -21,7 +21,6 @@ const Items = sequelize.define(
       type: DataTypes.STRING(255),
       allowNull: true,
     },
-
     short_description: {
       type: DataTypes.STRING(255),
       allowNull: true,

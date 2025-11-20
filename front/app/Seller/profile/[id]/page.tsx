@@ -145,7 +145,7 @@ const Page = () => {
                 Contact Vendor
               </button>
             )}
-            <div><img src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-sidebar_pic-922x1024.jpg" alt="" /></div>
+            <div><img src="/images/sidebar/autobid-sidebar_pic-922x1024.jpg" alt="" /></div>
           </div>
           <div>
             <div className='w-[150%] ml-[8%] h-[65%] mt-[15%] bg-white shadow-xl rounded-[20px] text-center relative'>
@@ -158,8 +158,8 @@ const Page = () => {
                 <p>JOHNNY DEEP</p>
               </div>
               <div className="flex items-center justify-center mt-4"><MdLocationOn color="#ff2800" /> <p>EL KEF</p></div>
-              <div className="flex items-center justify-center mt-4"><IoMdPhonePortrait color="#ff2800" /> <p>27348509</p></div>
-              <div className="flex items-center justify-center mt-4"><MdEmail color="#ff2800" /><p>johnny@gmail.com</p></div>
+              <div className="flex items-center justify-center mt-4"><IoMdPhonePortrait color="#ff2800" /> <p>+84961566302</p></div>
+              <div className="flex items-center justify-center mt-4"><MdEmail color="#ff2800" /><p>khelifisalmen9@gmail.com</p></div>
               <div className="flex items-center justify-center mt-4"><MdStarRate color="#ff2800" /> <p>5 on 5</p></div>
             </div>
           </div>
@@ -206,7 +206,7 @@ const Page = () => {
       <div className='flex flex-wrap justify-evenly gap-8'>
   <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
     <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ2.png" alt="" />
+      <img className='w-[200px]' src="/images/categories/autobid-main_categ2.png" alt="" />
       <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
         <GiThorHammer />
       </div>
@@ -219,7 +219,7 @@ const Page = () => {
   </div>
   <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
     <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ1.png" alt="" />
+      <img className='w-[200px]' src="/images/categories/autobid-main_categ1.png" alt="" />
       <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
         <GiThorHammer />
       </div>
@@ -232,7 +232,7 @@ const Page = () => {
   </div>
   <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
     <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ3.png" alt="" />
+      <img className='w-[200px]' src="/images/categories/autobid-main_categ3.png" alt="" />
       <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
         <GiThorHammer />
       </div>
@@ -245,7 +245,7 @@ const Page = () => {
   </div>
   <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
     <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png" alt="" />
+      <img className='w-[200px]' src="/images/categories/autobid-main_categ4.png" alt="" />
       <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
         <GiThorHammer />
       </div>
@@ -258,7 +258,7 @@ const Page = () => {
   </div>
   <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
     <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ7.png" alt="" />
+      <img className='w-[200px]' src="/images/categories/autobid-main_categ7.png" alt="" />
       <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
         <GiThorHammer />
       </div>
@@ -271,7 +271,7 @@ const Page = () => {
   </div>
   <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
     <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ5.png" alt="" />
+      <img className='w-[200px]' src="/images/categories/autobid-main_categ5.png" alt="" />
       <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
         <GiThorHammer />
       </div>
@@ -284,7 +284,7 @@ const Page = () => {
   </div>
   <div className='w-[200px] h-[260px] mb-8 shadow-xl rounded-[10px] bg-white flex flex-col justify-between items-center p-4 hover:transform hover:-translate-y-1 hover:shadow-2xl transition-transform duration-300 ease-in-out'>
     <div style={{ position: 'relative' }}>
-      <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ6.png" alt="" />
+      <img className='w-[200px]' src="/images/categories/autobid-main_categ6.png" alt="" />
       <div style={{ position: 'absolute', bottom: '-30px', left: '90%', transform: 'translateX(-50%)', textAlign: 'center', cursor: 'pointer' }}>
         <GiThorHammer />
       </div>

@@ -2,13 +2,22 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import { getApiUrl } from '../../../utils/api'
+
+export const dynamic = 'force-dynamic';
 const Edit = () => {
     const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [newPass, setNewpass] = useState("");
-  const id=localStorage.getItem('userId')
+  const [id, setId] = useState<string | null>(null);
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setId(localStorage.getItem('userId'));
+    }
+  }, []);
     const add = () => {
+        if (!id) return;
         axios
           .put(getApiUrl(`seller/edit/${id}`), {
             name: fname,

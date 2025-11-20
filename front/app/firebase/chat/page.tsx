@@ -11,7 +11,7 @@ export default function Page() {
       </div>
       {/* <PrettyChatWindow
         projectId={process.env.NEXT_PUBLIC_CHAT_ENGINE_PROJECT_ID || ""}
-        username="salmenkh1999@gmail.com"
+        username="khelifisalmen9@gmail.com"
         secret="salmenkhelifi"
         style={{ height: "100%" }}
       /> */}

@@ -7,15 +7,17 @@ const ItemHeader = ({ items }) => {
       {items.map((item) => (
         <div className="container" key={item.id}>
           <div className="">
-            <Link href={"/home"}>
-              {" "}
-              <h1 className="text-[#999999] inline-block mb-[2%]">Home / </h1>
-            </Link>
-            <Link href={"/shop"}>
-              <span className="text-[#999999]">Shop /</span>
-            </Link>
-
-            <span className="text-[#999999]">Product</span>
+            <div className="breadcrumb-nav">
+              <Link href={"/home"}>
+                <span className="text-[#999999]">Home</span>
+              </Link>
+              <span className="text-[#999999] breadcrumb-separator"> / </span>
+              <Link href={"/shop"}>
+                <span className="text-[#999999]">Shop</span>
+              </Link>
+              <span className="text-[#999999] breadcrumb-separator"> / </span>
+              <span className="text-[#999999]">Product</span>
+            </div>
 
             <div className="col-md-6">
               <h1>{item.name}</h1>

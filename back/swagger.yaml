@@ -1,0 +1,548 @@
+openapi: 3.0.0
+info:
+  title: AutoBid Car Auction Platform API
+  description: |
+    Complete API documentation for the AutoBid car auction platform.
+    This API supports deposits, proxy bids, live auctions, seller approvals, payments, pickups, and title transfers.
+  version: 1.0.0
+  contact:
+    name: AutoBid API Support
+    email: khelifisalmen9@gmail.com
+
+servers:
+  - url: http://localhost:3001
+    description: Development server
+  - url: https://api.autobid.com
+    description: Production server
+
+tags:
+  - name: Deposits
+    description: Deposit management endpoints
+  - name: Proxy Bids
+    description: Proxy/auto-bid endpoints
+  - name: Bidding
+    description: Live auction bidding endpoints
+  - name: Seller Approval
+    description: Seller approval workflow endpoints
+  - name: Payments
+    description: Payment and fee calculation endpoints
+  - name: Pickups
+    description: Pickup scheduling and management endpoints
+  - name: Title Transfer
+    description: Title transfer tracking endpoints
+
+paths:
+  /deposit/add:
+    post:
+      tags: [Deposits]
+      summary: Add a new deposit
+      description: Add a deposit to increase bidding power. Deposit × 10 = max bidding power.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientId
+                - amount
+              properties:
+                clientId:
+                  type: integer
+                  description: Client ID
+                amount:
+                  type: number
+                  format: decimal
+                  description: Deposit amount
+                  minimum: 0.01
+                paymentMethod:
+                  type: string
+                  description: Payment method (stripe, flouci, etc.)
+                transactionId:
+                  type: string
+                  description: Payment gateway transaction ID
+      responses:
+        '201':
+          description: Deposit added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepositResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /deposit/balance/{clientId}:
+    get:
+      tags: [Deposits]
+      summary: Get deposit balance and max bidding power
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Balance retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clientId:
+                    type: integer
+                  totalBalance:
+                    type: number
+                    format: decimal
+                  totalMaxBiddingPower:
+                    type: number
+                    format: decimal
+                  activeDeposits:
+                    type: integer
+                  deposits:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Deposit'
+
+  /deposit/history/{clientId}:
+    get:
+      tags: [Deposits]
+      summary: Get deposit history
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Deposit history retrieved successfully
+
+  /proxy/create:
+    post:
+      tags: [Proxy Bids]
+      summary: Create a proxy bid
+      description: Set maximum proxy bid amount. System will auto-bid when you are outbid.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientId
+                - itemId
+                - maxAmount
+              properties:
+                clientId:
+                  type: integer
+                itemId:
+                  type: integer
+                maxAmount:
+                  type: number
+                  format: decimal
+                  description: Maximum proxy bid amount
+                incrementAmount:
+                  type: number
+                  format: decimal
+                  description: Optional custom increment amount
+      responses:
+        '201':
+          description: Proxy bid created successfully
+        '400':
+          description: Bad request
+
+  /proxy/active/{clientId}:
+    get:
+      tags: [Proxy Bids]
+      summary: Get active proxy bids for a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Active proxy bids retrieved successfully
+
+  /bid/placeBid:
+    post:
+      tags: [Bidding]
+      summary: Place a bid on an item
+      description: Place a bid on an auction item. First bid must be >= opening bid.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - itemId
+                - bidAmount
+              properties:
+                userId:
+                  type: integer
+                itemId:
+                  type: integer
+                bidAmount:
+                  type: number
+                  format: decimal
+      responses:
+        '200':
+          description: Bid placed successfully
+        '400':
+          description: Bad request (insufficient bidding power, invalid amount, etc.)
+
+  /bid/current/{itemId}:
+    get:
+      tags: [Bidding]
+      summary: Get current highest bid for an item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Current bid retrieved successfully
+
+  /bid/winner/{itemId}:
+    get:
+      tags: [Bidding]
+      summary: Get auction winner
+      description: Get the winning bidder after auction ends
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Winner information retrieved successfully
+
+  /approval/pending/{sellerId}:
+    get:
+      tags: [Seller Approval]
+      summary: Get pending approvals for a seller
+      parameters:
+        - name: sellerId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Pending approvals retrieved successfully
+
+  /approval/respond/{approvalId}:
+    post:
+      tags: [Seller Approval]
+      summary: Seller responds to approval
+      description: Seller can approve, reject, or make a counteroffer
+      parameters:
+        - name: approvalId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [approved, rejected, counteroffer]
+                sellerResponse:
+                  type: string
+                  description: Optional response message
+                counterofferAmount:
+                  type: number
+                  format: decimal
+                  description: Required if status is counteroffer
+      responses:
+        '200':
+          description: Response recorded successfully
+
+  /payment/calculate/{itemId}:
+    get:
+      tags: [Payments]
+      summary: Calculate payment breakdown
+      description: Calculate vehicle price, auction fee, and storage fee
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Payment breakdown calculated successfully
+
+  /payment/process:
+    post:
+      tags: [Payments]
+      summary: Process payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - paymentId
+              properties:
+                paymentId:
+                  type: integer
+                paymentMethod:
+                  type: string
+                transactionId:
+                  type: string
+      responses:
+        '200':
+          description: Payment processed successfully
+
+  /pickup/schedule:
+    post:
+      tags: [Pickups]
+      summary: Schedule pickup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - itemId
+                - clientId
+              properties:
+                itemId:
+                  type: integer
+                clientId:
+                  type: integer
+                scheduledDate:
+                  type: string
+                  format: date-time
+                transportationCompany:
+                  type: string
+      responses:
+        '200':
+          description: Pickup scheduled successfully
+
+  /pickup/pending/{clientId}:
+    get:
+      tags: [Pickups]
+      summary: Get pending pickups for a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Pending pickups retrieved successfully
+
+  /title/initiate:
+    post:
+      tags: [Title Transfer]
+      summary: Initiate title transfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - itemId
+                - clientId
+              properties:
+                itemId:
+                  type: integer
+                clientId:
+                  type: integer
+      responses:
+        '201':
+          description: Title transfer initiated successfully
+
+  /title/status/{itemId}:
+    get:
+      tags: [Title Transfer]
+      summary: Get title transfer status
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Title transfer status retrieved successfully
+
+components:
+  schemas:
+    Deposit:
+      type: object
+      properties:
+        id:
+          type: integer
+        clientId:
+          type: integer
+        amount:
+          type: number
+          format: decimal
+        status:
+          type: string
+          enum: [pending, active, refunded, forfeited]
+        maxBiddingPower:
+          type: number
+          format: decimal
+        createdAt:
+          type: string
+          format: date-time
+
+    DepositResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        deposit:
+          $ref: '#/components/schemas/Deposit'
+
+    ProxyBid:
+      type: object
+      properties:
+        id:
+          type: integer
+        clientId:
+          type: integer
+        itemId:
+          type: integer
+        maxAmount:
+          type: number
+          format: decimal
+        currentBid:
+          type: number
+          format: decimal
+        isActive:
+          type: boolean
+
+    Bid:
+      type: object
+      properties:
+        id:
+          type: integer
+        bidAmount:
+          type: number
+          format: decimal
+        ClientId:
+          type: integer
+        itemId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    SellerApproval:
+      type: object
+      properties:
+        id:
+          type: integer
+        itemId:
+          type: integer
+        bidId:
+          type: integer
+        sellerId:
+          type: integer
+        status:
+          type: string
+          enum: [pending, approved, rejected, counteroffer]
+        sellerResponse:
+          type: string
+        counterofferAmount:
+          type: number
+          format: decimal
+        deadline:
+          type: string
+          format: date-time
+
+    Payment:
+      type: object
+      properties:
+        id:
+          type: integer
+        vehiclePrice:
+          type: number
+          format: decimal
+        auctionFee:
+          type: number
+          format: decimal
+        storageFee:
+          type: number
+          format: decimal
+        totalAmount:
+          type: number
+          format: decimal
+        status:
+          type: string
+          enum: [pending, paid, refunded, failed]
+        invoiceNumber:
+          type: string
+
+    Pickup:
+      type: object
+      properties:
+        id:
+          type: integer
+        itemId:
+          type: integer
+        clientId:
+          type: integer
+        scheduledDate:
+          type: string
+          format: date-time
+        pickupDeadline:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [scheduled, pending, confirmed, late, completed]
+        releaseDocument:
+          type: string
+
+    TitleTransfer:
+      type: object
+      properties:
+        id:
+          type: integer
+        itemId:
+          type: integer
+        clientId:
+          type: integer
+        titleType:
+          type: string
+          enum: [Clean, Salvage, Non-repairable, Rebuilt, Export-only]
+        status:
+          type: string
+          enum: [pending, in-transit, completed, delayed]
+        documentUrl:
+          type: string
+        transferDate:
+          type: string
+          format: date-time
+

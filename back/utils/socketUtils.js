@@ -23,7 +23,67 @@ function sendMessageToRoom(roomId, message, userId = null) {
   io.to(roomIdStr).emit("placedBid", { 
     bidAmount: parseFloat(message), 
     itemId: roomIdStr,
-    userId: userId ? parseInt(userId) : null
+    userId: userId ? parseInt(userId) : null,
+    timestamp: new Date().toISOString()
+  });
+}
+
+function emitAuctionCountdown(roomId, stage, timeLeft) {
+  if (!io) {
+    console.warn("Socket.IO not initialized. Cannot emit countdown.");
+    return;
+  }
+
+  const roomIdStr = roomId.toString();
+  io.to(roomIdStr).emit("auctionCountdown", {
+    stage, // 'goingOnce', 'goingTwice', 'sold'
+    timeLeft, // seconds remaining
+    itemId: roomIdStr,
+    timestamp: new Date().toISOString()
+  });
+}
+
+function emitProxyBidExecuted(roomId, bidAmount, userId) {
+  if (!io) {
+    console.warn("Socket.IO not initialized. Cannot emit proxy bid.");
+    return;
+  }
+
+  const roomIdStr = roomId.toString();
+  io.to(roomIdStr).emit("proxyBidExecuted", {
+    bidAmount,
+    itemId: roomIdStr,
+    userId,
+    timestamp: new Date().toISOString()
+  });
+}
+
+function emitApprovalStatusChanged(roomId, status, approvalData) {
+  if (!io) {
+    console.warn("Socket.IO not initialized. Cannot emit approval status.");
+    return;
+  }
+
+  const roomIdStr = roomId.toString();
+  io.to(roomIdStr).emit("approvalStatusChanged", {
+    status,
+    itemId: roomIdStr,
+    ...approvalData,
+    timestamp: new Date().toISOString()
+  });
+}
+
+function emitPaymentProcessed(roomId, paymentData) {
+  if (!io) {
+    console.warn("Socket.IO not initialized. Cannot emit payment status.");
+    return;
+  }
+
+  const roomIdStr = roomId.toString();
+  io.to(roomIdStr).emit("paymentProcessed", {
+    itemId: roomIdStr,
+    ...paymentData,
+    timestamp: new Date().toISOString()
   });
 }
 
@@ -52,5 +112,9 @@ module.exports = {
   initializeSocketUtils,
   sendMessageToRoom,
   sendMessageToUser,
+  emitAuctionCountdown,
+  emitProxyBidExecuted,
+  emitApprovalStatusChanged,
+  emitPaymentProcessed,
 };
 

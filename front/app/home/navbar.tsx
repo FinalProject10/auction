@@ -13,6 +13,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
+  const [mounted, setMounted] = useState(false)
   const [home, setHome] = useState(false)
   const [platform, setPlatform] = useState(false)
   const router = useRouter()
@@ -26,84 +27,182 @@ const Navbar = () => {
   const [mobileAccountOpen, setMobileAccountOpen] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [mounted])
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    if (!mounted || typeof window === 'undefined') return
+    const checkLogin = () => {
+      const userId = localStorage.getItem('userId')
+      const role = localStorage.getItem('role')
+      setIsLoggedIn(!!userId && !!role)
+    }
+    checkLogin()
+    // Check login status periodically in case it changes
+    const interval = setInterval(checkLogin, 1000)
+    return () => clearInterval(interval)
+  }, [mounted])
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!account) return
+    
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element
+      // Don't close if clicking inside the dropdown
+      if (!target.closest('.account-dropdown-container')) {
+        setAccount(false)
+      }
+    }
+    
+    // Use capture phase to catch clicks before they bubble
+    document.addEventListener('click', handleClickOutside, true)
+    return () => document.removeEventListener('click', handleClickOutside, true)
+  }, [account])
 
   const ripitiw = () => {
     const ra = localStorage.getItem('role')
     if (ra === "seller") {
       return '/sellerDash'
     }
+    if (ra === "admin") {
+      return '/AdminDashboard'
+    }
     return '/clientDash'
+  }
+
+  if (!mounted) {
+    return (
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-[100]">
+        <div className="container mx-auto">
+          <div className="flex items-center justify-between h-16 md:h-20 px-2 md:px-4">
+            <div className="h-8 md:h-12 w-32 bg-gray-200 animate-pulse rounded"></div>
+            <div className="hidden lg:flex items-center gap-8">
+              <div className="h-4 w-16 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-4 w-20 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-4 w-16 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-4 w-20 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-4 w-24 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-10 w-24 bg-gray-200 animate-pulse rounded"></div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    )
   }
 
   return (
     <>
       {/* Top Bar - Hidden on mobile */}
-      <div className={`hidden md:block w-full h-[54px] overflow-hidden border-b border-gray-200 bg-white transition-all duration-300 ${isScrolled ? 'hidden md:block' : ''}`}>
+      {isLoggedIn && (
+      <div className="hidden md:block w-full h-[54px] overflow-visible border-b border-gray-200 bg-white transition-all duration-300 relative z-[110]">
         <div className="container mx-auto h-full flex items-center justify-between text-sm text-gray-700">
           <div className="flex items-center gap-0">
             <div className="px-6 border-x border-gray-200 h-full flex items-center justify-center gap-2">
               <FaPhoneAlt className="text-primary" />
-              <span>+216 97 152 240</span>
+              <span>+84961566302</span>
             </div>
             <div className="px-6 border-r border-gray-200 h-full flex items-center justify-center gap-2">
               <CgMail className="text-primary" />
-              <span>auctionBid@gmail.tn</span>
+              <span>khelifisalmen9@gmail.com</span>
             </div>
             <div className="px-6 border-r border-gray-200 h-full flex items-center justify-center gap-2">
               <MdAccessTime className="text-primary" />
               <span>Mon - Fri: 10:00 - 18:00</span>
             </div>
           </div>
-          <div className="relative">
-            <div
-              className="px-6 border-l border-gray-200 h-full flex items-center justify-center gap-2 cursor-pointer hover:text-primary transition-colors"
-              onMouseEnter={() => setAccount(true)}
-            >
-              <span className="font-semibold">My Account</span>
-              <MdArrowDownward size={12} className={`transition-transform ${account ? 'rotate-180' : ''}`} />
-            </div>
-            {account && (
+          {isLoggedIn && (
+            <div className="relative account-dropdown-container z-[120]">
               <div
-                className="absolute right-0 top-full mt-2 bg-white w-[200px] shadow-xl rounded-lg py-2 z-50 animate-fade-in"
-                onMouseLeave={() => setAccount(false)}
+                className="px-6 border-l border-gray-200 h-full flex items-center justify-center gap-2 cursor-pointer hover:text-primary transition-colors"
+                onMouseEnter={() => setAccount(true)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setAccount(!account)
+                }}
               >
-                <Link href={`${ripitiw()}`} className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors">
-                  <RiDashboardFill className="text-primary" />
-                  <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Dashboard</span>
-                </Link>
-                <Link href={'/membershipCard'} className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors">
-                  <IoPersonOutline className="text-primary" />
-                  <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Services</span>
-                </Link>
-                <Link href={'/'} onClick={() => localStorage.clear()} className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors">
-                  <CiLogout className="text-primary" />
-                  <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Log out</span>
-                </Link>
+                <span className="font-semibold">My Account</span>
+                <MdArrowDownward size={12} className={`transition-transform ${account ? 'rotate-180' : ''}`} />
               </div>
-            )}
-          </div>
+              {account && (
+                <div
+                  className="absolute right-0 top-full mt-2 bg-white w-[200px] shadow-xl rounded-lg py-2 z-[120] border border-gray-200"
+                  onMouseEnter={() => setAccount(true)}
+                  onMouseLeave={() => setAccount(false)}
+                >
+                  <div
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer"
+                    onClick={() => {
+                      setAccount(false)
+                      router.push(ripitiw())
+                    }}
+                  >
+                    <RiDashboardFill className="text-primary" />
+                    <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Dashboard</span>
+                  </div>
+                  <div
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer"
+                    onClick={() => {
+                      setAccount(false)
+                      router.push('/membershipCard')
+                    }}
+                  >
+                    <IoPersonOutline className="text-primary" />
+                    <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Services</span>
+                  </div>
+                  <Link 
+                    href={'/'} 
+                    onClick={(e) => {
+                      e.preventDefault()
+                      localStorage.clear()
+                      setAccount(false)
+                      router.push('/')
+                    }} 
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors block no-underline"
+                  >
+                    <CiLogout className="text-primary" />
+                    <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Log out</span>
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
+          {!isLoggedIn && (
+            <div className="px-6 border-l border-gray-200 h-full flex items-center justify-center">
+              <Link href="/login" className="font-semibold text-gray-700 hover:text-primary transition-colors">
+                Login
+              </Link>
+            </div>
+          )}
         </div>
       </div>
+      )}
 
       {/* Main Navigation */}
-      <nav className={`bg-white border-b border-gray-200 sticky top-0 z-40 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
+      <nav className={`bg-white border-b border-gray-200 sticky top-0 z-[100] transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
         <div className="container mx-auto">
           <div className="flex items-center justify-between h-16 md:h-20 px-2 md:px-4">
             {/* Logo */}
             <Link href="/home" className="flex items-center flex-shrink-0">
               <Image
-                className="h-8 md:h-12 w-auto"
-                width={120}
-                height={48}
-                src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg"
+                className="h-8 md:h-12"
+                width={335}
+                height={151}
+                src="/images/logo/logo-autobid.svg"
                 alt="AutoBid Logo"
                 priority
+                style={{ width: 'auto' }}
               />
             </Link>
 
@@ -138,11 +237,11 @@ const Navbar = () => {
                           <h3 className="font-bold text-2xl mb-4 text-gray-900">Search Cars</h3>
                           <div className="space-y-3">
                             {[
-                              { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-1.png", label: "Body", filter: { body: 'Convertible' } },
-                              { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-2.png", label: "Color", filter: { Color: 'Black' } },
-                              { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-4.png", label: "Capacity", filter: { Capacity: '1.0L' } },
-                              { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-3.png", label: "Gearbox", filter: { Gearbox: 'automatic' } },
-                              { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-5.png", label: "Climatisation", filter: { Climatisation: 'Automatic Climate Control' } },
+                              { icon: "/images/icons/autobid-icon-v2-1.png", label: "Body", filter: { body: 'Convertible' } },
+                              { icon: "/images/icons/autobid-icon-v2-2.png", label: "Color", filter: { Color: 'Black' } },
+                              { icon: "/images/icons/autobid-icon-v2-4.png", label: "Capacity", filter: { Capacity: '1.0L' } },
+                              { icon: "/images/icons/autobid-icon-v2-3.png", label: "Gearbox", filter: { Gearbox: 'automatic' } },
+                              { icon: "/images/icons/autobid-icon-v2-5.png", label: "Climatisation", filter: { Climatisation: 'Automatic Climate Control' } },
                             ].map((item, idx) => (
                               <div
                                 key={idx}
@@ -168,7 +267,7 @@ const Navbar = () => {
                           <div className="space-y-3">
                             {['Appointment', 'Dimensions', 'Manufacturer', 'Material', 'Weight'].map((item, idx) => (
                               <div key={idx} className="flex items-center gap-3 cursor-pointer group/item hover:text-primary transition-colors">
-                                <img className="w-5 h-5" src={`https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-${6 + idx}.png`} alt={item} />
+                                <img className="w-5 h-5" src={`/images/icons/autobid-icon-v2-${6 + idx}.png`} alt={item} />
                                 <span className="font-semibold text-gray-700 group-hover/item:text-primary">{item}</span>
                               </div>
                             ))}
@@ -178,7 +277,7 @@ const Navbar = () => {
                       <div
                         className="bg-cover bg-center rounded-r-xl"
                         style={{
-                          backgroundImage: 'url(https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'
+                          backgroundImage: 'url(/images/backgrounds/car-background.jpg)'
                         }}
                       />
                     </div>
@@ -281,11 +380,11 @@ const Navbar = () => {
                         <h4 className="font-bold text-sm text-gray-900 mb-2">Search Cars</h4>
                         <div className="space-y-2">
                           {[
-                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-1.png", label: "Body", filter: { body: 'Convertible' } },
-                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-2.png", label: "Color", filter: { Color: 'Black' } },
-                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-4.png", label: "Capacity", filter: { Capacity: '1.0L' } },
-                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-3.png", label: "Gearbox", filter: { Gearbox: 'automatic' } },
-                            { icon: "https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-5.png", label: "Climatisation", filter: { Climatisation: 'Automatic Climate Control' } },
+                            { icon: "/images/icons/autobid-icon-v2-1.png", label: "Body", filter: { body: 'Convertible' } },
+                            { icon: "/images/icons/autobid-icon-v2-2.png", label: "Color", filter: { Color: 'Black' } },
+                            { icon: "/images/icons/autobid-icon-v2-4.png", label: "Capacity", filter: { Capacity: '1.0L' } },
+                            { icon: "/images/icons/autobid-icon-v2-3.png", label: "Gearbox", filter: { Gearbox: 'automatic' } },
+                            { icon: "/images/icons/autobid-icon-v2-5.png", label: "Climatisation", filter: { Climatisation: 'Automatic Climate Control' } },
                           ].map((item, idx) => (
                             <div
                               key={idx}
@@ -309,7 +408,7 @@ const Navbar = () => {
                         <div className="space-y-2">
                           {['Appointment', 'Dimensions', 'Manufacturer', 'Material', 'Weight'].map((item, idx) => (
                             <div key={idx} className="flex items-center gap-2 py-1 px-2 rounded-md hover:bg-gray-50">
-                              <img className="w-4 h-4" src={`https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-${6 + idx}.png`} alt={item} />
+                              <img className="w-4 h-4" src={`/images/icons/autobid-icon-v2-${6 + idx}.png`} alt={item} />
                               <span className="text-sm text-gray-700">{item}</span>
                             </div>
                           ))}

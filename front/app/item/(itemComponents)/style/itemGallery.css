@@ -32,6 +32,14 @@ body {
 
 .gallery-holder {
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.gallery {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .image img {
@@ -42,8 +50,61 @@ body {
 }
 
 @media (max-width: 768px) {
-    .image img {
-        height: 400px;
+    .gallery-holder {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .gallery {
+        margin-right: 0;
+        gap: 16px;
+        flex-basis: 100%;
+    }
+
+    .image img,
+    .gallery .image img {
+        height: 300px;
+    }
+
+    .gallery .thumbnails {
+        gap: 12px;
+    }
+
+    .gallery .thumbnails .img-holder {
+        height: 70px;
+        width: 70px;
+    }
+
+    .gallery .thumbnails img {
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-holder {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .image img,
+    .gallery .image img {
+        height: 240px;
+        border-radius: 10px;
+    }
+
+    .gallery .thumbnails {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .gallery .thumbnails .img-holder {
+        height: 60px;
+        width: 60px;
+    }
+
+    .gallery .thumbnails img {
+        height: 60px;
     }
 }
 
@@ -532,8 +593,26 @@ header nav .right .cart button.checkout:hover {
 }
 
 @media (max-width: 768px) {
+    .gallery {
+        margin-right: 0;
+        gap: 16px;
+    }
+
     .gallery .image img {
-        height: 350px;
+        height: 300px;
+    }
+
+    .gallery .thumbnails {
+        gap: 12px;
+    }
+
+    .gallery .thumbnails .img-holder {
+        height: 70px;
+        width: 70px;
+    }
+
+    .gallery .thumbnails img {
+        height: 70px;
     }
 }
 

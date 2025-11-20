@@ -827,6 +827,259 @@ Notifies users about important events like bid updates, auction wins, messages, 
 
 ---
 
+### 16. Deposit Management System
+
+**Description:**
+Clients must add a refundable deposit to participate in auctions. The deposit determines their maximum bidding power (deposit × 10 multiplier).
+
+**Key Features:**
+- Add deposit via payment gateway
+- View current balance and max bidding power
+- Deposit history tracking
+- Refund processing
+- Automatic bidding power calculation
+
+**User Flow:**
+1. Client navigates to deposit management page
+2. Client enters deposit amount
+3. Client completes payment via Stripe/Flouci
+4. System calculates max bidding power (deposit × 10)
+5. Client can now bid up to their max bidding power
+6. Client can view deposit history and request refunds
+
+**Acceptance Criteria:**
+- Deposit must be greater than $0
+- Max bidding power = deposit amount × 10
+- Deposit status tracked (pending/active/refunded/forfeited)
+- Payment gateway integration required
+- Deposit history visible to client
+
+---
+
+### 17. Proxy Bid (Auto-Bid) System
+
+**Description:**
+Allows clients to set a maximum bid amount. The system automatically bids on their behalf when they are outbid, up to their maximum amount.
+
+**Key Features:**
+- Set maximum proxy bid amount
+- Automatic bid execution when outbid
+- View active proxy bids
+- Cancel proxy bids
+- Real-time proxy bid updates
+
+**User Flow:**
+1. Client views auction item
+2. Client sets maximum proxy bid amount
+3. System stores proxy bid
+4. When client is outbid, system automatically places next bid
+5. System continues until max amount reached or client wins
+6. Client can cancel proxy bid at any time
+
+**Acceptance Criteria:**
+- Proxy bid must be greater than current bid
+- Auto-bid increments follow standard increment rules
+- Proxy bid stops at maximum amount
+- Multiple proxy bids can exist (lowest max executes first)
+- Real-time notifications when proxy bid executes
+
+---
+
+### 18. Live Auction Countdown System
+
+**Description:**
+Enhanced auction timer with "Going Once → Going Twice → Sold" countdown stages. Timer resets when new bids arrive.
+
+**Key Features:**
+- 30-second countdown after last bid
+- "Going Once" stage at 20 seconds
+- "Going Twice" stage at 10 seconds
+- "Sold" stage at 0 seconds
+- Automatic timer reset on new bids
+- Real-time socket updates
+
+**User Flow:**
+1. Auction is active
+2. Last bid placed starts 30-second countdown
+3. At 20 seconds: "Going Once" displayed
+4. At 10 seconds: "Going Twice" displayed
+5. At 0 seconds: "Sold" - auction ends
+6. If new bid arrives, countdown resets to 30 seconds
+
+**Acceptance Criteria:**
+- Countdown starts at 30 seconds after last bid
+- Timer resets when new bid placed
+- Visual indicators for each stage
+- Socket events for real-time updates
+- Auction ends when countdown reaches 0
+
+---
+
+### 19. Seller Approval Workflow
+
+**Description:**
+After auction ends, seller must approve the sale. Seller can approve, reject, or make a counteroffer.
+
+**Key Features:**
+- Pending approval creation after auction ends
+- Seller approval/reject/counteroffer options
+- 3-day deadline for seller response
+- Buyer notification of seller decision
+- Conditional sale workflow
+
+**User Flow:**
+1. Auction ends with winning bid
+2. System creates pending approval for seller
+3. Seller receives notification
+4. Seller views approval request with bid details
+5. Seller chooses: approve, reject, or counteroffer
+6. Buyer receives notification of decision
+7. If approved: payment process begins
+8. If rejected: auction ends, no sale
+9. If counteroffer: buyer can accept or decline
+
+**Acceptance Criteria:**
+- Approval created automatically after auction ends
+- Seller has 3 days to respond
+- Status tracked (pending/approved/rejected/counteroffer)
+- Buyer notified of all decisions
+- Item status updated based on decision
+
+---
+
+### 20. Payment & Fees Calculation
+
+**Description:**
+After seller approval, buyer pays vehicle price plus auction fees and storage fees (if applicable).
+
+**Key Features:**
+- Auction fee calculation (10% of winning bid)
+- Storage fee calculation (if pickup is late)
+- Payment processing via Stripe/Flouci
+- Invoice/receipt generation
+- Payment history tracking
+
+**User Flow:**
+1. Seller approves sale
+2. System calculates payment breakdown:
+   - Vehicle price (winning bid)
+   - Auction fee (10% of winning bid)
+   - Storage fee (if applicable)
+   - Total amount
+3. Buyer views payment breakdown
+4. Buyer completes payment
+5. System generates invoice/receipt
+6. Payment status updated to "paid"
+7. Pickup process begins
+
+**Acceptance Criteria:**
+- Auction fee = 10% of winning bid
+- Storage fee = $50/day after pickup deadline
+- Payment must be completed before pickup
+- Invoice number generated
+- Payment history tracked per client
+
+---
+
+### 21. Pickup & Transportation Management
+
+**Description:**
+After payment, buyer schedules pickup. System tracks pickup deadline and calculates late storage fees.
+
+**Key Features:**
+- Release document generation
+- Pickup scheduling
+- 5-day pickup deadline
+- Late storage fee calculation
+- Pickup confirmation
+- Transportation company tracking
+
+**User Flow:**
+1. Payment completed
+2. System generates release document
+3. System sets 5-day pickup deadline
+4. Buyer schedules pickup date
+5. Buyer views release document
+6. Buyer picks up vehicle
+7. Pickup confirmed in system
+8. If late: storage fees calculated automatically
+
+**Acceptance Criteria:**
+- Release document generated after payment
+- Pickup deadline = 5 days after payment
+- Late fee = $50/day after deadline
+- Pickup status tracked (pending/scheduled/confirmed/late/completed)
+- Storage fees added to payment if late
+
+---
+
+### 22. Title Transfer System
+
+**Description:**
+Tracks title transfer process from seller to buyer, including title type and document management.
+
+**Key Features:**
+- Title type tracking (Clean/Salvage/Rebuilt/etc.)
+- Title transfer status tracking
+- Document upload/download
+- Export documentation (if applicable)
+- Transfer completion tracking
+
+**User Flow:**
+1. Pickup confirmed
+2. System initiates title transfer
+3. Title type recorded (from item)
+4. Title document uploaded by seller/admin
+5. Status updated to "in-transit"
+6. Buyer receives notification
+7. Title transfer completed
+8. Status updated to "completed"
+9. Transfer date recorded
+
+**Acceptance Criteria:**
+- Title transfer initiated after pickup confirmation
+- Title type matches item title type
+- Status tracked (pending/in-transit/completed/delayed)
+- Documents can be uploaded/downloaded
+- Export docs handled if title type is "Export-only"
+
+---
+
+### 23. Car Intake & Verification
+
+**Description:**
+Enhanced vehicle listing with VIN, title type, damage type, lot number, and inspection reports.
+
+**Key Features:**
+- VIN number tracking
+- Title type (Clean/Salvage/Non-repairable/Rebuilt/Export-only)
+- Damage type categorization
+- Lot number assignment
+- Inspection report storage
+- Auction status tracking
+
+**User Flow:**
+1. Seller/admin adds vehicle
+2. System prompts for:
+   - VIN number
+   - Title type
+   - Damage type
+   - Lot number
+   - Inspection report
+3. System assigns auction status (scheduled)
+4. Vehicle appears in listings with all details
+5. Buyers can view all vehicle information
+
+**Acceptance Criteria:**
+- VIN number (17 characters) required
+- Title type must be selected from enum
+- Damage type can be text description
+- Lot number assigned automatically or manually
+- Inspection report can be text or file upload
+- Auction status tracks vehicle lifecycle
+
+---
+
 ## Summary
 
 The AutoBid platform provides a comprehensive auction experience with:

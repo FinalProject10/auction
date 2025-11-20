@@ -135,11 +135,12 @@ const Page = () => {
             </div>
             <div className="mission-years">
               <Image
-                src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/Autobid-24.png"
+                src="/images/about/Autobid-24.png"
                 alt="Years"
                 width={90}
                 height={90}
                 className="years-badge"
+                unoptimized={true}
               />
               <div>
                 <p className="years-text">Years on the Market</p>
@@ -151,10 +152,11 @@ const Page = () => {
           </div>
           <div className="mission-image">
             <Image
-              src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/Autobid-About_comp.jpg"
+              src="/images/about/Autobid-About_comp.jpg"
               alt="About AutoBid"
               fill
               className="mission-img"
+              unoptimized={true}
             />
           </div>
         </div>
@@ -180,7 +182,7 @@ const Page = () => {
             <div className="team-member">
               <div className="team-avatar">
                 <Image
-                  src="https://i.pravatar.cc/150?img=11"
+                  src="/images/about/salmen-khlifi.jpg"
                   alt="SALMEN KHLIFI"
                   fill
                   className="team-img"
@@ -234,14 +236,48 @@ const Page = () => {
         <div className="partners-container">
           <h2 className="partners-title">Our Trustworthy Partners</h2>
           <div className="partners-grid">
-            {[1, 2, 3, 4, 5, 6].map((num) => (
-              <div key={num} className="partner-logo">
+            {[
+              {
+                name: "AutoFinance Solutions",
+                logo: "https://via.placeholder.com/200x100/FF2800/FFFFFF?text=AutoFinance"
+              },
+              {
+                name: "Premium Motors",
+                logo: "https://via.placeholder.com/200x100/1F2937/FFFFFF?text=Premium+Motors"
+              },
+              {
+                name: "CarSecure Insurance",
+                logo: "https://via.placeholder.com/200x100/3B82F6/FFFFFF?text=CarSecure"
+              },
+              {
+                name: "Elite Auto Group",
+                logo: "https://via.placeholder.com/200x100/10B981/FFFFFF?text=Elite+Auto"
+              },
+              {
+                name: "Vehicle Logistics Pro",
+                logo: "https://via.placeholder.com/200x100/F59E0B/FFFFFF?text=Vehicle+Logistics"
+              },
+              {
+                name: "AutoTech Services",
+                logo: "https://via.placeholder.com/200x100/8B5CF6/FFFFFF?text=AutoTech"
+              },
+              {
+                name: "Classic Car Collection",
+                logo: "https://via.placeholder.com/200x100/EF4444/FFFFFF?text=Classic+Cars"
+              },
+              {
+                name: "Motor Inspection Co",
+                logo: "https://via.placeholder.com/200x100/06B6D4/FFFFFF?text=Motor+Inspection"
+              }
+            ].map((partner, index) => (
+              <div key={index} className="partner-logo" title={partner.name}>
                 <Image
-                  src={`https://autobid.modeltheme.com/wp-content/uploads/2023/11/Autobid-Client${num}.png`}
-                  alt={`Partner ${num}`}
+                  src={partner.logo}
+                  alt={partner.name}
                   width={150}
                   height={80}
                   className="partner-img"
+                  unoptimized
                 />
               </div>
             ))}

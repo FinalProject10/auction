@@ -10,7 +10,7 @@ const NoProductsFound = () => {
         <SideBar h={800}/>
     <div className="no-products-container">
       <img
-        src="https://autobid.modeltheme.com/wp-content/plugins/dokan-lite/assets/images/no-product-found.svg"
+        src="/images/empty/no-product-found.svg"
         alt="No Products Found"
       />
       <h2>No Products Found!</h2>

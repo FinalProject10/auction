@@ -10,42 +10,42 @@ const Style = () => {
   const bodyTypes = [
     {
       name: "Sedan",
-      image: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ1.png",
+      image: "/images/categories/autobid-main_categ1.png",
       category: "sedan"
     },
     {
       name: "SUV",
-      image: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ2.png",
+      image: "/images/categories/autobid-main_categ2.png",
       category: "suv"
     },
     {
       name: "Sports",
-      image: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ3.png",
+      image: "/images/categories/autobid-main_categ3.png",
       category: "sports"
     },
     {
       name: "Convertible",
-      image: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ4.png",
+      image: "/images/categories/autobid-main_categ4.png",
       category: "convertible"
     },
     {
       name: "Compact",
-      image: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ5.png",
+      image: "/images/categories/autobid-main_categ5.png",
       category: "compact"
     },
     {
       name: "Pick Up",
-      image: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ6.png",
+      image: "/images/categories/autobid-main_categ6.png",
       category: "pickup"
     },
     {
       name: "Cross Over",
-      image: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ7.png",
+      image: "/images/categories/autobid-main_categ7.png",
       category: "crossover"
     },
     {
       name: "Electric",
-      image: "https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-main_categ8.png",
+      image: "/images/categories/autobid-main_categ8.png",
       category: "electric"
     }
   ];
@@ -80,6 +80,11 @@ const Style = () => {
                   width={200}
                   height={150}
                   className="body-type-img"
+                  unoptimized={true}
+                  onError={(e) => {
+                    // Fallback to placeholder if image fails
+                    e.currentTarget.src = '/placeholder-car.png';
+                  }}
                 />
               </div>
               <h3 className="body-type-name">{type.name}</h3>

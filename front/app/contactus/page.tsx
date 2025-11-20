@@ -170,8 +170,8 @@ export default function Contact(){
                                 </svg>
                                 Email Address
                             </h2>
-                            <p className="text-gray-300 hover:text-white transition-colors">office@autobid.modeltheme.com</p>
-                            <p className="text-gray-300 hover:text-white transition-colors">sales@autobid.modeltheme.com</p>
+                            <p className="text-gray-300 hover:text-white transition-colors">khelifisalmen9@gmail.com</p>
+                            <p className="text-gray-300 hover:text-white transition-colors">khelifisalmen9@gmail.com</p>
                         </div>
                         <div className="border-t border-gray-700 my-8"></div>
                         <div className="mb-8">
@@ -196,8 +196,8 @@ export default function Contact(){
                                 Phone Number
                             </h2>
                             <p className="text-gray-300">
-                                Headquarters: <span className="text-white font-semibold">+20 000 000 000</span>
-                                <br />Sales: <span className="text-white font-semibold">+20 000 000 000</span>
+                                Headquarters: <span className="text-white font-semibold">+84961566302</span>
+                                <br />Sales: <span className="text-white font-semibold">+84961566302</span>
                             </p>
                         </div>
                         <div className="border-t border-gray-700 my-8"></div>

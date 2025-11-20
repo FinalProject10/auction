@@ -3,8 +3,9 @@ const router = express.Router();
 const bidController = require("../controllers/bidControllers");
 const { Bid, Client } = require("../models/relations");
 const { sendMessageToRoom } = require("../utils/socketUtils");
+const { validateBid } = require("../middleware/validation");
 
-router.post("/placeBid", bidController.placeBid);
+router.post("/placeBid", validateBid, bidController.placeBid);
 router.get("/fetch-items/:id", bidController.getBids);
 router.get("/current/:itemId", bidController.getCurrentBid);
 router.get("/history/:itemId", bidController.getBidHistory);
@@ -16,12 +17,13 @@ router.get("/bidNotification/:id", async (req, res) => {
     const itemId = req.params.id;
     const lastBid = await Bid.findOne({
       where: { itemId },
-      attributes: ["bidAmount", "createdAt"],
+      attributes: ["bidAmount", "id"],
       include: {
         model: Client,
+        as: "client",
         attributes: ["name"],
       },
-      order: [["createdAt", "DESC"]],
+      order: [["id", "DESC"]],
     });
 
     if (lastBid) {
