@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   backend:
     build:
@@ -8,10 +10,10 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV:-production}
       PORT: 3001
-      DB_HOST: mysql
-      DB_PORT: 3306
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT:-3306}
       DB_USER: ${DB_USER:-root}
-      DB_PASSWORD: ${DB_PASSWORD:-rootpassword}
+      DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME:-final}
       DB_DIALECT: mysql
       JWT_SECRET: ${JWT_SECRET}
@@ -30,10 +32,6 @@ services:
       - dokploy-network
     # Traefik labels removed - use Dokploy UI Domains tab instead
     # Dokploy will automatically configure Traefik routing when domain is added via UI
-
-volumes:
-  mysql-data:
-    driver: local
 
 networks:
   dokploy-network:
