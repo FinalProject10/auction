@@ -46,7 +46,7 @@ const Seller = sequelize.define(
       allowNull: true,
     },
   },
-  { timestamps: false, tableName: "seller" }
+  { timestamps: false, tableName: "sellers" }
 );
 
 module.exports = Seller;

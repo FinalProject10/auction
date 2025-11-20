@@ -1,0 +1,122 @@
+/* Chat Bubble Button */
+.chat-bubble-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.chat-bubble-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.chat-bubble-button:active {
+  transform: scale(0.95);
+}
+
+.chat-bubble-icon {
+  font-size: 24px;
+  color: white;
+}
+
+.chat-bubble-open {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Chat Widget Container */
+.chat-widget-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 999;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design - Enhanced Mobile */
+@media (max-width: 768px) {
+  .chat-bubble-button {
+    width: 56px;
+    height: 56px;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .chat-bubble-button:active {
+    transform: scale(0.9);
+  }
+
+  .chat-widget-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    bottom: auto;
+    right: auto;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .chat-widget-container .chat-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    position: relative;
+    animation: slideUpFull 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUpFull {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Ensure chat widget doesn't interfere with other elements */
+.chat-widget-container .chat-container {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+

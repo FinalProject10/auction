@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import { getApiUrl } from '../../../../utils/api'
 import Alert from '@mui/material/Alert';
 import Input from '@mui/joy/Input';
 import Image from 'next/image'
@@ -14,6 +15,7 @@ import { IoPersonCircle } from "react-icons/io5";
 import { HiDocumentText } from "react-icons/hi2";
 import { MdVerifiedUser } from "react-icons/md";
 import { useRouter } from 'next/navigation';
+import InfoTooltip from '../../../components/InfoTooltip';
 const FirstStep = () => {
   const router=useRouter()
   const[firstName,setFirstName]=useState(null)
@@ -30,7 +32,7 @@ const FirstStep = () => {
 
 
   const add=()=>{
-    axios.post(`http://localhost:5000/seller/register`,{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
+    axios.post(getApiUrl('seller/register'),{name:firstName,lastName:lastName,password:pass,email:email,phone:phone})
     .then(r=>{
       console.log(r.data)
       localStorage.setItem('id',r.data.id)
@@ -39,7 +41,7 @@ const FirstStep = () => {
   
   return (
     <div>
-        <img className='absolute right-0 h-full w-1/2' src="https://static01.nyt.com/images/2023/09/21/multimedia/21sp-cli-stadium-02-mljv/21sp-cli-stadium-02-mljv-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="" />
+        <img className='absolute right-0 h-full w-1/2' src="/images/backgrounds/login-background.jpg" alt="" />
         
        <div className='flex mt-28 ml-40 absolute'>
         <IoPersonCircle size={45} color="#0000007a"/>
@@ -77,7 +79,14 @@ const FirstStep = () => {
         </div>
         <div className='flex gap-5'>
         <div>
-        <h1 className='mb-5'>Phone</h1>
+        <h1 className='mb-5 flex items-center gap-2'>
+          Phone
+          <InfoTooltip 
+            content="Enter your phone number. Must be 8 digits long. Format: +84961566302"
+            position="top"
+            iconSize="sm"
+          />
+        </h1>
         <Input 
         onChange={(e:any)=>{setPhone(e.target.value)
         if(e.target.value.length===8){
@@ -86,13 +95,20 @@ const FirstStep = () => {
           setDanger(true)
         }}
         type="text"
-        placeholder='+216 . . .'
+        placeholder='+84961566302'
         color={danger?'danger':"success"}
         className=' w-[250px] h-[45px] bg-gray-50 pl-5 mb-5'
         />
         </div>
         <div>
-        <h1 className='mb-5'>Email</h1>
+        <h1 className='mb-5 flex items-center gap-2'>
+          Email
+          <InfoTooltip 
+            content="Enter a valid email address. This will be used for account verification and notifications."
+            position="top"
+            iconSize="sm"
+          />
+        </h1>
         <Input 
         onChange={(e:any)=>setEmail(e.target.value)}
         type="email"
@@ -104,7 +120,23 @@ const FirstStep = () => {
         <div className='flex gap-5'>
 
           <div>
-        <h1 className='mb-5'>Password</h1>
+        <h1 className='mb-5 flex items-center gap-2'>
+          Password
+          <InfoTooltip 
+            content={
+              <div>
+                <p className="font-semibold mb-1 text-yellow-300">Password Requirements:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>More than 8 characters</li>
+                  <li>At least one special character (#, ?, @)</li>
+                </ul>
+                <p className="mt-2 text-xs">Hover over the password field for real-time validation.</p>
+              </div>
+            }
+            position="top"
+            iconSize="sm"
+          />
+        </h1>
     
       <Input
         onMouseEnter={()=>setShow(true)}
@@ -137,7 +169,14 @@ const FirstStep = () => {
      
         </div>
         <div>
-        <h1 className='mb-5'>Confirm Password</h1>
+        <h1 className='mb-5 flex items-center gap-2'>
+          Confirm Password
+          <InfoTooltip 
+            content="Re-enter your password to confirm. Both passwords must match exactly."
+            position="top"
+            iconSize="sm"
+          />
+        </h1>
        
       <Input
         type="password"

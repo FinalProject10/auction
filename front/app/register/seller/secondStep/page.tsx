@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import { getApiUrl } from '../../../../utils/api'
 import img1 from '../../../images/img1.png'
 import Image from 'next/image'
 import { IoPersonCircle } from "react-icons/io5";
@@ -18,7 +19,7 @@ const SecondStep = () => {
   const [cin, setCin] = useState("");
   const [grise,setGrise]=useState("")
   // const add=()=>{
-  //   axios.post(`http://localhost:5000/seller/registerSec`,{batinda:grise,cinNum:cin})
+  //   axios.post(`http://localhost:5001/seller/registerSec`,{batinda:grise,cinNum:cin})
   //   .then(r=>router.push('/register/seller/thirdStep')
   //   ).catch(err=>console.log(err))
   // }
@@ -29,9 +30,9 @@ const addCin=()=>{
   form.append('img',cin)
   form.append('img',grise)
   form.append('id',id)
-  axios.post(`http://localhost:5000/cloudinary/get`,form).then(r=>{
+  axios.post(getApiUrl('cloudinary/get'),form).then(r=>{
    console.log(r.data)
-    axios.post(`http://localhost:5000/seller/registerSec/${id}`,{batinda:r.data[1].url,cinNum:r.data[0].url})
+    axios.post(getApiUrl(`seller/registerSec/${id}`),{batinda:r.data[1].url,cinNum:r.data[0].url})
     .then(r=>router.push('/register/seller/thirdStep')).catch(err=>console.log(err))
   })
   .catch(err=>console.log(err))
@@ -45,7 +46,7 @@ const addBatinda=()=>{
   return (
     <div>
 
-        <img className='absolute right-0 h-full w-1/2' src="https://static01.nyt.com/images/2023/09/21/multimedia/21sp-cli-stadium-02-mljv/21sp-cli-stadium-02-mljv-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="" />
+        <img className='absolute right-0 h-full w-1/2' src="/images/backgrounds/login-background.jpg" alt="" />
         {/* <Image  src={img1} className='absolute right-[17.25rem] rounded-xl top-[6rem] z-30'
         alt=''/> */}
         <div className='flex mt-20 ml-40 absolute'>

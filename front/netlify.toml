@@ -1,0 +1,17 @@
+[build]
+  base = "front"
+  command = "npm run build"
+  publish = "front/.next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Redirects for Next.js
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

@@ -1,9 +1,9 @@
 "use client"
-import React,{useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FaBasketShopping } from "react-icons/fa6";
+import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
-import img1 from '../images/BEE-removebg-preview.png'
+import Image from 'next/image';
 import { FaPhoneAlt } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
 import { MdAccessTime } from "react-icons/md";
@@ -12,202 +12,513 @@ import { RiDashboardFill } from "react-icons/ri";
 import { IoPersonOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 
-import Image from 'next/image';
 const Navbar = () => {
-   
-    const[home,setHome]=useState(false)
-    const[platform,setPlatform]=useState(false)
-    const router = useRouter()
-    const[shop,setShop]=useState(false)
-    const[pages,setPages]=useState(false)
-    const[cart,setCart]=useState(false)
-    const[account,setAcoount]=useState(false)
+  const [mounted, setMounted] = useState(false)
+  const [home, setHome] = useState(false)
+  const [platform, setPlatform] = useState(false)
+  const router = useRouter()
+  const [shop, setShop] = useState(false)
+  const [pages, setPages] = useState(false)
+  const [account, setAccount] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [mobilePlatformOpen, setMobilePlatformOpen] = useState(false)
+  const [mobilePagesOpen, setMobilePagesOpen] = useState(false)
+  const [mobileAccountOpen, setMobileAccountOpen] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [mounted])
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    if (!mounted || typeof window === 'undefined') return
+    const checkLogin = () => {
+      const userId = localStorage.getItem('userId')
+      const role = localStorage.getItem('role')
+      setIsLoggedIn(!!userId && !!role)
+    }
+    checkLogin()
+    // Check login status periodically in case it changes
+    const interval = setInterval(checkLogin, 1000)
+    return () => clearInterval(interval)
+  }, [mounted])
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!account) return
+    
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element
+      // Don't close if clicking inside the dropdown
+      if (!target.closest('.account-dropdown-container')) {
+        setAccount(false)
+      }
+    }
+    
+    // Use capture phase to catch clicks before they bubble
+    document.addEventListener('click', handleClickOutside, true)
+    return () => document.removeEventListener('click', handleClickOutside, true)
+  }, [account])
+
+  const ripitiw = () => {
+    const ra = localStorage.getItem('role')
+    if (ra === "seller") {
+      return '/sellerDash'
+    }
+    if (ra === "admin") {
+      return '/AdminDashboard'
+    }
+    return '/clientDash'
+  }
+
+  if (!mounted) {
+    return (
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-[100]">
+        <div className="container mx-auto">
+          <div className="flex items-center justify-between h-16 md:h-20 px-2 md:px-4">
+            <div className="h-8 md:h-12 w-32 bg-gray-200 animate-pulse rounded"></div>
+            <div className="hidden lg:flex items-center gap-8">
+              <div className="h-4 w-16 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-4 w-20 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-4 w-16 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-4 w-20 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-4 w-24 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-10 w-24 bg-gray-200 animate-pulse rounded"></div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    )
+  }
+
   return (
     <>
-    <div className='w-full h-[54px] overflow-hidden border-b-[1px] border-gray-200 flex'>
-      <div className='ml-[2%] border-l-[1px] border-r-[1px] border-gray-200  w-[180px] h-full flex justify-center items-center '>
-      <div className='flex  items-center'>
-      <FaPhoneAlt />
-      <h1 className='text-[15px] text-gray-700'>+216 97 152 240</h1>
-      </div>
-      </div>
-      <div className=' border-l-[1px] border-r-[1px] border-gray-200  w-[200px] h-full flex justify-center items-center '>
-      <div className='flex justify-evenly  items-center'>
-      <CgMail />
-      <h1 className='text-[15px] text-gray-700'>auctionBid@gmail.tn</h1>
-      </div>
-      </div>
-      <div className=' border-l-[1px] border-r-[1px] border-gray-200  w-[250px] h-full flex justify-center items-center '>
-      <div className='flex  items-center'>
-      <MdAccessTime />
-      <h1 className='text-[15px] text-gray-700'>Mon - Fri: 10:00 - 18:00</h1>
-      </div>
-      </div>
-      <div className='ml-[40%] border-l-[1px] border-r-[1px] border-gray-200  w-[170px] h-full flex justify-center items-center '>
-      <div className='flex  items-center justify-between cursor-pointer'
-      onMouseEnter={()=>setAcoount(true)}
-      >
-      
-      <h1 className='text-[15px] text-gray-700 font-[600]'>My Account</h1>
-      <MdArrowDownward size={10}/>
-      </div>
-      </div>
-      {account&&<div className='text-[#333333] bg-white w-[170px] h-[120px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl right-[55px] absolute top-[7%] '
-         onMouseLeave={()=>setAcoount(false)}
-        >
-           <Link href={'/clientDash'}> <div className='flex '> <RiDashboardFill className='mt-[5px]'/><h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Dashboard</h1></div></Link>
-           <Link href={'/membershipCard'}> <div className='flex'><CiLogout className='mt-[5px]'/><h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Account Details</h1></div> </Link>
-          <Link href={'/'} onClick={()=>localStorage.clear()}> <div className='flex'><IoPersonOutline className='mt-[5px]'/><h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Log out</h1></div> </Link> 
-        </div>}
-
-      {/* <div className='flex justify-center items-center ml-[8%]'>
-      <CgMail />
-
-      <h1 className='text-[15px] text-gray-700'>auctionBid@gmail.tn</h1>
-
-      
-
-      </div> */}
-     
-      
-    </div>
-    <div
-    onMouseLeave={()=>{setHome(false);setPlatform(false);setShop(false);setPages(false);setCart(false)}}
-
-    >
-        {/* <div 
-        className=' w-full h-[54px] bg-[#262626] flex justify-center items-center gap-[80%]'>
-        </div> */}
-        <div className='flex items-center gap-[30px] text-[#333333] font-[600] mb-[25px]'>
-            <Image className='w-[120px] ml-[75px]  mt-[15px] ' width={120} height={20} src="https://autobid.modeltheme.com/wp-content/themes/autobid/images/logo-autobid.svg" alt="" />
-        <Link href={'/home'} className='mt-[1%] ml-[10%] hover:text-[#ff2800] transition ease-in-out delay-50 ' 
-        onMouseEnter={()=>{setHome(true);setPlatform(false);setShop(false);setPages(false)}}
-        >Home</Link>
-        
-        <h1  className='mt-[1%] cursor-pointer hover:text-[#ff2800] transition ease-in-out delay-50'
-        onMouseEnter={()=>{setPlatform(true);setHome(false);setShop(false);setPages(false)}}
-        >Platform</h1>
-       
-        <Link href={'/shop'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'
-        onMouseEnter={()=>{setShop(true);setHome(false);setPlatform(false);setPages(false)}}
-        >Shop</Link>
-        <h1 className='mt-[1%] cursor-pointer hover:text-[#ff2800] transition ease-in-out delay-50'
-        onMouseEnter={()=>{setPages(true);setHome(false);setPlatform(false);setShop(false)}}
-        >Pages</h1>
-        <Link href={'/getInTouch'} className='mt-[1%] hover:text-[#ff2800] transition ease-in-out delay-50'>Get In Touch</Link>
-       {/* <Link className='hover:text-[#ff2800] ml-[20%] mt-[1%] cursor-pointer' href={'/cart'}> <FaBasketShopping size={25} 
-        onMouseEnter={()=>setCart(true)}/>
-</Link> */}
-        <button className='text-white font-[800] mt-[1%] bg-[#ff2800] rounded w-[132px] h-[43px] float-right hover:text-black hover:bg-white hover:border-[2px] hover:border-black hover:transition ease-in-out delay-50 ml-[15%]'>Sell Now</button>
-        </div>
-        
-       
-        {platform&&<div
-        onMouseLeave={()=>setPlatform(false)}
-        className=' bg-white w-[900px] h-[367px] rounded-[20px] absolute top-[15%] left-[419px] grid grid-cols-2 mt-[10px]'>
-            <div className='grid grid-cols-2 mt-[2%] ml-[2%] p-5'>
-                <div className='mb-10'>
-                <h1 className='font-[700] text-[30px] mb-[15px]'>Search Cars</h1>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-1.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '
-                onClick={()=>{localStorage.setItem('body','Convertible')
-                router.push('/shop')}}>Body</h1>
-                </div>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-2.png" alt="" />
-                <h1 
-                onClick={()=>{localStorage.setItem('Color','Black')
-                router.push('/shop')}}
-                className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Color</h1>
-                </div>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-4.png" alt="" />
-                <h1 
-                onClick={()=>{localStorage.setItem('Capacity','1.0L')
-                router.push('/shop')}}
-                className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Capacity</h1>
-                </div>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-3.png" alt="" />
-                <h1 
-                onClick={()=>{localStorage.setItem('Gearbox','automatic')
-                router.push('/shop')}}
-                className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Gearbox</h1>
-                </div>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px] h-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-5.png" alt="" />
-                <h1 
-                onClick={()=>{localStorage.setItem('Climatisation','Automatic Climate Control')
-                router.push('/shop')}}
-                className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Climatisation</h1><br/>
-                </div>
-                <Link href={'/shop'}><button className='font-[700] text-[15px] text-[#ff2800]'>Explore All Categories</button></Link>
-
-                </div>
-                <div>
-                <h1 className='font-[700] text-[30px] mb-[15px]'>Search Parts</h1>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-6.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Appointment</h1>
-                </div>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-7.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Dimensions</h1>
-                </div>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-8.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Manifacturer</h1>
-                </div>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-9.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Material</h1>
-                </div>
-                <div className='flex gap-[10px] mb-[15px]'>
-                <img className='w-[20px] h-[20px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/12/autobid-icon-v2-10.png" alt="" />
-                <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50 '>Weight</h1><br/>
-                </div>
-                </div>
-
+      {/* Top Bar - Hidden on mobile */}
+      {isLoggedIn && (
+      <div className="hidden md:block w-full h-[54px] overflow-visible border-b border-gray-200 bg-white transition-all duration-300 relative z-[110]">
+        <div className="container mx-auto h-full flex items-center justify-between text-sm text-gray-700">
+          <div className="flex items-center gap-0">
+            <div className="px-6 border-x border-gray-200 h-full flex items-center justify-center gap-2">
+              <FaPhoneAlt className="text-primary" />
+              <span>+84961566302</span>
             </div>
-            <div style={{backgroundImage: 'url(https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)', 
-  backgroundSize: 'cover',
-  borderBottomRightRadius:'20px',
-  borderTopRightRadius:'20px'}}></div>
-
-        </div>}
-       
-        {/* {shop&&<div className='text-[#333333] bg-white w-[150px] h-[144px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[35%] '
-        onMouseLeave={()=>setShop(false)}
-        >
-           <Link href={'/shop'}> <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Shop Page</h1></Link>
-            <Link href={'/membershipCard'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Checkout</h1></Link>
-           <Link href={'/cart'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Cart</h1></Link>
-           <Link href={'/'}></Link> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>My Account</h1>
-        </div>} */}
-        {pages&&<div className='text-[#333333] bg-white w-[170px] h-[165px] leading-[30px]	 pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[40%] '
-        onMouseLeave={()=>setPages(false)}
-        >
-           <Link href={'/Howitwork'}> <h1 className= 'cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>How It Works</h1></Link>
-           <Link href={'/membershipCard'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>Pricing Services</h1></Link>
-          <Link href={'/aboutUs'}>  <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>About us</h1></Link>
-          <Link href={'/faq'}>  <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>faq</h1></Link>
-
-          <Link href={'/404'}> <h1 className='cursor-pointer text-[#333333] font-[600] hover:text-[#ff2800] transition ease-in-out delay-50'>404 Not Found</h1></Link> 
-        </div>}
-        {/* {cart&&
-        <div className='text-[#333333] bg-white w-[350px] h-[144px] pl-[1.5rem] pt-3 shadow-2xl absolute top-[16%] left-[70%] rounded-[20px]'
-        onMouseLeave={()=>setCart(false)}
-        >
-            <h1 className= ' text-[#333333] font-[600] text-[30px] '>Cart</h1>
-            <h1>No Product In The Cart!</h1>
-           
+            <div className="px-6 border-r border-gray-200 h-full flex items-center justify-center gap-2">
+              <CgMail className="text-primary" />
+              <span>khelifisalmen9@gmail.com</span>
+            </div>
+            <div className="px-6 border-r border-gray-200 h-full flex items-center justify-center gap-2">
+              <MdAccessTime className="text-primary" />
+              <span>Mon - Fri: 10:00 - 18:00</span>
+            </div>
+          </div>
+          {isLoggedIn && (
+            <div className="relative account-dropdown-container z-[120]">
+              <div
+                className="px-6 border-l border-gray-200 h-full flex items-center justify-center gap-2 cursor-pointer hover:text-primary transition-colors"
+                onMouseEnter={() => setAccount(true)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setAccount(!account)
+                }}
+              >
+                <span className="font-semibold">My Account</span>
+                <MdArrowDownward size={12} className={`transition-transform ${account ? 'rotate-180' : ''}`} />
+              </div>
+              {account && (
+                <div
+                  className="absolute right-0 top-full mt-2 bg-white w-[200px] shadow-xl rounded-lg py-2 z-[120] border border-gray-200"
+                  onMouseEnter={() => setAccount(true)}
+                  onMouseLeave={() => setAccount(false)}
+                >
+                  <div
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer"
+                    onClick={() => {
+                      setAccount(false)
+                      router.push(ripitiw())
+                    }}
+                  >
+                    <RiDashboardFill className="text-primary" />
+                    <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Dashboard</span>
+                  </div>
+                  <div
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer"
+                    onClick={() => {
+                      setAccount(false)
+                      router.push('/membershipCard')
+                    }}
+                  >
+                    <IoPersonOutline className="text-primary" />
+                    <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Services</span>
+                  </div>
+                  <Link 
+                    href={'/'} 
+                    onClick={(e) => {
+                      e.preventDefault()
+                      localStorage.clear()
+                      setAccount(false)
+                      router.push('/')
+                    }} 
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors block no-underline"
+                  >
+                    <CiLogout className="text-primary" />
+                    <span className="font-semibold text-gray-700 hover:text-primary transition-colors">Log out</span>
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
+          {!isLoggedIn && (
+            <div className="px-6 border-l border-gray-200 h-full flex items-center justify-center">
+              <Link href="/login" className="font-semibold text-gray-700 hover:text-primary transition-colors">
+                Login
+              </Link>
+            </div>
+          )}
         </div>
-         }  */}
-       
+      </div>
+      )}
 
-        
-    </div>
+      {/* Main Navigation */}
+      <nav className={`bg-white border-b border-gray-200 sticky top-0 z-[100] transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
+        <div className="container mx-auto">
+          <div className="flex items-center justify-between h-16 md:h-20 px-2 md:px-4">
+            {/* Logo */}
+            <Link href="/home" className="flex items-center flex-shrink-0">
+              <Image
+                className="h-8 md:h-12"
+                width={335}
+                height={151}
+                src="/images/logo/logo-autobid.svg"
+                alt="AutoBid Logo"
+                priority
+                style={{ width: 'auto' }}
+              />
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-8">
+              <Link
+                href={'/home'}
+                className="text-gray-700 font-semibold hover:text-primary transition-colors relative group"
+                onMouseEnter={() => { setHome(true); setPlatform(false); setShop(false); setPages(false) }}
+              >
+                Home
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+              </Link>
+
+              <div className="relative">
+                <button
+                  className="text-gray-700 font-semibold hover:text-primary transition-colors relative group flex items-center gap-1"
+                  onMouseEnter={() => { setPlatform(true); setHome(false); setShop(false); setPages(false) }}
+                >
+                  Platform
+                  <MdArrowDownward size={14} className={`transition-transform ${platform ? 'rotate-180' : ''}`} />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                </button>
+                {platform && (
+                  <div
+                    className="absolute top-full left-0 mt-2 bg-white w-[900px] rounded-xl shadow-2xl overflow-hidden animate-fade-in"
+                    onMouseLeave={() => setPlatform(false)}
+                  >
+                    <div className="grid grid-cols-2 p-6">
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <h3 className="font-bold text-2xl mb-4 text-gray-900">Search Cars</h3>
+                          <div className="space-y-3">
+                            {[
+                              { icon: "/images/icons/autobid-icon-v2-1.png", label: "Body", filter: { body: 'Convertible' } },
+                              { icon: "/images/icons/autobid-icon-v2-2.png", label: "Color", filter: { Color: 'Black' } },
+                              { icon: "/images/icons/autobid-icon-v2-4.png", label: "Capacity", filter: { Capacity: '1.0L' } },
+                              { icon: "/images/icons/autobid-icon-v2-3.png", label: "Gearbox", filter: { Gearbox: 'automatic' } },
+                              { icon: "/images/icons/autobid-icon-v2-5.png", label: "Climatisation", filter: { Climatisation: 'Automatic Climate Control' } },
+                            ].map((item, idx) => (
+                              <div
+                                key={idx}
+                                className="flex items-center gap-3 cursor-pointer group/item hover:text-primary transition-colors"
+                                onClick={() => {
+                                  Object.entries(item.filter).forEach(([key, value]) => {
+                                    localStorage.setItem(key, value as string)
+                                  })
+                                  router.push('/shop')
+                                }}
+                              >
+                                <img className="w-5 h-5" src={item.icon} alt={item.label} />
+                                <span className="font-semibold text-gray-700 group-hover/item:text-primary">{item.label}</span>
+                              </div>
+                            ))}
+                            <Link href={'/shop'} className="inline-block mt-4 font-bold text-primary hover:underline">
+                              Explore All Categories →
+                            </Link>
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-2xl mb-4 text-gray-900">Search Parts</h3>
+                          <div className="space-y-3">
+                            {['Appointment', 'Dimensions', 'Manufacturer', 'Material', 'Weight'].map((item, idx) => (
+                              <div key={idx} className="flex items-center gap-3 cursor-pointer group/item hover:text-primary transition-colors">
+                                <img className="w-5 h-5" src={`/images/icons/autobid-icon-v2-${6 + idx}.png`} alt={item} />
+                                <span className="font-semibold text-gray-700 group-hover/item:text-primary">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="bg-cover bg-center rounded-r-xl"
+                        style={{
+                          backgroundImage: 'url(/images/backgrounds/car-background.jpg)'
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <Link
+                href={'/shop'}
+                className="text-gray-700 font-semibold hover:text-primary transition-colors relative group"
+                onMouseEnter={() => { setShop(true); setHome(false); setPlatform(false); setPages(false) }}
+              >
+                Shop
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+              </Link>
+
+              <div className="relative">
+                <button
+                  className="text-gray-700 font-semibold hover:text-primary transition-colors relative group flex items-center gap-1"
+                  onMouseEnter={() => { setPages(true); setHome(false); setPlatform(false); setShop(false) }}
+                >
+                  Pages
+                  <MdArrowDownward size={14} className={`transition-transform ${pages ? 'rotate-180' : ''}`} />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                </button>
+                {pages && (
+                  <div
+                    className="absolute top-full left-0 mt-2 bg-white w-[200px] rounded-lg shadow-xl py-2 z-50 animate-fade-in"
+                    onMouseLeave={() => setPages(false)}
+                  >
+                    {[
+                      { href: '/Howitwork', label: 'How It Works' },
+                      { href: '/membershipCard', label: 'Pricing Services' },
+                      { href: '/aboutUs', label: 'About us' },
+                      { href: '/faq', label: 'FAQ' },
+                      { href: '/404', label: '404 Not Found' },
+                    ].map((item, idx) => (
+                      <Link
+                        key={idx}
+                        href={item.href}
+                        className="block px-4 py-2 font-semibold text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <Link
+                href={'/getInTouch'}
+                className="text-gray-700 font-semibold hover:text-primary transition-colors relative group"
+              >
+                Get In Touch
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+              </Link>
+
+              <Link
+                href={'/createitem'}
+                className="btn btn-primary ml-4"
+              >
+                Sell Now
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="lg:hidden p-2 text-gray-700 hover:text-primary transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden border-t border-gray-200 py-4 animate-slide-down max-h-[calc(100vh-64px)] overflow-y-auto">
+              <div className="flex flex-col gap-2 px-4">
+                <Link 
+                  href="/home" 
+                  className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                
+                {/* Platform Dropdown */}
+                <div className="flex flex-col">
+                  <button
+                    className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50 flex items-center justify-between"
+                    onClick={() => setMobilePlatformOpen(!mobilePlatformOpen)}
+                  >
+                    <span>Platform</span>
+                    <MdArrowDownward size={16} className={`transition-transform ${mobilePlatformOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {mobilePlatformOpen && (
+                    <div className="pl-4 mt-2 space-y-2 border-l-2 border-gray-200">
+                      <div className="mb-3">
+                        <h4 className="font-bold text-sm text-gray-900 mb-2">Search Cars</h4>
+                        <div className="space-y-2">
+                          {[
+                            { icon: "/images/icons/autobid-icon-v2-1.png", label: "Body", filter: { body: 'Convertible' } },
+                            { icon: "/images/icons/autobid-icon-v2-2.png", label: "Color", filter: { Color: 'Black' } },
+                            { icon: "/images/icons/autobid-icon-v2-4.png", label: "Capacity", filter: { Capacity: '1.0L' } },
+                            { icon: "/images/icons/autobid-icon-v2-3.png", label: "Gearbox", filter: { Gearbox: 'automatic' } },
+                            { icon: "/images/icons/autobid-icon-v2-5.png", label: "Climatisation", filter: { Climatisation: 'Automatic Climate Control' } },
+                          ].map((item, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-2 py-1 px-2 rounded-md hover:bg-gray-50"
+                              onClick={() => {
+                                Object.entries(item.filter).forEach(([key, value]) => {
+                                  localStorage.setItem(key, value as string)
+                                })
+                                router.push('/shop')
+                                setMobileMenuOpen(false)
+                              }}
+                            >
+                              <img className="w-4 h-4" src={item.icon} alt={item.label} />
+                              <span className="text-sm text-gray-700">{item.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-sm text-gray-900 mb-2">Search Parts</h4>
+                        <div className="space-y-2">
+                          {['Appointment', 'Dimensions', 'Manufacturer', 'Material', 'Weight'].map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-2 py-1 px-2 rounded-md hover:bg-gray-50">
+                              <img className="w-4 h-4" src={`/images/icons/autobid-icon-v2-${6 + idx}.png`} alt={item} />
+                              <span className="text-sm text-gray-700">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <Link 
+                  href="/shop" 
+                  className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Shop
+                </Link>
+
+                {/* Pages Dropdown */}
+                <div className="flex flex-col">
+                  <button
+                    className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50 flex items-center justify-between"
+                    onClick={() => setMobilePagesOpen(!mobilePagesOpen)}
+                  >
+                    <span>Pages</span>
+                    <MdArrowDownward size={16} className={`transition-transform ${mobilePagesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {mobilePagesOpen && (
+                    <div className="pl-4 mt-2 space-y-1 border-l-2 border-gray-200">
+                      {[
+                        { href: '/Howitwork', label: 'How It Works' },
+                        { href: '/membershipCard', label: 'Pricing Services' },
+                        { href: '/aboutUs', label: 'About us' },
+                        { href: '/faq', label: 'FAQ' },
+                        { href: '/404', label: '404 Not Found' },
+                      ].map((item, idx) => (
+                        <Link
+                          key={idx}
+                          href={item.href}
+                          className="block py-2 px-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <Link 
+                  href="/getInTouch" 
+                  className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Get In Touch
+                </Link>
+
+                {/* Mobile Account Menu */}
+                <div className="flex flex-col border-t border-gray-200 pt-2 mt-2">
+                  <button
+                    className="text-gray-700 font-semibold hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-gray-50 flex items-center justify-between"
+                    onClick={() => setMobileAccountOpen(!mobileAccountOpen)}
+                  >
+                    <span>My Account</span>
+                    <MdArrowDownward size={16} className={`transition-transform ${mobileAccountOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {mobileAccountOpen && (
+                    <div className="pl-4 mt-2 space-y-1 border-l-2 border-gray-200">
+                      <Link 
+                        href={`${ripitiw()}`} 
+                        className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <RiDashboardFill className="text-primary" />
+                        Dashboard
+                      </Link>
+                      <Link 
+                        href={'/membershipCard'} 
+                        className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <IoPersonOutline className="text-primary" />
+                        Services
+                      </Link>
+                      <Link 
+                        href={'/'} 
+                        onClick={() => {
+                          localStorage.clear()
+                          setMobileMenuOpen(false)
+                        }} 
+                        className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                      >
+                        <CiLogout className="text-primary" />
+                        Log out
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                <Link 
+                  href="/createitem" 
+                  className="btn btn-primary w-full mt-4"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sell Now
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
     </>
   )
 }

@@ -4,16 +4,29 @@ import '../AdminClientNotBid/bt.css'
 import axios from 'axios'
 import dynamic from "next/dynamic";
 const SideBare = dynamic(() => import("../AdminSidebar/page"));
+import { getApiUrl } from '../../../utils/api'
+
+interface SellerData {
+  id?: number;
+  name: string;
+  lastName: string;
+  email: string;
+  address?: string;
+  cinNum?: number;
+  telNumb?: number;
+  [key: string]: any;
+}
+
 const listOfSeller = () => {
-  const [data,setData]= useState<[]>([])
+  const [data,setData]= useState<SellerData[]>([])
   const[refrech,setRefrech]=useState(false)
 
   
   useEffect(() => {
     axios
-      .get('http://localhost:5000/dash/getsel')
+      .get(getApiUrl('dash/getsel'))
       .then((res) => {
-        const Data: [] = res.data;
+        const Data = res.data as SellerData[];
         setData(Data);
       })
       .catch((err) => {
@@ -22,7 +35,7 @@ const listOfSeller = () => {
   }, [refrech]);
   const delet = async (id:number) => {
     try {
-      await axios.delete(`http://localhost:5000/dash/removeSel/${id}`);
+      await axios.delete(getApiUrl(`dash/removeSel/${id}`));
       setRefrech(!refrech);
     } catch (err) {
       console.log(err);
@@ -77,9 +90,9 @@ const listOfSeller = () => {
                 
               </tr>
             </thead>
-            {data.map((el=>(
-              <tbody>
-              <tr>
+            <tbody>
+            {data.map((el: SellerData, index: number) => (
+              <tr key={el.id || el.email || index}>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                  {el.name} 
                 </th>
@@ -115,9 +128,8 @@ const listOfSeller = () => {
 
                 </td>
               </tr>
+            ))}
             </tbody>
-
-            )))}
             
           </table>
         </div>

@@ -62,5 +62,19 @@ node_modules/
 # Yarn Integrity file
 .yarn-integrity
 
+# Next.js build output (static export)
+front/out
+front/.next
+
 # dotenv environment variables file
 .env
+.env.local
+.env*.local
+back/.env
+front/.env.local
+front/.env
+
+# Google Cloud Service Account credentials
+**/serviceAccountKey.json
+**/auction-*.json
+functions/auction-*.json

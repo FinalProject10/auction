@@ -1,31 +1,141 @@
 .autobid-breadcrumbs {
-    background: #F2F2F2;
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+    padding: 24px 0;
+    border-bottom: 1px solid #e9ecef;
+    width: 100%;
+    overflow-x: hidden;
 }
-
 
 .container {
-    margin: 20px;
-    padding: 20px 15px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+    box-sizing: border-box;
 }
-
 
 .description {
     padding-left: 0px;
     padding-right: 0px;
+    margin-top: 8px;
 }
 
 .description p {
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-
-    padding-top: 5px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #666666;
+    padding-top: 8px;
     margin-bottom: 0;
 }
 
 .col-md-6 h1 {
-    font-size: 26px !important;
-    line-height: 30px !important;
+    font-size: 36px !important;
+    line-height: 44px !important;
     font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.autobid-breadcrumbs a {
+    transition: color 0.2s ease;
+}
+
+.autobid-breadcrumbs a:hover {
+    color: #ff2800 !important;
+}
+
+/* Breadcrumb specific styles */
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.breadcrumb-nav a {
+    text-decoration: none;
+}
+
+.breadcrumb-nav span {
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.breadcrumb-separator {
+    margin: 0 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .autobid-breadcrumbs {
+        padding: 16px 0;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .breadcrumb-nav {
+        margin-bottom: 10px;
+        gap: 2px;
+    }
+
+    .breadcrumb-nav span {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .breadcrumb-separator {
+        margin: 0 1px;
+    }
+
+    .col-md-6 h1 {
+        font-size: 24px !important;
+        line-height: 32px !important;
+    }
+
+    .description p {
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .autobid-breadcrumbs {
+        padding: 12px 0;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .breadcrumb-nav {
+        margin-bottom: 8px;
+        gap: 1px;
+    }
+
+    .breadcrumb-nav span {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .breadcrumb-separator {
+        margin: 0;
+        font-size: 10px;
+    }
+
+    .col-md-6 h1 {
+        font-size: 20px !important;
+        line-height: 28px !important;
+        word-break: break-word;
+    }
+
+    .description p {
+        font-size: 13px;
+        line-height: 20px;
+    }
 }

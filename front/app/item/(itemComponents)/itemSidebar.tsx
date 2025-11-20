@@ -2,157 +2,215 @@
 import React, { useEffect, useState } from "react";
 import "./style/itemSidebar.css";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaHammer } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { RiAccountPinCircleFill } from "react-icons/ri";
-import { FaCircleArrowLeft } from "react-icons/fa6";
-import { FaCircleArrowRight } from "react-icons/fa6";
-
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
+import LoadingLink from "../../components/LoadingLink";
 import axios from "axios";
+import { API_URL } from "../../../utils/api";
+
 const ItemSidebar = ({ items }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  console.log("page,data", page, data);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Function to fetch items from the server
     const fetchItems = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:5000/items/fetch-items/?page=${page}`
+          `${API_URL}/items/fetch-items/?page=${page}`
         );
         setData(response.data);
       } catch (error) {
         console.error("Error fetching items:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    // Fetch items when the component mounts and when the page changes
     fetchItems();
   }, [page]);
 
   const handleLoadMore = () => {
-    // Increment the page when the "Load More" button is clicked
     setPage(page + 1);
   };
 
   const handleLoadBack = () => {
-    // Decrement the page when the "Back" button is clicked
-    setPage((prevPage) => prevPage - 1);
+    if (page > 1) {
+      setPage((prevPage) => prevPage - 1);
+    }
   };
+
+  // Calculate days remaining for an auction
+  const calculateDaysRemaining = (timeEnd) => {
+    const now = new Date().getTime();
+    const endTime = new Date(timeEnd).getTime();
+    const diff = endTime - now;
+    
+    if (diff <= 0) return 0;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    
+    if (days > 0) {
+      return `${days} ${days === 1 ? 'day' : 'days'}`;
+    } else if (hours > 0) {
+      return `${hours} ${hours === 1 ? 'hour' : 'hours'}`;
+    } else {
+      return 'Ending soon';
+    }
+  };
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
   return (
-    <>
-      <div>
-        <div>
-          {items.map((item) => (
-            <div
-              key={item.id}
-              className="max-w-sm border border-black-200 rounded-lg p-4 drop-shadow-lg bg-white rounded-b-lg z-15"
+    <div className="item-sidebar-container">
+      {/* Seller Information Card */}
+      {items.map((item) => (
+        <div key={item.id} className="seller-card">
+          <div className="seller-header">
+            <div className="seller-avatar">
+              <Image
+                className="seller-avatar-img"
+                src={item.seller?.avatar || "/images/vehicles/autobid-vehicle-13-768x486.jpg"}
+                alt={item.seller?.name || "Seller"}
+                width={70}
+                height={70}
+              />
+            </div>
+            <div className="seller-info">
+              <h3 className="seller-name">{item.seller?.name || "Seller"}</h3>
+              <div className="seller-location">
+                <FaLocationDot className="location-icon" />
+                <span>{item.seller?.address || "Address not available"}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="seller-actions">
+            <Link
+              href={`/Seller/profile/${item.seller?.id}`}
+              className="seller-link"
             >
-              <span className="flex m-4 ">
-                <Image
-                  className="rounded-full "
-                  src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-vehicle-13-768x486.jpg"
-                  alt="product"
-                  width={70}
-                  height={70}
-                />
-                <h2 className="font-bold pl-3">{item.seller?.name}</h2>
-              </span>
-              <p>
-                <FaLocationDot className="black-icon w-[15px] inline-block mx-2 " />
-                {item.seller?.address}
-              </p>
-              <p className="mb-3">
-                <RiAccountPinCircleFill className="black-icon w-[15px] inline-block mx-2" />
-                <Link
-                  href="/seller/profile/"
-                  as={`/seller/profile/${item.seller?.id}`}
-                >
-                  Check more offers from this vendor.
-                </Link>
-              </p>
+              <RiAccountPinCircleFill className="link-icon" />
+              <span>Check more offers from this vendor</span>
+            </Link>
+          </div>
 
-              <div className="bid flex justify-center flex-wrap ml-px">
-                <button
-                  type=""
-                  className="w-80 m-px  bg-red-500 text-white text-sm leading-6 font-bold py-2 px-4 rounded-lg hover:bg-red-700"
-                >
-                  <MdMessage className="black-icon w-[20px] inline-block  mx-1" />
-                  Send Message
-                </button>
-
-                <button
-                  type=""
-                  className="w-80 m-px    text-sm leading-6 font-bold py-2 px-4 rounded-lg   text-white  mt-[1%] bg-red-500  h-[43px] float-right hover:text-black hover:bg-white
-              hover:border-[2px] hover:border-black 
-              hover:h-[47px] hover:transition ease-in-out delay-50 "
-                >
-                  <FaPhoneAlt className="black-icon h-4 w-4 inline-block mx-1" />
-
-                  <Link href="tel:{item.seller.telNumb}">Call Vendor</Link>
-                </button>
-              </div>
-            </div>
-          ))}
+          <div className="seller-buttons">
+            <button className="btn-send-message">
+              <MdMessage className="btn-icon" />
+              <span>Send Message</span>
+            </button>
+            <a 
+              href={`tel:${item.seller?.telNumb || ''}`}
+              className="btn-call-vendor"
+            >
+              <FaPhoneAlt className="btn-icon" />
+              <span>Call Vendor</span>
+            </a>
+          </div>
         </div>
-        <div>
+      ))}
+
+      {/* Related Auctions Section */}
+      <div className="related-auctions-section">
+        <div className="section-header">
+          <h3 className="section-title">Related Auctions</h3>
           {data.length > 0 && (
-            <button onClick={handleLoadBack}>
-              <FaCircleArrowLeft />
-            </button>
-          )}
-          {data.length > 0 && (
-            <button onClick={handleLoadMore}>
-              <FaCircleArrowRight />
-            </button>
+            <div className="pagination-controls">
+              <button
+                onClick={handleLoadBack}
+                disabled={page === 1 || loading}
+                className="pagination-btn"
+                aria-label="Previous page"
+              >
+                <FaChevronLeft />
+              </button>
+              <span className="page-indicator">Page {page}</span>
+              <button
+                onClick={handleLoadMore}
+                disabled={loading || data.length === 0}
+                className="pagination-btn"
+                aria-label="Next page"
+              >
+                <FaChevronRight />
+              </button>
+            </div>
           )}
         </div>
-        <div className="flex flex-wrap mt-3 max-w-[400px]">
-          {data.map((el) => (
-            <div className="flex flex-wrap mt-3" key={el.id}>
-              <div className="sadContainer rounded-b-lg">
-                <div
-                  className="w-178 h-100 rounded-t-lg"
-                  style={{
-                    backgroundImage: `url(${el.images[0]})`,
-                    backgroundSize: "cover",
-                  }}
-                >
-                  <Link href={`/item/${el.id}`}>
-                    <button
-                      type=""
-                      className="bidIcon font-bold  object-center   text-white text-sm leading-6  py-2 px-4 rounded-lg hover:bg-red-700 "
-                    >
-                      <FaHammer
-                        size={20}
-                        className="text-white cursor-pointer"
-                      />
-                    </button>
-                  </Link>
-                </div>
 
-                <h1 className="name font-bold object-center mb-3 ">26 daays</h1>
+        {loading ? (
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <p>Loading auctions...</p>
+          </div>
+        ) : data.length === 0 ? (
+          <div className="empty-state">
+            <p>No related auctions found</p>
+          </div>
+        ) : (
+          <div className="related-auctions-grid">
+            {data.map((el) => (
+              <LoadingLink href={`/item/${el.id}`} key={el.id} className="auction-card-link">
+                <div className="auction-card">
+                  <div className="auction-image-container">
+                    <Image
+                      src={el.images?.[0] || 'https://via.placeholder.com/300x200'}
+                      alt={el.name}
+                      fill
+                      className="auction-image"
+                    />
+                    <div className="auction-overlay">
+                      <div className="auction-badge">
+                        <FaHammer className="badge-icon" />
+                      </div>
+                      <div className="time-remaining-badge">
+                        {calculateDaysRemaining(el.timeEnd)}
+                      </div>
+                    </div>
+                  </div>
 
-                <div className="font-semibold	 text-sm/[30px] border border-black-200 rounded-sm p-4 drop-shadow-lg bg-white rounded-b-lg">
-                  <p>{el.name}</p>
-                  <p> 2015 · 97 900 km · 2</p>
-                  <p>494 cm3 · Hybrid</p>
-                  <p className="text-black">
-                    Current Bid: €{" "}
-                    <span className="text-red-500">{el.price}</span>
-                  </p>
+                  <div className="auction-content">
+                    <h4 className="auction-title">{el.name}</h4>
+                    <div className="auction-specs">
+                      <span className="spec-item">{el.year || 'N/A'}</span>
+                      <span className="spec-separator">·</span>
+                      <span className="spec-item">{el.mileage || 'N/A'} km</span>
+                      <span className="spec-separator">·</span>
+                      <span className="spec-item">{el.cubicCapacity || 'N/A'}</span>
+                      {el.fuel && (
+                        <>
+                          <span className="spec-separator">·</span>
+                          <span className="spec-item">{el.fuel}</span>
+                        </>
+                      )}
+                    </div>
+                    <div className="auction-bid">
+                      <span className="bid-label">Current Bid:</span>
+                      <span className="bid-amount">{formatPrice(el.price || 0)}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </LoadingLink>
+            ))}
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
+
 export default ItemSidebar;

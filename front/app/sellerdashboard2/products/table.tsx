@@ -3,6 +3,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import './table.css'
+import { getApiUrl } from '../../../utils/api'
 interface Product {
     name:string;
     category:string;
@@ -11,7 +12,7 @@ interface Product {
 export default function Table(){
     const [products,setProducts]=useState<[]>([])
    const fetchAll = ()=>{
-    axios.get('http://localhost:5000/items//fetch-items/').then((result)=>{
+    axios.get(getApiUrl('items//fetch-items/')).then((result)=>{
         setProducts(result.data)
     }).catch((err)=>{
         console.log(err)

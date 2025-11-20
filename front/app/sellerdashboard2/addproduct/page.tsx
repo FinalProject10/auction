@@ -4,8 +4,8 @@ import './page.css'
 import React,{useState} from "react"
 import Navbar from "../../home/navbar";
 import Header from "../header/page";
-import Footer from "../../footer/Footer";
 import SideBar from "../sidebar/page";
+import InfoTooltip from "../../components/InfoTooltip";
 import { Edit, FormatBold, FormatItalic, FormatUnderlined,
      FormatAlignLeft, FormatAlignCenter, FormatAlignRight
      , FormatAlignJustify } from '@mui/icons-material';
@@ -68,13 +68,27 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
               </div>
             </div>
                         <div className="auction">
-                        <div className="checkbox-with-text">
+                        <div className="checkbox-with-text flex items-center gap-2">
                 <input type="checkbox" id="downloadableCheckbox" />
-                <label htmlFor="downloadableCheckbox">auction</label>
+                <label htmlFor="downloadableCheckbox" className="flex items-center gap-2">
+                  auction
+                  <InfoTooltip 
+                    content="Check this box to list the product as an auction item. Auction items have a start and end time, and buyers bid on them. Unchecked items are regular products with fixed prices."
+                    position="top"
+                    iconSize="sm"
+                  />
+                </label>
               </div>
                         </div>
                         <div className="inp">
-              <label>Initial Price</label>
+              <label className="flex items-center gap-2">
+                Initial Price
+                <InfoTooltip 
+                  content="The starting price for your auction. This is the minimum bid amount. Bidders must bid at least this amount or higher based on current bids."
+                  position="top"
+                  iconSize="sm"
+                />
+              </label>
               <div className="dokan-input-group">
                 <span className="dokan-input-group-addon">£</span>
                 <input
@@ -217,7 +231,6 @@ import { Edit, FormatBold, FormatItalic, FormatUnderlined,
   </div>
   </div>
             </div>
-            <Footer/>
 
             </div>
  

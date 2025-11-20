@@ -8,6 +8,7 @@ import { MdVerticalAlignTop } from "react-icons/md";
 import Chart from 'chart.js/auto';
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
+import { getApiUrl } from '../../../utils/api'
 // import '../AdminHome/AdminDes.css'
 
 
@@ -59,15 +60,52 @@ const HomePage = () => {
     const [data3,setData3] =useState <[]>([])
     const [total ,setTotal]=useState<number>(0)
     const [total1,setTotal1] =useState <number>(0)
-   const [cordoner , setCordoner]=useState<[]> ([])
-   const [graph , setGraph]=useState([])
-   const [graph2,setGraph2]=useState ([])
-   const [reclamtion,setReclamation]= useState <[]>([])
+   interface CordonerItem {
+     seller: {
+       name: string;
+       image: string;
+       items: Array<{
+         images: string[];
+         name: string;
+         price: number;
+         [key: string]: any;
+       }>;
+     };
+     [key: string]: any;
+   }
+   const [cordoner , setCordoner]=useState<CordonerItem[]> ([])
+   const [graph , setGraph]=useState<Array<{ createdAt: string | Date; [key: string]: any }>>([])
+   const [graph2,setGraph2]=useState<Array<{ createdAt: string | Date; [key: string]: any }>>([])
+   const [reclamtion,setReclamation]= useState<Array<{ createdAt: string | Date; [key: string]: any }>>([])
+   const [month1, setMonth1] = useState([])
+   const [month2, setMonth2] = useState([])
+   const [month3, setMonth3] = useState([])
+   const [month4, setMonth4] = useState([])
+   const [month5, setMonth5] = useState([])
+   const [month6, setMonth6] = useState([])
+   const [month7, setMonth7] = useState([])
+   const [month8, setMonth8] = useState([])
+   const [month9, setMonth9] = useState([])
+   const [month10, setMonth10] = useState([])
+   const [month11, setMonth11] = useState([])
+   const [month12, setMonth12] = useState([])
+   const [month13, setMonth13] = useState([])
+   const [month14, setMonth14] = useState([])
+   const [month15, setMonth15] = useState([])
+   const [month16, setMonth16] = useState([])
+   const [month17, setMonth17] = useState([])
+   const [month18, setMonth18] = useState([])
+   const [month19, setMonth19] = useState([])
+   const [month20, setMonth20] = useState([])
+   const [month21, setMonth21] = useState([])
+   const [month22, setMonth22] = useState([])
+   const [month23, setMonth23] = useState([])
+   const [month24, setMonth24] = useState([])
 
 
     useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/het')
+          .get(getApiUrl('dash/het'))
           .then((res) => {
             const Data: clientProps[] = res.data;
             setData(Data);
@@ -78,9 +116,9 @@ const HomePage = () => {
       }, []);
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/SelItem')
+          .get(getApiUrl('dash/SelItem'))
           .then((res) => {
-            const Data:[] = res.data;
+            const Data = res.data as CordonerItem[];
             console.log(Data);
             setCordoner(Data);
           })
@@ -90,7 +128,7 @@ const HomePage = () => {
       }, []);
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/getsel')
+          .get(getApiUrl('dash/getsel'))
           .then((res) => {
             const Data: sellerProps[] = res.data;
             setData1(Data);
@@ -101,7 +139,7 @@ const HomePage = () => {
       }, []);
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/getMember')
+          .get(getApiUrl('dash/getMember'))
           .then((res) => {
             const fetchedData: MemberPr[] = res.data;
             setData2(fetchedData);
@@ -117,7 +155,7 @@ const HomePage = () => {
       
       useEffect(() => {
         axios
-          .get('http://127.0.0.1:5000/dash/getPro')
+          .get(getApiUrl('dash/getPro'))
           .then((res) => {
             const fetchedData: [] = res.data; 
             setData3(fetchedData);
@@ -131,24 +169,125 @@ const HomePage = () => {
           });
       }, []);
    
-
- 
-    // const router=useRouter()
-    // useEffect(()=>{
-    //     const role=localStorage.getItem('role')
-    //     const token=localStorage.getItem('user')
-    //     if(role==='admin'){
-    //         axios.get(`http://localhost:5000/admin/home`,{headers:{Authorization:`Bearer ${token}`}})
-    //         .then(r=>console.log("r")).catch(err=>router.push('/register/seller'))
-    //         }
-    //     else{
-    //         router.push('/register/seller')
-
-    //     }
-    //   },[])
   useEffect(() => {
-    const config = {
-      type: 'bar',
+    axios
+      .get(getApiUrl('dash/getReclam'))
+      .then((res) => {
+        const Data = res.data as Array<{ createdAt: string | Date; [key: string]: any }>;
+        setReclamation(Data);
+       const reclamation1= Data.filter((item)=>{
+        return new Date(item.createdAt).getFullYear()===new Date().getFullYear()})
+       const reclamtion2 = Data.filter((item2)=>{
+        return new Date(item2.createdAt).getFullYear()===new Date().getFullYear()-1})
+       setGraph(reclamation1)
+       setGraph2(reclamtion2)
+       fltr1(reclamation1)
+       fltr2(reclamation1)
+       fltr3(reclamation1)
+       fltr4(reclamation1)
+       fltr5(reclamation1)
+       fltr6(reclamation1)
+       fltr7(reclamation1)
+       fltr8(reclamation1)
+       fltr9(reclamation1)
+       fltr10(reclamation1)
+       fltr11(reclamation1)
+       fltr12(reclamation1)
+       fltr13(reclamtion2)
+       fltr14(reclamtion2)
+       fltr15(reclamtion2)
+       fltr16(reclamtion2)
+       fltr17(reclamtion2)
+       fltr18(reclamtion2)
+       fltr19(reclamtion2)
+       fltr20(reclamtion2)
+       fltr21(reclamtion2)
+       fltr22(reclamtion2)
+       fltr23(reclamtion2)
+       fltr24(reclamtion2)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const fltr1 = (graph)=>{
+    return setMonth1( graph.filter((el) =>new Date(el.createdAt).getMonth()+1===1))
+  }
+  const fltr2 = (graph)=>{
+    return setMonth2 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===2))
+  }
+  const fltr3 = (graph)=>{
+    return setMonth3( graph.filter((el) =>new Date(el.createdAt).getMonth()+1===3))
+  }
+  const fltr4 = (graph)=>{
+    return  setMonth4 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===4))
+  }
+  const fltr5 = (graph)=>{
+    return setMonth5 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===5))
+  }
+  const fltr6 = (graph)=>{
+    return setMonth6( graph.filter((el) =>new Date(el.createdAt).getMonth()+1===6))
+  }
+  const fltr7 = (graph)=>{
+    return setMonth7 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===7))
+  }
+  const fltr8 = (graph)=>{
+    return setMonth8 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===8))
+  }
+  const fltr9 = (graph)=>{
+    return setMonth9 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===9))
+  }
+  const fltr10 = (graph)=>{
+    return setMonth10 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===10))
+  }
+  const fltr11 = (graph)=>{
+    return setMonth11 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===11))
+  }
+  const fltr12 = (graph)=>{
+    return setMonth12 (graph.filter((el) =>new Date(el.createdAt).getMonth()+1===12))
+  }
+   //the last years
+  const fltr13 = (graph2)=>{
+    return setMonth13( graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===1))
+  }
+  const fltr14 = (graph2)=>{
+    return setMonth14 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===2))
+  }
+  const fltr15 = (graph2)=>{
+    return setMonth15( graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===3))
+  }
+  const fltr16 = (graph2)=>{
+    return  setMonth16 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===4))
+  }
+  const fltr17 = (graph2)=>{
+    return setMonth17 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===5))
+  }
+  const fltr18 = (graph2)=>{
+    return setMonth18( graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===6))
+  }
+  const fltr19 = (graph2)=>{
+    return setMonth19 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===7))
+  }
+  const fltr20= (graph2)=>{
+    return setMonth20 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===8))
+  }
+  const fltr21 = (graph2)=>{
+    return setMonth21 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===9))
+  }
+  const fltr22 = (graph2)=>{
+    return setMonth22 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===10))
+  }
+  const fltr23 = (graph2)=>{
+    return setMonth23 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===11))
+  }
+  const fltr24 = (graph2)=>{
+    return setMonth24 (graph2.filter((el) =>new Date(el.createdAt).getMonth()+1===12))
+  }
+
+  useEffect(() => {
+    const config: any = {
+      type: 'bar' as const,
       data: {
         labels: [
           'January',
@@ -169,7 +308,7 @@ const HomePage = () => {
             label: new Date().getFullYear(),
             backgroundColor: '#ed64a6',
             borderColor: '#ed64a6',
-            data: [30, 78, 56, 34, 100, 45, 13,45,45,45,46,12],
+            data: [month1.length, month2.length, month3.length, month4.length, month5.length, month6.length, month7.length,month8.length,month9.length,month10.length,month11.length,month12.length],
             fill: false,
             barThickness: 8,
           },
@@ -240,23 +379,7 @@ const HomePage = () => {
         myBar.destroy();
       };
     }
-  }, []);
- 
-  useEffect(() => {
-    axios
-      .get('http://127.0.0.1:5000/dash/getReclam')
-      .then((res) => {
-        const Data: [] = res.data;
-        setReclamation(Data);
-       const reclamation1= Data.filter((item)=>{item.createdAt.getFullYear()===new Date().getFullYear()}).sort()
-       const reclamtion2 = Data.filter((item2)=>{item2.createdAt.getFullYear()===new Date().getFullYear()-1}).sort()
-       setGraph(reclamation1)
-       setGraph2(reclamtion2)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  }, [month1, month2, month3, month4, month5, month6, month7, month8, month9, month10, month11, month12]);
 
 
   
@@ -266,14 +389,14 @@ const HomePage = () => {
  <SideBare/> 
  <div className="  overflow-y-auto">
  
-      <div className="relative bg-blueGray-800 md:pt-32 pb-32  mt-[-2%] " style={{"background-color": "#1e293b"}}>
+      <div className="relative bg-blueGray-800 md:pt-32 pb-32  mt-[-2%] " style={{backgroundColor: "#1e293b"}}>
         <div className="px-4 md:px-10 mx-auto w-full">
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap mt-[-7%]">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="total revenue"
+                  statSubtitle="total rev"
                   statTitle={total1}
                   statArrow="up"
                   statPercent="3.48"
@@ -360,17 +483,17 @@ const HomePage = () => {
 <div className=" flex  rounded-md w-[1220px] h-[50%] overflow-x-scroll ml-[15px]">
 {cordoner.map((el, index) => (
    el.seller.items.length > 0 && (
-  <div key={index} style={{ "paddingRight": "0%" }}>
+  <div key={index} style={{ paddingRight: "0%" }}>
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
         <tr>
           <th scope="col" className="px-6 py-3">
             <div className="flex items-center">
-              <a style={{ "marginLeft": "15px", 'fontSize': '20px' }}>
+              <a style={{ marginLeft: "15px", fontSize: '20px' }}>
               
              <center> <img src={el.seller.image}
                 className="w-10 h-auto rounded-full"
-                style={{ "marginLeft": "0%" }} alt={`${el.seller.name}'s profile`} />
+                style={{ marginLeft: "0%" }} alt={`${el.seller.name}'s profile`} />
               <span className="ml-2">{el.seller.name}</span></center>
              
             
@@ -379,7 +502,7 @@ const HomePage = () => {
           </th>
         </tr>
       </thead>
-      <tbody className="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" style={{"height": "20vh"}}>
+      <tbody className="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" style={{height: "20vh"}}>
         <tr className="bg-white dark:bg-gray-800">
           <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
           
@@ -391,7 +514,7 @@ const HomePage = () => {
             <tr className="bg-white dark:bg-gray-800">
               <th scope="row" className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 <img src={item.images[0]}
-                  style={{ "width": "100%" }} alt="" />
+                  style={{ width: "100%" }} alt="" />
               </th>
             </tr>
             <tr className="bg-white dark:bg-gray-800">

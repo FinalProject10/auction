@@ -2,7 +2,6 @@ import React from "react"
 import Navbar from "../../home/navbar"
 import Header from "../header/page"
 import SideBar from '../sidebar/page'
-import Footer from "../../footer/Footer"
 import './formulaire.css'
 interface FormulaireProps {
     head:string;
@@ -70,7 +69,6 @@ const Formulaire=(props:FormulaireProps)=>{
         </div>
         
         </div>
-        <Footer/>
         </div>
     )
 }

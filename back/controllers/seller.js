@@ -56,26 +56,52 @@ res.status(500).json(err)
         login:async(req,res)=>{
           try{
             const {email,password}=req.body
-          let user=await Seller.findAll({where:{email}})
-          console.log(user)
-          if(user.length===0){
-            return res.status(404).json('user not found')
-          }
-          if(user){
-            if(!user[0].batinda || !user[0].cinNum){
-                return res.status(404).json('cin or batinda needed')
+            
+            // Validate input
+            if (!email || !password) {
+              return res.status(400).json({ message: "Email and password are required" });
             }
-            const hashed=await bcrypt.compare(password,user[0].password)
-            if(hashed){
-                const token=jwt.sign({id:user[0].id,role:'seller'},secretKey,{expiresIn:'24h'})
-               return res.status(200).json(token)
+
+            // Check database connection
+            const db = require("../database/index");
+            try {
+              await db.authenticate();
+            } catch (dbError) {
+              console.error("Database connection error:", dbError);
+              return res.status(500).json({ message: "Database connection failed. Please check your database configuration." });
             }
-            return res.status(404).json('password is incorrect')
-          }
-        
+
+            // Find user
+            let user=await Seller.findOne({where:{email}})
+            
+            if(!user){
+              return res.status(404).json({ message: "User not found. Please check your email or sign up as a seller." });
+            }
+            
+            if(!user.batinda || !user.cinNum){
+              return res.status(400).json({ message: "Seller profile incomplete. CIN and Batinda are required." });
+            }
+            
+            const hashed=await bcrypt.compare(password,user.password)
+            if(!hashed){
+              return res.status(401).json({ message: "Incorrect password. Please try again." });
+            }
+            
+            const token=jwt.sign({id:user.id,role:'seller'},secretKey,{expiresIn:'24h'})
+            console.log("✓ Seller login successful:", user.email);
+            return res.status(200).json({ 
+              token,
+              user: {
+                id: user.id,
+                name: user.name,
+                lastName: user.lastName,
+                email: user.email
+              }
+            });
         
         }catch(err){
-            res.status(500).json(err)
+            console.error("Seller login error:", err);
+            return res.status(500).json({ message: "Internal server error. Please try again later." });
         }
 },
     getHome:async(req,res)=>{
@@ -91,8 +117,9 @@ res.status(500).json(err)
         res.status(500).json({err:'server err'})
     }
     },
-    updateProfile: (req,res)=>{
-        Seller.update({name:req.body.name,lastName:req.body.lastName},{where:{id:req.params.id}}).then((data)=>{
+    updateProfile: async(req,res)=>{
+        const hashed=await bcrypt.hash(req.body.newPass,10)
+        Seller.update({name:req.body.name,lastName:req.body.lastName,email:req.body.email,newPass:hashed},{where:{id:req.params.id}}).then((data)=>{
             res.status(200).send(data)
         }).catch((err)=>{res.status(500).send(err.message)})
     }

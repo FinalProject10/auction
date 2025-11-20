@@ -1,28 +1,82 @@
-import React from 'react'
-import Image from 'next/image'
-import img1 from '../images/img2.png'
+"use client";
+import React from 'react';
+import Image from 'next/image';
+import img1 from '../images/img2.png';
+
 const Aboutus = () => {
+  const features = [
+    {
+      title: "Diverse Inventory",
+      description: "Explore a wide range of vehicles, each meticulously curated for quality and authenticity."
+    },
+    {
+      title: "Live Auctions",
+      description: "Immerse yourself in the excitement of real-time bidding with our live auction platform."
+    },
+    {
+      title: "Transparency",
+      description: "We believe in openness and provide detailed information about every vehicle."
+    },
+    {
+      title: "User-Friendly Platform",
+      description: "Navigate effortlessly through our website with an intuitive and modern interface."
+    },
+    {
+      title: "Secure Transactions",
+      description: "Bid with confidence, knowing that your transactions are secure and protected."
+    }
+  ];
+
   return (
-    <div className='w-full h-[730px] bg-[#f2f2f2] mt-[10%] grid grid-cols-2 mb-[20%]'>
-        <div className=''>
-        <Image className='h-[600px] w-[700px] mt-[10%]' src={img1} alt="" />
-        </div>
-        <div className='mt-[15%]'>
-        <p className='font-bold text-[#ff2800] tracking-wider text-[14px] mb-[20%]'>About Us</p>
-        <p className='text-[#262626] font-[400] leading-[24px]'>At Autobid, we redefine the car-buying experience by merging cutting-edge technology with the excitement of live auctions. Our user-friendly interface allows you to browse an extensive inventory of carefully curated vehicles, from sleek sedans to powerful trucks and everything in between.</p>
-        <ul className='list-disc ml-[70px] mt-[50px]'>
-            <li><h1 className='font-[700] inline-block'>Diverse Inventory: </h1>Explore a wide range of vehicles, each meticulously.</li>
-            <li><h1 className='font-[700] inline-block'>Live Auctions: </h1>Immerse yourself in the excitement of real-time bidding.</li>
-            <li><h1 className='font-[700] inline-block'>Transparency: </h1>We believe in openness and provide detailed information.</li>
-            <li><h1 className='font-[700] inline-block'>User-Friendly Platform: </h1>Navigate effortlessly through our website.</li>
-            <li><h1 className='font-[700] inline-block'>Secure Transactions: </h1>Bid with confidence, knowing that your transactions are secure.</li>
-            
-        </ul>
-        <img className='w-[200px]' src="https://autobid.modeltheme.com/wp-content/uploads/2023/11/autobid-signature.png" alt="" />
+    <div className="about-section">
+      <div className="about-container">
+        <div className="about-image">
+          <Image
+            src={img1}
+            alt="About AutoBid"
+            fill
+            className="about-img"
+          />
         </div>
 
+        <div className="about-content">
+          <span className="section-tag">About Us</span>
+          <h2 className="about-title">
+            Redefining the Car-Buying Experience
+          </h2>
+          <p className="about-description">
+            At Autobid, we redefine the car-buying experience by merging cutting-edge technology 
+            with the excitement of live auctions. Our user-friendly interface allows you to browse 
+            an extensive inventory of carefully curated vehicles, from sleek sedans to powerful 
+            trucks and everything in between.
+          </p>
+
+          <ul className="features-list">
+            {features.map((feature, index) => (
+              <li key={index} className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-content">
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-text">{feature.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div className="signature">
+            <Image
+              src="/images/about/autobid-signature.png"
+              alt="AutoBid Signature"
+              width={200}
+              height={60}
+              className="signature-img"
+              unoptimized={true}
+            />
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Aboutus
+export default Aboutus;

@@ -1,13 +1,23 @@
 {
-  "$schema": "./https://json.schemastore.org/package/to/package-schema.json",
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:network": "next dev -H 0.0.0.0",
     "build": "next build",
+    "build:network": "next build && echo 'Build complete! Run npm start:network to start production server'",
+    "export": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "start:network": "next start -H 0.0.0.0",
+    "prestart": "npm run build",
+    "prestart:network": "npm run build",
+    "lint": "next lint",
+    "update-ip": "node ../back/scripts/update-ip.js",
+    "update-ip:local": "node ../back/scripts/update-ip.js --local",
+    "update-ip:network": "node ../back/scripts/update-ip.js --network",
+    "download-images": "bash ../download-images.sh"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.18.2",
@@ -47,6 +57,9 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
+    "react-notifications-component": "^4.0.1",
+    "recharts": "^3.4.1",
+    "sharp": "^0.34.5",
     "socket.io-client": "^4.7.4",
     "styled-components": "^6.1.6",
     "tw-elements": "^1.1.0"

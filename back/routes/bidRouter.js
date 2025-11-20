@@ -1,29 +1,35 @@
 const express = require("express");
 const router = express.Router();
 const bidController = require("../controllers/bidControllers");
+const { Bid, Client } = require("../models/relations");
+const { sendMessageToRoom } = require("../utils/socketUtils");
+const { validateBid } = require("../middleware/validation");
 
-router.post("/placeBid", bidController.placeBid);
+router.post("/placeBid", validateBid, bidController.placeBid);
 router.get("/fetch-items/:id", bidController.getBids);
-router.get("/bidNotification", async (req, res) => {
+router.get("/current/:itemId", bidController.getCurrentBid);
+router.get("/history/:itemId", bidController.getBidHistory);
+router.get("/winner/:itemId", bidController.getAuctionWinner);
+
+// Legacy endpoint for backward compatibility
+router.get("/bidNotification/:id", async (req, res) => {
   try {
+    const itemId = req.params.id;
     const lastBid = await Bid.findOne({
-      attributes: ["bidAmount", "createdAt"],
+      where: { itemId },
+      attributes: ["bidAmount", "id"],
       include: {
         model: Client,
+        as: "client",
         attributes: ["name"],
       },
-      order: [["createdAt", "DESC"]],
+      order: [["id", "DESC"]],
     });
 
     if (lastBid) {
-      const bidData = {
-        bidAmount: lastBid.bidAmount,
-        userName: lastBid.Client.name,
-        bidDate: lastBid.createdAt,
-      };
-
-      sendMessageToUser(3, JSON.stringify(bidData));
-      return res.json({ bidData });
+      const bidAmount = parseInt(lastBid.bidAmount, 10);
+      sendMessageToRoom(parseInt(itemId), bidAmount.toString());
+      return res.json(bidAmount);
     } else {
       return res.json({ message: "No bids found" });
     }

@@ -1,57 +1,119 @@
+"use client"
 import React from 'react'
-import Navbar from '../home/navbar'
-import Footer from '../footer/Footer'
-import "./404.css"
-const Custom404: React.FC = () => {
-  return (
-    <div className="container">
-    <Navbar />
-    <div className="four1">
-      <svg width="133px" height="234px" viewBox="0 0 133 234" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="Page-1" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-          <g id="404" transform="translate(0.000000, -2.000000)" fill="#ff2800">
-            <g id="4-1" transform="translate(0.000000, 2.000000)">
-              <polygon id="Path" points="72.5466868 198.372928 0 198.372928 0 166.947514 48.1896202 0 83.5942392 0 33.4376957 166.947514 72.5466868 166.947514 72.5466868 100.495856 105.984382 100.495856 105.984382 166.947514 132.046116 166.947514 132.046116 198.372928 105.984382 198.372928 105.984382 233.071823 72.5466868 233.071823"></polygon>
-            </g>
-          </g>
-        </g>
-      </svg>
-    </div>
-    <div className="zero">
-      <svg width="148px" height="237px" viewBox="0 0 148 237" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="Page-1" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-          <g id="404" transform="translate(-148.000000, 0.000000)">
-            <g id="0" transform="translate(148.000000, 0.000000)">
-              <g id="face" transform="translate(38.000000, 86.000000)">
-                <polygon id="X-Copy-3" fill="#000000" transform="translate(35.500000, 18.000000) rotate(-270.000000) translate(-35.500000, -18.000000)" points="30.5085911 17.7751756 18 -14 29.1053837 -14 35.4799542 6.45901639 35.8808706 6.45901639 42.255441 -14 53 -14 40.4513173 17.8126464 53 50 42.2955326 50 35.8006873 29.4285714 35.1191294 29.4285714 28.3436426 50 18 50"></polygon>
-                <path d="M24.0351542,54 C24.0118227,54.3463381 24,54.7095981 24,55.0905484 C24,66.0862349 33.8497355,75 46,75 C58.1502645,75 68,66.0862349 68,55.0905484 C68,54.7095981 67.9881773,54.3463381 67.9648458,54 L24.0351542,54 Z" id="Combined-Shape" fill="#ff0800"></path>
-                <rect id="Rectangle" fill="#000000" x="0" y="44" width="68" height="10"></rect>
-              </g>
-              <path d="M0.961656046,50.0842541 C0.961656046,42.2278613 2.96423494,35.2445057 6.96945281,29.1339779 C10.9746707,23.0234501 16.3415821,17.7859334 23.0703481,13.4212707 C29.7991142,9.05660801 37.5691203,5.72860262 46.3805996,3.4371547 C55.1920789,1.14570677 64.4039418,0 74.0164647,0 C83.6289876,0 92.8408505,1.14570677 101.65233,3.4371547 C110.463809,5.72860262 118.233815,9.05660801 124.962581,13.4212707 C131.691347,17.7859334 137.058259,23.0234501 141.063477,29.1339779 C145.068694,35.2445057 147.071273,42.2278613 147.071273,50.0842541 L147.071273,186.915746 C147.071273,194.772139 145.068694,201.755494 141.063477,207.866022 C137.058259,213.97655 131.691347,219.214067 124.962581,223.578729 C118.233815,227.943392 110.463809,231.271397 101.65233,233.562845 C92.8408505,235.854293 83.6289876,237 74.0164647,237 C64.4039418,237 55.1920789,235.854293 46.3805996,233.562845 C37.5691203,231.271397 29.7991142,227.943392 23.0703481,223.578729 C16.3415821,219.214067 10.9746707,213.97655 6.96945281,207.866022 C2.96423494,201.755494 0.961656046,194.772139 0.961656046,186.915746 L0.961656046,50.0842541 Z M29.9573833,186.473826 C29.9573833,191.274955 39.7025876,201.314403 47.9147519,204.478783 C56.1269162,207.643164 61.046071,209.521702 73.9509006,209.521702 C86.8557302,209.521702 96.0430912,206.378605 104.255255,203.214225 C112.46742,200.049844 117.944418,191.274955 117.944418,186.473826 L117.944418,49.6423343 C117.944418,44.8412053 109.271767,36.8600273 101.059602,33.6956468 C92.847438,30.5312663 86.8557302,28.2586018 73.9509006,28.2586018 C61.046071,28.2586018 54.1320606,30.5312663 45.9198963,33.6956468 C37.707732,36.8600273 29.9573833,44.8412053 29.9573833,49.6423343 L29.9573833,186.473826 Z" id="404-copy-2" fill="#F85656"></path>
-            </g>
-          </g>
-        </g>
-      </svg>
-    </div>
-    <div className="four2">
-      <svg width="133px" height="234px" viewBox="0 0 133 234" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="Page-1" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-          <g id="404" fill="#ff2800">
-            <g id="4-1" transform="translate(0.000000, 2.000000)">
-              <polygon id="Path" points="72.5466868 198.372928 0 198.372928 0 166.947514 48.1896202 0 83.5942392 0 33.4376957 166.947514 72.5466868 166.947514 72.5466868 100.495856 105.984382 100.495856 105.984382 166.947514 132.046116 166.947514 132.046116 198.372928 105.984382 198.372928 105.984382 233.071823 72.5466868 233.071823"></polygon>
-            </g>
-          </g>
-        </g>
-      </svg>
-    </div>
-    <h1 id="farid">PAGE NOT FOUND</h1>
-    <h1 className='title'>Sorry! The page you were looking for could not be found.
-Try searching for it or browse through our website.</h1>
-    <button className='button_cart'>Return To Shop</button>
+import dynamic from 'next/dynamic'
+const Navbar = dynamic(() => import('../home/navbar'), { ssr: false })
+const Footer = dynamic(() => import('../footer/Footer'))
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { FaHome, FaSearch, FaExclamationTriangle } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
 
-    <Footer  />
-  </div>
-);
-};
+const Custom404: React.FC = () => {
+  const router = useRouter()
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 flex flex-col">
+      <header>
+        <Navbar />
+      </header>
+      
+      <div className="flex-1 flex items-center justify-center py-16 px-4">
+        <div className="text-center max-w-4xl mx-auto">
+          {/* 404 Animation */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
+            <div className="relative inline-block">
+              <h1 className="text-9xl md:text-[12rem] font-extrabold bg-gradient-to-r from-red-500 via-red-600 to-red-700 bg-clip-text text-transparent">
+                404
+              </h1>
+              <div className="absolute -top-4 -right-4 animate-bounce">
+                <FaExclamationTriangle className="text-red-500 text-4xl" />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Error Message */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-8"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+              Page Not Found
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+              Sorry! The page you were looking for could not be found.
+              <br />
+              Try searching for it or browse through our website.
+            </p>
+          </motion.div>
+
+          {/* Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <Link
+              href="/home"
+              className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-red-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              <FaHome /> Return Home
+            </Link>
+            <Link
+              href="/shop"
+              className="flex items-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-lg font-bold text-lg border-2 border-gray-300 hover:border-red-500 hover:text-red-600 transition-all shadow-md hover:shadow-lg"
+            >
+              <FaSearch /> Browse Auctions
+            </Link>
+            <button
+              onClick={() => router.back()}
+              className="text-gray-600 hover:text-red-600 font-semibold px-8 py-4 transition-colors"
+            >
+              Go Back
+            </button>
+          </motion.div>
+
+          {/* Helpful Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-16"
+          >
+            <p className="text-gray-600 mb-6">You might be looking for:</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl mx-auto">
+              {[
+                { href: '/shop', label: 'Shop', icon: '🚗' },
+                { href: '/Howitwork', label: 'How It Works', icon: '📖' },
+                { href: '/faq', label: 'FAQ', icon: '❓' },
+                { href: '/getInTouch', label: 'Contact', icon: '📧' }
+              ].map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition-all border-2 border-gray-100 hover:border-red-200 group"
+                >
+                  <div className="text-2xl mb-2">{link.icon}</div>
+                  <p className="font-semibold text-gray-900 group-hover:text-red-600 transition-colors">
+                    {link.label}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  )
+}
 
 export default Custom404

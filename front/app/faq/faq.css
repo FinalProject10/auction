@@ -1,16 +1,19 @@
-/* Reset some default browser styles */
-body, h1, h2, h3, p, ul, li, button {
+/* FAQ-specific styles only - scoped to avoid conflicts with navbar */
+.faq-page-container {
+    font-family: 'Hind', sans-serif;
+}
+
+.faq-page-container h1, 
+.faq-page-container h2, 
+.faq-page-container h3, 
+.faq-page-container p, 
+.faq-page-container ul, 
+.faq-page-container li {
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: 'Hind', sans-serif;
-    background-color: #fff;
-    color: #4d5974;
-}
-
-.container {
+.faq-old-container {
     margin: 0 auto;
     padding: 4rem;
     width: 80%; 
@@ -39,7 +42,8 @@ h2 {
 }
 
 
-button {
+/* Only style FAQ accordion buttons, not all buttons */
+.faq-page-container .accordion-item button {
     position: relative;
     display: block;
     text-align: left;
@@ -56,8 +60,8 @@ button {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle box shadow for depth */
 }
 
-button:hover,
-button:focus {
+.faq-page-container .accordion-item button:hover,
+.faq-page-container .accordion-item button:focus {
     color: #ff884d; /* Lighter updated color on hover/focus */
     background-color: #f5f5f5; /* Light gray background on hover/focus */
 }
@@ -75,22 +79,22 @@ button:focus {
     font-size: 22px;
 }
 
-button[aria-expanded='true'] .icon::before {
+.faq-page-container button[aria-expanded='true'] .icon::before {
     content: '-';
 }
 
-button[aria-expanded='false'] .icon::before {
+.faq-page-container button[aria-expanded='false'] .icon::before {
     content: '+';
 }
 
-.accordion-content {
+.faq-page-container .accordion-content {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
     transition: opacity 200ms linear, max-height 200ms linear;
 }
 
-button[aria-expanded='true'] + .accordion-content {
+.faq-page-container button[aria-expanded='true'] + .accordion-content {
     opacity: 1;
     max-height: 9em;
 }

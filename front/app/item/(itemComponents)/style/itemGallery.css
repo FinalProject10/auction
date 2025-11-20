@@ -32,11 +32,80 @@ body {
 
 .gallery-holder {
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.gallery {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .image img {
-    height: 800px;
+    height: 600px;
+    width: 100%;
     object-fit: cover;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .gallery-holder {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .gallery {
+        margin-right: 0;
+        gap: 16px;
+        flex-basis: 100%;
+    }
+
+    .image img,
+    .gallery .image img {
+        height: 300px;
+    }
+
+    .gallery .thumbnails {
+        gap: 12px;
+    }
+
+    .gallery .thumbnails .img-holder {
+        height: 70px;
+        width: 70px;
+    }
+
+    .gallery .thumbnails img {
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-holder {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .image img,
+    .gallery .image img {
+        height: 240px;
+        border-radius: 10px;
+    }
+
+    .gallery .thumbnails {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .gallery .thumbnails .img-holder {
+        height: 60px;
+        width: 60px;
+    }
+
+    .gallery .thumbnails img {
+        height: 60px;
+    }
 }
 
 .activated {
@@ -513,8 +582,38 @@ header nav .right .cart button.checkout:hover {
 
 .gallery .image img {
     height: 500px;
-    border-radius: 10px;
+    width: 100%;
+    border-radius: 12px;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery .image img:hover {
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        margin-right: 0;
+        gap: 16px;
+    }
+
+    .gallery .image img {
+        height: 300px;
+    }
+
+    .gallery .thumbnails {
+        gap: 12px;
+    }
+
+    .gallery .thumbnails .img-holder {
+        height: 70px;
+        width: 70px;
+    }
+
+    .gallery .thumbnails img {
+        height: 70px;
+    }
 }
 
 /* 
@@ -534,6 +633,12 @@ header nav .right .cart button.checkout:hover {
     position: relative;
     height: 90px;
     width: 90px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.gallery .thumbnails .img-holder:hover {
+    transform: scale(1.05);
 }
 
 /* @media (max-width: 992px) {
