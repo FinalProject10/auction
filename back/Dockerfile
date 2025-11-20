@@ -6,13 +6,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+RUN npm install --omit=dev
 
 # Copy application code
 COPY . .
 
-# Expose port
-EXPOSE 5001
+# Expose port (default 3001, can be overridden with PORT env var)
+EXPOSE 3001
 
 # Start the application
 CMD ["node", "index.js"]
